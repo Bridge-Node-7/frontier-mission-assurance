@@ -1,16 +1,60 @@
 # Frontier Mission Assurance
 
-**Public reference implementation for evidence-native verification, validation, and mission assurance.**
+**Mission assurance for frontier teams moving faster than their evidence can naturally stay organized.**
 
-Frontier Mission Assurance (FMA) is a deliberately small public reference layer for representing:
+Frontier Mission Assurance (FMA) is a deliberately small public reference layer for connecting:
 
 **Mission → claim → assumption → experiment → evidence → decision**
 
 in ordinary version-controlled files.
 
-Its purpose is to make traceability, evidence gaps, reproducibility, scientific-discovery assurance, and decision basis easier to inspect without turning fast technical work into process-heavy bureaucracy.
+It is designed for small, interdisciplinary teams building difficult systems under uncertainty. The goal is not more process. The goal is to make the decision basis inspectable: what must be true, what is directly supported, what is still assumed, what has been reproduced, what changed, and what a human can justify doing next.
 
 > **Public boundary:** this repository contains only software, public-safe documentation, and synthetic fixtures. It is **not** a live program workspace, customer system, canonical operational kernel, or repository for real mission evidence. Do not place personal names, external organization names, private URLs, screenshots, raw logs, credentials, customer/program identifiers, or nonpublic technical evidence in public issues, pull requests, CI artifacts, examples, branches, releases, or commit history. See [`OPSEC.md`](OPSEC.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), and [`docs/PUBLIC_REFERENCE_BOUNDARY.md`](docs/PUBLIC_REFERENCE_BOUNDARY.md).
+
+## For mission-oriented frontier teams
+
+A technical leader should be able to answer five questions without reconstructing the program from notebooks, tickets, slide decks, chat threads, experiment folders, and tribal knowledge:
+
+1. **What must be true for the mission to succeed?**
+2. **Which claims are supported by direct evidence, and which still depend on assumptions?**
+3. **Which important results have been reproduced or independently challenged?**
+4. **What decisions or interfaces are affected when a dependency changes?**
+5. **What decision can an accountable human justify now—and what would change that decision?**
+
+FMA provides thin connective tissue across the tools a team already uses. It does not require a central data migration or attempt to replace laboratory systems, source control, test infrastructure, issue trackers, product-lifecycle systems, research notebooks, or private AI systems.
+
+A typical mission loop looks like:
+
+```text
+MISSION OBJECTIVE
+      ↓
+AI / THEORY / ENGINEERING RESULT
+      ↓
+CLAIM + ASSUMPTIONS
+      ↓
+SIMULATION / EXPERIMENT / EVIDENCE
+      ↓
+REPRODUCTION + CHALLENGE
+      ↓
+HUMAN DECISION
+      ↓
+CHANGE / NEW EVIDENCE
+      └───────────────→ reassess affected claims and decisions
+```
+
+FMA makes that loop inspectable without pretending that machine-readable structure makes the underlying science true.
+
+### Where it creates leverage
+
+- **AI-assisted research** — preserve provenance and require evidence gates instead of treating generated output as established fact.
+- **Cross-disciplinary integration** — connect theory, software, controls, experimental hardware, interfaces, and system evidence without forcing them into one tool.
+- **Design and readiness reviews** — make direct evidence, open assumptions, unresolved gaps, and decision basis visible in a repeatable form.
+- **Partner and supplier boundaries** — represent what is claimed, required, evidenced, and still uncertain at an interface without publishing private internal reasoning.
+- **Change impact** — show which declared claims, requirements, risks, and decisions may need review when an upstream dependency changes.
+- **Small-team velocity** — start with one consequential decision and add only the assurance structure that earns its keep.
+
+For a bounded adoption pattern and a CTO-level fit test, see [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md).
 
 ## Why this exists
 
@@ -74,7 +118,7 @@ frontier-mission-assurance/
 │   └── scientific-discovery/    # synthetic scientific-discovery assurance contracts
 ├── examples/                    # synthetic-only core worked fixtures
 ├── tests/                       # positive, regression, tamper, and boundary tests
-├── docs/                        # public architecture, V&V doctrine, UAT, release boundary
+├── docs/                        # public architecture, V&V doctrine, UAT, mission adoption
 ├── .github/                     # CI + issue/PR public-safety workflows
 ├── PUBLIC_BOUNDARY.md           # public-data and claim boundary
 ├── OPSEC.md                     # public-release handling rules
@@ -230,7 +274,7 @@ See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/
 
 ## Current maturity
 
-**v0.3.0 — public reference with Scientific Discovery Assurance.**
+The current source identity is defined by [`VERSION`](VERSION). The **v0.3.x** line adds Scientific Discovery Assurance and security-hardened release automation while preserving the deliberately thin public/private boundary.
 
 The repository is intentionally fail-visible: unsupported claims and unresolved assumptions are outputs, not defects to hide. Current verification evidence and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 
