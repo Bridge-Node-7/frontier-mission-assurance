@@ -1,11 +1,11 @@
 # Current UX Simulation
 
-FMA v0.3.0 is intentionally a Git/CLI reference implementation rather than a graphical product.
+FMA v0.3.1 is intentionally a Git/CLI reference implementation rather than a graphical product.
 
 ## Current surfaces
 
 1. **CLI** — validation, assumption visibility, evidence coverage, dependency impact, receipt verification, explicit reproduction, decision-basis checks, and report generation.
-2. **GitHub-native workflow** — pull-request checklist, issue forms, CI, validation evidence, and release records.
+2. **GitHub-native workflow** — pull-request checklist, issue forms, CI, validation evidence, dependency vulnerability review, protected-main CodeQL, and release records.
 3. **Markdown report** — human-readable summary of direct evidence coverage and unresolved assumptions.
 4. **Research Reproducibility Contract** — human-facing environment/execution/result expectations paired with machine-readable receipts.
 5. **Scientific Discovery Assurance profile** — portable schemas, synthetic linked records, and a deterministic profile validator for discovery provenance, priority evidence, research-boundary declarations, formal-proof/specification separation, replication, and attribution chronology.
@@ -58,7 +58,7 @@ Expected: distinguish structural validity from scientific truth, local chronolog
 
 ### Security / OPSEC reviewer
 
-Expected: identify the public-data boundary, scanner behavior, prohibited artifact types, and runtime privacy posture quickly.
+Expected: identify the public-data boundary, scanner behavior, prohibited artifact types, runtime privacy posture, vulnerability-reporting path, dependency-review gate, and main-line static analysis quickly.
 
 ### Release engineer
 
@@ -82,4 +82,4 @@ The Scientific Discovery Assurance profile validates declared contracts and sele
 
 ## Non-goal
 
-This release does not claim to provide a hosted application, graphical dashboard, customer portal, private operational case-management system, scientific certification authority, or provider-enforcement audit system.
+This release does not claim to provide a hosted application, graphical dashboard, customer portal, private operational case-management system, scientific certification authority, provider-enforcement audit system, or proof that every software vulnerability has been eliminated.

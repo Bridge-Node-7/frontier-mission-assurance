@@ -28,6 +28,8 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 - [ ] Wheel build + fresh dependency-resolving install passes.
 - [ ] Ruff passes.
 - [ ] Public-release OPSEC scan passes.
+- [ ] Pull-request dependency vulnerability review passes when applicable.
+- [ ] Protected-main CodeQL analysis passes before stable release eligibility.
 - [ ] Scientific Discovery Assurance synthetic profile validation passes when present.
 - [ ] Synthetic assurance-report artifacts upload successfully.
 
@@ -36,6 +38,7 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 - [ ] Protect `main` with required hosted checks.
 - [ ] Block force-push and deletion of protected `main`.
 - [ ] Review security/secret-scanning controls available to the account/repository.
+- [ ] Confirm the vulnerability-reporting policy remains accurate for the repository's available private-reporting controls.
 - [ ] Review dependency-update behavior.
 - [ ] Confirm workflow permissions remain least-privilege.
 - [ ] Confirm only intended long-lived branches remain.

@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=77", "wheel"]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "frontier-mission-assurance"
-version = "0.3.0"
+version = "0.3.1"
 description = "Public reference implementation for evidence-native verification, validation, and mission assurance"
 readme = "README.md"
 requires-python = ">=3.11"

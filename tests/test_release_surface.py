@@ -65,18 +65,20 @@ def test_github_actions_are_immutably_pinned():
 
 def test_release_identity_is_consistent():
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    assert version == "0.3.0"
+    assert re.fullmatch(r"\d+\.\d+\.\d+", version)
 
     pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert 'version = "0.3.0"' in pyproject
+    assert f'version = "{version}"' in pyproject
     assert 'license = "LicenseRef-Proprietary"' in pyproject
     assert 'license-files = ["LICENSE"]' in pyproject
     assert 'Private :: Do Not Upload' in pyproject
+    assert 'setuptools==80.9.0' in pyproject
+    assert 'wheel==0.45.1' in pyproject
 
     init_text = (ROOT / "src" / "frontier_assurance" / "__init__.py").read_text(
         encoding="utf-8"
     )
-    assert '__version__ = "0.3.0"' in init_text
+    assert f'__version__ = "{version}"' in init_text
 
     facts = json.loads((ROOT / "PROJECT_FACTS.json").read_text(encoding="utf-8"))
     assert facts["version"] == version

@@ -6,6 +6,31 @@ It must not contain credentials, secrets, private keys, personally identifying i
 
 See [`OPSEC.md`](OPSEC.md) and [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md).
 
+## Supported versions
+
+Only the latest tagged stable release is supported for security fixes. Earlier tags remain reproducible release records, but they are not maintained security branches.
+
+## Reporting a vulnerability
+
+Do **not** disclose suspected vulnerabilities, exploit details, credentials, or sensitive reproduction data in a public issue, pull request, Discussion, commit, branch name, or Actions artifact.
+
+Use this repository's GitHub Security page and private vulnerability-reporting flow when that control is available. Include the affected release or commit, a concise impact description, the smallest public-safe reproduction that is sufficient for triage, and any proposed mitigation. Do not include real mission/program data or unrelated secrets.
+
+If private reporting is not available in the viewer's GitHub session, do not publish exploit details as a workaround; use an already authorized private Bridge Node 7 contact channel.
+
+## Automated security controls
+
+The repository uses bounded, fail-visible controls as defense in depth:
+
+- Dependabot monitors Python and GitHub Actions dependencies.
+- Pull-request V&V performs dependency vulnerability review for high-severity findings.
+- Protected-main V&V performs CodeQL analysis for Python before a stable release can be triggered.
+- GitHub Actions are pinned to immutable commit SHAs.
+- Runtime regression tests prohibit common network-client imports in the installed FMA package.
+- The public-release OPSEC scanner rejects several high-risk disclosure patterns and artifact types.
+
+These controls reduce risk; they do not prove the absence of vulnerabilities, malicious dependencies, sensitive proper nouns, or unsafe operational use.
+
 ## Public GitHub is a disclosure surface
 
 Treat public issues, pull requests, Actions logs, uploaded artifacts, Discussions, release notes, commit history, branch names, and filenames as publicly observable. Deleting a file later does not guarantee removal from forks, caches, clones, logs, or history.

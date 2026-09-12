@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1 — security and release hardening
+
+- Moved first-party GitHub Actions to current Node 24 runtimes while retaining immutable commit-SHA pins.
+- Added high-severity dependency vulnerability review to the existing required pull-request V&V path.
+- Added CodeQL Python analysis to the existing required Python 3.12 protected-main V&V path before stable release eligibility.
+- Pinned build-backend/tooling requirements and made hosted package construction non-isolated to reduce release-time dependency drift.
+- Added explicit supported-version and private-first vulnerability-reporting guidance.
+- Preserved Scientific Discovery Assurance behavior, synthetic-only examples, All Rights Reserved licensing, local-only runtime, public/private OPSEC boundaries, and human consequential decision authority.
+
 ## 0.3.0 — Scientific Discovery Assurance
 
 - Added a bounded Scientific Discovery Assurance profile without creating a new repository or exposing private operational systems.
