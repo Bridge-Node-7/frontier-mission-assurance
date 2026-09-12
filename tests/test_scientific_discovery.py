@@ -7,7 +7,6 @@ from pathlib import Path
 import yaml
 from jsonschema import Draft202012Validator, FormatChecker
 
-
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "profiles" / "scientific-discovery"
 SCHEMAS = PROFILE / "schemas"

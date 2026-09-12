@@ -7,7 +7,6 @@ from pathlib import Path
 import yaml
 from jsonschema import Draft202012Validator, FormatChecker
 
-
 PROFILE = Path("profiles/scientific-discovery")
 SCHEMAS = PROFILE / "schemas"
 EXAMPLE = PROFILE / "examples" / "synthetic-discovery"
