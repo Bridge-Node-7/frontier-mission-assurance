@@ -4,8 +4,8 @@ import json
 import sys
 from pathlib import Path
 
-import yaml
 from jsonschema import Draft202012Validator, FormatChecker
+import yaml
 
 
 PROFILE = Path("profiles/scientific-discovery")
@@ -29,7 +29,7 @@ def _load_json(path: Path) -> dict:
 def _load_yaml(path: Path) -> dict:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
-        raise ValueError(f"{path}: document must be a mapping")
+        raise TypeError(f"{path}: document must be a mapping")
     return data
 
 
@@ -52,7 +52,7 @@ def validate_profile(root: Path) -> list[str]:
             for error in schema_errors:
                 location = ".".join(str(item) for item in error.path) or "<root>"
                 errors.append(f"{doc_name}:{location}: {error.message}")
-        except Exception as exc:  # noqa: BLE001 - validation should report all bounded failures
+        except Exception as exc:  # noqa: BLE001 - report all bounded validation failures
             errors.append(f"{doc_name}: {exc}")
 
     if errors or len(docs) != len(DOCUMENTS):
@@ -109,12 +109,15 @@ def validate_profile(root: Path) -> list[str]:
     proof = docs["proof"]
     proof_checker_passed = proof["checker"]["state"] == "PASS"
     spec_state = proof["specification_equivalence"]["state"]
-    if proof_checker_passed and spec_state != "CONFIRMED":
-        if passport["verification"]["disposition"] == "PASS":
-            errors.append(
-                "passport: proof-checker PASS cannot become overall PASS while "
-                "specification equivalence is unresolved"
-            )
+    if (
+        proof_checker_passed
+        and spec_state != "CONFIRMED"
+        and passport["verification"]["disposition"] == "PASS"
+    ):
+        errors.append(
+            "passport: proof-checker PASS cannot become overall PASS while "
+            "specification equivalence is unresolved"
+        )
 
     replication = docs["replication"]
     if replication["result"] != "REPRODUCED" and passport["verification"]["disposition"] == "PASS":

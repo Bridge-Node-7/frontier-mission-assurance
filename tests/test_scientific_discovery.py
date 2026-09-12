@@ -4,8 +4,8 @@ import importlib.util
 import json
 from pathlib import Path
 
-import yaml
 from jsonschema import Draft202012Validator, FormatChecker
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
