@@ -1,10 +1,10 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.2.0-rc10",
-  "maturity": "public-reference release candidate",
+  "version": "0.2.0",
+  "maturity": "public reference",
   "owner": "Bridge Node 7",
-  "license": "All rights reserved; no reuse license granted by this release candidate",
+  "license": "All rights reserved; no reuse license granted by this release",
   "python": ">=3.11",
   "purpose": "Public reference implementation for evidence-native verification, validation, and mission assurance.",
   "public_boundary": "Software, schemas, synthetic fixtures, and public-safe documentation only; no real external program identities or nonpublic evidence.",
