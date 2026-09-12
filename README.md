@@ -76,7 +76,7 @@ frontier-mission-assurance/
 ├── PUBLIC_BOUNDARY.md           # public-data and claim boundary
 ├── OPSEC.md                     # public-release handling rules
 ├── scripts/opsec_scan.py        # automated disclosure-pattern scan
-├── VALIDATION_REPORT.md         # current release-candidate evidence
+├── VALIDATION_REPORT.md         # current source validation evidence
 └── PROJECT_FACTS.json           # machine-readable public scope
 ```
 
@@ -183,7 +183,7 @@ python -m pip install --no-deps -e .
 make check
 ```
 
-Hosted release-candidate CI additionally rehearses supported Python versions, multiple operating systems, and fresh wheel installation.
+Hosted CI additionally rehearses supported Python versions, multiple operating systems, and fresh wheel installation.
 
 ## Design principles
 
@@ -202,16 +202,16 @@ See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/
 
 ## Current maturity
 
-**v0.2.0-rc10 — public-reference release candidate.**
+**v0.2.0 — public reference.**
 
 The repository is intentionally fail-visible: unsupported claims and unresolved assumptions are outputs, not defects to hide. Current verification evidence and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 
 ## Copyright and citation
 
-Copyright © 2026 Bridge Node 7. All rights reserved. No reuse license is granted by this release candidate. See [`LICENSE`](LICENSE).
+Copyright © 2026 Bridge Node 7. All rights reserved. No reuse license is granted by this release. See [`LICENSE`](LICENSE).
 
-External code contributions are not accepted while release-candidate licensing and inbound contribution terms remain unresolved; public-safe feedback and bug reports are welcome.
+External code contributions are not accepted unless and until Bridge Node 7 intentionally adopts separate inbound-contribution terms; public-safe feedback and bug reports are welcome.
 
-The release-candidate package metadata intentionally blocks public package-index upload; evaluation artifacts are distributed only through the controlled repository/release workflow.
+The package metadata intentionally blocks public package-index upload; evaluation artifacts are distributed only through the controlled repository/release workflow.
 
 Use [`CITATION.cff`](CITATION.cff) and cite the exact tagged release if the public reference materially informs published work.
