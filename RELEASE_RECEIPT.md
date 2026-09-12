@@ -1,26 +1,24 @@
-# Source Release Receipt — v0.3.3
+# Source Release Receipt — v0.3.4
 
-**Release type:** public reference  
+**Release type:** stable public reference  
 **Date:** 2026-09-12
 
 ## Purpose
 
-Close the open pytest development-dependency security finding while preserving FMA's deliberately thin public reference boundary and assurance semantics.
+Finalize the public product surface around mission-oriented technical review while preserving FMA runtime semantics, release integrity, and the synthetic-only public-data boundary.
 
-## Baseline
+## Material changes in v0.3.4
 
-FMA v0.3.2 closed the build-tool dependency security findings and retained Node 24 immutable Action pins, pull-request dependency review, protected-main CodeQL, pinned build tooling, clean-user release UAT, and private-first vulnerability-reporting guidance.
-
-## Material changes in v0.3.3
-
-- Update the pinned development test runner from pytest 8.4.2 to pytest 9.1.1.
-- Raise the optional development dependency floor to pytest >=9.1.1,<10 so supported development environments do not resolve back into the affected 8.x line.
-- Add a release-surface regression that keeps the security-fixed pytest baseline aligned between `requirements-dev.txt` and package metadata.
-- Preserve runtime dependencies, Scientific Discovery Assurance semantics, Node 24 immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, OPSEC boundaries, and human decision authority.
+- Added the Mission Decision Packet pattern and worked synthetic decision walkthrough.
+- Made explicit reopen conditions a first-class part of the public decision-review experience.
+- Simplified the README around mission, evidence, reproducibility, decision basis, and bounded evaluation.
+- Replaced internal-facing security shorthand and process-artifact naming with product-facing public-boundary and acceptance terminology.
+- Consolidated public-boundary documentation and removed redundant internal-process-style documents from the current tree.
+- Preserved Scientific Discovery Assurance semantics, cross-platform verification, immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, and human consequential decision authority.
 
 ## Source-level evidence
 
-The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, OPSEC, deterministic reproduction, packaging, dependency review, CodeQL, and release-surface validation under pytest 9.1.1.
+The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, public-boundary validation, deterministic reproduction, packaging, dependency review, CodeQL, and release-surface validation.
 
 ## Hosted evidence rule
 
@@ -36,4 +34,4 @@ This receipt does not claim scientific truth, mission readiness, legal priority,
 
 ## Release gate
 
-A source candidate may advance only when deterministic source validation passes. Stable release additionally requires successful hosted V&V on the exact commit and final clean-user public UAT.
+A source candidate may advance only when deterministic source validation passes. Stable release additionally requires successful hosted V&V on the exact commit and successful clean-user verification of the published artifacts.
