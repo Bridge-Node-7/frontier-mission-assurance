@@ -4,8 +4,8 @@ import json
 import sys
 from pathlib import Path
 
-from jsonschema import Draft202012Validator, FormatChecker
 import yaml
+from jsonschema import Draft202012Validator, FormatChecker
 
 
 PROFILE = Path("profiles/scientific-discovery")
