@@ -7,6 +7,7 @@ from pathlib import Path
 import yaml
 from jsonschema import Draft202012Validator, FormatChecker
 
+
 PROFILE = Path("profiles/scientific-discovery")
 SCHEMAS = PROFILE / "schemas"
 EXAMPLE = PROFILE / "examples" / "synthetic-discovery"
@@ -35,6 +36,7 @@ def _load_yaml(path: Path) -> dict:
 def validate_profile(root: Path) -> list[str]:
     errors: list[str] = []
     docs: dict[str, dict] = {}
+
     for key, (schema_name, doc_name) in DOCUMENTS.items():
         schema_path = root / SCHEMAS / schema_name
         doc_path = root / EXAMPLE / doc_name
@@ -50,8 +52,9 @@ def validate_profile(root: Path) -> list[str]:
             for error in schema_errors:
                 location = ".".join(str(item) for item in error.path) or "<root>"
                 errors.append(f"{doc_name}:{location}: {error.message}")
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:  # noqa: BLE001 - validation should report all bounded failures
             errors.append(f"{doc_name}: {exc}")
+
     if errors or len(docs) != len(DOCUMENTS):
         return errors
 
@@ -63,6 +66,7 @@ def validate_profile(root: Path) -> list[str]:
     passport = docs["passport"]
     if passport.get("metadata", {}).get("synthetic") is not True:
         errors.append("passport: public worked example must declare metadata.synthetic=true")
+
     if passport["attribution"]["priority_receipt_ref"] != docs["priority"]["receipt_id"]:
         errors.append("passport: priority_receipt_ref does not resolve")
     if (
@@ -73,10 +77,15 @@ def validate_profile(root: Path) -> list[str]:
     if passport["verification"]["formal_proof_ref"] != docs["proof"]["record_id"]:
         errors.append("passport: formal_proof_ref does not resolve")
 
-    if set(passport["verification"]["replication_refs"]) - {docs["replication"]["receipt_id"]}:
-        errors.append("passport: unresolved replication refs")
-    if set(passport["provenance"]["agent_provenance_refs"]) - {docs["agent"]["run_id"]}:
-        errors.append("passport: unresolved agent provenance refs")
+    replication_ids = {docs["replication"]["receipt_id"]}
+    missing_replications = set(passport["verification"]["replication_refs"]) - replication_ids
+    if missing_replications:
+        errors.append(f"passport: unresolved replication refs: {sorted(missing_replications)}")
+
+    agent_ids = {docs["agent"]["run_id"]}
+    missing_agents = set(passport["provenance"]["agent_provenance_refs"]) - agent_ids
+    if missing_agents:
+        errors.append(f"passport: unresolved agent provenance refs: {sorted(missing_agents)}")
 
     priority = docs["priority"]
     anchor = priority["time_evidence"]["external_anchor"]
@@ -93,24 +102,24 @@ def validate_profile(root: Path) -> list[str]:
     if state != "UNANCHORED" and anchor is None and signature is None:
         errors.append("priority: local time alone cannot establish trusted priority")
 
-    if docs["boundary"]["assurance_semantics"] != "DECLARATION_ONLY":
+    boundary = docs["boundary"]
+    if boundary["assurance_semantics"] != "DECLARATION_ONLY":
         errors.append("boundary: attestation must remain declaration-only")
 
     proof = docs["proof"]
-    if (
-        proof["checker"]["state"] == "PASS"
-        and proof["specification_equivalence"]["state"] != "CONFIRMED"
-        and passport["verification"]["disposition"] == "PASS"
-    ):
-        errors.append(
-            "passport: proof-checker PASS cannot become overall PASS while "
-            "specification equivalence is unresolved"
-        )
-    if (
-        docs["replication"]["result"] != "REPRODUCED"
-        and passport["verification"]["disposition"] == "PASS"
-    ):
+    proof_checker_passed = proof["checker"]["state"] == "PASS"
+    spec_state = proof["specification_equivalence"]["state"]
+    if proof_checker_passed and spec_state != "CONFIRMED":
+        if passport["verification"]["disposition"] == "PASS":
+            errors.append(
+                "passport: proof-checker PASS cannot become overall PASS while "
+                "specification equivalence is unresolved"
+            )
+
+    replication = docs["replication"]
+    if replication["result"] != "REPRODUCED" and passport["verification"]["disposition"] == "PASS":
         errors.append("passport: overall PASS requires completed independent reproduction")
+
     return errors
 
 

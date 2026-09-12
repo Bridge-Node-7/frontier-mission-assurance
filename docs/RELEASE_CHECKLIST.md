@@ -57,10 +57,10 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 ## Release
 
 - [ ] Hosted CI passes on the exact release commit.
-- [ ] Regenerate `REPO_FILE_MANIFEST.sha256`.
+- [ ] Generate a complete tracked-source SHA-256 manifest from the exact release commit as a release artifact rather than embedding commit-specific hashes back into source.
 - [ ] Generate source ZIP and wheel from the exact release commit.
-- [ ] Generate external SHA-256 manifest.
-- [ ] Confirm the frozen source archive reconstructs to the exact accepted Git tree.
+- [ ] Generate the external release-artifact SHA-256 manifest.
+- [ ] Confirm the frozen source archive reconstructs to the exact accepted Git tree and verifies against the tracked-source manifest.
 - [ ] Create the GitHub tag/release from the exact passing commit.
 - [ ] Bind exact commit SHA and Actions run in the release record.
 

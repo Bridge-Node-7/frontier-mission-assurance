@@ -1,9 +1,22 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"https://github.com/Bridge-Node-7/frontier-mission-assurance/blob/main/profiles/scientific-discovery/schemas/replication-receipt.schema.json",
-  "title":"FMA Replication Receipt","type":"object","additionalProperties":false,
-  "required":["receipt_version","receipt_id","discovery_id","independent_party_ref","environment_ref","input_artifact_refs","procedure_ref","deviations","result","observations","unresolved_discrepancies"],
-  "properties":{
-    "receipt_version":{"const":"1.0"},"receipt_id":{"type":"string","minLength":1},"discovery_id":{"type":"string","minLength":1},"independent_party_ref":{"type":"string","minLength":1},"environment_ref":{"type":"string","minLength":1},"input_artifact_refs":{"type":"array","items":{"type":"string","minLength":1}},"procedure_ref":{"type":"string","minLength":1},"deviations":{"type":"array","items":{"type":"string","minLength":1}},"result":{"enum":["NOT_ATTEMPTED","IN_PROGRESS","PARTIAL","REPRODUCED","FAILED"]},"observations":{"type":"array","items":{"type":"string","minLength":1}},"unresolved_discrepancies":{"type":"array","items":{"type":"string","minLength":1}},"completed_at":{"type":["string","null"],"format":"date-time"}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Bridge-Node-7/frontier-mission-assurance/blob/main/profiles/scientific-discovery/schemas/replication-receipt.schema.json",
+  "title": "FMA Replication Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["receipt_version","receipt_id","discovery_id","independent_party_ref","environment_ref","input_artifact_refs","procedure_ref","deviations","result","observations","unresolved_discrepancies"],
+  "properties": {
+    "receipt_version": {"const": "1.0"},
+    "receipt_id": {"type": "string", "minLength": 1},
+    "discovery_id": {"type": "string", "minLength": 1},
+    "independent_party_ref": {"type": "string", "minLength": 1},
+    "environment_ref": {"type": "string", "minLength": 1},
+    "input_artifact_refs": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "procedure_ref": {"type": "string", "minLength": 1},
+    "deviations": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "result": {"enum": ["NOT_ATTEMPTED","IN_PROGRESS","PARTIAL","REPRODUCED","FAILED"]},
+    "observations": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "unresolved_discrepancies": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "completed_at": {"type": ["string","null"], "format": "date-time"}
   }
 }

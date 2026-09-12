@@ -1,12 +1,19 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"https://github.com/Bridge-Node-7/frontier-mission-assurance/blob/main/profiles/scientific-discovery/schemas/research-boundary-attestation.schema.json",
-  "title":"FMA Research Boundary Attestation","type":"object","additionalProperties":false,
-  "required":["attestation_version","attestation_id","discovery_id","issuer_ref","declared_at","assurance_semantics","declared_controls","independent_verification","limitations"],
-  "properties":{
-    "attestation_version":{"const":"1.0"},"attestation_id":{"type":"string","minLength":1},"discovery_id":{"type":"string","minLength":1},"issuer_ref":{"type":"string","minLength":1},"declared_at":{"type":"string","format":"date-time"},"assurance_semantics":{"const":"DECLARATION_ONLY"},
-    "declared_controls":{"type":"object","additionalProperties":false,"required":["training_use","evaluation_use","employee_access","research_use","retrieval_use","telemetry_use","retention","model_checkpoint_ref","training_cutoff","permitted_tools"],"properties":{"training_use":{"enum":["ALLOWED","PROHIBITED","UNKNOWN"]},"evaluation_use":{"enum":["ALLOWED","PROHIBITED","UNKNOWN"]},"employee_access":{"enum":["ALLOWED","PROHIBITED","UNKNOWN"]},"research_use":{"enum":["ALLOWED","PROHIBITED","UNKNOWN"]},"retrieval_use":{"enum":["ALLOWED","PROHIBITED","UNKNOWN"]},"telemetry_use":{"enum":["ALLOWED","PROHIBITED","UNKNOWN"]},"retention":{"type":"string","minLength":1},"model_checkpoint_ref":{"type":"string","minLength":1},"training_cutoff":{"type":["string","null"],"format":"date-time"},"permitted_tools":{"type":"array","items":{"type":"string","minLength":1}}}},
-    "independent_verification":{"type":"object","additionalProperties":false,"required":["state","evidence_refs"],"properties":{"state":{"enum":["NOT_ASSESSED","PARTIAL","VERIFIED","DISPUTED"]},"evidence_refs":{"type":"array","items":{"type":"string","minLength":1}}}},
-    "limitations":{"type":"array","items":{"type":"string","minLength":1}}
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Bridge-Node-7/frontier-mission-assurance/blob/main/profiles/scientific-discovery/schemas/research-boundary-attestation.schema.json",
+  "title": "FMA Research Boundary Attestation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["attestation_version","attestation_id","discovery_id","issuer_ref","declared_at","assurance_semantics","declared_controls","independent_verification","limitations"],
+  "properties": {
+    "attestation_version": {"const": "1.0"},
+    "attestation_id": {"type": "string", "minLength": 1},
+    "discovery_id": {"type": "string", "minLength": 1},
+    "issuer_ref": {"type": "string", "minLength": 1},
+    "declared_at": {"type": "string", "format": "date-time"},
+    "assurance_semantics": {"const": "DECLARATION_ONLY"},
+    "declared_controls": {"type": "object", "additionalProperties": false, "required": ["training_use","evaluation_use","employee_access","research_use","retrieval_use","telemetry_use","retention","model_checkpoint_ref","training_cutoff","permitted_tools"], "properties": {"training_use": {"enum": ["ALLOWED","PROHIBITED","UNKNOWN"]}, "evaluation_use": {"enum": ["ALLOWED","PROHIBITED","UNKNOWN"]}, "employee_access": {"enum": ["ALLOWED","PROHIBITED","UNKNOWN"]}, "research_use": {"enum": ["ALLOWED","PROHIBITED","UNKNOWN"]}, "retrieval_use": {"enum": ["ALLOWED","PROHIBITED","UNKNOWN"]}, "telemetry_use": {"enum": ["ALLOWED","PROHIBITED","UNKNOWN"]}, "retention": {"type": "string", "minLength": 1}, "model_checkpoint_ref": {"type": "string", "minLength": 1}, "training_cutoff": {"type": ["string","null"], "format": "date-time"}, "permitted_tools": {"type": "array", "items": {"type": "string", "minLength": 1}}}},
+    "independent_verification": {"type": "object", "additionalProperties": false, "required": ["state","evidence_refs"], "properties": {"state": {"enum": ["NOT_ASSESSED","PARTIAL","VERIFIED","DISPUTED"]}, "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}}}},
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
   }
 }

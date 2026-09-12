@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import shutil
 from pathlib import Path
 
 import yaml
 from jsonschema import Draft202012Validator, FormatChecker
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "profiles" / "scientific-discovery"
@@ -52,12 +52,16 @@ def test_scientific_discovery_examples_conform_to_schemas():
 
 
 def test_scientific_discovery_cross_record_validator_passes():
-    assert _validator_module().validate_profile(ROOT) == []
+    module = _validator_module()
+    assert module.validate_profile(ROOT) == []
 
 
 def test_local_time_cannot_be_promoted_to_trusted_priority(tmp_path):
+    import shutil
+
     module = _validator_module()
-    target = tmp_path / "profiles" / "scientific-discovery"
+    profile_root = tmp_path
+    target = profile_root / "profiles" / "scientific-discovery"
     target.mkdir(parents=True)
     shutil.copytree(SCHEMAS, target / "schemas")
     shutil.copytree(EXAMPLE, target / "examples" / "synthetic-discovery")
@@ -65,15 +69,19 @@ def test_local_time_cannot_be_promoted_to_trusted_priority(tmp_path):
     priority = yaml.safe_load(priority_path.read_text(encoding="utf-8"))
     priority["priority_state"] = "EXTERNALLY_ANCHORED"
     priority_path.write_text(yaml.safe_dump(priority, sort_keys=False), encoding="utf-8")
-    errors = module.validate_profile(tmp_path)
-    assert any("EXTERNALLY_ANCHORED requires verified external anchor evidence" in e for e in errors)
+    errors = module.validate_profile(profile_root)
+    assert any(
+        "EXTERNALLY_ANCHORED requires verified external anchor evidence" in item
+        for item in errors
+    )
 
 
 def test_research_boundary_is_declaration_not_enforcement():
     schema = _load_schema("research-boundary-attestation.schema.json")
     doc = _load_example("research-boundary-attestation.yaml")
     doc["assurance_semantics"] = "ENFORCEMENT_PROVEN"
-    assert list(Draft202012Validator(schema).iter_errors(doc))
+    errors = list(Draft202012Validator(schema).iter_errors(doc))
+    assert errors
 
 
 def test_formal_checker_pass_does_not_collapse_specification_validation():
@@ -92,4 +100,5 @@ def test_partial_replication_remains_visible():
 
 
 def test_synthetic_passport_is_explicitly_marked():
-    assert _load_example("discovery-passport.yaml")["metadata"]["synthetic"] is True
+    passport = _load_example("discovery-passport.yaml")
+    assert passport["metadata"]["synthetic"] is True
