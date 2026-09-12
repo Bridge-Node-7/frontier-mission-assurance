@@ -1,6 +1,6 @@
 # Interoperability
 
-FMA exposes small public contracts intended for interchange without disclosing private implementation.
+FMA exposes small public contracts intended for interchange without requiring disclosure of implementation details beyond the contract boundary.
 
 ## Contract versions
 
@@ -16,8 +16,8 @@ The JSON Schemas under `schemas/` are the portable structural contracts. Runtime
 
 - Producers must preserve declared version fields.
 - Consumers must fail visibly on unsupported contract versions.
-- Public identifiers should be stable within a record and must not encode private organization/program context.
-- Private systems may map richer internal state into these public contracts, but the public contract does not define or reveal the private internal model.
+- Public identifiers should be stable within a record and must not encode sensitive organization/program context.
+- Implementations may map richer local state into these public contracts; interoperability does not require the contract to describe that implementation.
 - A future incompatible contract change requires a new contract version and migration notes.
 
 ## Evidence semantics
