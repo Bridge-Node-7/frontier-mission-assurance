@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0-rc9 — evidence lifecycle and maintenance architecture
+
+- Separated deterministic source validation from commit-specific hosted evidence and tagged-release evidence to prevent stale or recursive receipts.
+- Reframed the release checklist as a reusable template rather than a live status board.
+- Added explicit branch/dependency/release maintenance policy for a clean long-lived repository.
+- Added the Research Reproducibility Contract as the human-facing companion to executable research receipts.
+- Added release-surface regressions that prevent exact commit/run identifiers from being embedded in source-controlled validation receipts.
+- Preserved RC8 assurance behavior, public/private boundary, synthetic fixtures, All Rights Reserved posture, deterministic cross-platform reproduction, and immutable CI pins.
+
 ## 0.2.0-rc8 — Git hygiene and line-ending determinism
 
 - Removed the three trailing-whitespace defects caught by the pre-commit staged-diff gate.

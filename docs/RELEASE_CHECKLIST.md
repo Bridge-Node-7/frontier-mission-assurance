@@ -1,6 +1,8 @@
-# GitHub Release Checklist
+# GitHub Release Checklist Template
 
-This checklist is the acceptance path for staging and potentially publishing FMA under `Bridge-Node-7/frontier-mission-assurance`.
+This is the reusable acceptance template for staging and potentially publishing FMA under `Bridge-Node-7/frontier-mission-assurance`. **It is not a live status board.** Commit-specific status belongs in GitHub Actions and the tagged release record.
+
+See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evidence model.
 
 ## Public-boundary / IP gate
 
@@ -9,14 +11,14 @@ This checklist is the acceptance path for staging and potentially publishing FMA
 - [ ] Licensing is selected intentionally before any public visibility change.
 - [ ] A separate private proper-noun/context review passes without embedding the private denylist in this repository.
 
-## Repository creation
+## Repository identity
 
 - [ ] Repository name is exactly `frontier-mission-assurance`.
-- [ ] Initial visibility is **private**.
+- [ ] Initial visibility is private until all public gates pass.
 - [ ] Default branch is `main`.
 - [ ] `PUBLIC_BOUNDARY.md`, `OPSEC.md`, `DISCLAIMER.md`, `SECURITY.md`, `docs/PUBLIC_REFERENCE_BOUNDARY.md`, and `VALIDATION_REPORT.md` are present.
 
-## First push / hosted CI
+## Hosted V&V
 
 - [ ] Push only the reviewed release-candidate commit.
 - [ ] Confirm `V&V CI` starts successfully.
@@ -36,6 +38,8 @@ This checklist is the acceptance path for staging and potentially publishing FMA
 - [ ] Review security/secret-scanning controls available to the account/repository.
 - [ ] Review dependency-update behavior.
 - [ ] Confirm workflow permissions remain least-privilege.
+- [ ] Confirm only intended long-lived branches remain.
+- [ ] Confirm no stale/open PR or issue blocks release.
 
 ## Public UX
 
@@ -53,7 +57,7 @@ This checklist is the acceptance path for staging and potentially publishing FMA
 - [ ] Generate source ZIP and wheel from the exact release commit.
 - [ ] Generate external SHA-256 manifest.
 - [ ] Create the GitHub tag/pre-release from the exact passing commit.
-- [ ] Record exact commit SHA and Actions run in the release receipt.
+- [ ] Bind exact commit SHA and Actions run in the release record.
 
 ## Profile integration
 

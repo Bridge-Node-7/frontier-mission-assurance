@@ -24,7 +24,7 @@ body:
     id: version
     attributes:
       label: FMA version
-      placeholder: 0.2.0rc8
+      placeholder: 0.2.0rc9
     validations:
       required: true
   - type: dropdown

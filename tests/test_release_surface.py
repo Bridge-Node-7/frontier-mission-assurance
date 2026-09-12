@@ -64,16 +64,16 @@ def test_github_actions_are_immutably_pinned():
 
 def test_release_identity_is_consistent():
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    assert version == "0.2.0-rc8"
+    assert version == "0.2.0-rc9"
 
     pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert 'version = "0.2.0rc8"' in pyproject
+    assert 'version = "0.2.0rc9"' in pyproject
     assert 'license = "LicenseRef-Proprietary"' in pyproject
     assert 'license-files = ["LICENSE"]' in pyproject
     assert 'Private :: Do Not Upload' in pyproject
 
     init_text = (ROOT / "src" / "frontier_assurance" / "__init__.py").read_text(encoding="utf-8")
-    assert '__version__ = "0.2.0rc8"' in init_text
+    assert '__version__ = "0.2.0rc9"' in init_text
 
     facts = json.loads((ROOT / "PROJECT_FACTS.json").read_text(encoding="utf-8"))
     assert facts["version"] == version
@@ -86,3 +86,25 @@ def test_proprietary_candidate_does_not_claim_open_source():
     disclaimer = (ROOT / "DISCLAIMER.md").read_text(encoding="utf-8").lower()
     assert "open-source" not in disclaimer
     assert "open source" not in disclaimer
+
+
+def test_release_evidence_lifecycle_is_non_recursive():
+    receipt = (ROOT / "RELEASE_RECEIPT.md").read_text(encoding="utf-8")
+    validation = (ROOT / "VALIDATION_REPORT.md").read_text(encoding="utf-8")
+    checklist = (ROOT / "docs" / "RELEASE_CHECKLIST.md").read_text(encoding="utf-8")
+    lifecycle = (ROOT / "docs" / "RELEASE_EVIDENCE_LIFECYCLE.md").read_text(encoding="utf-8")
+
+    assert "Commit-specific hosted evidence belongs in GitHub Actions" in receipt
+    assert "not a live status board" in checklist
+    assert "recursive" in lifecycle.lower()
+    assert not re.search(r"\b[0-9a-f]{40}\b", receipt)
+    assert not re.search(r"\b[0-9a-f]{40}\b", validation)
+
+
+def test_strategic_infrastructure_docs_are_present():
+    required = [
+        ROOT / "docs" / "MAINTENANCE.md",
+        ROOT / "docs" / "RELEASE_EVIDENCE_LIFECYCLE.md",
+        ROOT / "docs" / "RESEARCH_REPRODUCIBILITY_CONTRACT.md",
+    ]
+    assert all(path.is_file() for path in required)

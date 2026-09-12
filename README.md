@@ -131,6 +131,8 @@ checks:
 
 The receipt is a reproducibility record, not a digital signature or scientific certification.
 
+For a human-facing environment/execution/result contract that can accompany research code, see [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md).
+
 ## GitHub operating model
 
 Every meaningful change should answer at least one of these:
@@ -196,11 +198,11 @@ Hosted release-candidate CI additionally rehearses supported Python versions, mu
 9. Human judgment owns prioritization and consequential decisions.
 10. The purpose of V&V is faster justified decisions, not paperwork.
 
-See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/UAT.md`](docs/UAT.md), and [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
+See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md), [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md), [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md), [`docs/UAT.md`](docs/UAT.md), and [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
 
 ## Current maturity
 
-**v0.2.0-rc8 — public-reference release candidate.**
+**v0.2.0-rc9 — public-reference release candidate.**
 
 The repository is intentionally fail-visible: unsupported claims and unresolved assumptions are outputs, not defects to hide. Current verification evidence and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 
