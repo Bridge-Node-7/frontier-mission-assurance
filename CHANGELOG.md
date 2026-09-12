@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.2 — build-tool dependency security closure
+
+- Updated pinned setuptools from 80.9.0 to current stable 84.0.0.
+- Updated pinned wheel from 0.45.1 to current stable 0.48.0, incorporating upstream security fixes including path-traversal protections.
+- Kept package metadata, hosted package smoke, release construction, release-surface tests, and validation documentation aligned on the same build-tool versions.
+- Preserved v0.3.1 security controls, Scientific Discovery Assurance behavior, synthetic-only examples, All Rights Reserved licensing, local-only runtime, public/private OPSEC boundaries, and human consequential decision authority.
+
 ## 0.3.1 — security and release hardening
 
 - Moved first-party GitHub Actions to current Node 24 runtimes while retaining immutable commit-SHA pins.

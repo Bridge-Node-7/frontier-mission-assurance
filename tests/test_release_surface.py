@@ -72,8 +72,8 @@ def test_release_identity_is_consistent():
     assert 'license = "LicenseRef-Proprietary"' in pyproject
     assert 'license-files = ["LICENSE"]' in pyproject
     assert 'Private :: Do Not Upload' in pyproject
-    assert 'setuptools==80.9.0' in pyproject
-    assert 'wheel==0.45.1' in pyproject
+    assert 'setuptools==84.0.0' in pyproject
+    assert 'wheel==0.48.0' in pyproject
 
     init_text = (ROOT / "src" / "frontier_assurance" / "__init__.py").read_text(
         encoding="utf-8"

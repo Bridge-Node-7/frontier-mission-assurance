@@ -1,4 +1,4 @@
-# Source Validation Report — v0.3.1
+# Source Validation Report — v0.3.2
 
 **Date:** 2026-09-12  
 **Candidate role:** thin public reference/interoperability layer with Scientific Discovery Assurance
@@ -25,7 +25,7 @@ This report records deterministic validation properties of the source candidate.
 - Research-boundary declaration-only guard: **PASS required**
 - Formal-proof / specification-equivalence separation: **PASS required**
 - Replication-state guard: **PASS required**
-- CLI version contract: **0.3.1 required**
+- CLI version contract: **0.3.2 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
@@ -40,7 +40,7 @@ This report records deterministic validation properties of the source candidate.
 ## Packaging V&V
 
 - Wheel and source-distribution build: **PASS required**
-- Build backend/tooling pins are exact for the candidate: **required**
+- Build backend/tooling pins: **setuptools 84.0.0, wheel 0.48.0, build 1.6.1 required**
 - Package build runs without isolated dependency re-resolution in hosted package smoke: **required**
 - PEP 639 license metadata: **`LicenseRef-Proprietary` required**
 - License file included in wheel metadata: **required**
