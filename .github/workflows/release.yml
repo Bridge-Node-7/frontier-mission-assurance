@@ -60,10 +60,10 @@ jobs:
           "setuptools==84.0.0" "wheel==0.48.0" "build==1.6.1"
           "PyYAML==6.0.3" "jsonschema==4.26.0"
 
-      - name: Reverify source boundary
+      - name: Reverify public release boundary
         if: env.RELEASE_ELIGIBLE == '1'
         run: |
-          python scripts/opsec_scan.py .
+          python scripts/public_boundary_scan.py .
           PYTHONPATH=src python scripts/evaluate_public_reference.py
           python scripts/validate_scientific_discovery.py .
 
@@ -112,14 +112,14 @@ jobs:
           TAG_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
           [[ "$TAG_SHA" == "$RELEASE_SHA" ]]
 
-      - name: Public release clean-user UAT
+      - name: Verify published release as a clean user
         if: env.RELEASE_ELIGIBLE == '1'
         shell: bash
         run: |
           set -euo pipefail
-          UAT="$RUNNER_TEMP/fma-release-uat"
-          mkdir -p "$UAT"
-          cd "$UAT"
+          VERIFY="$RUNNER_TEMP/fma-release-verify"
+          mkdir -p "$VERIFY"
+          cd "$VERIFY"
           BASE="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${TAG}"
           SOURCE="frontier-mission-assurance-v${VERSION}.zip"
           WHEEL="frontier_mission_assurance-${VERSION}-py3-none-any.whl"
@@ -134,7 +134,7 @@ jobs:
           [[ "$(.venv/bin/python -m frontier_assurance.cli --version)" == "fma ${VERSION}" ]]
           unzip -q "$SOURCE" -d source
           cd source/frontier-mission-assurance
-          sha256sum -c "$UAT/$SOURCE_SUMS"
-          "$UAT/.venv/bin/python" scripts/evaluate_public_reference.py
-          "$UAT/.venv/bin/python" scripts/validate_scientific_discovery.py .
+          sha256sum -c "$VERIFY/$SOURCE_SUMS"
+          "$VERIFY/.venv/bin/python" scripts/evaluate_public_reference.py
+          "$VERIFY/.venv/bin/python" scripts/validate_scientific_discovery.py .
           grep -Fq "CLAIM-CYCLE-TARGET" build/assurance-report.md
