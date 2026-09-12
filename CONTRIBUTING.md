@@ -4,7 +4,7 @@
 
 This public reference is **All Rights Reserved**. No reuse license is granted by this release.
 
-**External code contributions are not accepted** unless and until Bridge Node 7 intentionally adopts separate inbound-contribution terms. Public-safe bug reports, reproducibility reports, and documentation feedback are welcome through the repository's issue forms. Maintainer changes must continue to satisfy the complete V&V and OPSEC gates.
+**External code contributions are not accepted** unless and until Bridge Node 7 intentionally adopts separate inbound-contribution terms. Public-safe bug reports, reproducibility reports, and documentation feedback are welcome through the repository's issue forms. Maintainer changes must continue to satisfy the complete V&V and public-boundary gates.
 
 ## Principle
 

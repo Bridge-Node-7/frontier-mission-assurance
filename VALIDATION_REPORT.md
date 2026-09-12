@@ -1,9 +1,9 @@
-# Source Validation Report — v0.3.3
+# Source Validation Report — v0.3.4
 
 **Date:** 2026-09-12  
-**Candidate role:** thin public reference/interoperability layer with Scientific Discovery Assurance
+**Role:** bounded public reference for evidence-native verification, validation, reproducibility, traceability, and mission assurance
 
-This report records deterministic validation properties of the source candidate. Commit-specific hosted CI evidence is intentionally maintained by GitHub Actions and tagged release metadata rather than embedded here. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
+This report records deterministic validation properties of the source candidate. Commit-specific hosted CI evidence is maintained by GitHub Actions and tagged release metadata rather than embedded here. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
 
 ## Functional V&V
 
@@ -18,6 +18,7 @@ This report records deterministic validation properties of the source candidate.
 - Research-receipt numerical acceptance: **PASS required**
 - Explicit trusted reproduction: **PASS required**
 - Decision-basis receipt verification: **PASS required**
+- Mission Decision Packet documentation and worked synthetic example: **present required**
 - Bounded public-reference evaluation: **PASS required**
 - Markdown assurance-report generation: **PASS required**
 - Scientific Discovery Assurance schema + synthetic cross-record validation: **PASS required**
@@ -25,13 +26,12 @@ This report records deterministic validation properties of the source candidate.
 - Research-boundary declaration-only guard: **PASS required**
 - Formal-proof / specification-equivalence separation: **PASS required**
 - Replication-state guard: **PASS required**
-- CLI version contract: **0.3.3 required**
+- CLI version contract: **0.3.4 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
 - Local Markdown-link integrity: **PASS required**
 - GitHub Actions immutable-SHA check: **PASS required**
-- GitHub Actions Node 24 runtime migration: **required**
 - Pull-request dependency vulnerability review: **PASS required on pull requests**
 - Protected-main CodeQL analysis: **PASS required on main pushes**
 - Checkout credential persistence disabled: **required**
@@ -41,7 +41,7 @@ This report records deterministic validation properties of the source candidate.
 
 - Development test runner: **pytest 9.1.1 required**
 - Project optional dev range: **pytest >=9.1.1,<10 required**
-- The pytest security remediation must pass the complete supported Python and cross-platform matrix before release.
+- Supported Python and cross-platform verification: **PASS required**
 
 ## Packaging V&V
 
@@ -53,16 +53,16 @@ This report records deterministic validation properties of the source candidate.
 - Public package-index upload guard: **`Private :: Do Not Upload` required**
 - Clean wheel install and CLI smoke: **PASS required**
 
-## Public-boundary / OPSEC V&V
+## Public-boundary V&V
 
-- Automated OPSEC scanner: **PASS required**
+- Automated public-boundary scanner: **PASS required**
 - Unapproved external URLs: **must fail scanner**
 - High-risk binary/log artifact types: **must fail scanner**
 - Worked examples: **synthetic only**
 - Scientific Discovery Assurance worked example: **explicitly synthetic and intentionally unresolved**
-- No personal email addresses, credentials, private keys, local home paths, or private URLs in the public candidate
-- Public reference boundary, threat model, interoperability boundary, security-reporting policy, and scientific-discovery limitations present
-- No private operating playbook, private deployment details, proprietary prioritization logic, or real research-session evidence in the public candidate
+- No personal email addresses, credentials, private keys, local home paths, private URLs, real program identities, or nonpublic evidence in the public candidate
+- Security-reporting policy, threat model, interoperability contract, acceptance criteria, release acceptance, and scientific-discovery limitations present
+- Internal-facing public-surface artifacts and security shorthand removed from the current tree
 - Contribution/IP boundary explicit
 
 ## Expected core synthetic example behavior
@@ -74,6 +74,7 @@ The core fixture intentionally contains three critical mission/claim nodes, two 
 - direct coverage ratio: **66.7%**
 - visible critical evidence gap: `CLAIM-CYCLE-TARGET`
 - unresolved assumptions: **3**, listed without automated priority scoring
+- decision disposition: **HOLD** until the declared evidence gap is resolved or the dependency basis changes
 
 ## Expected Scientific Discovery Assurance behavior
 
@@ -92,8 +93,8 @@ These are fixture behaviors, not claims about any external program or discovery.
 
 ## Hosted acceptance
 
-The exact pushed commit must independently pass the declared hosted Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, OPSEC, deterministic reproduction, Scientific Discovery Assurance validation, dependency review where applicable, protected-main CodeQL, and fresh wheel installation. The Actions run attached to that commit is the authoritative hosted evidence.
+The exact pushed commit must independently pass the declared hosted Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, public-boundary validation, deterministic reproduction, Scientific Discovery Assurance validation, dependency review where applicable, protected-main CodeQL, and fresh wheel installation. The Actions run attached to that commit is the authoritative hosted evidence.
 
 ## Disposition rule
 
-**SOURCE PASS** means this candidate satisfies the deterministic source-level contract. It is not equivalent to scientific truth, mission readiness, legal priority, or publication/deployment authorization. Stable release additionally requires the GitHub administration, hosted V&V, licensing, release-provenance, and public-UAT gates in [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
+**SOURCE PASS** means this candidate satisfies the deterministic source-level contract. It is not equivalent to scientific truth, mission readiness, legal priority, or publication/deployment authorization. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).

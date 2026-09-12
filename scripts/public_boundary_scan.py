@@ -76,15 +76,15 @@ def main() -> int:
                 findings.append(f"unapproved external URL: {rel}:{line} ({host})")
 
     if warnings:
-        print("OPSEC WARNINGS")
+        print("PUBLIC BOUNDARY WARNINGS")
         for item in sorted(set(warnings)):
             print(f"WARN: {item}")
     if findings:
-        print("OPSEC FAIL")
+        print("PUBLIC BOUNDARY FAIL")
         for item in sorted(set(findings)):
             print(f"FAIL: {item}")
         return 2
-    print("OPSEC PASS: no automated high-risk disclosure patterns detected")
+    print("PUBLIC BOUNDARY PASS: no automated high-risk disclosure patterns detected")
     print("NOTE: manual review is still required for proper nouns, sensitive technical values, and context.")
     return 0
 

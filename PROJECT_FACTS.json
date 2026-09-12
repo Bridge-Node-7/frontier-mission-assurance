@@ -1,13 +1,13 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "maturity": "public reference",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
   "python": ">=3.11",
-  "purpose": "Public reference implementation for evidence-native verification, validation, and mission assurance.",
-  "public_boundary": "Software, schemas, synthetic fixtures, and public-safe documentation only; no real external program identities or nonpublic evidence.",
+  "purpose": "Public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance.",
+  "public_boundary": "Software, schemas, synthetic fixtures, and public documentation only; no real program evidence or sensitive operational data.",
   "does": [
     "validate assurance-graph structure and selected semantics",
     "list unresolved assumptions without automated priority scoring",
@@ -18,13 +18,11 @@
     "verify that decision-receipt basis references exist in a valid graph",
     "validate portable scientific-discovery assurance contracts and their synthetic cross-record references",
     "keep formal proof-checker state separate from specification-equivalence state",
-    "preserve explicit research-priority, research-boundary, attribution, and replication states"
+    "preserve explicit research-priority, research-boundary, attribution, and replication states",
+    "connect consequential decisions to explicit reopen conditions through Mission Decision Packets"
   ],
   "does_not": [
-    "expose a private operational assurance kernel",
-    "calculate proprietary or autonomous engineering priority",
     "certify scientific truth",
-    "validate nonpublic external systems or practices",
     "replace independent engineering judgment",
     "authorize safety, security, acquisition, compliance, or mission readiness",
     "serve as a public storage location for real program evidence",
@@ -32,7 +30,7 @@
     "prove enforcement of a declared research-data boundary",
     "treat proof-checker success as automatic specification validation"
   ],
-  "distribution": "GitHub source/release workflow; public package-index upload intentionally blocked by package metadata.",
-  "evidence_lifecycle": "Source-controlled validation records deterministic candidate evidence; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata to avoid stale or recursive receipts.",
-  "maintenance": "Keep main as the only long-lived branch; keep issue forms self-describing without custom-label dependencies; use immutable Node 24 GitHub Action pins, pull-request dependency review, protected-main CodeQL, current security-fixed build tooling and test runner, and bounded dependency updates; rerun full V&V after material source changes."
+  "distribution": "GitHub source and release workflow; public package-index upload intentionally blocked by package metadata.",
+  "evidence_lifecycle": "Source-controlled validation defines deterministic expectations; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata.",
+  "maintenance": "Keep main as the protected long-lived branch, use immutable GitHub Action pins, dependency review, protected-main CodeQL, bounded dependency updates, and full V&V after material source changes."
 }

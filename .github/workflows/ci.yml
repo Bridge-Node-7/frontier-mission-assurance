@@ -54,8 +54,8 @@ jobs:
         run: ruff check src tests scripts
       - name: Unit, regression, schema, tamper, and boundary tests
         run: pytest
-      - name: Public-release OPSEC scan
-        run: python scripts/opsec_scan.py .
+      - name: Public release boundary check
+        run: python scripts/public_boundary_scan.py .
       - name: Validate public example graph
         run: fma validate examples/frontier_program/graph.yaml
       - name: List unresolved assumptions without automated priority

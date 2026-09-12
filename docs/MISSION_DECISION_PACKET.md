@@ -4,7 +4,7 @@ A Mission Decision Packet is the minimum reviewable bundle needed to connect a c
 
 It is designed for fast frontier programs where research, software, experiments, interfaces, and external contributors move at different speeds.
 
-The packet is not a replacement for notebooks, source control, laboratory systems, test infrastructure, or private program management. It is the thin evidence-to-decision layer across them.
+The packet is not a replacement for notebooks, source control, laboratory systems, test infrastructure, or program management. It is the thin evidence-to-decision layer across them.
 
 ## The core idea
 
@@ -70,7 +70,7 @@ Examples of reopen triggers include:
 - an AI-generated result fails specification or applicability review;
 - a mission requirement or operating envelope changes.
 
-FMA does not monitor those conditions autonomously in this public reference. It makes them explicit so that private program policy, CI, review practice, or another system can decide how to watch them.
+FMA does not monitor those conditions autonomously in this public reference. It makes them explicit so an operational environment can decide how to watch them.
 
 ## 90-second inspection path
 
@@ -125,7 +125,7 @@ A result can be reproducible and still be inapplicable to the system being built
 For a partner or supplier boundary, the packet can expose only the shareable contract:
 
 ```text
-PRIVATE INTERNAL STATE
+SOURCE SYSTEM / LOCAL STATE
         │
         │ bounded export
         ▼
@@ -138,7 +138,7 @@ INTERFACE REVIEW
 DEPENDENT DECISION
 ```
 
-The private reasoning, sensitive evidence, customer context, and prioritization model do not belong in the public FMA repository.
+Only information appropriate for the receiving boundary belongs in the shared packet. Sensitive program context remains outside the public FMA repository.
 
 ## AI-assisted work
 
@@ -178,8 +178,8 @@ Useful acceptance questions are:
 
 If the packet does not improve those outcomes, reduce it.
 
-## Public-boundary rule
+## Public boundary
 
-This repository contains only public-safe software, documentation, and synthetic fixtures. Do not place real mission evidence, proprietary architecture details, customer identifiers, private partner information, credentials, or internal decision intelligence in this public repository.
+This repository contains only public software, documentation, and synthetic fixtures. Real mission evidence, sensitive architecture details, customer identifiers, credentials, partner-confidential information, and nonpublic technical data do not belong here.
 
 Operational use belongs in an appropriately access-controlled environment.

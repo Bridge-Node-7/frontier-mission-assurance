@@ -41,7 +41,7 @@ EXPERIMENT / EVIDENCE
 DECISION BASIS
 ```
 
-The graph is a public reference structure. It is not intended to encode or reveal a private operational system.
+The graph is a portable public structure. It is not a requirement to centralize every operational detail or sensitive artifact in one repository.
 
 ## Separation of responsibilities
 
@@ -52,7 +52,7 @@ The graph is a public reference structure. It is not intended to encode or revea
 - **Research receipts** bind declared inputs/outputs to hashes and numerical checks.
 - **Decision receipts** verify that cited basis nodes exist in a valid graph.
 
-These are reference mechanics, not a full private assurance platform.
+These are bounded reference mechanics rather than a claim that all program operations belong in FMA.
 
 ## Verification versus reproduction
 
@@ -64,7 +64,7 @@ These are reference mechanics, not a full private assurance platform.
 
 Graph validity is not scientific truth. A structurally valid edge can still be based on weak or incorrect source material. Source credibility, independence, applicability, calibration validity, and domain-specific sufficiency remain review responsibilities unless separately encoded and validated.
 
-See [`PUBLIC_REFERENCE_BOUNDARY.md`](PUBLIC_REFERENCE_BOUNDARY.md) for the intentional public/private architectural boundary.
+See [`../PUBLIC_BOUNDARY.md`](../PUBLIC_BOUNDARY.md) for the public-data and claim boundary.
 
 ## Runtime boundary
 
