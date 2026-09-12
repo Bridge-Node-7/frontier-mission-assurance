@@ -23,9 +23,9 @@
 
 <!-- What generic decision becomes safer/faster/more accurate because of this change? -->
 
-## OPSEC / public-boundary check
+## Public boundary
 
-- [ ] I ran `python scripts/opsec_scan.py .`.
+- [ ] I ran `python scripts/public_boundary_scan.py .`.
 - [ ] No personal names or unnecessary personally identifying information are included.
 - [ ] No external organization/customer/supplier/program names are included in worked examples or live case material.
 - [ ] No private URLs, repository links, account/ticket/document IDs, screenshots, raw logs, or local filesystem paths are included.
