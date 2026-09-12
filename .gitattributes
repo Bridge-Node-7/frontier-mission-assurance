@@ -1,0 +1,12 @@
+# Canonical public-source text normalization
+* text=auto eol=lf
+
+# Common binary types remain binary if ever deliberately added.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.zip binary
+*.whl binary
