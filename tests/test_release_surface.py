@@ -74,6 +74,10 @@ def test_release_identity_is_consistent():
     assert 'Private :: Do Not Upload' in pyproject
     assert 'setuptools==84.0.0' in pyproject
     assert 'wheel==0.48.0' in pyproject
+    assert 'pytest>=9.1.1,<10' in pyproject
+
+    requirements_dev = (ROOT / "requirements-dev.txt").read_text(encoding="utf-8")
+    assert "pytest==9.1.1" in requirements_dev
 
     init_text = (ROOT / "src" / "frontier_assurance" / "__init__.py").read_text(
         encoding="utf-8"

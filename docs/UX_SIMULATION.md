@@ -1,6 +1,6 @@
 # Current UX Simulation
 
-FMA v0.3.2 is intentionally a Git/CLI reference implementation rather than a graphical product.
+FMA v0.3.3 is intentionally a Git/CLI reference implementation rather than a graphical product.
 
 ## Current surfaces
 
