@@ -1,29 +1,24 @@
 # Public Boundary
 
-This repository is a **public reference implementation**. The repository, public issues, public pull requests, CI logs, release artifacts, and Git history must contain only software, synthetic fixtures, or information intentionally approved for unrestricted public release.
+Frontier Mission Assurance is a **public reference implementation**. Everything committed, discussed, logged, or released here should be suitable for unrestricted public disclosure.
 
-## Allowed in this public repository
+## Appropriate for this repository
 
+- software and schemas;
 - synthetic test fixtures;
-- public-safe schemas, methods, documentation, and software;
-- generic examples that do not identify real people or external organizations;
-- independently authored methods that clearly distinguish evidence, inference, assumptions, and decisions.
+- public documentation;
+- generic examples;
+- release and validation evidence intended for public use.
 
-## Do not publish here
+## Keep outside this repository
 
-- personal names or personally identifying information not intentionally part of the project's own public identity;
-- customer, employer, supplier, partner, investor, or external organization names in worked examples;
-- proprietary or nonpublic program information;
-- export-controlled technical data, controlled unclassified information, classified information, or controlled facility details;
+- real customer, supplier, partner, employer, facility, or program evidence;
+- nonpublic architecture, performance, schedule, commercial, contractual, or operational data;
 - credentials, secrets, private keys, authentication material, or sensitive security configuration;
-- nonpublic pricing, capacity, contractual terms, vulnerabilities, exact internal performance values, schedules, or roadmaps;
-- internal hostnames, IP addresses, account IDs, ticket IDs, repository URLs, document links, local filesystem paths, screenshots, or raw logs that reveal private context.
+- restricted, export-controlled, controlled, classified, or legally protected information;
+- screenshots, raw logs, private links, local paths, identifiers, or metadata that reveal nonpublic context.
 
-## Operating rule
-
-**The public repository is not a live case-management system.**
-
-Real assurance graphs, evidence receipts, customer/program identifiers, and raw artifacts belong in a separate access-controlled environment. Publish only sanitized abstractions or synthetic fixtures here.
+Operational use with real evidence belongs in an appropriately access-controlled environment.
 
 ## Claim boundary
 
