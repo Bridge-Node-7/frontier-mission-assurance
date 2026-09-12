@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.2.0-rc9",
+  "version": "0.2.0-rc10",
   "maturity": "public-reference release candidate",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release candidate",
@@ -28,5 +28,5 @@
   ],
   "distribution": "GitHub source/release workflow; public package-index upload intentionally blocked by package metadata.",
   "evidence_lifecycle": "Source-controlled validation records deterministic candidate evidence; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata to avoid stale or recursive receipts.",
-  "maintenance": "Keep main branch clean; evaluate dependency-major upgrades separately from a frozen release candidate; rerun full V&V after material source changes."
+  "maintenance": "Keep main as the only long-lived branch; keep issue forms self-describing without custom-label dependencies; evaluate dependency-major upgrades separately from a frozen release candidate; rerun full V&V after material source changes."
 }

@@ -27,6 +27,10 @@ Once a candidate is frozen, unrelated dependency churn does not enter that candi
 
 Source validation, hosted commit evidence, and tagged release evidence are separate layers. See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md).
 
+## Issue intake
+
+Issue forms are intentionally self-describing and do not require custom repository labels to render or accept a public-safe report. Classification may be added later through repository administration, but issue intake must not depend on hidden setup.
+
 ## Public-surface hygiene
 
 Before public release, verify the repository tree, branches, pull requests, issues, Actions artifacts, release assets, and commit metadata. Public history is durable disclosure.

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "frontier-mission-assurance"
-version = "0.2.0rc9"
+version = "0.2.0rc10"
 description = "Public reference implementation for evidence-native verification, validation, and mission assurance"
 readme = "README.md"
 requires-python = ">=3.11"

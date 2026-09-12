@@ -64,16 +64,16 @@ def test_github_actions_are_immutably_pinned():
 
 def test_release_identity_is_consistent():
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-    assert version == "0.2.0-rc9"
+    assert version == "0.2.0-rc10"
 
     pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert 'version = "0.2.0rc9"' in pyproject
+    assert 'version = "0.2.0rc10"' in pyproject
     assert 'license = "LicenseRef-Proprietary"' in pyproject
     assert 'license-files = ["LICENSE"]' in pyproject
     assert 'Private :: Do Not Upload' in pyproject
 
     init_text = (ROOT / "src" / "frontier_assurance" / "__init__.py").read_text(encoding="utf-8")
-    assert '__version__ = "0.2.0rc9"' in init_text
+    assert '__version__ = "0.2.0rc10"' in init_text
 
     facts = json.loads((ROOT / "PROJECT_FACTS.json").read_text(encoding="utf-8"))
     assert facts["version"] == version
@@ -108,3 +108,23 @@ def test_strategic_infrastructure_docs_are_present():
         ROOT / "docs" / "RESEARCH_REPRODUCIBILITY_CONTRACT.md",
     ]
     assert all(path.is_file() for path in required)
+
+
+def test_uat_identifiers_are_unique_and_sequential():
+    text = (ROOT / "docs" / "UAT.md").read_text(encoding="utf-8")
+    numbers = [int(value) for value in re.findall(r"^## UAT-(\d{2})\b", text, flags=re.MULTILINE)]
+    assert numbers
+    assert numbers == list(range(1, len(numbers) + 1))
+
+
+def test_issue_forms_do_not_depend_on_custom_labels():
+    issue_dir = ROOT / ".github" / "ISSUE_TEMPLATE"
+    forms = [
+        issue_dir / "assumption-challenge.yml",
+        issue_dir / "evidence-gap.yml",
+        issue_dir / "experiment-result.yml",
+        issue_dir / "bug-report.yml",
+    ]
+    for path in forms:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        assert "labels" not in data, f"{path.relative_to(ROOT)} requires repository label setup"

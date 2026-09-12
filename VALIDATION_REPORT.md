@@ -1,4 +1,4 @@
-# Source Validation Report — v0.2.0-rc9
+# Source Validation Report — v0.2.0-rc10
 
 **Date:** 2026-09-12
 **Candidate role:** thin public reference/interoperability layer
@@ -20,7 +20,7 @@ This report records deterministic validation properties of the source candidate.
 - Decision-basis receipt verification: **PASS required**
 - Bounded public-reference evaluation: **PASS required**
 - Markdown assurance-report generation: **PASS required**
-- CLI version contract: **0.2.0rc9 required**
+- CLI version contract: **0.2.0rc10 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**

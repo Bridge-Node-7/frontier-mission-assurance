@@ -1,4 +1,4 @@
-# Source Release Receipt — v0.2.0-rc9
+# Source Release Receipt — v0.2.0-rc10
 
 **Candidate type:** public-reference release candidate
 **Date:** 2026-09-12
@@ -7,18 +7,18 @@
 
 Provide a deliberately thin, inspectable public reference for evidence-native verification, validation, reproducibility, and decision-basis traceability without exposing private operational systems or real program evidence.
 
-## RC9 trigger
+## RC10 trigger
 
-RC8 achieved exact source-tree parity and successful hosted cross-platform V&V. The final audit then identified a documentation-lifecycle weakness: source-controlled evidence files still described hosted checks as unproven even after those checks had passed. RC9 corrects that architecture rather than embedding another mutable live status into source.
+RC9 established the release-evidence lifecycle and maintenance architecture, then passed exact-tree hosted cross-platform V&V. Final UX/UAT review found two public-interface defects: duplicate UAT numbering and issue forms that depended on custom GitHub labels not guaranteed to exist. RC10 removes those hidden setup assumptions and completes the public acceptance contract.
 
-## Material changes in RC9
+## Material changes in RC10
 
-- Separate deterministic source validation from commit-specific hosted evidence and tagged-release evidence.
-- Make the release checklist explicitly a reusable template rather than a live status board.
-- Add maintenance/branch/dependency policy for a clean long-lived repository.
-- Add a Research Reproducibility Contract that formalizes the human-facing companion to executable research receipts.
-- Add regression coverage preventing commit-specific SHA/run state from being embedded in source-controlled validation/receipt files.
-- Preserve the bounded public product, synthetic fixtures, All Rights Reserved posture, and existing assurance behavior.
+- Make UAT identifiers unique and sequential.
+- Add explicit logged-out public GitHub, external clean-user, and release-provenance acceptance tests.
+- Remove custom-label dependencies from all issue forms so public-safe intake works without hidden repository setup.
+- Add regression coverage for sequential UAT numbering and label-independent issue forms.
+- Extend maintenance, UX simulation, and release-checklist guidance to preserve those guarantees.
+- Preserve the bounded public product, release-evidence lifecycle, synthetic fixtures, All Rights Reserved posture, and existing assurance behavior.
 
 ## Source-level evidence
 

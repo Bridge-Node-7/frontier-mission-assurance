@@ -1,6 +1,6 @@
 # Current UX Simulation
 
-FMA v0.2.0-rc9 is intentionally a Git/CLI reference implementation rather than a graphical product.
+FMA v0.2.0-rc10 is intentionally a Git/CLI reference implementation rather than a graphical product.
 
 ## Current surfaces
 
@@ -56,6 +56,14 @@ Expected: identify the public-data boundary, scanner behavior, prohibited artifa
 ### Release engineer
 
 Expected: distinguish source validation from hosted commit evidence and tagged release evidence without recursive or stale receipts.
+
+### Logged-out public visitor
+
+Expected after publication: understand purpose, maturity, licensing, non-claims, five-minute evaluation, and public/private boundary without authentication or private context.
+
+### External clean-user evaluator
+
+Expected after publication: start from a clean environment, follow only documented commands, reach the declared bounded result, and distinguish successful mechanics from mission readiness.
 
 ## Trust boundary
 

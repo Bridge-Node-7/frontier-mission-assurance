@@ -1,9 +1,6 @@
 name: Experiment result
 description: Record a result that verifies, validates, or contradicts an assurance
   node
-labels:
-- experiment
-- evidence
 body:
 - type: markdown
   attributes:

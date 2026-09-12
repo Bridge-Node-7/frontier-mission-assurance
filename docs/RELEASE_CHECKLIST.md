@@ -49,6 +49,9 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 - [ ] Local documentation links resolve.
 - [ ] No external person, customer, supplier, partner, or program identity appears.
 - [ ] The repository does not imply a graphical UI, hosted site, or private operational platform exists.
+- [ ] Issue forms render and remain usable without custom repository-label setup.
+- [ ] Logged-out public GitHub UAT passes immediately after visibility changes.
+- [ ] External clean-user five-minute evaluation passes before final `v0.2.0`.
 
 ## Release
 
@@ -56,6 +59,7 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 - [ ] Regenerate `REPO_FILE_MANIFEST.sha256`.
 - [ ] Generate source ZIP and wheel from the exact release commit.
 - [ ] Generate external SHA-256 manifest.
+- [ ] Confirm the frozen source archive reconstructs to the exact accepted Git tree.
 - [ ] Create the GitHub tag/pre-release from the exact passing commit.
 - [ ] Bind exact commit SHA and Actions run in the release record.
 

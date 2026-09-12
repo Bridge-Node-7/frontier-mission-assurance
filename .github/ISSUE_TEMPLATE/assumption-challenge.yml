@@ -1,7 +1,5 @@
 name: Assumption challenge
 description: Challenge an active assumption with new evidence or reasoning
-labels:
-- assumption
 body:
 - type: markdown
   attributes:

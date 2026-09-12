@@ -1,6 +1,6 @@
 # User Acceptance Tests
 
-These UAT cases define the intended behavior of the public reference implementation.
+These UAT cases define the intended behavior of the public reference implementation and its controlled public-release journey.
 
 ## UAT-01 — Five-minute orientation
 
@@ -47,14 +47,26 @@ The public-release scanner and manual review shall find no credentials, personal
 
 A wheel built from the exact release commit shall install into a clean environment and run the documented public example commands.
 
-## UAT-10 — Bounded one-command evaluation
+## UAT-11 — Bounded one-command evaluation
 
 After installation, `python scripts/evaluate_public_reference.py` shall complete the non-executing public-reference journey and end with `RESULT - PUBLIC REFERENCE EVALUATION PASS`.
 
-## UAT-11 — Runtime privacy
+## UAT-12 — Runtime privacy
 
 The runtime package shall contain no network-client imports and shall emit no telemetry or default uploads.
 
-## UAT-12 — Contract alignment
+## UAT-13 — Contract alignment
 
 Published schema constraints for contract versions and graph statuses shall align with runtime validation behavior.
+
+## UAT-14 — Logged-out public GitHub presentation
+
+After public visibility is intentionally enabled, a logged-out visitor shall be able to identify the repository purpose, maturity, licensing posture, public/private boundary, five-minute evaluation path, and non-claims without relying on private context.
+
+## UAT-15 — External clean-user evaluation
+
+An independent user starting from a clean supported environment shall be able to follow only documented commands and reach the declared bounded evaluation result without author-machine assumptions.
+
+## UAT-16 — Release provenance
+
+The public release record shall bind the accepted tag to the exact passing commit, successful hosted V&V run, source archive, wheel, and external SHA-256 manifest. The frozen source archive shall reconstruct to the exact accepted Git tree.

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0-rc10 — public acceptance and zero-hidden-setup UX
+
+- Corrected duplicate UAT numbering and made the acceptance sequence machine-verifiable.
+- Added logged-out public GitHub, external clean-user, and exact release-provenance UATs.
+- Removed custom-label dependencies from GitHub issue forms so intake does not depend on undisclosed repository administration.
+- Added release-surface regressions for sequential UAT identifiers and label-independent issue forms.
+- Extended maintenance, UX simulation, and release checklist guidance around public acceptance.
+- Preserved RC9 evidence-lifecycle architecture, assurance behavior, public/private boundary, synthetic fixtures, All Rights Reserved posture, deterministic cross-platform reproduction, and immutable CI pins.
+
 ## 0.2.0-rc9 — evidence lifecycle and maintenance architecture
 
 - Separated deterministic source validation from commit-specific hosted evidence and tagged-release evidence to prevent stale or recursive receipts.

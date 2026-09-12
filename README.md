@@ -202,7 +202,7 @@ See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/
 
 ## Current maturity
 
-**v0.2.0-rc9 — public-reference release candidate.**
+**v0.2.0-rc10 — public-reference release candidate.**
 
 The repository is intentionally fail-visible: unsupported claims and unresolved assumptions are outputs, not defects to hide. Current verification evidence and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 

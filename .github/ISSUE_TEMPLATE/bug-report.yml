@@ -1,7 +1,5 @@
 name: Public reference bug / reproducibility report
 description: Report a public-safe defect or reproducibility problem
-labels:
-  - bug
 body:
   - type: markdown
     attributes:
@@ -24,7 +22,7 @@ body:
     id: version
     attributes:
       label: FMA version
-      placeholder: 0.2.0rc9
+      placeholder: 0.2.0rc10
     validations:
       required: true
   - type: dropdown

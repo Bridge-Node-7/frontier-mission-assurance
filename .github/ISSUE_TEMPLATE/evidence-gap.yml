@@ -1,7 +1,5 @@
 name: Evidence gap
 description: Record a claim or assumption that lacks sufficient evidence
-labels:
-- evidence-gap
 body:
 - type: markdown
   attributes:
