@@ -10,9 +10,9 @@ in ordinary version-controlled files.
 
 It is designed for small, interdisciplinary teams building difficult systems under uncertainty. The goal is not more process. The goal is to make the decision basis inspectable: what must be true, what is directly supported, what is still assumed, what has been reproduced, what changed, and what a human can justify doing next.
 
-> **Public boundary:** this repository contains only software, public-safe documentation, and synthetic fixtures. It is **not** a live program workspace, customer system, canonical operational kernel, or repository for real mission evidence. Do not place personal names, external organization names, private URLs, screenshots, raw logs, credentials, customer/program identifiers, or nonpublic technical evidence in public issues, pull requests, CI artifacts, examples, branches, releases, or commit history. See [`OPSEC.md`](OPSEC.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), and [`docs/PUBLIC_REFERENCE_BOUNDARY.md`](docs/PUBLIC_REFERENCE_BOUNDARY.md).
+> **Public boundary:** this repository contains software, public documentation, and synthetic fixtures. It is not a repository for real mission evidence or sensitive program data. See [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md) and [`SECURITY.md`](SECURITY.md).
 
-## For mission-oriented frontier teams
+## The mission-oriented question
 
 A technical leader should be able to answer five questions without reconstructing the program from notebooks, tickets, slide decks, chat threads, experiment folders, and tribal knowledge:
 
@@ -22,9 +22,7 @@ A technical leader should be able to answer five questions without reconstructin
 4. **What decisions or interfaces are affected when a dependency changes?**
 5. **What decision can an accountable human justify now—and what would change that decision?**
 
-FMA provides thin connective tissue across the tools a team already uses. It does not require a central data migration or attempt to replace laboratory systems, source control, test infrastructure, issue trackers, product-lifecycle systems, research notebooks, or private AI systems.
-
-A typical mission loop looks like:
+FMA provides thin connective tissue across the tools a team already uses. It does not require a central data migration or attempt to replace laboratory systems, source control, test infrastructure, issue trackers, research notebooks, or engineering tools.
 
 ```text
 MISSION OBJECTIVE
@@ -45,22 +43,34 @@ CHANGE / NEW EVIDENCE
 
 FMA makes that loop inspectable without pretending that machine-readable structure makes the underlying science true.
 
-### Where it creates leverage
+## Mission Decision Packet
+
+A **Mission Decision Packet** is the smallest reviewable bundle that connects one consequential technical decision to its evidence, assumptions, reproduction state, dependencies, and explicit conditions for reopening the decision.
+
+The key question is not only:
+
+> Why did we decide this?
+
+It is also:
+
+> **What would make us revisit it?**
+
+That turns a one-time review into a change-sensitive decision record without automating accountable human judgment.
+
+Start with the worked synthetic example in [`examples/frontier_program/`](examples/frontier_program/) and the pattern in [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md).
+
+## Where FMA creates leverage
 
 - **AI-assisted research** — preserve provenance and require evidence gates instead of treating generated output as established fact.
 - **Cross-disciplinary integration** — connect theory, software, controls, experimental hardware, interfaces, and system evidence without forcing them into one tool.
 - **Design and readiness reviews** — make direct evidence, open assumptions, unresolved gaps, and decision basis visible in a repeatable form.
-- **Partner and supplier boundaries** — represent what is claimed, required, evidenced, and still uncertain at an interface without publishing private internal reasoning.
+- **Partner and supplier interfaces** — represent what is claimed, required, evidenced, and still uncertain at an interface while keeping sensitive details outside the public repository.
 - **Change impact** — show which declared claims, requirements, risks, and decisions may need review when an upstream dependency changes.
 - **Small-team velocity** — start with one consequential decision and add only the assurance structure that earns its keep.
 
-For a bounded adoption pattern and a CTO-level fit test, see [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md).
+For a bounded adoption pattern, see [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md).
 
-## Why this exists
-
-High-consequence engineering and scientific decisions often depend on evidence scattered across analysis, simulation, experiments, formal systems, interfaces, and test artifacts. FMA provides portable reference contracts for connecting those artifacts while keeping uncertainty visible and consequential prioritization and final decisions human-owned.
-
-The public implementation intentionally provides only a bounded set of capabilities:
+## Public capabilities
 
 - **Assurance-graph validation** — detect malformed nodes, invalid relations, duplicate identifiers, and dangling references.
 - **Open-assumption visibility** — list unresolved assumptions without assigning an automated priority score.
@@ -71,8 +81,6 @@ The public implementation intentionally provides only a bounded set of capabilit
 - **Decision receipts** — verify that a declared decision basis references nodes in a valid assurance graph.
 - **Scientific Discovery Assurance** — portable contracts for discovery provenance, priority evidence, research-boundary declarations, formal-proof/specification separation, replication, and attribution chronology.
 - **CI-native V&V** — exercise graph, receipt, decision, schema, package, scientific-discovery, and public-boundary checks on pull requests.
-
-FMA does **not** expose private operational reasoning, proprietary prioritization, private relationship semantics, customer/program workflows, real evidence, or internal decision systems.
 
 ## Five-minute evaluation
 
@@ -112,18 +120,17 @@ The installed FMA runtime makes no remote API calls, emits no telemetry, and per
 
 ```text
 frontier-mission-assurance/
-├── src/frontier_assurance/      # minimal public reference implementation
-├── schemas/                     # core portable JSON Schemas
-├── profiles/                    # bounded domain assurance profiles
-│   └── scientific-discovery/    # synthetic scientific-discovery assurance contracts
-├── examples/                    # synthetic-only core worked fixtures
-├── tests/                       # positive, regression, tamper, and boundary tests
-├── docs/                        # public architecture, V&V doctrine, UAT, mission adoption
-├── .github/                     # CI + issue/PR public-safety workflows
+├── src/frontier_assurance/      # reference implementation
+├── schemas/                     # portable JSON Schemas
+├── profiles/                    # bounded assurance profiles
+│   └── scientific-discovery/    # scientific-discovery contracts
+├── examples/                    # synthetic worked examples
+├── tests/                       # regression, tamper, and boundary tests
+├── docs/                        # architecture, acceptance, and adoption guidance
+├── .github/                     # CI and public issue/PR workflows
 ├── PUBLIC_BOUNDARY.md           # public-data and claim boundary
-├── OPSEC.md                     # public-release handling rules
-├── scripts/opsec_scan.py        # automated disclosure-pattern scan
-├── VALIDATION_REPORT.md         # current source validation evidence
+├── SECURITY.md                  # security and vulnerability-reporting guidance
+├── VALIDATION_REPORT.md         # deterministic source validation contract
 └── PROJECT_FACTS.json           # machine-readable public scope
 ```
 
@@ -146,7 +153,7 @@ A minimal assumption:
   status: open
 ```
 
-FMA intentionally does **not** calculate an engineering priority score from assumption fields. It exposes assumptions, gaps, and dependency impact; consequence, urgency, resource allocation, and final priority remain human-owned or belong to private program policy.
+FMA intentionally does **not** calculate an engineering priority score from assumption fields. It exposes assumptions, gaps, and dependency impact; consequence, urgency, resource allocation, and final priority remain human-owned.
 
 ## Research receipt
 
@@ -189,9 +196,9 @@ For a human-facing environment/execution/result contract that can accompany rese
 - `ResearchBoundaryAttestation` records a declared research-data boundary; the declaration is not proof that the boundary was enforced.
 - `FormalProofRecord` keeps proof-checker state separate from specification-equivalence review.
 - `ReplicationReceipt` preserves independent reproduction state and unresolved discrepancies.
-- `AgentProvenanceRef` provides bounded machine-run references without publishing an internal telemetry graph.
+- `AgentProvenanceRef` provides bounded machine-run references without requiring a remote telemetry service.
 
-The bundled synthetic case intentionally remains `REVIEW_REQUIRED`: proof checking passes, but specification equivalence and replication are incomplete. Run the profile validator from a development environment with:
+The bundled synthetic case intentionally remains `REVIEW_REQUIRED`: proof checking passes, but specification equivalence and replication are incomplete.
 
 ```bash
 python scripts/validate_scientific_discovery.py .
@@ -204,18 +211,6 @@ SCIENTIFIC DISCOVERY PROFILE PASS
 ```
 
 That PASS establishes only the declared contracts and synthetic cross-record invariants; it does not certify the discovery.
-
-## GitHub operating model
-
-Every meaningful change should answer at least one of these:
-
-1. What claim changes?
-2. What evidence changed?
-3. What assumption changed?
-4. What decision basis changes?
-5. What test prevents regression?
-
-The PR template and issue forms encode that behavior without requiring a separate process system.
 
 ## Status semantics
 
@@ -235,17 +230,7 @@ Recommended node statuses:
 
 A passing FMA validator means the checked artifact met this repository's declared machine-checkable rules. It does **not** establish scientific truth, certify a supplier or subsystem, approve acquisition, establish regulatory compliance, prove mission readiness, establish legal priority, or replace authorized human review.
 
-See [`DISCLAIMER.md`](DISCLAIMER.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), [`docs/PUBLIC_REFERENCE_BOUNDARY.md`](docs/PUBLIC_REFERENCE_BOUNDARY.md), and [`SECURITY.md`](SECURITY.md).
-
-## OPSEC-first operating model
-
-Run this before every public push:
-
-```bash
-python scripts/opsec_scan.py .
-```
-
-The scanner catches several high-risk disclosure patterns, but it cannot infer whether every proper noun or technical value is sensitive. Public release therefore requires both automated scanning and manual review. Real assurance data belongs in a separate access-controlled environment, never in this public repository.
+See [`DISCLAIMER.md`](DISCLAIMER.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), and [`SECURITY.md`](SECURITY.md).
 
 ## Development
 
@@ -255,7 +240,7 @@ python -m pip install --no-deps -e .
 make check
 ```
 
-Hosted CI additionally rehearses supported Python versions, multiple operating systems, fresh wheel installation, and the Scientific Discovery Assurance synthetic profile.
+Hosted CI additionally rehearses supported Python versions, multiple operating systems, fresh wheel installation, the public release boundary, and the Scientific Discovery Assurance synthetic profile.
 
 ## Design principles
 
@@ -270,13 +255,13 @@ Hosted CI additionally rehearses supported Python versions, multiple operating s
 9. Human judgment owns prioritization and consequential decisions.
 10. The purpose of V&V is faster justified decisions, not paperwork.
 
-See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md), [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md), [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md), [`docs/UAT.md`](docs/UAT.md), and [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md).
+See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md), [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md), [`docs/ACCEPTANCE_CRITERIA.md`](docs/ACCEPTANCE_CRITERIA.md), and [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
 
 ## Current maturity
 
-The current source identity is defined by [`VERSION`](VERSION). The **v0.3.x** line adds Scientific Discovery Assurance and security-hardened release automation while preserving the deliberately thin public/private boundary.
+The current source identity is defined by [`VERSION`](VERSION). The v0.3 line includes Scientific Discovery Assurance, Mission Decision Packets, cross-platform verification, and stable-release automation while preserving a deliberately small public scope.
 
-The repository is intentionally fail-visible: unsupported claims and unresolved assumptions are outputs, not defects to hide. Current verification evidence and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
+Current deterministic validation expectations and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 
 ## Copyright and citation
 
@@ -284,6 +269,6 @@ Copyright © 2026 Bridge Node 7. All rights reserved. No reuse license is grante
 
 External code contributions are not accepted unless and until Bridge Node 7 intentionally adopts separate inbound-contribution terms; public-safe feedback and bug reports are welcome.
 
-The package metadata intentionally blocks public package-index upload; evaluation artifacts are distributed only through the controlled repository/release workflow.
+The package metadata intentionally blocks public package-index upload; evaluation artifacts are distributed through the repository release workflow.
 
 Use [`CITATION.cff`](CITATION.cff) and cite the exact tagged release if the public reference materially informs published work.
