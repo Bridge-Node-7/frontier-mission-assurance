@@ -124,7 +124,7 @@ jobs:
           cache: pip
       - run: >-
           python -m pip install
-          "setuptools==80.9.0" "wheel==0.45.1" "build==1.6.1"
+          "setuptools==84.0.0" "wheel==0.48.0" "build==1.6.1"
       - run: python -m build --no-isolation
       - run: python -m venv .package-smoke
       - run: .package-smoke/bin/python -m pip install dist/*.whl

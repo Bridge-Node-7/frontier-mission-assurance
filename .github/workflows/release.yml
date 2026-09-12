@@ -57,7 +57,7 @@ jobs:
         if: env.RELEASE_ELIGIBLE == '1'
         run: >-
           python -m pip install
-          "setuptools==80.9.0" "wheel==0.45.1" "build==1.6.1"
+          "setuptools==84.0.0" "wheel==0.48.0" "build==1.6.1"
           "PyYAML==6.0.3" "jsonschema==4.26.0"
 
       - name: Reverify source boundary
