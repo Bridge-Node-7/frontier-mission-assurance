@@ -1,27 +1,26 @@
-# Source Release Receipt — v0.3.2
+# Source Release Receipt — v0.3.3
 
 **Release type:** public reference  
 **Date:** 2026-09-12
 
 ## Purpose
 
-Close the immediate build-tool dependency security findings discovered immediately after v0.3.1 while preserving FMA's deliberately thin public reference boundary and assurance semantics.
+Close the open pytest development-dependency security finding while preserving FMA's deliberately thin public reference boundary and assurance semantics.
 
 ## Baseline
 
-FMA v0.3.1 introduced current Node 24 GitHub Actions, pull-request dependency review, protected-main CodeQL, pinned build tooling, and private-first vulnerability-reporting guidance.
+FMA v0.3.2 closed the build-tool dependency security findings and retained Node 24 immutable Action pins, pull-request dependency review, protected-main CodeQL, pinned build tooling, clean-user release UAT, and private-first vulnerability-reporting guidance.
 
-## Material changes in v0.3.2
+## Material changes in v0.3.3
 
-- Update the pinned build backend from setuptools 80.9.0 to the current stable setuptools 84.0.0.
-- Update the pinned wheel tooling from wheel 0.45.1 to the current stable wheel 0.48.0, incorporating upstream security fixes including path-traversal protections published in later wheel releases.
-- Keep the same pinned build 1.6.1 release, which remains current.
-- Keep build pins aligned across package metadata, hosted package smoke, stable-release construction, validation tests, and release documentation.
-- Preserve Node 24 immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, Scientific Discovery Assurance behavior, and human decision authority.
+- Update the pinned development test runner from pytest 8.4.2 to pytest 9.1.1.
+- Raise the optional development dependency floor to pytest >=9.1.1,<10 so supported development environments do not resolve back into the affected 8.x line.
+- Add a release-surface regression that keeps the security-fixed pytest baseline aligned between `requirements-dev.txt` and package metadata.
+- Preserve runtime dependencies, Scientific Discovery Assurance semantics, Node 24 immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, OPSEC boundaries, and human decision authority.
 
 ## Source-level evidence
 
-The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including core tests, profile tests, schema/runtime alignment, OPSEC, deterministic reproduction, packaging, dependency review, CodeQL, and release-surface validation.
+The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, OPSEC, deterministic reproduction, packaging, dependency review, CodeQL, and release-surface validation under pytest 9.1.1.
 
 ## Hosted evidence rule
 

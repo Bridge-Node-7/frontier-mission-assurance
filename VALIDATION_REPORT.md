@@ -1,4 +1,4 @@
-# Source Validation Report — v0.3.2
+# Source Validation Report — v0.3.3
 
 **Date:** 2026-09-12  
 **Candidate role:** thin public reference/interoperability layer with Scientific Discovery Assurance
@@ -25,7 +25,7 @@ This report records deterministic validation properties of the source candidate.
 - Research-boundary declaration-only guard: **PASS required**
 - Formal-proof / specification-equivalence separation: **PASS required**
 - Replication-state guard: **PASS required**
-- CLI version contract: **0.3.2 required**
+- CLI version contract: **0.3.3 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
@@ -36,6 +36,12 @@ This report records deterministic validation properties of the source candidate.
 - Protected-main CodeQL analysis: **PASS required on main pushes**
 - Checkout credential persistence disabled: **required**
 - Hosted-job timeout / artifact-retention controls declared: **required**
+
+## Dependency V&V
+
+- Development test runner: **pytest 9.1.1 required**
+- Project optional dev range: **pytest >=9.1.1,<10 required**
+- The pytest security remediation must pass the complete supported Python and cross-platform matrix before release.
 
 ## Packaging V&V
 

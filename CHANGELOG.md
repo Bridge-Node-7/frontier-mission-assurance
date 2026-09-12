@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.3 — pytest development-dependency security remediation
+
+- Updated the pinned development test runner from pytest 8.4.2 to current stable pytest 9.1.1.
+- Raised the optional development dependency floor to `pytest>=9.1.1,<10` so supported development installs do not resolve into the affected 8.x line.
+- Added a release-surface regression that keeps the security-fixed pytest baseline aligned between `requirements-dev.txt` and package metadata.
+- Preserved v0.3.2 build-tool security closure, Node 24 immutable Action pins, dependency review, protected-main CodeQL, Scientific Discovery Assurance behavior, synthetic-only examples, All Rights Reserved licensing, local-only runtime, public/private OPSEC boundaries, and human consequential decision authority.
+
 ## 0.3.2 — build-tool dependency security closure
 
 - Updated pinned setuptools from 80.9.0 to current stable 84.0.0.
@@ -54,7 +61,7 @@
 
 - Removed the three trailing-whitespace defects caught by the pre-commit staged-diff gate.
 - Added a repository-level `.gitattributes` policy that normalizes public text files to LF across Windows, macOS, and Linux while preserving common binary types as binary.
-- Preserved RC7 assurance behavior, 31-test baseline, deterministic receipt reproduction, OPSEC controls, bounded dependency toolchain, and immutable CI pins.
+- Preserved RC7 assurance behavior, 31-test baseline, deterministic receipt reproduction, OPSEC controls, bounded toolchain, and immutable CI pins.
 - Kept the newly created GitHub repository private and empty until this corrected candidate is validated and committed.
 
 ## 0.2.0-rc7 — cross-platform receipt determinism
