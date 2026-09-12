@@ -1,0 +1,30 @@
+{
+  "project": "frontier-mission-assurance",
+  "display_name": "Frontier Mission Assurance",
+  "version": "0.2.0-rc8",
+  "maturity": "public-reference release candidate",
+  "owner": "Bridge Node 7",
+  "license": "All rights reserved; no reuse license granted by this release candidate",
+  "python": ">=3.11",
+  "purpose": "Public reference implementation for evidence-native verification, validation, and mission assurance.",
+  "public_boundary": "Software, schemas, synthetic fixtures, and public-safe documentation only; no real external program identities or nonpublic evidence.",
+  "does": [
+    "validate assurance-graph structure and selected semantics",
+    "list unresolved assumptions without automated priority scoring",
+    "expose direct evidence gaps on critical nodes",
+    "show dependency impact through declared depends_on/requires relations",
+    "verify declared artifact hashes and numerical acceptance checks",
+    "explicitly reproduce trusted receipt commands when the user invokes fma reproduce",
+    "verify that decision-receipt basis references exist in a valid graph"
+  ],
+  "does_not": [
+    "expose a private operational assurance kernel",
+    "calculate proprietary or autonomous engineering priority",
+    "certify scientific truth",
+    "validate nonpublic external systems or practices",
+    "replace independent engineering judgment",
+    "authorize safety, security, acquisition, compliance, or mission readiness",
+    "serve as a public storage location for real program evidence"
+  ],
+  "distribution": "GitHub source/release workflow; public package-index upload intentionally blocked by package metadata."
+}

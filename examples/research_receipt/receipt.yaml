@@ -1,0 +1,21 @@
+receipt_version: "1.0"
+experiment:
+  id: DEMO-Z-EXPECTATION
+  command: "python analysis.py"
+  seed: 1111
+  purpose: "Demonstrate immutable inputs/outputs and numerical verification"
+environment:
+  runtime: "Python >=3.11, standard library only"
+inputs:
+  - path: data/measurements.csv
+    sha256: afac4acef548f23e1787a9bb70b3455284ddbd961e985e48b9f17a828f8a3f56
+outputs:
+  - path: outputs/result.json
+    sha256: 6cd9011cd5234f8d1e9e5e757535066d755545e9e59013bcb97e10b43906af30
+checks:
+  - name: z_expectation
+    path: outputs/result.json
+    json_path: estimate_z
+    expected: 0.6
+    atol: 1.0e-12
+    rtol: 0.0

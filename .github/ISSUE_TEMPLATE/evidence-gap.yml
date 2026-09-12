@@ -1,0 +1,43 @@
+name: Evidence gap
+description: Record a claim or assumption that lacks sufficient evidence
+labels:
+- evidence-gap
+body:
+- type: markdown
+  attributes:
+    value: '**PUBLIC REPOSITORY:** Use synthetic/public-safe identifiers only. Do
+      not include personal names, external organization names, private URLs, screenshots,
+      raw logs, credentials, or nonpublic program data.'
+- type: input
+  id: node
+  attributes:
+    label: Claim / assumption ID
+  validations:
+    required: true
+- type: textarea
+  id: gap
+  attributes:
+    label: What is not yet supported?
+  validations:
+    required: true
+- type: textarea
+  id: consequence
+  attributes:
+    label: Mission / decision consequence
+  validations:
+    required: true
+- type: textarea
+  id: closure
+  attributes:
+    label: Minimum evidence needed to close the gap
+  validations:
+    required: true
+- type: checkboxes
+  id: public_safe
+  attributes:
+    label: Public-safety attestation
+    options:
+    - label: I confirm this submission contains only public-safe or synthetic information.
+      required: true
+  validations:
+    required: true

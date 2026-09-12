@@ -1,0 +1,53 @@
+.PHONY: install test lint validate assumptions coverage impact receipt reproduce report schema opsec evaluate fingerprint demo check clean
+
+install:
+	python -m pip install -e '.[dev]'
+
+test:
+	pytest
+
+lint:
+	ruff check src tests scripts
+
+validate:
+	fma validate examples/frontier_program/graph.yaml
+
+assumptions:
+	fma assumptions examples/frontier_program/graph.yaml
+
+coverage:
+	fma coverage examples/frontier_program/graph.yaml
+
+impact:
+	fma impact examples/frontier_program/graph.yaml ASSUMP-CYCLE-COMPOSITION
+
+receipt:
+	fma receipt examples/research_receipt/receipt.yaml
+	fma decision examples/frontier_program/graph.yaml examples/frontier_program/decision-receipt.yaml
+
+reproduce:
+	fma reproduce examples/research_receipt/receipt.yaml
+
+report:
+	mkdir -p build
+	fma report examples/frontier_program/graph.yaml --out build/assurance-report.md
+
+schema:
+	pytest -q tests/test_schemas.py
+
+opsec:
+	python scripts/opsec_scan.py .
+
+evaluate:
+	python scripts/evaluate_public_reference.py
+
+fingerprint:
+	python scripts/environment_fingerprint.py --out build/environment-fingerprint.json
+
+demo: evaluate
+
+check: lint test validate assumptions coverage receipt reproduce report evaluate fingerprint opsec
+
+clean:
+	rm -rf build dist .pytest_cache .ruff_cache .coverage *.egg-info src/*.egg-info
+	find . -type d -name __pycache__ -prune -exec rm -rf {} +

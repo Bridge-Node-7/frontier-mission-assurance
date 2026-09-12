@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Executable Research Receipt",
+  "type": "object",
+  "required": [
+    "receipt_version",
+    "experiment",
+    "inputs",
+    "outputs",
+    "checks"
+  ],
+  "properties": {
+    "receipt_version": {
+      "const": "1.0"
+    },
+    "experiment": {
+      "type": "object",
+      "required": [
+        "id",
+        "command"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "seed": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "environment": {
+      "type": "object"
+    },
+    "inputs": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "outputs": {
+      "$ref": "#/$defs/artifacts"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "path",
+          "json_path",
+          "expected"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "json_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected": {
+            "type": "number"
+          },
+          "atol": {
+            "type": "number",
+            "minimum": 0
+          },
+          "rtol": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

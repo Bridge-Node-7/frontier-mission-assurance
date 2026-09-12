@@ -1,0 +1,103 @@
+graph_version: '1.0'
+metadata:
+  title: Synthetic frontier-system assurance example
+  classification: PUBLIC / SYNTHETIC
+  affiliation: Independent synthetic reference fixture
+  purpose: Demonstrate minimum-sufficient-assurance graph mechanics without external program data
+nodes:
+- id: MISSION-FRONTIER-SYSTEM
+  kind: mission
+  title: Deliver a high-consequence frontier system within its declared performance envelope
+  status: proposed
+  criticality: 5
+  notes: Synthetic mission framing for public demonstration only.
+- id: CLAIM-RESOURCE-FEASIBILITY
+  kind: claim
+  title: The architecture can achieve the required workload within the declared resource envelope
+  status: active
+  criticality: 5
+  notes: Synthetic analytical claim used only to exercise assurance logic.
+- id: CLAIM-CYCLE-TARGET
+  kind: claim
+  title: The integrated control cycle can meet the synthetic target budget
+  status: proposed
+  criticality: 5
+  notes: Synthetic timing target used to demonstrate an evidence gap.
+- id: ASSUMP-CYCLE-COMPOSITION
+  kind: assumption
+  title: Sensing, control, actuation, and scheduling compose within the target cycle budget
+  status: open
+- id: ASSUMP-SCALE-PERFORMANCE
+  kind: assumption
+  title: Subsystem performance does not degrade beyond architecture margin at deployment scale
+  status: open
+- id: ASSUMP-CONTROL-INTERFACE
+  kind: assumption
+  title: The control interface can satisfy calibration, reliability, and manufacturability needs simultaneously
+  status: open
+- id: EVID-SYNTHETIC-ARCHITECTURE
+  kind: evidence
+  title: Synthetic architecture analysis note
+  status: active
+  source:
+    type: synthetic-fixture
+    locator: sources/architecture-note.md
+  notes: Supports the synthetic analytical claim, not real-system performance.
+- id: EVID-SYNTHETIC-MISSION
+  kind: evidence
+  title: Synthetic mission brief
+  status: active
+  source:
+    type: synthetic-fixture
+    locator: sources/mission-brief.md
+- id: EXP-INTEGRATED-CYCLE
+  kind: experiment
+  title: Synthetic integrated timing demonstration
+  status: planned
+  notes: Synthetic risk-retirement experiment for public demonstration only.
+- id: INTERFACE-CONTROL
+  kind: interface
+  title: Core system to control-interface evidence contract
+  status: proposed
+- id: RISK-CROSS-DOMAIN-COMPOSITION
+  kind: risk
+  title: Individually passing subsystems fail when composed at required scale or timing
+  status: open
+- id: DEC-ARCHITECTURE-GATE
+  kind: decision
+  title: Retain the architecture only while integrated evidence preserves required margin
+  status: proposed
+edges:
+- from: EVID-SYNTHETIC-MISSION
+  to: MISSION-FRONTIER-SYSTEM
+  relation: supports
+- from: EVID-SYNTHETIC-ARCHITECTURE
+  to: CLAIM-RESOURCE-FEASIBILITY
+  relation: supports
+- from: MISSION-FRONTIER-SYSTEM
+  to: CLAIM-RESOURCE-FEASIBILITY
+  relation: depends_on
+- from: CLAIM-RESOURCE-FEASIBILITY
+  to: CLAIM-CYCLE-TARGET
+  relation: depends_on
+- from: CLAIM-CYCLE-TARGET
+  to: ASSUMP-CYCLE-COMPOSITION
+  relation: depends_on
+- from: CLAIM-RESOURCE-FEASIBILITY
+  to: ASSUMP-SCALE-PERFORMANCE
+  relation: depends_on
+- from: ASSUMP-CYCLE-COMPOSITION
+  to: INTERFACE-CONTROL
+  relation: depends_on
+- from: INTERFACE-CONTROL
+  to: ASSUMP-CONTROL-INTERFACE
+  relation: depends_on
+- from: EXP-INTEGRATED-CYCLE
+  to: ASSUMP-CYCLE-COMPOSITION
+  relation: verifies
+- from: RISK-CROSS-DOMAIN-COMPOSITION
+  to: CLAIM-RESOURCE-FEASIBILITY
+  relation: contradicts
+- from: DEC-ARCHITECTURE-GATE
+  to: EXP-INTEGRATED-CYCLE
+  relation: depends_on

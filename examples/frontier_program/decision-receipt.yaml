@@ -1,0 +1,18 @@
+decision_version: "1.0"
+decision:
+  id: DEC-ARCHITECTURE-GATE
+  disposition: HOLD
+  rationale: >-
+    The synthetic analytical evidence supports continued evaluation of the architecture,
+    but the integrated cycle target remains without direct experimental evidence in this
+    public fixture. Hold promotion of the timing claim to verified status.
+  reopen_when:
+    - "A representative synthetic integrated-cycle experiment produces a verified research receipt."
+    - "The timing target or architecture dependency is materially revised."
+basis:
+  node_refs:
+    - CLAIM-RESOURCE-FEASIBILITY
+    - CLAIM-CYCLE-TARGET
+    - ASSUMP-CYCLE-COMPOSITION
+    - EVID-SYNTHETIC-ARCHITECTURE
+    - EXP-INTEGRATED-CYCLE

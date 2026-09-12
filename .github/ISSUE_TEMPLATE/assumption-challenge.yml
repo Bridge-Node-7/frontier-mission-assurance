@@ -1,0 +1,39 @@
+name: Assumption challenge
+description: Challenge an active assumption with new evidence or reasoning
+labels:
+- assumption
+body:
+- type: markdown
+  attributes:
+    value: '**PUBLIC REPOSITORY:** Use synthetic/public-safe identifiers only. Do
+      not include personal names, external organization names, private URLs, screenshots,
+      raw logs, credentials, or nonpublic program data.'
+- type: input
+  id: assumption
+  attributes:
+    label: Assumption ID
+  validations:
+    required: true
+- type: textarea
+  id: challenge
+  attributes:
+    label: Challenge
+  validations:
+    required: true
+- type: textarea
+  id: evidence
+  attributes:
+    label: Contradicting or qualifying evidence
+- type: textarea
+  id: impact
+  attributes:
+    label: What decisions/claims could be stale if this challenge is correct?
+- type: checkboxes
+  id: public_safe
+  attributes:
+    label: Public-safety attestation
+    options:
+    - label: I confirm this submission contains only public-safe or synthetic information.
+      required: true
+  validations:
+    required: true

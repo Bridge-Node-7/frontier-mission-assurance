@@ -1,0 +1,55 @@
+name: Experiment result
+description: Record a result that verifies, validates, or contradicts an assurance
+  node
+labels:
+- experiment
+- evidence
+body:
+- type: markdown
+  attributes:
+    value: '**PUBLIC REPOSITORY:** Use synthetic/public-safe identifiers only. Do
+      not include personal names, external organization names, private URLs, screenshots,
+      raw logs, credentials, or nonpublic program data.'
+- type: input
+  id: experiment
+  attributes:
+    label: Experiment ID
+  validations:
+    required: true
+- type: input
+  id: target
+  attributes:
+    label: Claim / assumption being tested
+  validations:
+    required: true
+- type: textarea
+  id: acceptance
+  attributes:
+    label: Declared acceptance criterion
+  validations:
+    required: true
+- type: textarea
+  id: result
+  attributes:
+    label: Result and receipt/provenance locator
+  validations:
+    required: true
+- type: dropdown
+  id: verdict
+  attributes:
+    label: Verdict
+    options:
+    - PASS
+    - FAIL
+    - INCONCLUSIVE
+  validations:
+    required: true
+- type: checkboxes
+  id: public_safe
+  attributes:
+    label: Public-safety attestation
+    options:
+    - label: I confirm this submission contains only public-safe or synthetic information.
+      required: true
+  validations:
+    required: true

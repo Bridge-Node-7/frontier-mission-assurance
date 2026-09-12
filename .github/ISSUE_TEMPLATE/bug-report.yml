@@ -1,0 +1,49 @@
+name: Public reference bug / reproducibility report
+description: Report a public-safe defect or reproducibility problem
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        **PUBLIC REPOSITORY:** Use synthetic/public-safe information only. Do not include personal names, external organization/program identities, private URLs, screenshots, raw logs, credentials, or nonpublic technical data.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: Describe the smallest public-safe reproduction.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: FMA version
+      placeholder: 0.2.0rc8
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other / not applicable
+    validations:
+      required: true
+  - type: checkboxes
+    id: public_safe
+    attributes:
+      label: Public-safety attestation
+      options:
+        - label: I confirm this submission contains only public-safe or synthetic information.
+          required: true
+    validations:
+      required: true
