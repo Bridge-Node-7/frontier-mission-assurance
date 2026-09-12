@@ -1,0 +1,139 @@
+name: Stable Release
+
+on:
+  workflow_run:
+    workflows: ["V&V CI"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stable-release-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Publish stable release
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Resolve stable release identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="$(tr -d '\r\n' < VERSION)"
+          SHA="${{ github.event.workflow_run.head_sha }}"
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "RELEASE_ELIGIBLE=0" >> "$GITHUB_ENV"
+            echo "Stable release skipped for non-stable VERSION: $VERSION"
+            exit 0
+          fi
+          TAG="v$VERSION"
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >/dev/null 2>&1; then
+            echo "RELEASE_ELIGIBLE=0" >> "$GITHUB_ENV"
+            echo "Stable release already exists for $TAG"
+            exit 0
+          fi
+          echo "RELEASE_ELIGIBLE=1" >> "$GITHUB_ENV"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          echo "RELEASE_SHA=$SHA" >> "$GITHUB_ENV"
+
+      - name: Install bounded release toolchain
+        if: env.RELEASE_ELIGIBLE == '1'
+        run: python -m pip install "setuptools==80.9.0" "wheel==0.45.1" "build==1.6.1"
+
+      - name: Reverify source boundary
+        if: env.RELEASE_ELIGIBLE == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum -c REPO_FILE_MANIFEST.sha256
+          python scripts/opsec_scan.py .
+          python scripts/evaluate_public_reference.py
+
+      - name: Build release artifacts
+        if: env.RELEASE_ELIGIBLE == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          git archive --format=zip --prefix=frontier-mission-assurance/ \
+            -o "dist/frontier-mission-assurance-v${VERSION}.zip" "$RELEASE_SHA"
+          python -m build --wheel --no-isolation
+          (
+            cd dist
+            sha256sum \
+              "frontier-mission-assurance-v${VERSION}.zip" \
+              "frontier_mission_assurance-${VERSION}-py3-none-any.whl" \
+              > "FMA-v${VERSION}-SHA256SUMS"
+          )
+
+      - name: Publish GitHub Release
+        if: env.RELEASE_ELIGIBLE == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > release-notes.md <<EOF
+          Frontier Mission Assurance v${VERSION} is the initial stable public reference for evidence-native verification, validation, reproducibility, traceability, and human-owned decision basis.
+
+          This release was published automatically only after the exact main commit passed the complete hosted V&V workflow.
+
+          V&V run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${{ github.event.workflow_run.id }}
+          Commit: ${RELEASE_SHA}
+
+          A PASS proves only the declared mechanics. It does not establish scientific truth, regulatory compliance, supplier qualification, mission readiness, or authorization for consequential decisions.
+
+          License posture: All Rights Reserved. No reuse license is granted by this release.
+          EOF
+          gh release create "$TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$RELEASE_SHA" \
+            --title "Frontier Mission Assurance v${VERSION}" \
+            --notes-file release-notes.md \
+            "dist/frontier-mission-assurance-v${VERSION}.zip" \
+            "dist/frontier_mission_assurance-${VERSION}-py3-none-any.whl" \
+            "dist/FMA-v${VERSION}-SHA256SUMS"
+          TAG_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
+          [[ "$TAG_SHA" == "$RELEASE_SHA" ]]
+
+      - name: Public release clean-user UAT
+        if: env.RELEASE_ELIGIBLE == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          UAT="$RUNNER_TEMP/fma-release-uat"
+          mkdir -p "$UAT"
+          cd "$UAT"
+          BASE="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${TAG}"
+          SOURCE="frontier-mission-assurance-v${VERSION}.zip"
+          WHEEL="frontier_mission_assurance-${VERSION}-py3-none-any.whl"
+          SUMS="FMA-v${VERSION}-SHA256SUMS"
+          curl -fsSL "$BASE/$SOURCE" -o "$SOURCE"
+          curl -fsSL "$BASE/$WHEEL" -o "$WHEEL"
+          curl -fsSL "$BASE/$SUMS" -o "$SUMS"
+          sha256sum -c "$SUMS"
+          python -m venv .venv
+          .venv/bin/python -m pip install "./$WHEEL"
+          [[ "$(.venv/bin/python -m frontier_assurance.cli --version)" == "fma ${VERSION}" ]]
+          unzip -q "$SOURCE" -d source
+          cd source/frontier-mission-assurance
+          "$UAT/.venv/bin/python" scripts/evaluate_public_reference.py
+          grep -Fq "CLAIM-CYCLE-TARGET" build/assurance-report.md
