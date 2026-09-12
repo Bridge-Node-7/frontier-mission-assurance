@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 — initial public reference
+
+- Promote the fully validated RC10 line after public, logged-out, and clean-user acceptance.
+- Finalize release identity without expanding runtime behavior or the public/private architecture boundary.
+- Retain the All Rights Reserved posture and public package-index upload guard.
+
 ## 0.2.0-rc10 — public acceptance and zero-hidden-setup UX
 
 - Corrected duplicate UAT numbering and made the acceptance sequence machine-verifiable.

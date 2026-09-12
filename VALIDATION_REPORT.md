@@ -1,4 +1,4 @@
-# Source Validation Report — v0.2.0-rc10
+# Source Validation Report — v0.2.0
 
 **Date:** 2026-09-12
 **Candidate role:** thin public reference/interoperability layer
@@ -20,7 +20,7 @@ This report records deterministic validation properties of the source candidate.
 - Decision-basis receipt verification: **PASS required**
 - Bounded public-reference evaluation: **PASS required**
 - Markdown assurance-report generation: **PASS required**
-- CLI version contract: **0.2.0rc10 required**
+- CLI version contract: **0.2.0 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
@@ -46,7 +46,7 @@ This report records deterministic validation properties of the source candidate.
 - No personal email addresses, credentials, private keys, local home paths, or private URLs in the public candidate
 - Public reference boundary, threat model, and interoperability boundary present
 - No private operating playbook, private deployment details, or proprietary prioritization logic in the public candidate
-- Release-candidate contribution/IP boundary explicit
+- Contribution/IP boundary explicit
 
 ## Expected synthetic example behavior
 

@@ -1,10 +1,10 @@
 # Contributing
 
-## Release-candidate contribution policy
+## Contribution policy
 
-This release candidate is **All Rights Reserved** while the public license and inbound-contribution terms are still being decided.
+This public reference is **All Rights Reserved**. No reuse license is granted by this release.
 
-Until those terms are intentionally selected, **external code contributions are not accepted**. Public-safe bug reports, reproducibility reports, and documentation feedback are welcome through the repository's issue forms. Maintainer changes must continue to satisfy the complete V&V and OPSEC gates.
+**External code contributions are not accepted** unless and until Bridge Node 7 intentionally adopts separate inbound-contribution terms. Public-safe bug reports, reproducibility reports, and documentation feedback are welcome through the repository's issue forms. Maintainer changes must continue to satisfy the complete V&V and OPSEC gates.
 
 ## Principle
 
