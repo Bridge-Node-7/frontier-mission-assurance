@@ -1,4 +1,4 @@
-# Source Validation Report — v0.3.0
+# Source Validation Report — v0.3.1
 
 **Date:** 2026-09-12  
 **Candidate role:** thin public reference/interoperability layer with Scientific Discovery Assurance
@@ -25,18 +25,23 @@ This report records deterministic validation properties of the source candidate.
 - Research-boundary declaration-only guard: **PASS required**
 - Formal-proof / specification-equivalence separation: **PASS required**
 - Replication-state guard: **PASS required**
-- CLI version contract: **0.3.0 required**
+- CLI version contract: **0.3.1 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
 - Local Markdown-link integrity: **PASS required**
 - GitHub Actions immutable-SHA check: **PASS required**
+- GitHub Actions Node 24 runtime migration: **required**
+- Pull-request dependency vulnerability review: **PASS required on pull requests**
+- Protected-main CodeQL analysis: **PASS required on main pushes**
 - Checkout credential persistence disabled: **required**
 - Hosted-job timeout / artifact-retention controls declared: **required**
 
 ## Packaging V&V
 
 - Wheel and source-distribution build: **PASS required**
+- Build backend/tooling pins are exact for the candidate: **required**
+- Package build runs without isolated dependency re-resolution in hosted package smoke: **required**
 - PEP 639 license metadata: **`LicenseRef-Proprietary` required**
 - License file included in wheel metadata: **required**
 - Public package-index upload guard: **`Private :: Do Not Upload` required**
@@ -50,7 +55,7 @@ This report records deterministic validation properties of the source candidate.
 - Worked examples: **synthetic only**
 - Scientific Discovery Assurance worked example: **explicitly synthetic and intentionally unresolved**
 - No personal email addresses, credentials, private keys, local home paths, or private URLs in the public candidate
-- Public reference boundary, threat model, interoperability boundary, and scientific-discovery limitations present
+- Public reference boundary, threat model, interoperability boundary, security-reporting policy, and scientific-discovery limitations present
 - No private operating playbook, private deployment details, proprietary prioritization logic, or real research-session evidence in the public candidate
 - Contribution/IP boundary explicit
 
@@ -81,7 +86,7 @@ These are fixture behaviors, not claims about any external program or discovery.
 
 ## Hosted acceptance
 
-The exact pushed commit must independently pass the declared hosted Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, OPSEC, deterministic reproduction, Scientific Discovery Assurance validation, and fresh wheel installation. The Actions run attached to that commit is the authoritative hosted evidence.
+The exact pushed commit must independently pass the declared hosted Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, OPSEC, deterministic reproduction, Scientific Discovery Assurance validation, dependency review where applicable, protected-main CodeQL, and fresh wheel installation. The Actions run attached to that commit is the authoritative hosted evidence.
 
 ## Disposition rule
 

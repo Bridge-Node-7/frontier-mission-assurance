@@ -4,7 +4,7 @@ body:
   - type: markdown
     attributes:
       value: >-
-        **PUBLIC REPOSITORY:** Use synthetic/public-safe information only. Do not include personal names, external organization/program identities, private URLs, screenshots, raw logs, credentials, or nonpublic technical data.
+        **PUBLIC REPOSITORY:** Use synthetic/public-safe information only. Do not include personal names, external organization/program identities, private URLs, screenshots, raw logs, credentials, or nonpublic technical data. Suspected security vulnerabilities or exploit details belong in the private reporting path described in SECURITY.md, not this public form.
   - type: textarea
     id: behavior
     attributes:
@@ -22,7 +22,7 @@ body:
     id: version
     attributes:
       label: FMA version
-      placeholder: 0.3.0
+      placeholder: 0.3.1
     validations:
       required: true
   - type: dropdown
