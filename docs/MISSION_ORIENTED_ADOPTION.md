@@ -168,6 +168,12 @@ If the structure improves the conversation, keep it.
 
 If a field or artifact does not help a real reviewer make or revisit the decision, remove it.
 
+## Worked Mission Decision Packet
+
+For a concrete, synthetic example of the full path from mission objective to a change-sensitive human disposition, see [`MISSION_DECISION_PACKET.md`](MISSION_DECISION_PACKET.md) and [`../examples/frontier_program/README.md`](../examples/frontier_program/README.md).
+
+The key idea is the **reopen contract**: the decision receipt states not only why the current disposition is justified, but what new evidence, changed dependency, or revised requirement should force the decision to be reconsidered.
+
 ## What not to do
 
 Do **not**:
