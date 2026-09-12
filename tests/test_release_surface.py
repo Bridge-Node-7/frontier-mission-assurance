@@ -163,21 +163,32 @@ def test_internal_facing_public_surface_artifacts_are_absent():
     assert all(not path.exists() for path in removed)
 
 
-def test_public_surface_does_not_use_internal_security_shorthand():
+def test_public_surface_avoids_internal_shorthand():
     ignored = {".git", ".venv", "build", "dist", "__pycache__"}
+    patterns = [
+        re.compile(r"\bopsec\b", flags=re.IGNORECASE),
+        re.compile(r"\buat\b", flags=re.IGNORECASE),
+        re.compile(r"\bux simulation\b", flags=re.IGNORECASE),
+    ]
     violations: list[str] = []
+    self_path = Path(__file__).resolve()
+
     for path in ROOT.rglob("*"):
-        if not path.is_file() or any(part in ignored for part in path.parts):
+        if not path.is_file() or path.resolve() == self_path:
             continue
-        if path.suffix.lower() not in {".md", ".py", ".yml", ".yaml", ".json", ".toml", ".cff", ".txt"} and path.name not in {"Makefile"}:
+        if any(part in ignored for part in path.parts):
+            continue
+        suffixes = {".md", ".py", ".yml", ".yaml", ".json", ".toml", ".cff", ".txt"}
+        if path.suffix.lower() not in suffixes and path.name != "Makefile":
             continue
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        if re.search(r"\bopsec\b", text, flags=re.IGNORECASE):
+        if any(pattern.search(text) for pattern in patterns):
             violations.append(str(path.relative_to(ROOT)))
-    assert not violations, "internal security shorthand remains in: " + ", ".join(violations)
+
+    assert not violations, "internal shorthand remains in: " + ", ".join(violations)
 
 
 def test_issue_forms_do_not_depend_on_custom_labels():
