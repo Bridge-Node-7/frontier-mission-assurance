@@ -100,23 +100,26 @@ def test_proprietary_candidate_does_not_claim_open_source():
 def test_release_evidence_lifecycle_is_non_recursive():
     receipt = (ROOT / "RELEASE_RECEIPT.md").read_text(encoding="utf-8")
     validation = (ROOT / "VALIDATION_REPORT.md").read_text(encoding="utf-8")
-    checklist = (ROOT / "docs" / "RELEASE_CHECKLIST.md").read_text(encoding="utf-8")
+    acceptance = (ROOT / "docs" / "RELEASE_ACCEPTANCE.md").read_text(encoding="utf-8")
     lifecycle = (ROOT / "docs" / "RELEASE_EVIDENCE_LIFECYCLE.md").read_text(
         encoding="utf-8"
     )
 
     assert "Commit-specific hosted evidence belongs in GitHub Actions" in receipt
-    assert "not a live status board" in checklist
+    assert "Commit-specific hosted evidence belongs in GitHub Actions" in acceptance
     assert "recursive" in lifecycle.lower()
     assert not re.search(r"\b[0-9a-f]{40}\b", receipt)
     assert not re.search(r"\b[0-9a-f]{40}\b", validation)
 
 
-def test_strategic_infrastructure_docs_are_present():
+def test_public_infrastructure_docs_are_present():
     required = [
         ROOT / "docs" / "MAINTENANCE.md",
         ROOT / "docs" / "RELEASE_EVIDENCE_LIFECYCLE.md",
         ROOT / "docs" / "RESEARCH_REPRODUCIBILITY_CONTRACT.md",
+        ROOT / "docs" / "MISSION_DECISION_PACKET.md",
+        ROOT / "docs" / "ACCEPTANCE_CRITERIA.md",
+        ROOT / "docs" / "RELEASE_ACCEPTANCE.md",
     ]
     assert all(path.is_file() for path in required)
 
@@ -137,14 +140,44 @@ def test_scientific_discovery_profile_surface_is_present():
     assert len(schemas) == 6
 
 
-def test_uat_identifiers_are_unique_and_sequential():
-    text = (ROOT / "docs" / "UAT.md").read_text(encoding="utf-8")
+def test_acceptance_identifiers_are_unique_and_sequential():
+    text = (ROOT / "docs" / "ACCEPTANCE_CRITERIA.md").read_text(encoding="utf-8")
     numbers = [
         int(value)
-        for value in re.findall(r"^## UAT-(\d{2})\b", text, flags=re.MULTILINE)
+        for value in re.findall(r"^## AC-(\d{2})\b", text, flags=re.MULTILINE)
     ]
     assert numbers
     assert numbers == list(range(1, len(numbers) + 1))
+
+
+def test_internal_facing_public_surface_artifacts_are_absent():
+    removed = [
+        ROOT / "OPSEC.md",
+        ROOT / "docs" / "UAT.md",
+        ROOT / "docs" / "UX_SIMULATION.md",
+        ROOT / "docs" / "RELEASE_CHECKLIST.md",
+        ROOT / "docs" / "PUBLIC_REFERENCE_BOUNDARY.md",
+        ROOT / "scripts" / "opsec_scan.py",
+        ROOT / "tests" / "test_opsec.py",
+    ]
+    assert all(not path.exists() for path in removed)
+
+
+def test_public_surface_does_not_use_internal_security_shorthand():
+    ignored = {".git", ".venv", "build", "dist", "__pycache__"}
+    violations: list[str] = []
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or any(part in ignored for part in path.parts):
+            continue
+        if path.suffix.lower() not in {".md", ".py", ".yml", ".yaml", ".json", ".toml", ".cff", ".txt"} and path.name not in {"Makefile"}:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        if re.search(r"\bopsec\b", text, flags=re.IGNORECASE):
+            violations.append(str(path.relative_to(ROOT)))
+    assert not violations, "internal security shorthand remains in: " + ", ".join(violations)
 
 
 def test_issue_forms_do_not_depend_on_custom_labels():
