@@ -23,6 +23,7 @@ def test_tampered_output_fails(tmp_path):
     assert any("sha256 mismatch" in error for error in result.errors)
 
 
+
 def test_path_escape_fails(tmp_path):
     src = RECEIPT.parent
     dst = tmp_path / "receipt-demo"

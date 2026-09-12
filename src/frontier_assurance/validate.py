@@ -98,6 +98,7 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
             result.warnings.append(f"duplicate edge: {src} -[{relation}]-> {dst}")
         seen_edges.add(key)
 
+    # Evidence should support/verify/validate something useful.
     outgoing: dict[str, list[dict[str, Any]]] = {node_id: [] for node_id in by_id}
     for edge in edges:
         if isinstance(edge, dict) and edge.get("from") in outgoing:

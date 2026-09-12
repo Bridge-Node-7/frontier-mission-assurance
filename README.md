@@ -159,29 +159,29 @@ Recommended node statuses:
 
 ## What a PASS means
 
-A passing FMA validator means the checked artifact met this repository's declared machine-checkable rules. It does **not** establish scientific truth, certify a supplier or subsystem, approve acquisition, establish regulatory compliance, prove mission readiness, or replace independent engineering review.
+A passing FMA validator means the checked artifact met this repository's declared machine-checkable rules. It does **not** establish scientific truth, certify a supplier or subsystem, approve acquisition, establish regulatory compliance, prove mission readiness, or replace authorized human review.
 
-This distinction is intentional: assurance requires explicit evidence and human judgment, not a generic green badge.
+See [`DISCLAIMER.md`](DISCLAIMER.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), [`docs/PUBLIC_REFERENCE_BOUNDARY.md`](docs/PUBLIC_REFERENCE_BOUNDARY.md), and [`SECURITY.md`](SECURITY.md).
 
-## Quickstart: individual commands
+## OPSEC-first operating model
 
-```bash
-fma validate examples/frontier_program/graph.yaml
-fma assumptions examples/frontier_program/graph.yaml
-fma coverage examples/frontier_program/graph.yaml
-fma impact examples/frontier_program/graph.yaml ASSUMP-CYCLE-COMPOSITION
-fma receipt examples/research_receipt/receipt.yaml
-fma decision examples/frontier_program/graph.yaml examples/frontier_program/decision-receipt.yaml
-fma report examples/frontier_program/graph.yaml --out build/assurance-report.md
-```
-
-Explicit trusted reproduction:
+Run this before every public push:
 
 ```bash
-fma reproduce examples/research_receipt/receipt.yaml
+python scripts/opsec_scan.py .
 ```
 
-`fma receipt` does **not** execute code. `fma reproduce` does; run reproduction only on trusted code after reviewing the declared command.
+The scanner catches several high-risk disclosure patterns, but it cannot infer whether every proper noun or technical value is sensitive. Public release therefore requires both automated scanning and manual review. Real assurance data belongs in a separate access-controlled environment, never in this public repository.
+
+## Development
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pip install --no-deps -e .
+make check
+```
+
+Hosted release-candidate CI additionally rehearses supported Python versions, multiple operating systems, and fresh wheel installation.
 
 ## Design principles
 
