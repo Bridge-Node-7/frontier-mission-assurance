@@ -1,10 +1,10 @@
 # Security and Data Handling
 
-This public repository must contain only public-safe software, documentation, and synthetic fixtures.
+This public repository contains only public-safe software, documentation, and synthetic fixtures.
 
 It must not contain credentials, secrets, private keys, personally identifying information, real external program identities in worked examples, proprietary data, private system details, restricted technical data, nonpublic performance values, internal URLs, private repository links, screenshots, or raw logs that reveal private context.
 
-See [`OPSEC.md`](OPSEC.md) and [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md).
+See [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md).
 
 ## Supported versions
 
@@ -14,7 +14,7 @@ Only the latest tagged stable release is supported for security fixes. Earlier t
 
 Do **not** disclose suspected vulnerabilities, exploit details, credentials, or sensitive reproduction data in a public issue, pull request, Discussion, commit, branch name, or Actions artifact.
 
-Use this repository's GitHub Security page and private vulnerability-reporting flow when that control is available. Include the affected release or commit, a concise impact description, the smallest public-safe reproduction that is sufficient for triage, and any proposed mitigation. Do not include real mission/program data or unrelated secrets.
+Use this repository's GitHub Security page and private vulnerability-reporting flow when that control is available. Include the affected release or commit, a concise impact description, the smallest public-safe reproduction sufficient for triage, and any proposed mitigation. Do not include real mission/program data or unrelated secrets.
 
 If private reporting is not available in the viewer's GitHub session, do not publish exploit details as a workaround; use an already authorized private Bridge Node 7 contact channel.
 
@@ -27,7 +27,7 @@ The repository uses bounded, fail-visible controls as defense in depth:
 - Protected-main V&V performs CodeQL analysis for Python before a stable release can be triggered.
 - GitHub Actions are pinned to immutable commit SHAs.
 - Runtime regression tests prohibit common network-client imports in the installed FMA package.
-- The public-release OPSEC scanner rejects several high-risk disclosure patterns and artifact types.
+- The public release boundary check rejects several high-risk disclosure patterns and artifact types.
 
 These controls reduce risk; they do not prove the absence of vulnerabilities, malicious dependencies, sensitive proper nouns, or unsafe operational use.
 
@@ -43,8 +43,8 @@ Treat public issues, pull requests, Actions logs, uploaded artifacts, Discussion
 
 Do not run `fma reproduce` on an untrusted receipt, checkout, fork, pull request, or artifact. Review the command and code first and use an isolated environment when appropriate.
 
-## Real-program deployment
+## Operational use
 
-Use a separate access-controlled workspace with explicit classification, identity, authorization, retention, audit logging, artifact signing, backup, and incident-response policies. Do not mirror real evidence into this public repository.
+Use an access-controlled environment with appropriate identity, authorization, retention, audit, backup, and incident-response controls for real program data. Do not mirror real evidence into this public repository.
 
 If sensitive information or credentials are committed, assume exposure occurred. Rotate affected credentials immediately and follow the relevant incident-response process. History rewriting alone is not sufficient remediation.
