@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Bridge-Node-7/frontier-mission-assurance/blob/main/profiles/scientific-discovery/schemas/agent-provenance-ref.schema.json",
+  "title": "FMA Bounded Agent Provenance Reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["record_version","run_id","discovery_id","system_ref","model_ref","parent_activity_refs","input_refs","output_refs","tool_refs","human_intervention_refs","started_at","ended_at"],
+  "properties": {
+    "record_version": {"const": "1.0"},
+    "run_id": {"type":"string","minLength":1},
+    "discovery_id": {"type":"string","minLength":1},
+    "system_ref": {"type":"string","minLength":1},
+    "model_ref": {"type":"string","minLength":1},
+    "parent_activity_refs": {"type":"array","items":{"type":"string","minLength":1}},
+    "input_refs": {"type":"array","items":{"type":"string","minLength":1}},
+    "output_refs": {"type":"array","items":{"type":"string","minLength":1}},
+    "tool_refs": {"type":"array","items":{"type":"string","minLength":1}},
+    "human_intervention_refs": {"type":"array","items":{"type":"string","minLength":1}},
+    "started_at": {"type":"string","format":"date-time"},
+    "ended_at": {"type":"string","format":"date-time"}
+  }
+}

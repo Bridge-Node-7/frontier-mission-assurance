@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://github.com/Bridge-Node-7/frontier-mission-assurance/blob/main/profiles/scientific-discovery/schemas/research-priority-receipt.schema.json",
+  "title":"FMA Research Priority Receipt","type":"object","additionalProperties":false,
+  "required":["receipt_version","receipt_id","discovery_id","claimant_ref","artifact","asserted_at","priority_state","time_evidence","signature_evidence","limitations"],
+  "properties":{
+    "receipt_version":{"const":"1.0"},"receipt_id":{"type":"string","minLength":1},"discovery_id":{"type":"string","minLength":1},"claimant_ref":{"type":"string","minLength":1},
+    "artifact":{"type":"object","additionalProperties":false,"required":["artifact_ref","sha256"],"properties":{"artifact_ref":{"type":"string","minLength":1},"sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}}},
+    "asserted_at":{"type":"string","format":"date-time"},"priority_state":{"enum":["UNANCHORED","EXTERNALLY_ANCHORED","SIGNATURE_VERIFIED"]},
+    "time_evidence":{"type":"object","additionalProperties":false,"required":["local_observed_at","external_anchor"],"properties":{"local_observed_at":{"type":"string","format":"date-time"},"external_anchor":{"oneOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["anchor_ref","verified"],"properties":{"anchor_ref":{"type":"string","minLength":1},"verified":{"type":"boolean"}}}]}}},
+    "signature_evidence":{"oneOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["signature_ref","verified"],"properties":{"signature_ref":{"type":"string","minLength":1},"verified":{"type":"boolean"}}}]},
+    "limitations":{"type":"array","items":{"type":"string","minLength":1}}
+  }
+}

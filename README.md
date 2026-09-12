@@ -8,13 +8,13 @@ Frontier Mission Assurance (FMA) is a deliberately small public reference layer 
 
 in ordinary version-controlled files.
 
-Its purpose is to make traceability, evidence gaps, reproducibility, and decision basis easier to inspect without turning fast technical work into process-heavy bureaucracy.
+Its purpose is to make traceability, evidence gaps, reproducibility, scientific-discovery assurance, and decision basis easier to inspect without turning fast technical work into process-heavy bureaucracy.
 
 > **Public boundary:** this repository contains only software, public-safe documentation, and synthetic fixtures. It is **not** a live program workspace, customer system, canonical operational kernel, or repository for real mission evidence. Do not place personal names, external organization names, private URLs, screenshots, raw logs, credentials, customer/program identifiers, or nonpublic technical evidence in public issues, pull requests, CI artifacts, examples, branches, releases, or commit history. See [`OPSEC.md`](OPSEC.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), and [`docs/PUBLIC_REFERENCE_BOUNDARY.md`](docs/PUBLIC_REFERENCE_BOUNDARY.md).
 
 ## Why this exists
 
-High-consequence engineering decisions often depend on evidence that is scattered across analysis, simulation, experiments, interfaces, and test artifacts. FMA provides a portable reference contract for connecting those artifacts while keeping consequential prioritization and final decisions human-owned.
+High-consequence engineering and scientific decisions often depend on evidence scattered across analysis, simulation, experiments, formal systems, interfaces, and test artifacts. FMA provides portable reference contracts for connecting those artifacts while keeping uncertainty visible and consequential prioritization and final decisions human-owned.
 
 The public implementation intentionally provides only a bounded set of capabilities:
 
@@ -25,7 +25,8 @@ The public implementation intentionally provides only a bounded set of capabilit
 - **Research receipts** — SHA-256-bind declared input/output artifacts to numerical acceptance checks.
 - **Explicit reproduction** — `fma reproduce` verifies declared inputs, executes a trusted receipt command, then verifies outputs and tolerances.
 - **Decision receipts** — verify that a declared decision basis references nodes in a valid assurance graph.
-- **CI-native V&V** — exercise graph, receipt, decision, schema, package, and public-boundary checks on pull requests.
+- **Scientific Discovery Assurance** — portable contracts for discovery provenance, priority evidence, research-boundary declarations, formal-proof/specification separation, replication, and attribution chronology.
+- **CI-native V&V** — exercise graph, receipt, decision, schema, package, scientific-discovery, and public-boundary checks on pull requests.
 
 FMA does **not** expose private operational reasoning, proprietary prioritization, private relationship semantics, customer/program workflows, real evidence, or internal decision systems.
 
@@ -68,8 +69,10 @@ The installed FMA runtime makes no remote API calls, emits no telemetry, and per
 ```text
 frontier-mission-assurance/
 ├── src/frontier_assurance/      # minimal public reference implementation
-├── schemas/                     # portable JSON Schemas
-├── examples/                    # synthetic-only worked fixtures
+├── schemas/                     # core portable JSON Schemas
+├── profiles/                    # bounded domain assurance profiles
+│   └── scientific-discovery/    # synthetic scientific-discovery assurance contracts
+├── examples/                    # synthetic-only core worked fixtures
 ├── tests/                       # positive, regression, tamper, and boundary tests
 ├── docs/                        # public architecture, V&V doctrine, UAT, release boundary
 ├── .github/                     # CI + issue/PR public-safety workflows
@@ -133,6 +136,31 @@ The receipt is a reproducibility record, not a digital signature or scientific c
 
 For a human-facing environment/execution/result contract that can accompany research code, see [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md).
 
+## Scientific Discovery Assurance
+
+[`profiles/scientific-discovery/`](profiles/scientific-discovery/) adds a bounded contract set for machine-assisted or computational discovery:
+
+- `DiscoveryPassport` records the claimed result, contributors, execution context, provenance, verification state, attribution chronology, limitations, and accountable decision authority.
+- `ResearchPriorityReceipt` binds an artifact hash to declared priority evidence; a local runtime clock alone remains untrusted.
+- `ResearchBoundaryAttestation` records a declared research-data boundary; the declaration is not proof that the boundary was enforced.
+- `FormalProofRecord` keeps proof-checker state separate from specification-equivalence review.
+- `ReplicationReceipt` preserves independent reproduction state and unresolved discrepancies.
+- `AgentProvenanceRef` provides bounded machine-run references without publishing an internal telemetry graph.
+
+The bundled synthetic case intentionally remains `REVIEW_REQUIRED`: proof checking passes, but specification equivalence and replication are incomplete. Run the profile validator from a development environment with:
+
+```bash
+python scripts/validate_scientific_discovery.py .
+```
+
+Expected result:
+
+```text
+SCIENTIFIC DISCOVERY PROFILE PASS
+```
+
+That PASS establishes only the declared contracts and synthetic cross-record invariants; it does not certify the discovery.
+
 ## GitHub operating model
 
 Every meaningful change should answer at least one of these:
@@ -161,7 +189,7 @@ Recommended node statuses:
 
 ## What a PASS means
 
-A passing FMA validator means the checked artifact met this repository's declared machine-checkable rules. It does **not** establish scientific truth, certify a supplier or subsystem, approve acquisition, establish regulatory compliance, prove mission readiness, or replace authorized human review.
+A passing FMA validator means the checked artifact met this repository's declared machine-checkable rules. It does **not** establish scientific truth, certify a supplier or subsystem, approve acquisition, establish regulatory compliance, prove mission readiness, establish legal priority, or replace authorized human review.
 
 See [`DISCLAIMER.md`](DISCLAIMER.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), [`docs/PUBLIC_REFERENCE_BOUNDARY.md`](docs/PUBLIC_REFERENCE_BOUNDARY.md), and [`SECURITY.md`](SECURITY.md).
 
@@ -183,7 +211,7 @@ python -m pip install --no-deps -e .
 make check
 ```
 
-Hosted CI additionally rehearses supported Python versions, multiple operating systems, and fresh wheel installation.
+Hosted CI additionally rehearses supported Python versions, multiple operating systems, fresh wheel installation, and the Scientific Discovery Assurance synthetic profile.
 
 ## Design principles
 
@@ -202,7 +230,7 @@ See [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md), [`docs/ARCHITECTURE.md`](docs/
 
 ## Current maturity
 
-**v0.2.0 — public reference.**
+**v0.3.0 — public reference with Scientific Discovery Assurance.**
 
 The repository is intentionally fail-visible: unsupported claims and unresolved assumptions are outputs, not defects to hide. Current verification evidence and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 

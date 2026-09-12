@@ -58,7 +58,13 @@ jobs:
 
       - name: Install bounded release toolchain
         if: env.RELEASE_ELIGIBLE == '1'
-        run: python -m pip install "setuptools==80.9.0" "wheel==0.45.1" "build==1.6.1" "PyYAML==6.0.3"
+        run: >-
+          python -m pip install
+          "setuptools==80.9.0"
+          "wheel==0.45.1"
+          "build==1.6.1"
+          "PyYAML==6.0.3"
+          "jsonschema==4.26.0"
 
       - name: Reverify source boundary
         if: env.RELEASE_ELIGIBLE == '1'
@@ -68,6 +74,7 @@ jobs:
           sha256sum -c REPO_FILE_MANIFEST.sha256
           python scripts/opsec_scan.py .
           PYTHONPATH=src python scripts/evaluate_public_reference.py
+          python scripts/validate_scientific_discovery.py .
 
       - name: Build release artifacts
         if: env.RELEASE_ELIGIBLE == '1'
@@ -92,14 +99,14 @@ jobs:
         run: |
           set -euo pipefail
           cat > release-notes.md <<EOF
-          Frontier Mission Assurance v${VERSION} is the initial stable public reference for evidence-native verification, validation, reproducibility, traceability, and human-owned decision basis.
+          Frontier Mission Assurance v${VERSION} is a stable public reference release for evidence-native verification, validation, reproducibility, traceability, and human-owned decision basis.
 
-          This release was published automatically only after the exact main commit passed the complete hosted V&V workflow.
+          This release was published automatically only after the exact main commit passed the complete hosted V&V workflow. See CHANGELOG.md for material changes.
 
           V&V run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${{ github.event.workflow_run.id }}
           Commit: ${RELEASE_SHA}
 
-          A PASS proves only the declared mechanics. It does not establish scientific truth, regulatory compliance, supplier qualification, mission readiness, or authorization for consequential decisions.
+          A PASS proves only the declared mechanics. It does not establish scientific truth, regulatory compliance, supplier qualification, mission readiness, legal priority, research-boundary enforcement, or authorization for consequential decisions.
 
           License posture: All Rights Reserved. No reuse license is granted by this release.
           EOF
@@ -131,9 +138,10 @@ jobs:
           curl -fsSL "$BASE/$SUMS" -o "$SUMS"
           sha256sum -c "$SUMS"
           python -m venv .venv
-          .venv/bin/python -m pip install "./$WHEEL"
+          .venv/bin/python -m pip install "./$WHEEL" "jsonschema==4.26.0"
           [[ "$(.venv/bin/python -m frontier_assurance.cli --version)" == "fma ${VERSION}" ]]
           unzip -q "$SOURCE" -d source
           cd source/frontier-mission-assurance
           "$UAT/.venv/bin/python" scripts/evaluate_public_reference.py
+          "$UAT/.venv/bin/python" scripts/validate_scientific_discovery.py .
           grep -Fq "CLAIM-CYCLE-TARGET" build/assurance-report.md

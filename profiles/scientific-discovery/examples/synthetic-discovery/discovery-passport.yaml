@@ -1,0 +1,58 @@
+passport_version: '1.0'
+discovery_id: DISC-SYN-001
+title: Synthetic frontier-model stability result
+problem_specification: Determine whether the declared synthetic model remains stable
+  inside a bounded test envelope.
+claim:
+  statement: The synthetic model remains within the declared stability envelope for
+    the tested case.
+  scope: Synthetic bounded test only.
+  state: UNDER_REVIEW
+contributors:
+  human:
+  - contributor_ref: HUMAN-SYN-001
+    role: accountable reviewer
+  machine:
+  - system_ref: AGENT-SYS-SYN-001
+    model_ref: MODEL-SYN-001
+    role: candidate generation
+execution:
+  environment_ref: ENV-SYN-001
+  agent_topology: bounded parallel candidate search
+  agent_count: 4
+  started_at: '2026-09-12T08:00:00Z'
+  ended_at: '2026-09-12T08:05:00Z'
+provenance:
+  source_refs:
+  - SRC-SYN-001
+  - SRC-SYN-002
+  research_trigger_refs:
+  - TRIGGER-SYN-001
+  research_boundary_attestation_ref: RBA-SYN-001
+  agent_provenance_refs:
+  - APR-SYN-001
+verification:
+  formal_proof_ref: FPR-SYN-001
+  replication_refs:
+  - RR-SYN-001
+  adversarial_findings:
+  - One parameter region remains untested.
+  limitations:
+  - Synthetic fixture; no external scientific claim is made.
+  open_objections:
+  - Specification-equivalence review is partial.
+  disposition: REVIEW_REQUIRED
+attribution:
+  priority_receipt_ref: RPR-SYN-001
+  events:
+  - event_type: CONCEPT
+    actor_ref: HUMAN-SYN-001
+    asserted_at: '2026-09-12T07:50:00Z'
+    evidence_ref: RPR-SYN-001
+  conflicts: []
+decision_authority:
+  authority_type: HUMAN
+  authority_ref: HUMAN-SYN-001
+created_at: '2026-09-12T08:10:00Z'
+metadata:
+  synthetic: true

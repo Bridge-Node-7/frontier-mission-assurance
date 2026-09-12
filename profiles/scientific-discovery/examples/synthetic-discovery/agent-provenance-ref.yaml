@@ -1,0 +1,18 @@
+record_version: '1.0'
+run_id: APR-SYN-001
+discovery_id: DISC-SYN-001
+system_ref: AGENT-SYS-SYN-001
+model_ref: MODEL-SYN-001
+parent_activity_refs:
+- TRIGGER-SYN-001
+input_refs:
+- SRC-SYN-001
+- SRC-SYN-002
+output_refs:
+- ART-SYN-001
+tool_refs:
+- TOOL-SYN-001
+human_intervention_refs:
+- HUMAN-SYN-001
+started_at: '2026-09-12T08:00:00Z'
+ended_at: '2026-09-12T08:05:00Z'

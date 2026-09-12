@@ -1,0 +1,25 @@
+record_version: '1.0'
+record_id: FPR-SYN-001
+discovery_id: DISC-SYN-001
+intended_statement: The synthetic model remains stable inside the declared bounded
+  envelope.
+formal_statement: SyntheticInvariantWithinEnvelope
+proof_system:
+  name: SYNTHETIC-PROOF-CHECKER
+  version: '1.0'
+artifact_sha256: '1111111111111111111111111111111111111111111111111111111111111111'
+dependencies:
+- DEP-SYN-001
+axioms:
+- AXIOM-SYN-001
+checker:
+  state: PASS
+  run_ref: CHECK-SYN-001
+specification_equivalence:
+  state: PARTIAL
+  reviewer_ref: HUMAN-SYN-001
+  evidence_refs:
+  - SPEC-SYN-001
+  remaining_gap: One boundary condition is not yet mapped.
+limitations:
+- Checker success does not establish complete specification equivalence.
