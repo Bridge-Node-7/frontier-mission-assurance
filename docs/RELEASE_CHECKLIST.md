@@ -8,19 +8,18 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 
 - [ ] The candidate is intentionally limited to the public reference layer.
 - [ ] No private operational repository names, architecture, customer/program context, or private decision logic are disclosed.
-- [ ] Licensing is selected intentionally before any public visibility change.
+- [ ] Licensing is selected intentionally before any public visibility or release change.
 - [ ] A separate private proper-noun/context review passes without embedding the private denylist in this repository.
 
 ## Repository identity
 
 - [ ] Repository name is exactly `frontier-mission-assurance`.
-- [ ] Initial visibility is private until all public gates pass.
 - [ ] Default branch is `main`.
 - [ ] `PUBLIC_BOUNDARY.md`, `OPSEC.md`, `DISCLAIMER.md`, `SECURITY.md`, `docs/PUBLIC_REFERENCE_BOUNDARY.md`, and `VALIDATION_REPORT.md` are present.
 
 ## Hosted V&V
 
-- [ ] Push only the reviewed release-candidate commit.
+- [ ] Push only the reviewed candidate commit.
 - [ ] Confirm `V&V CI` starts successfully.
 - [ ] Python 3.11 / Ubuntu passes.
 - [ ] Python 3.12 / Ubuntu passes.
@@ -29,6 +28,7 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 - [ ] Wheel build + fresh dependency-resolving install passes.
 - [ ] Ruff passes.
 - [ ] Public-release OPSEC scan passes.
+- [ ] Scientific Discovery Assurance synthetic profile validation passes when present.
 - [ ] Synthetic assurance-report artifacts upload successfully.
 
 ## Governance
@@ -47,27 +47,28 @@ See [`RELEASE_EVIDENCE_LIFECYCLE.md`](RELEASE_EVIDENCE_LIFECYCLE.md) for the evi
 - [ ] Five-minute evaluation is easy to find.
 - [ ] macOS/Linux and Windows PowerShell paths are correct.
 - [ ] Local documentation links resolve.
-- [ ] No external person, customer, supplier, partner, or program identity appears.
+- [ ] Scientific Discovery Assurance documentation and synthetic example are discoverable when included.
+- [ ] No external person, customer, supplier, partner, program, or real research identity appears in public examples.
 - [ ] The repository does not imply a graphical UI, hosted site, or private operational platform exists.
 - [ ] Issue forms render and remain usable without custom repository-label setup.
-- [ ] Logged-out public GitHub UAT passes immediately after visibility changes.
-- [ ] External clean-user five-minute evaluation passes before final `v0.2.0`.
+- [ ] Logged-out public GitHub UAT passes after public-surface changes.
+- [ ] External clean-user evaluation passes before a stable release.
 
 ## Release
 
 - [ ] Hosted CI passes on the exact release commit.
-- [ ] Regenerate `REPO_FILE_MANIFEST.sha256`.
+- [ ] Generate a complete tracked-source SHA-256 manifest from the exact release commit as a release artifact rather than embedding commit-specific hashes back into source.
 - [ ] Generate source ZIP and wheel from the exact release commit.
-- [ ] Generate external SHA-256 manifest.
-- [ ] Confirm the frozen source archive reconstructs to the exact accepted Git tree.
-- [ ] Create the GitHub tag/pre-release from the exact passing commit.
+- [ ] Generate the external release-artifact SHA-256 manifest.
+- [ ] Confirm the frozen source archive reconstructs to the exact accepted Git tree and verifies against the tracked-source manifest.
+- [ ] Create the GitHub tag/release from the exact passing commit.
 - [ ] Bind exact commit SHA and Actions run in the release record.
 
 ## Profile integration
 
-- [ ] Add FMA to the existing Bridge Node 7 profile only after the repository is publicly reachable.
-- [ ] Make a surgical profile edit; do not overwrite newer profile positioning.
+- [ ] Keep the Bridge Node 7 public profile link accurate after public release changes.
+- [ ] Make surgical profile edits only when public positioning actually changes.
 
 ## Final acceptance rule
 
-Do not make the repository public or promote a final release when any required gate is red, skipped unexpectedly, unresolved, or materially different from the reviewed candidate.
+Do not promote a stable release when any required gate is red, skipped unexpectedly, unresolved, or materially different from the reviewed candidate.

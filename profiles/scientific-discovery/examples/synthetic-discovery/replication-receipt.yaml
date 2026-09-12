@@ -1,0 +1,16 @@
+receipt_version: '1.0'
+receipt_id: RR-SYN-001
+discovery_id: DISC-SYN-001
+independent_party_ref: REPL-SYN-001
+environment_ref: ENV-SYN-002
+input_artifact_refs:
+- ART-SYN-001
+procedure_ref: PROC-SYN-001
+deviations:
+- One optional diagnostic was omitted.
+result: PARTIAL
+observations:
+- Core synthetic result reproduced in the tested subset.
+unresolved_discrepancies:
+- Untested parameter region remains.
+completed_at: '2026-09-12T08:08:00Z'

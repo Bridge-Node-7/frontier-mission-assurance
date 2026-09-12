@@ -1,0 +1,23 @@
+attestation_version: '1.0'
+attestation_id: RBA-SYN-001
+discovery_id: DISC-SYN-001
+issuer_ref: SYSTEM-SYN-001
+declared_at: '2026-09-12T07:55:00Z'
+assurance_semantics: DECLARATION_ONLY
+declared_controls:
+  training_use: PROHIBITED
+  evaluation_use: PROHIBITED
+  employee_access: UNKNOWN
+  research_use: PROHIBITED
+  retrieval_use: PROHIBITED
+  telemetry_use: UNKNOWN
+  retention: synthetic-session-only
+  model_checkpoint_ref: MODEL-SYN-001
+  training_cutoff: null
+  permitted_tools:
+  - TOOL-SYN-001
+independent_verification:
+  state: NOT_ASSESSED
+  evidence_refs: []
+limitations:
+- This record captures a declared boundary and does not prove enforcement.

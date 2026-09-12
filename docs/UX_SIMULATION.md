@@ -1,6 +1,6 @@
 # Current UX Simulation
 
-FMA v0.2.0 is intentionally a Git/CLI reference implementation rather than a graphical product.
+FMA v0.3.0 is intentionally a Git/CLI reference implementation rather than a graphical product.
 
 ## Current surfaces
 
@@ -8,6 +8,7 @@ FMA v0.2.0 is intentionally a Git/CLI reference implementation rather than a gra
 2. **GitHub-native workflow** — pull-request checklist, issue forms, CI, validation evidence, and release records.
 3. **Markdown report** — human-readable summary of direct evidence coverage and unresolved assumptions.
 4. **Research Reproducibility Contract** — human-facing environment/execution/result expectations paired with machine-readable receipts.
+5. **Scientific Discovery Assurance profile** — portable schemas, synthetic linked records, and a deterministic profile validator for discovery provenance, priority evidence, research-boundary declarations, formal-proof/specification separation, replication, and attribution chronology.
 
 ## Primary technical journey
 
@@ -32,7 +33,9 @@ optionally reproduce trusted code
   ↓
 verify decision basis
   ↓
-generate report
+validate synthetic scientific-discovery profile
+  ↓
+generate / inspect bounded evidence outputs
 ```
 
 ## Simulated personas
@@ -49,6 +52,10 @@ Expected: follow documented install/evaluation commands and receive bounded, fai
 
 Expected: distinguish non-executing receipt verification from explicit trusted reproduction and inspect declared hashes/tolerances.
 
+### Scientific-discovery reviewer
+
+Expected: distinguish structural validity from scientific truth, local chronology from trusted priority, a declared privacy boundary from proof of enforcement, formal proof checking from specification validation, and partial replication from completed reproduction.
+
 ### Security / OPSEC reviewer
 
 Expected: identify the public-data boundary, scanner behavior, prohibited artifact types, and runtime privacy posture quickly.
@@ -59,11 +66,11 @@ Expected: distinguish source validation from hosted commit evidence and tagged r
 
 ### Logged-out public visitor
 
-Expected after publication: understand purpose, maturity, licensing, non-claims, five-minute evaluation, and public/private boundary without authentication or private context.
+Expected: understand purpose, maturity, licensing, non-claims, five-minute evaluation, scientific-discovery profile, and public/private boundary without authentication or private context.
 
 ### External clean-user evaluator
 
-Expected after publication: start from a clean environment, follow only documented commands, reach the declared bounded result, and distinguish successful mechanics from mission readiness.
+Expected: start from a clean environment, follow only documented commands, reach the declared bounded results, and distinguish successful mechanics from mission readiness or scientific acceptance.
 
 ## Trust boundary
 
@@ -71,6 +78,8 @@ Expected after publication: start from a clean environment, follow only document
 
 `fma reproduce` is a separate, explicit trusted-code operation.
 
+The Scientific Discovery Assurance profile validates declared contracts and selected cross-record invariants; it does not certify a discovery.
+
 ## Non-goal
 
-This release does not claim to provide a hosted application, graphical dashboard, customer portal, or private operational case-management system.
+This release does not claim to provide a hosted application, graphical dashboard, customer portal, private operational case-management system, scientific certification authority, or provider-enforcement audit system.

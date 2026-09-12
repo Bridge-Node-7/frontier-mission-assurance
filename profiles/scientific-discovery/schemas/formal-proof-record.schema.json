@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Bridge-Node-7/frontier-mission-assurance/blob/main/profiles/scientific-discovery/schemas/formal-proof-record.schema.json",
+  "title": "FMA Formal Proof Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["record_version","record_id","discovery_id","intended_statement","formal_statement","proof_system","artifact_sha256","dependencies","axioms","checker","specification_equivalence","limitations"],
+  "properties": {
+    "record_version": {"const": "1.0"},
+    "record_id": {"type": "string", "minLength": 1},
+    "discovery_id": {"type": "string", "minLength": 1},
+    "intended_statement": {"type": "string", "minLength": 1},
+    "formal_statement": {"type": "string", "minLength": 1},
+    "proof_system": {"type": "object", "additionalProperties": false, "required": ["name","version"], "properties": {"name": {"type": "string", "minLength": 1}, "version": {"type": "string", "minLength": 1}}},
+    "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "dependencies": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "axioms": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "checker": {"type": "object", "additionalProperties": false, "required": ["state","run_ref"], "properties": {"state": {"enum": ["PASS","FAIL","NOT_RUN"]}, "run_ref": {"type": ["string","null"]}}},
+    "specification_equivalence": {"type": "object", "additionalProperties": false, "required": ["state","reviewer_ref","evidence_refs","remaining_gap"], "properties": {"state": {"enum": ["NOT_ASSESSED","PARTIAL","CONFIRMED","CHALLENGED"]}, "reviewer_ref": {"type": ["string","null"]}, "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}}, "remaining_gap": {"type": "string"}}},
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  }
+}

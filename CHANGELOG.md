@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 — Scientific Discovery Assurance
+
+- Added a bounded Scientific Discovery Assurance profile without creating a new repository or exposing private operational systems.
+- Added six portable public contracts: Discovery Passport, Research Priority Receipt, Research Boundary Attestation, Formal Proof Record, Replication Receipt, and bounded Agent Provenance Reference.
+- Added a fully synthetic linked discovery case that remains visibly `REVIEW_REQUIRED` while specification equivalence and replication are incomplete.
+- Added deterministic cross-record validation and negative tests for false priority, research-boundary overclaiming, proof/specification collapse, and incomplete replication.
+- Added profile-specific public documentation for attribution, specification equivalence, and limitations.
+- Extended hosted cross-platform V&V and stable-release clean-user UAT to exercise the scientific-discovery profile.
+- Preserved All Rights Reserved licensing, the package-index upload guard, local-only runtime, public/private OPSEC boundary, and human consequential decision authority.
+
 ## 0.2.0 — initial public reference
 
 - Promote the fully validated RC10 line after public, logged-out, and clean-user acceptance.

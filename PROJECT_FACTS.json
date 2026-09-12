@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "maturity": "public reference",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -15,7 +15,10 @@
     "show dependency impact through declared depends_on/requires relations",
     "verify declared artifact hashes and numerical acceptance checks",
     "explicitly reproduce trusted receipt commands when the user invokes fma reproduce",
-    "verify that decision-receipt basis references exist in a valid graph"
+    "verify that decision-receipt basis references exist in a valid graph",
+    "validate portable scientific-discovery assurance contracts and their synthetic cross-record references",
+    "keep formal proof-checker state separate from specification-equivalence state",
+    "preserve explicit research-priority, research-boundary, attribution, and replication states"
   ],
   "does_not": [
     "expose a private operational assurance kernel",
@@ -24,7 +27,10 @@
     "validate nonpublic external systems or practices",
     "replace independent engineering judgment",
     "authorize safety, security, acquisition, compliance, or mission readiness",
-    "serve as a public storage location for real program evidence"
+    "serve as a public storage location for real program evidence",
+    "establish trusted scientific priority from a local clock value alone",
+    "prove enforcement of a declared research-data boundary",
+    "treat proof-checker success as automatic specification validation"
   ],
   "distribution": "GitHub source/release workflow; public package-index upload intentionally blocked by package metadata.",
   "evidence_lifecycle": "Source-controlled validation records deterministic candidate evidence; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata to avoid stale or recursive receipts.",

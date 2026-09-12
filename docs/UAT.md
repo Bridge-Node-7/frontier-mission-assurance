@@ -70,3 +70,7 @@ An independent user starting from a clean supported environment shall be able to
 ## UAT-16 — Release provenance
 
 The public release record shall bind the accepted tag to the exact passing commit, successful hosted V&V run, source archive, wheel, and external SHA-256 manifest. The frozen source archive shall reconstruct to the exact accepted Git tree.
+
+## UAT-17 — Scientific Discovery Assurance
+
+The bundled synthetic scientific-discovery records shall validate as a linked contract set while preserving unresolved assurance state: local time alone shall not establish trusted priority, a research-boundary attestation shall remain declaration-only, proof-checker `PASS` shall remain separate from specification-equivalence review, partial replication shall remain visible, and the synthetic Discovery Passport shall remain `REVIEW_REQUIRED` until those evidence gates are satisfied.

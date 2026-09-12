@@ -1,0 +1,15 @@
+receipt_version: '1.0'
+receipt_id: RPR-SYN-001
+discovery_id: DISC-SYN-001
+claimant_ref: HUMAN-SYN-001
+artifact:
+  artifact_ref: ART-SYN-001
+  sha256: '0000000000000000000000000000000000000000000000000000000000000000'
+asserted_at: '2026-09-12T07:50:00Z'
+priority_state: UNANCHORED
+time_evidence:
+  local_observed_at: '2026-09-12T07:50:00Z'
+  external_anchor: null
+signature_evidence: null
+limitations:
+- Local time alone does not establish trusted scientific priority.
