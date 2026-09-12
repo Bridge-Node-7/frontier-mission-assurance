@@ -112,12 +112,12 @@ See [`../profiles/scientific-discovery/README.md`](../profiles/scientific-discov
 
 Mission programs often depend on evidence that crosses organizational boundaries.
 
-FMA can represent the public or shareable side of that interface without requiring disclosure of the private model behind it:
+FMA can represent the shareable side of that interface without requiring either side to disclose more context than the decision needs:
 
 ```text
-PRIVATE PROGRAM STATE
+SOURCE SYSTEM / LOCAL STATE
         │
-        │ bounded adapter / exported contract
+        │ bounded contract
         ▼
 CLAIM + REQUIREMENT + EVIDENCE + RECEIPT
         │
@@ -128,9 +128,7 @@ INTERFACE REVIEW
 DEPENDENT MISSION DECISION
 ```
 
-This lets a team preserve private reasoning and sensitive evidence while still defining what must be demonstrated at an interface.
-
-The public FMA repository must never be used for real sensitive program data. Operational use belongs in an appropriately access-controlled environment.
+This allows an interface review to define what must be demonstrated while sensitive program data remains outside the public repository.
 
 ## What a useful pilot should measure
 
