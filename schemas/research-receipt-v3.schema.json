@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bridge-node-7.github.io/frontier-mission-assurance/research-receipt-v3.schema.json",
+  "title": "Executable Research Receipt v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["receipt_version", "experiment", "execution", "output_acceptance", "calibration", "code", "inputs", "outputs", "checks"],
+  "properties": {
+    "receipt_version": {"const": "3.0"},
+    "experiment": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["id", "command", "entrypoint"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "command": {"type": "string", "minLength": 1},
+        "entrypoint": {"type": "string", "minLength": 1},
+        "seed": {"type": ["integer", "string"]}
+      }
+    },
+    "execution": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {"mode": {"const": "LOCAL"}}
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "submission_receipt", "collection_receipt"],
+          "properties": {
+            "mode": {"const": "EXTERNAL"},
+            "submission_receipt": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["scheduler", "submission_ref", "job_ref", "submitted_at", "code_manifest_sha256", "input_manifest_sha256", "environment"],
+              "properties": {
+                "scheduler": {"type": "string", "minLength": 1},
+                "submission_ref": {"type": "string", "minLength": 1},
+                "job_ref": {"type": "string", "minLength": 1},
+                "submitted_at": {"type": "string", "format": "date-time"},
+                "code_manifest_sha256": {"$ref": "#/$defs/sha256"},
+                "input_manifest_sha256": {"$ref": "#/$defs/sha256"},
+                "environment": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["runtime", "environment_sha256"],
+                  "properties": {
+                    "runtime": {"type": "string", "minLength": 1},
+                    "environment_sha256": {"$ref": "#/$defs/sha256"},
+                    "container_digest": {"type": "string", "minLength": 1}
+                  }
+                }
+              }
+            },
+            "collection_receipt": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["job_ref", "collected_at", "terminal_state", "timeout_seconds", "cancellation_semantics", "outputs"],
+              "properties": {
+                "job_ref": {"type": "string", "minLength": 1},
+                "collected_at": {"type": "string", "format": "date-time"},
+                "terminal_state": {"enum": ["SUCCEEDED", "FAILED", "CANCELLED", "TIMED_OUT"]},
+                "timeout_seconds": {"type": "integer", "minimum": 1},
+                "cancellation_semantics": {"type": "string", "minLength": 1},
+                "outputs": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["path", "sha256"],
+                    "properties": {
+                      "path": {"type": "string", "minLength": 1},
+                      "sha256": {"$ref": "#/$defs/sha256"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "output_acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"enum": ["EXACT_SHA256", "NUMERIC_CHECKS", "HYBRID"]}}
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "as_of", "instruments"],
+      "properties": {
+        "policy": {"enum": ["REQUIRED", "REVIEW_IF_MISSING", "NOT_APPLICABLE"]},
+        "as_of": {"type": "string", "format": "date-time"},
+        "instruments": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["instrument_id", "state_id", "observed_at", "valid_from", "valid_until", "configuration_sha256", "lineage_ref"],
+            "properties": {
+              "instrument_id": {"type": "string", "minLength": 1},
+              "state_id": {"type": "string", "minLength": 1},
+              "observed_at": {"type": "string", "format": "date-time"},
+              "valid_from": {"type": "string", "format": "date-time"},
+              "valid_until": {"type": "string", "format": "date-time"},
+              "configuration_sha256": {"$ref": "#/$defs/sha256"},
+              "lineage_ref": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "environment": {"type": "object"},
+    "code": {"$ref": "#/$defs/input_artifacts"},
+    "inputs": {"$ref": "#/$defs/input_artifacts"},
+    "outputs": {"$ref": "#/$defs/output_artifacts"},
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "path", "json_path", "expected"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "json_path": {"type": "string", "minLength": 1},
+          "expected": {"type": "number"},
+          "atol": {"type": "number", "minimum": 0},
+          "rtol": {"type": "number", "minimum": 0}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "input_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    },
+    "output_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path"],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "reference_sha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    }
+  }
+}
