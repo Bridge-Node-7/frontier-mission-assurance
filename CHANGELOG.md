@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.5 — durable public-release polish
+
+- Refined release evidence and regression naming so the current source reads as a finished product rather than a maintenance narrative.
+- Preserved the Mission Decision Packet, explicit reopen conditions, Scientific Discovery Assurance, and bounded public-data model introduced in the v0.3 line.
+- Preserved cross-platform V&V, dependency review, CodeQL, immutable Action pins, local-only runtime, synthetic-only fixtures, All Rights Reserved licensing, and human consequential decision authority.
+- No assurance-graph, schema, CLI, runtime, or workflow semantics changed from v0.3.4.
+
 ## 0.3.4 — mission decision UX and public-surface finalization
 
 - Added the Mission Decision Packet as a bounded evidence-to-decision pattern with explicit reopen conditions.
