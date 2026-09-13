@@ -131,3 +131,4 @@ jobs:
       - run: .package-smoke/bin/python -m pip check
       - run: .package-smoke/bin/fma validate examples/frontier_program/graph.yaml
       - run: .package-smoke/bin/fma receipt examples/research_receipt/receipt.yaml
+      - run: .package-smoke/bin/fma reproduce examples/research_receipt/receipt.yaml --timeout 30
