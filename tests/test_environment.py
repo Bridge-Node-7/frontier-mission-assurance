@@ -5,9 +5,11 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import yaml
 
+import frontier_assurance.receipt as receipt_module
 from frontier_assurance.io import load_structured
 from frontier_assurance.receipt import reproduce_receipt, verify_receipt_inputs
 
@@ -58,3 +60,18 @@ def test_receipt_v2_command_must_reference_entrypoint(tmp_path):
     result = reproduce_receipt(receipt_path, timeout=30)
     assert not result.ok
     assert any("declared experiment.entrypoint" in error for error in result.errors)
+
+
+def test_fresh_reproduction_does_not_reuse_preexisting_output(tmp_path, monkeypatch):
+    dst = tmp_path / "receipt-demo"
+    shutil.copytree(RECEIPT.parent, dst)
+
+    def no_output_run(*args, **kwargs):
+        workspace = Path(kwargs["cwd"])
+        assert not (workspace / "outputs" / "result.json").exists()
+        return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+    monkeypatch.setattr(receipt_module.subprocess, "run", no_output_run)
+    result = reproduce_receipt(dst / "receipt.yaml", timeout=30)
+    assert not result.ok
+    assert any("missing artifact" in error for error in result.errors)
