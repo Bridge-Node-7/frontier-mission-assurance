@@ -27,6 +27,7 @@ The repository uses bounded, fail-visible controls as defense in depth:
 - Protected-main V&V performs CodeQL analysis for Python before a stable release can be triggered.
 - GitHub Actions are pinned to immutable commit SHAs.
 - Runtime regression tests prohibit common network-client imports in the installed FMA package.
+- Version-2 receipt tests verify code/input binding and fresh-output reproduction behavior.
 - The public release boundary check rejects several high-risk disclosure patterns and artifact types.
 
 These controls reduce risk; they do not prove the absence of vulnerabilities, malicious dependencies, sensitive proper nouns, or unsafe operational use.
@@ -39,9 +40,13 @@ Treat public issues, pull requests, Actions logs, uploaded artifacts, Discussion
 
 `fma receipt` is verification-only and does not execute the declared experiment command.
 
-`fma reproduce` **does execute repository code**. It verifies declared input hashes first, runs the command without a shell, and verifies outputs afterward. This reduces some accidental command-injection paths but does not make untrusted code safe.
+`fma reproduce` **does execute trusted repository code** and accepts only the current version-2 executable receipt contract. It verifies declared code and input hashes before execution, requires the command to reference the declared entrypoint, creates a fresh temporary workspace that does not contain declared outputs, runs the command with `shell=False`, and then verifies the resulting output hashes and numerical checks.
 
-Do not run `fma reproduce` on an untrusted receipt, checkout, fork, pull request, or artifact. Review the command and code first and use an isolated environment when appropriate.
+The fresh workspace prevents a stale checked-in result from satisfying a current reproduction PASS, but it is **not a sandbox or hermetic execution environment**. Trusted code can still use permissions, interpreters, libraries, environment variables, devices, files, and other capabilities available from the host.
+
+Do not run `fma reproduce` on an untrusted receipt, checkout, fork, pull request, or artifact. Review the command and bound code first and use an appropriately isolated execution environment when the consequence warrants it.
+
+Legacy version-1 research receipts remain usable for non-executing historical verification. They are not eligible for the current fresh-reproduction PASS because they do not carry the version-2 code-binding and fresh-output semantics.
 
 ## Operational use
 
