@@ -4,8 +4,8 @@ import hashlib
 import json
 import math
 import os
-import shutil
 import shlex
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import Any
 
 from .io import load_structured
-
 
 SUPPORTED_RECEIPT_VERSIONS = {"1.0", "2.0"}
 FRESH_REPRODUCTION_VERSION = "2.0"
