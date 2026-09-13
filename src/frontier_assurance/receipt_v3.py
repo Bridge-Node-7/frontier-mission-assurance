@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import hashlib
-from datetime import datetime, timezone
+from collections.abc import Callable
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 V3 = "3.0"
 ACCEPTANCE_MODES = {"EXACT_SHA256", "NUMERIC_CHECKS", "HYBRID"}
@@ -24,12 +25,12 @@ def _parse_timestamp(value: Any) -> datetime | None:
     if not isinstance(value, str) or not value.strip():
         return None
     try:
-        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(value)
     except ValueError:
         return None
     if parsed.tzinfo is None:
         return None
-    return parsed.astimezone(timezone.utc)
+    return parsed.astimezone(UTC)
 
 
 def artifact_manifest_sha256(items: list[Any]) -> str:
