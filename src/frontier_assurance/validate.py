@@ -16,8 +16,52 @@ class ValidationResult:
         return not self.errors
 
 
-def _in_unit_interval(value: Any) -> bool:
-    return isinstance(value, (int, float)) and 0 <= float(value) <= 1
+def _depends_on_cycle_warnings(
+    edges: list[Any], by_id: dict[str, dict[str, Any]]
+) -> list[str]:
+    adjacency: dict[str, set[str]] = {node_id: set() for node_id in by_id}
+    for edge in edges:
+        if not isinstance(edge, dict) or edge.get("relation") != "depends_on":
+            continue
+        src, dst = edge.get("from"), edge.get("to")
+        if src in adjacency and dst in adjacency and src != dst:
+            adjacency[src].add(dst)
+
+    state: dict[str, int] = {}
+    stack: list[str] = []
+    stack_index: dict[str, int] = {}
+    cycles: set[tuple[str, ...]] = set()
+
+    def canonical(nodes: list[str]) -> tuple[str, ...]:
+        body = nodes[:-1]
+        rotations = [tuple(body[i:] + body[:i]) for i in range(len(body))]
+        return min(rotations)
+
+    def visit(node: str) -> None:
+        state[node] = 1
+        stack_index[node] = len(stack)
+        stack.append(node)
+        for nxt in sorted(adjacency[node]):
+            nxt_state = state.get(nxt, 0)
+            if nxt_state == 0:
+                visit(nxt)
+            elif nxt_state == 1:
+                start = stack_index[nxt]
+                cycle = stack[start:] + [nxt]
+                if len(cycle) > 2:
+                    cycles.add(canonical(cycle))
+        stack.pop()
+        stack_index.pop(node, None)
+        state[node] = 2
+
+    for node in sorted(adjacency):
+        if state.get(node, 0) == 0:
+            visit(node)
+
+    warnings = []
+    for cycle in sorted(cycles):
+        warnings.append("depends_on cycle detected: " + " -> ".join((*cycle, cycle[0])))
+    return warnings
 
 
 def validate_graph(graph: dict[str, Any]) -> ValidationResult:
@@ -83,9 +127,7 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
             continue
         extra_edge = sorted(set(edge) - {"from", "to", "relation"})
         if extra_edge:
-            result.errors.append(
-                f"edges[{i}]: unsupported fields: {', '.join(extra_edge)}"
-            )
+            result.errors.append(f"edges[{i}]: unsupported fields: {', '.join(extra_edge)}")
         src, dst, relation = edge.get("from"), edge.get("to"), edge.get("relation")
         if src not in by_id:
             result.errors.append(f"edges[{i}]: unknown source node {src!r}")
@@ -97,8 +139,11 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
         if key in seen_edges:
             result.warnings.append(f"duplicate edge: {src} -[{relation}]-> {dst}")
         seen_edges.add(key)
+        if relation == "depends_on" and src == dst and src in by_id:
+            result.warnings.append(f"self dependency: {src} -[depends_on]-> {dst}")
 
-    # Evidence should support/verify/validate something useful.
+    result.warnings.extend(_depends_on_cycle_warnings(edges, by_id))
+
     outgoing: dict[str, list[dict[str, Any]]] = {node_id: [] for node_id in by_id}
     for edge in edges:
         if isinstance(edge, dict) and edge.get("from") in outgoing:
@@ -110,6 +155,8 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
                 for e in outgoing[node_id]
             )
             if not useful:
-                result.warnings.append(f"{node_id}: evidence is not linked to a supported claim/assumption")
+                result.warnings.append(
+                    f"{node_id}: evidence is not linked to a supported claim/assumption"
+                )
 
     return result
