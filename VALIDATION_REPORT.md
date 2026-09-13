@@ -1,4 +1,4 @@
-# Source Validation Report — v0.4.0
+# Source Validation Report — v0.4.1
 
 **Date:** 2026-09-12  
 **Role:** bounded public reference for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -11,6 +11,7 @@ This report records deterministic validation properties of the source candidate.
 - Automated tests: **PASS required**
 - Assurance-graph validation: **PASS required**
 - Runtime/schema contract alignment regressions: **PASS required**
+- Core schema `$id` identifiers: **stable and unique required**
 - Open-assumption visibility: **PASS required**
 - Direct evidence-coverage analysis: **PASS required**
 - Dependency-impact traversal: **PASS required**
@@ -35,7 +36,7 @@ This report records deterministic validation properties of the source candidate.
 - Research-boundary declaration-only guard: **PASS required**
 - Formal-proof / specification-equivalence separation: **PASS required**
 - Replication-state guard: **PASS required**
-- CLI version contract: **0.4.0 required**
+- CLI version contract: **0.4.1 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
@@ -53,6 +54,12 @@ This report records deterministic validation properties of the source candidate.
 `fma reproduce` accepts only version-2 receipts. It verifies declared code and inputs before execution, requires the declared command to reference the declared entrypoint, stages only the receipt, declared code, and declared inputs into a fresh temporary workspace, executes the trusted command with `shell=False`, and then verifies that declared outputs now exist with the expected hashes and numerical values. Pre-existing outputs from the source working directory are not staged into the reproduction workspace.
 
 This strengthens causal reproduction evidence but does not provide a sandbox or hermetic environment. Trusted reproduction code still executes with the permissions and ambient capabilities of the invoking host.
+
+## Interoperability contract
+
+The assurance graph, Research Receipt v2, and Decision Receipt v1 schemas must each expose a stable `$id`. Richer domain records may map into these contracts without surrendering local semantics. Adapter logic must preserve source provenance and fail visibly rather than inventing missing meaning.
+
+The standards-positioning document must preserve the non-claim boundary: FMA uses established assurance, provenance, hashing, reproducibility, and regression-testing ideas and differentiates through bounded composition and operational discipline rather than claiming novelty for those primitives.
 
 ## Dependency V&V
 
@@ -78,7 +85,7 @@ This strengthens causal reproduction evidence but does not provide a sandbox or 
 - Worked examples: **synthetic only**
 - Scientific Discovery Assurance worked example: **explicitly synthetic and intentionally unresolved**
 - No personal email addresses, credentials, private keys, local home paths, private URLs, real program identities, or nonpublic evidence in the public candidate
-- Security-reporting policy, threat model, interoperability contract, acceptance criteria, release acceptance, and scientific-discovery limitations present
+- Security-reporting policy, threat model, interoperability contract, standards positioning, acceptance criteria, release acceptance, and scientific-discovery limitations present
 - Public-facing artifacts and regression names use product-facing boundary and acceptance terminology
 - Contribution/IP boundary explicit
 
@@ -112,7 +119,7 @@ These are fixture behaviors, not claims about any external program or discovery.
 
 ## Hosted acceptance
 
-The exact pushed commit must independently pass the declared hosted Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, public-boundary validation, version-2 fresh reproduction, adversarial rejection regressions, deterministic report behavior, Scientific Discovery Assurance validation, dependency review where applicable, protected-main CodeQL, and fresh wheel installation. The Actions run attached to that commit is the authoritative hosted evidence.
+The exact pushed commit must independently pass the declared hosted Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, public-boundary validation, version-2 fresh reproduction, adversarial rejection regressions, deterministic report behavior, Scientific Discovery Assurance validation, core-schema identifier regression, dependency review where applicable, protected-main CodeQL, and fresh wheel installation. The Actions run attached to that commit is the authoritative hosted evidence.
 
 ## Disposition rule
 

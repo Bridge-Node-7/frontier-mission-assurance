@@ -1,26 +1,24 @@
-# Source Release Receipt — v0.4.0
+# Source Release Receipt — v0.4.1
 
 **Release type:** stable public reference  
 **Date:** 2026-09-12
 
 ## Purpose
 
-Strengthen Frontier Mission Assurance so a reproduction PASS means the declared version-2 code and inputs were checked, the trusted entrypoint ran from a fresh declared-artifact workspace, and the declared outputs were present only after that execution and passed their declared integrity and numerical checks.
+Harden FMA's portability boundary so the three core contracts are consistently identifiable, richer domain systems can map into FMA without losing local semantics, and public positioning is explicit about established assurance/provenance prior art and unsigned-receipt limits.
 
-## Material changes in v0.4.0
+## Material changes in v0.4.1
 
-- Introduced the executable Research Receipt v2 contract with explicit code artifacts and `experiment.entrypoint`.
-- Bound declared analysis code by SHA-256 before execution.
-- Changed `fma reproduce` to stage only the receipt, declared code, and declared inputs into a fresh temporary workspace; declared outputs are intentionally absent before execution.
-- Made a zero-exit command that produces no required output fail closed instead of permitting a stale source-tree output to satisfy reproduction.
-- Retained legacy version-1 receipts for non-executing historical verification while requiring version 2 for a current fresh-reproduction PASS.
-- Made receipt PASS messages enumerate the controls actually executed and reject empty version-2 assurance sections.
-- Added controlled exit-2 handling for malformed inputs, CLI discoverability improvements, dependency-cycle/self-loop warnings, deterministic report support through `SOURCE_DATE_EPOCH`, and expanded adversarial rejection-path regressions.
-- Preserved Scientific Discovery Assurance, Mission Decision Packets, cross-platform verification, immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, and human consequential decision authority.
+- Added stable `$id` identifiers to the core Research Receipt v2 and Decision Receipt v1 schemas, completing stable identifiers across all three core portable contracts.
+- Clarified interoperability as an adapter problem rather than a mandate for one universal evidence or decision ontology.
+- Added explicit adapter rules: preserve source provenance, retain richer domain semantics in the owning system, and fail visibly on ambiguity or information loss.
+- Added public standards positioning that does not claim novelty for established assurance-case, provenance, hashing, reproducibility, or regression-testing primitives.
+- Clarified that unsigned core receipts establish declared integrity/consistency, not authorship or signer identity.
+- Preserved the v0.4.0 fresh code-bound reproduction contract, Scientific Discovery Assurance, Mission Decision Packets, cross-platform verification, immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, and human consequential decision authority.
 
 ## Source-level evidence
 
-The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, public-boundary validation, fresh code-bound reproduction integrity, rejection-path regressions, deterministic report behavior, packaging, dependency review, CodeQL, and release-surface validation.
+The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, stable core schema identifiers, public-boundary validation, fresh code-bound reproduction integrity, rejection-path regressions, deterministic report behavior, packaging, dependency review, CodeQL, and release-surface validation.
 
 ## Hosted evidence rule
 
@@ -32,7 +30,9 @@ The public release record binds the accepted tag to the exact commit, successful
 
 ## Non-claims
 
-A version-2 reproduction workspace is an integrity control, not a sandbox or hermetic environment. This receipt does not claim scientific truth, mission readiness, legal priority, research-boundary enforcement, independent scientific acceptance, authorization for consequential action, or the permanent absence of future dependency vulnerabilities.
+FMA does not claim invention of assurance cases, provenance records, content hashing, reproducible workflows, numerical regression checks, or cryptographic attestation. Core FMA receipts are unsigned and therefore do not independently establish authorship or signer identity. A version-2 reproduction workspace remains an integrity control, not a sandbox or hermetic environment.
+
+This receipt does not claim scientific truth, mission readiness, legal priority, research-boundary enforcement, independent scientific acceptance, authorization for consequential action, or the permanent absence of future dependency vulnerabilities.
 
 ## Release gate
 
