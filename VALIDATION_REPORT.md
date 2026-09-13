@@ -1,4 +1,4 @@
-# Source Validation Report — v0.3.4
+# Source Validation Report — v0.3.5
 
 **Date:** 2026-09-12  
 **Role:** bounded public reference for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -26,7 +26,7 @@ This report records deterministic validation properties of the source candidate.
 - Research-boundary declaration-only guard: **PASS required**
 - Formal-proof / specification-equivalence separation: **PASS required**
 - Replication-state guard: **PASS required**
-- CLI version contract: **0.3.4 required**
+- CLI version contract: **0.3.5 required**
 - Runtime no-network-client import regression: **PASS required**
 - Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
@@ -62,7 +62,7 @@ This report records deterministic validation properties of the source candidate.
 - Scientific Discovery Assurance worked example: **explicitly synthetic and intentionally unresolved**
 - No personal email addresses, credentials, private keys, local home paths, private URLs, real program identities, or nonpublic evidence in the public candidate
 - Security-reporting policy, threat model, interoperability contract, acceptance criteria, release acceptance, and scientific-discovery limitations present
-- Internal-facing public-surface artifacts and security shorthand removed from the current tree
+- Public-facing artifacts and regression names use product-facing boundary and acceptance terminology
 - Contribution/IP boundary explicit
 
 ## Expected core synthetic example behavior

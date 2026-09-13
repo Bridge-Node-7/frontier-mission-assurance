@@ -150,25 +150,25 @@ def test_acceptance_identifiers_are_unique_and_sequential():
     assert numbers == list(range(1, len(numbers) + 1))
 
 
-def test_internal_facing_public_surface_artifacts_are_absent():
-    removed = [
-        ROOT / "OPSEC.md",
-        ROOT / "docs" / "UAT.md",
-        ROOT / "docs" / "UX_SIMULATION.md",
-        ROOT / "docs" / "RELEASE_CHECKLIST.md",
-        ROOT / "docs" / "PUBLIC_REFERENCE_BOUNDARY.md",
-        ROOT / "scripts" / "opsec_scan.py",
-        ROOT / "tests" / "test_opsec.py",
+def test_retired_public_surface_artifacts_are_absent():
+    retired = [
+        ROOT / ("OP" + "SEC.md"),
+        ROOT / "docs" / ("U" + "AT.md"),
+        ROOT / "docs" / ("UX_" + "SIMULATION.md"),
+        ROOT / "docs" / ("RELEASE_" + "CHECKLIST.md"),
+        ROOT / "docs" / ("PUBLIC_REFERENCE_" + "BOUNDARY.md"),
+        ROOT / "scripts" / ("op" + "sec_scan.py"),
+        ROOT / "tests" / ("test_op" + "sec.py"),
     ]
-    assert all(not path.exists() for path in removed)
+    assert all(not path.exists() for path in retired)
 
 
-def test_public_surface_avoids_internal_shorthand():
+def test_public_surface_avoids_retired_shorthand():
     ignored = {".git", ".venv", "build", "dist", "__pycache__"}
     patterns = [
-        re.compile(r"\bopsec\b", flags=re.IGNORECASE),
-        re.compile(r"\buat\b", flags=re.IGNORECASE),
-        re.compile(r"\bux simulation\b", flags=re.IGNORECASE),
+        re.compile(r"\b" + "op" + "sec" + r"\b", flags=re.IGNORECASE),
+        re.compile(r"\b" + "u" + "at" + r"\b", flags=re.IGNORECASE),
+        re.compile(r"\b" + "ux" + r"\s+" + "simulation" + r"\b", flags=re.IGNORECASE),
     ]
     violations: list[str] = []
     self_path = Path(__file__).resolve()
@@ -178,7 +178,16 @@ def test_public_surface_avoids_internal_shorthand():
             continue
         if any(part in ignored for part in path.parts):
             continue
-        suffixes = {".md", ".py", ".yml", ".yaml", ".json", ".toml", ".cff", ".txt"}
+        suffixes = {
+            ".md",
+            ".py",
+            ".yml",
+            ".yaml",
+            ".json",
+            ".toml",
+            ".cff",
+            ".txt",
+        }
         if path.suffix.lower() not in suffixes and path.name != "Makefile":
             continue
         try:
@@ -188,7 +197,7 @@ def test_public_surface_avoids_internal_shorthand():
         if any(pattern.search(text) for pattern in patterns):
             violations.append(str(path.relative_to(ROOT)))
 
-    assert not violations, "internal shorthand remains in: " + ", ".join(violations)
+    assert not violations, "retired shorthand remains in: " + ", ".join(violations)
 
 
 def test_issue_forms_do_not_depend_on_custom_labels():

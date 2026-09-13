@@ -1,20 +1,18 @@
-# Source Release Receipt — v0.3.4
+# Source Release Receipt — v0.3.5
 
 **Release type:** stable public reference  
 **Date:** 2026-09-12
 
 ## Purpose
 
-Finalize the public product surface around mission-oriented technical review while preserving FMA runtime semantics, release integrity, and the synthetic-only public-data boundary.
+Establish a durable public product baseline around mission-oriented technical review while preserving FMA runtime semantics, release integrity, and the synthetic-only public-data boundary.
 
-## Material changes in v0.3.4
+## Material changes in v0.3.5
 
-- Added the Mission Decision Packet pattern and worked synthetic decision walkthrough.
-- Made explicit reopen conditions a first-class part of the public decision-review experience.
-- Simplified the README around mission, evidence, reproducibility, decision basis, and bounded evaluation.
-- Replaced internal-facing security shorthand and process-artifact naming with product-facing public-boundary and acceptance terminology.
-- Consolidated public-boundary documentation and removed redundant internal-process-style documents from the current tree.
+- Normalized release evidence and regression-test naming for a durable public surface.
+- Kept the Mission Decision Packet and explicit reopen conditions as first-class parts of the public decision-review experience.
 - Preserved Scientific Discovery Assurance semantics, cross-platform verification, immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, and human consequential decision authority.
+- No assurance-graph, schema, CLI, runtime, or workflow semantics changed from v0.3.4.
 
 ## Source-level evidence
 
