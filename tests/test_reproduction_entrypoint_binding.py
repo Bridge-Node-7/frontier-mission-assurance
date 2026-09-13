@@ -16,9 +16,8 @@ def _sha256(data: bytes) -> str:
 def _write_receipt(tmp_path: Path, command: str) -> Path:
     code_bytes = (
         b"from pathlib import Path\n"
-        b"import json\n"
         b"Path('outputs').mkdir(exist_ok=True)\n"
-        b"Path('outputs/result.json').write_text(json.dumps({'value': 1.0}) + '\\n', encoding='utf-8')\n"
+        b"Path('outputs/result.json').write_bytes(b'{\\\"value\\\": 1.0}\\n')\n"
     )
     input_bytes = b"declared input\n"
     output_bytes = b'{"value": 1.0}\n'
