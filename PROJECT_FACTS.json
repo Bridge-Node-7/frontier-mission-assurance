@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "maturity": "public reference",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -19,7 +19,8 @@
     "validate portable scientific-discovery assurance contracts and their synthetic cross-record references",
     "keep formal proof-checker state separate from specification-equivalence state",
     "preserve explicit research-priority, research-boundary, attribution, and replication states",
-    "connect consequential decisions to explicit reopen conditions through Mission Decision Packets"
+    "connect consequential decisions to explicit reopen conditions through Mission Decision Packets",
+    "publish stable schema identifiers for the three core portable contracts"
   ],
   "does_not": [
     "certify scientific truth",
@@ -29,9 +30,11 @@
     "provide a sandbox or hermetic execution environment for reproduction",
     "establish trusted scientific priority from a local clock value alone",
     "prove enforcement of a declared research-data boundary",
-    "treat proof-checker success as automatic specification validation"
+    "treat proof-checker success as automatic specification validation",
+    "claim authorship or signer identity for unsigned core receipts"
   ],
   "distribution": "GitHub source and release workflow; public package-index upload intentionally blocked by package metadata.",
   "evidence_lifecycle": "Source-controlled validation defines deterministic expectations; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata.",
+  "interoperability": "Core schemas use stable identifiers. Richer domain records may map into FMA contracts without collapsing local evidence or decision semantics.",
   "maintenance": "Keep main as the protected long-lived branch, use immutable GitHub Action pins, dependency review, protected-main CodeQL, bounded dependency updates, and full V&V after material source changes."
 }

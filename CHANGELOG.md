@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.1 — portable contract identity
+
+- Added stable `$id` identifiers to the core Research Receipt v2 and Decision Receipt v1 schemas, completing consistent identifiers across the three core FMA contracts.
+- Clarified that interoperability preserves richer local evidence and decision semantics through explicit adapters rather than forcing one universal ontology.
+- Added public standards positioning that distinguishes FMA's bounded composition and UX from established assurance-case, provenance, hashing, reproducibility, and attestation primitives.
+- Clarified that unsigned core receipts establish declared integrity and consistency, not authorship or signer identity.
+- Added regression coverage for stable, unique core schema identifiers.
+- Preserved v0.4.0 reproduction integrity, cross-platform V&V, Scientific Discovery Assurance, Mission Decision Packets, local-only runtime, synthetic-only public fixtures, and human consequential decision authority.
+
 ## 0.4.0 — reproduction integrity
 
 - Upgraded executable research receipts to version 2.0 with explicit code artifacts and a declared execution entrypoint.

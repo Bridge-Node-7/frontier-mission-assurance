@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bridge-node-7.github.io/frontier-mission-assurance/decision-receipt.schema.json",
   "title": "Decision Receipt",
   "type": "object",
   "required": [
