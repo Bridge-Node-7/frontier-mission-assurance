@@ -42,6 +42,8 @@ The synthetic fixture intentionally retains a visible critical evidence gap. A P
 
 ## 3. Optional deeper inspection
 
-Use `fma validate`, `fma assumptions`, `fma coverage`, `fma impact`, `fma receipt`, `fma decision`, and `fma report` for individual checks.
+Use `fma validate`, `fma assumptions`, `fma coverage`, `fma impact`, `fma receipt`, `fma decision`, and `fma report` for individual checks. Each subcommand provides positional help and an example through `fma <command> --help`.
 
-`fma reproduce` is intentionally excluded from the bounded evaluation because it executes receipt-declared code. Run it only on trusted code after review.
+`fma receipt` remains non-executing. The bundled version-2 receipt binds declared code, inputs, outputs, and numerical acceptance checks.
+
+`fma reproduce` is intentionally excluded from the bounded evaluation because it executes trusted receipt-declared code. For a version-2 receipt it first verifies code and inputs, then runs the declared entrypoint in a fresh temporary workspace where declared outputs are absent, and finally verifies the new outputs and numerical criteria. The workspace prevents stale outputs from satisfying a reproduction PASS, but it is not a sandbox or hermetic environment. Run reproduction only on trusted code after review.
