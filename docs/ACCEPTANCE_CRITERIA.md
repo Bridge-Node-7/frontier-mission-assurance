@@ -82,3 +82,19 @@ A pre-existing valid output shall never be sufficient for `fma reproduce` to pas
 ## AC-19 — Controlled CLI errors and deterministic reports
 
 Malformed YAML/JSON, directory paths supplied where files are required, invalid arguments, and other controlled input failures shall exit `2` without a Python traceback. `fma report` shall support byte-reproducible output when `SOURCE_DATE_EPOCH` is set to the same valid value.
+
+## AC-20 — Version-3 stochastic output acceptance
+
+Version-3 receipts shall keep declared code and input artifacts exact while making output acceptance explicit. `NUMERIC_CHECKS` may accept non-byte-identical output only when every declared numerical tolerance passes. The observed output SHA-256 remains visible provenance. `EXACT_SHA256` and `HYBRID` require reference output hashes and shall fail on a mismatch.
+
+## AC-21 — Calibration/instrument-state provenance
+
+Version-3 receipts shall record an `as_of` time and an explicit calibration policy. `REQUIRED` calibration shall fail when evidence is missing or outside its declared validity window. Instrument state shall carry identity, configuration hash, observation time, validity window, and lineage. A review-required policy shall not silently become an unconditional PASS claim.
+
+## AC-22 — External long-running reproduction evidence
+
+A version-3 `EXTERNAL` receipt shall separate submission/environment evidence from collection evidence, preserve scheduler/job identity, exact code/input manifests, environment identity, timeout and cancellation semantics, terminal state, and collected-output hashes. Public CI shall validate a synthetic reference contract without claiming to execute a real cluster. `fma reproduce` shall not launch an external scheduler job.
+
+## AC-23 — Actionable bounded diagnostics
+
+When local reproduction fails on a Python import error, raw child stderr shall remain visible and FMA may add a bounded hint that a declared code artifact or runtime dependency could be missing. Unsupported graph statuses shall report the rejected value and the sorted allowed set without changing graph-validation semantics.

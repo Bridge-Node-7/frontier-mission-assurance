@@ -14,18 +14,22 @@ from pathlib import Path
 from typing import Any
 
 from .io import load_structured
+from .receipt_v3 import V3, execution_mode, validate_v3_shape, verify_v3_provenance
 
-SUPPORTED_RECEIPT_VERSIONS = {"1.0", "2.0"}
-FRESH_REPRODUCTION_VERSION = "2.0"
+SUPPORTED_RECEIPT_VERSIONS = {"1.0", "2.0", V3}
+FRESH_REPRODUCTION_VERSIONS = {"2.0", V3}
 
 
 @dataclass
 class ReceiptResult:
     errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
     checks: list[str] = field(default_factory=list)
     stdout: str = ""
     stderr: str = ""
     receipt_version: str = ""
+    acceptance_mode: str = ""
+    observed_output_hashes: dict[str, str] = field(default_factory=dict)
     artifact_counts: dict[str, int] = field(
         default_factory=lambda: {"code": 0, "inputs": 0, "outputs": 0}
     )
@@ -82,7 +86,7 @@ def _validate_document_shape(doc: dict[str, Any], result: ReceiptResult) -> None
     version = str(doc.get("receipt_version"))
     result.receipt_version = version
     if version not in SUPPORTED_RECEIPT_VERSIONS:
-        result.errors.append("receipt_version must be '1.0' or '2.0'")
+        result.errors.append("receipt_version must be '1.0', '2.0', or '3.0'")
 
     experiment = doc.get("experiment")
     if not isinstance(experiment, dict):
@@ -99,21 +103,29 @@ def _validate_document_shape(doc: dict[str, Any], result: ReceiptResult) -> None
         value = doc.get(section)
         if not isinstance(value, list):
             result.errors.append(f"{section} must be a list")
-        elif version == FRESH_REPRODUCTION_VERSION and not value:
+        elif version == "2.0" and not value:
             result.errors.append(
                 f"{section} must contain at least one entry for receipt_version 2.0"
             )
+        elif version == V3 and section in {"inputs", "outputs"} and not value:
+            result.errors.append(
+                f"{section} must contain at least one entry for receipt_version 3.0"
+            )
 
-    if version == FRESH_REPRODUCTION_VERSION:
+    if version in FRESH_REPRODUCTION_VERSIONS:
         code = doc.get("code")
         if not isinstance(code, list):
-            result.errors.append("code must be a list for receipt_version 2.0")
+            result.errors.append(f"code must be a list for receipt_version {version}")
         elif not code:
-            result.errors.append("code must contain at least one entry for receipt_version 2.0")
+            result.errors.append(
+                f"code must contain at least one entry for receipt_version {version}"
+            )
 
         entrypoint = experiment.get("entrypoint")
         if not isinstance(entrypoint, str) or not entrypoint.strip():
-            result.errors.append("experiment.entrypoint is required for receipt_version 2.0")
+            result.errors.append(
+                f"experiment.entrypoint is required for receipt_version {version}"
+            )
         else:
             code_paths = _artifact_paths(doc, "code")
             if entrypoint not in code_paths:
@@ -134,6 +146,9 @@ def _validate_document_shape(doc: dict[str, Any], result: ReceiptResult) -> None
                 result.errors.append(
                     f"checks[{index}].path must reference a declared output artifact"
                 )
+
+    if version == V3:
+        validate_v3_shape(doc, result)
 
 
 def _verify_artifact_section(
@@ -180,7 +195,7 @@ def verify_receipt_inputs(receipt_path: str | Path) -> ReceiptResult:
     base = receipt_path.parent
     result = ReceiptResult()
     _validate_document_shape(doc, result)
-    if result.receipt_version == FRESH_REPRODUCTION_VERSION:
+    if result.receipt_version in FRESH_REPRODUCTION_VERSIONS:
         _verify_artifact_section(doc, "code", base, result)
     _verify_artifact_section(doc, "inputs", base, result)
     return result
@@ -193,10 +208,13 @@ def verify_receipt(receipt_path: str | Path) -> ReceiptResult:
     result = ReceiptResult()
 
     _validate_document_shape(doc, result)
-    if result.receipt_version == FRESH_REPRODUCTION_VERSION:
+    if result.receipt_version in FRESH_REPRODUCTION_VERSIONS:
         _verify_artifact_section(doc, "code", base, result)
     _verify_artifact_section(doc, "inputs", base, result)
-    _verify_artifact_section(doc, "outputs", base, result)
+    if result.receipt_version == V3:
+        verify_v3_provenance(doc, base, result, _safe_target, sha256_file)
+    else:
+        _verify_artifact_section(doc, "outputs", base, result)
 
     checks = doc.get("checks", [])
     if isinstance(checks, list):
@@ -271,20 +289,31 @@ def _stage_artifacts(
 
 
 def reproduce_receipt(receipt_path: str | Path, timeout: int = 300) -> ReceiptResult:
-    """Run a receipt v2 command in an isolated declared-artifact workspace.
+    """Run a local code-bound receipt in an isolated declared-artifact workspace.
 
-    The workspace starts with only the receipt, declared code, and declared inputs. Declared
-    outputs are deliberately absent, so a successful reproduction must create them fresh.
-    This is an integrity boundary, not a sandbox or hermetic execution environment.
+    Version 2.0 preserves exact output hash verification. Version 3.0 may use
+    exact, numeric, or hybrid output acceptance. EXTERNAL version-3 receipts
+    are verified as submission/collection evidence and are not executed here.
+
+    The workspace starts with only the receipt, declared code, and declared inputs.
+    Declared outputs are deliberately absent, so a successful local reproduction
+    must create them fresh. This is an integrity boundary, not a sandbox or
+    hermetic execution environment.
     """
     receipt_path = Path(receipt_path).resolve()
     doc = load_structured(receipt_path)
     result = verify_receipt_inputs(receipt_path)
     if not result.ok:
         return result
-    if result.receipt_version != FRESH_REPRODUCTION_VERSION:
+    if result.receipt_version not in FRESH_REPRODUCTION_VERSIONS:
         result.errors.append(
-            "fresh reproduction requires receipt_version 2.0 with code-bound execution"
+            "fresh reproduction requires receipt_version 2.0 or 3.0 with code-bound execution"
+        )
+        return result
+    if result.receipt_version == V3 and execution_mode(doc) == "EXTERNAL":
+        result.errors.append(
+            "EXTERNAL receipt_version 3.0 is collection-verification only; "
+            "submit through the declared scheduler and use fma receipt on collected evidence"
         )
         return result
 
@@ -370,6 +399,15 @@ def reproduce_receipt(receipt_path: str | Path, timeout: int = 300) -> ReceiptRe
         result.stderr = completed.stderr
         if completed.returncode != 0:
             result.errors.append(f"experiment command exited with status {completed.returncode}")
+            diagnostic_text = completed.stderr.lower()
+            if any(
+                token in diagnostic_text
+                for token in ("modulenotfounderror", "importerror", "no module named")
+            ):
+                result.errors.append(
+                    "bounded diagnostic: reproduction may be missing a declared code artifact "
+                    "or runtime dependency; raw child stderr is preserved above"
+                )
             return result
 
         verified = verify_receipt(staged_receipt)

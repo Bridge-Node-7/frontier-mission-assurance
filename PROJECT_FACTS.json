@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "maturity": "public reference",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -13,14 +13,17 @@
     "list unresolved assumptions without automated priority scoring",
     "expose direct evidence gaps on critical nodes",
     "show dependency impact through declared depends_on/requires relations",
-    "verify declared code, input, and output artifact hashes plus numerical acceptance checks",
-    "explicitly reproduce trusted version-2 receipts in a fresh declared-artifact workspace with SHA-256-bound code, direct declared-entrypoint execution, and freshly generated outputs",
+    "verify declared code and input artifact hashes plus versioned output acceptance and numerical checks",
+    "explicitly reproduce trusted version-2 receipts and local version-3 receipts in a fresh declared-artifact workspace with SHA-256-bound code, direct declared-entrypoint execution, and freshly generated outputs",
+    "verify version-3 stochastic or hybrid output acceptance without discarding observed output hashes",
+    "validate version-3 calibration/instrument-state provenance and declared validity windows",
+    "verify synthetic external-job submission and collection provenance without claiming to run a real scheduler in public CI",
     "verify that decision-receipt basis references exist in a valid graph",
     "validate portable scientific-discovery assurance contracts and their synthetic cross-record references",
     "keep formal proof-checker state separate from specification-equivalence state",
     "preserve explicit research-priority, research-boundary, attribution, and replication states",
     "connect consequential decisions to explicit reopen conditions through Mission Decision Packets",
-    "publish stable schema identifiers for the three core portable contracts"
+    "publish stable identifiers for versioned portable contracts"
   ],
   "does_not": [
     "certify scientific truth",
@@ -28,6 +31,7 @@
     "authorize safety, security, acquisition, compliance, or mission readiness",
     "serve as a public storage location for real program evidence",
     "provide a sandbox or hermetic execution environment for reproduction",
+    "launch external scheduler or cluster jobs",
     "establish trusted scientific priority from a local clock value alone",
     "prove enforcement of a declared research-data boundary",
     "treat proof-checker success as automatic specification validation",
@@ -35,6 +39,6 @@
   ],
   "distribution": "GitHub source and release workflow; public package-index upload intentionally blocked by package metadata.",
   "evidence_lifecycle": "Source-controlled validation defines deterministic expectations; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata.",
-  "interoperability": "Core schemas use stable identifiers. Richer domain records may map into FMA contracts without collapsing local evidence or decision semantics.",
+  "interoperability": "Versioned core schemas use stable identifiers. Richer domain records may map into FMA contracts without collapsing local evidence, calibration, acceptance, or decision semantics.",
   "maintenance": "Keep main as the protected long-lived branch, use immutable GitHub Action pins, dependency review, protected-main CodeQL, bounded dependency updates, and full V&V after material source changes."
 }

@@ -109,7 +109,10 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
         if not isinstance(title, str) or not title.strip():
             result.errors.append(f"{node_id}: title is required")
         if status not in STATUSES:
-            result.errors.append(f"{node_id}: unsupported status {status!r}")
+            allowed = ", ".join(sorted(STATUSES))
+            result.errors.append(
+                f"{node_id}: unsupported status {status!r}; allowed: {allowed}"
+            )
 
         criticality = node.get("criticality")
         if criticality is not None and (

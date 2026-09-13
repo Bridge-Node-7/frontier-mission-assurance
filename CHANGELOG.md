@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 — research receipt v3
+
+- Added Research Receipt v3 with explicit `EXACT_SHA256`, `NUMERIC_CHECKS`, and `HYBRID` output-acceptance modes while keeping declared code and inputs SHA-256 exact.
+- Preserved every observed v3 output SHA-256 as provenance even when stochastic/numerical acceptance does not require byte identity.
+- Added calibration/instrument-state provenance with explicit policy, identity, configuration hash, lineage, observation time, and validity-window checks.
+- Added a bounded external/cluster contract that separates submission/environment evidence from result collection and verifies scheduler/job continuity, code/input manifests, environment identity, timeout/cancellation semantics, terminal state, and collected-output hashes without running a real cluster in public CI.
+- Kept version-2 exact local reproduction semantics backward compatible.
+- Improved reproduction diagnostics for undeclared Python helpers while retaining raw child stderr, and made invalid graph-status errors list the sorted allowed set.
+- Added synthetic-only regression coverage for stochastic acceptance, calibration freshness, external collection provenance, exact-hash tampering, external execution refusal, and bounded diagnostics.
+- Preserved the public/synthetic boundary, local-only runtime behavior for FMA itself, All Rights Reserved licensing, protected release gates, and human consequential decision authority.
+
 ## 0.4.2 — reproduction entrypoint binding
 
 - Tightened version-2 reproduction so a Python command must execute the declared entrypoint as its first script argument; merely mentioning the entrypoint later in `argv` no longer satisfies the binding control.
