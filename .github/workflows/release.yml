@@ -137,4 +137,5 @@ jobs:
           sha256sum -c "$VERIFY/$SOURCE_SUMS"
           "$VERIFY/.venv/bin/python" scripts/evaluate_public_reference.py
           "$VERIFY/.venv/bin/python" scripts/validate_scientific_discovery.py .
+          "$VERIFY/.venv/bin/fma" reproduce examples/research_receipt/receipt.yaml --timeout 30
           grep -Fq "CLAIM-CYCLE-TARGET" build/assurance-report.md
