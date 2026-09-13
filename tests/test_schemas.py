@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import yaml
@@ -42,12 +43,35 @@ def test_examples_conform_to_published_schemas():
 
 def test_graph_schema_rejects_runtime_invalid_status_and_version():
     schema = _schema("assurance-graph.schema.json")
-    doc = yaml.safe_load((ROOT / "examples" / "frontier_program" / "graph.yaml").read_text(encoding="utf-8"))
+    doc = yaml.safe_load(
+        (ROOT / "examples" / "frontier_program" / "graph.yaml").read_text(encoding="utf-8")
+    )
     doc["graph_version"] = "2.0"
-    errors = list(Draft202012Validator(schema).iter_errors(doc))
-    assert errors
+    assert list(Draft202012Validator(schema).iter_errors(doc))
 
-    doc = yaml.safe_load((ROOT / "examples" / "frontier_program" / "graph.yaml").read_text(encoding="utf-8"))
+    doc = yaml.safe_load(
+        (ROOT / "examples" / "frontier_program" / "graph.yaml").read_text(encoding="utf-8")
+    )
     doc["nodes"][0]["status"] = "mystery"
-    errors = list(Draft202012Validator(schema).iter_errors(doc))
-    assert errors
+    assert list(Draft202012Validator(schema).iter_errors(doc))
+
+
+def test_research_receipt_v2_rejects_empty_assurance_sections_and_missing_entrypoint():
+    schema = _schema("research-receipt.schema.json")
+    validator = Draft202012Validator(schema)
+    original = yaml.safe_load(
+        (ROOT / "examples" / "research_receipt" / "receipt.yaml").read_text(encoding="utf-8")
+    )
+
+    for section in ("code", "inputs", "outputs", "checks"):
+        doc = deepcopy(original)
+        doc[section] = []
+        assert list(validator.iter_errors(doc)), section
+
+    doc = deepcopy(original)
+    doc["experiment"].pop("entrypoint")
+    assert list(validator.iter_errors(doc))
+
+    doc = deepcopy(original)
+    doc["receipt_version"] = "1.0"
+    assert list(validator.iter_errors(doc))
