@@ -42,13 +42,29 @@ Date plus release/tag identity
 
 The executable receipt supplies the machine-checkable portion:
 
-`Source → Environment → Experiment → Result → Validation → Receipt`
+`Code → Input → Environment → Experiment → Fresh Result → Validation → Receipt`
 
-- input/output SHA-256 hashes preserve artifact identity;
+For the current version-2 executable contract:
+
+- declared code artifacts are SHA-256-bound before execution;
+- `experiment.entrypoint` identifies the declared code artifact the command must reference;
+- input and output SHA-256 hashes preserve artifact identity;
 - declared numerical checks preserve acceptance expectations;
 - explicit reproduction separates trusted code execution from non-executing receipt verification;
+- reproduction runs from a fresh temporary workspace containing the receipt, declared code, and declared inputs, while declared outputs are absent before execution;
+- successful reproduction therefore requires the command to create the declared outputs in that fresh workspace before hashes and numerical checks can pass;
 - environment fingerprints capture public-safe execution context;
 - hosted CI demonstrates the contract on clean infrastructure.
+
+The fresh workspace is an integrity control, not a sandbox or hermetic environment. Trusted code can still access resources allowed by the host, so environment equivalence and undeclared ambient dependencies remain separate assurance questions.
+
+## Legacy receipt compatibility
+
+Version-1 receipts remain readable for non-executing historical verification. They do not carry the version-2 code-binding and fresh-output guarantees, so `fma reproduce` does not issue a current reproduction PASS for a version-1 receipt.
+
+## Deterministic reports
+
+`fma report` normally records the current UTC generation time. When a byte-reproducible report is needed for receipt binding or deterministic release evidence, set `SOURCE_DATE_EPOCH` to the intended Unix timestamp before generating the report.
 
 ## Minimum sufficient assurance
 
@@ -56,4 +72,4 @@ Not every research artifact needs a full production platform. The contract shoul
 
 ## Non-claim
 
-A reproducible computation does not by itself establish scientific truth, operational validity, mission readiness, or regulatory acceptance.
+A reproducible computation does not by itself establish scientific truth, operational validity, mission readiness, regulatory acceptance, or authorization for consequential action.
