@@ -13,7 +13,7 @@ A technical user should understand within five minutes:
 
 ## AC-02 — Graph validation
 
-A valid synthetic graph shall pass. Duplicate identifiers, dangling edges, unsupported kinds/relations/statuses, and malformed required fields shall fail visibly.
+A valid synthetic graph shall pass. Duplicate identifiers, dangling edges, unsupported kinds/relations/statuses, and malformed required fields shall fail visibly. Duplicate edges, `depends_on` self-loops, and `depends_on` cycles shall remain visible as warnings rather than being silently accepted.
 
 ## AC-03 — Evidence gap visibility
 
@@ -25,15 +25,15 @@ Open assumptions shall be listed deterministically. The public reference shall n
 
 ## AC-05 — Dependency impact
 
-Changing a declared dependency shall expose transitively dependent nodes for review.
+Changing a declared dependency shall expose transitively dependent nodes for review. Cycles shall not cause unbounded traversal.
 
 ## AC-06 — Research receipt verification
 
-Hash or numerical-check tampering shall fail deterministically.
+Version-2 research receipts shall require non-empty declared code, inputs, outputs, and numerical checks. Code, input, or output hash tampering and numerical-check failures shall fail deterministically. The PASS summary shall report the controls that actually ran rather than claiming an unexecuted verification class.
 
 ## AC-07 — Trusted reproduction boundary
 
-Receipt verification shall remain non-executing. Reproduction shall execute only when explicitly invoked and shall use `shell=False`.
+Receipt verification shall remain non-executing. Fresh reproduction shall execute only when explicitly invoked on a version-2 receipt, shall verify declared code and inputs before execution, shall require the declared command to reference the declared entrypoint, and shall use `shell=False`. Reproduction is not a sandbox.
 
 ## AC-08 — Decision-basis verification
 
@@ -57,11 +57,11 @@ The runtime package shall contain no network-client imports and shall emit no te
 
 ## AC-13 — Contract alignment
 
-Published schema constraints for contract versions and graph statuses shall align with runtime validation behavior.
+Published schema constraints for contract versions and graph statuses shall align with runtime validation behavior. Runtime-only cross-artifact invariants that are not expressible in the published JSON Schema shall be documented and regression-tested.
 
 ## AC-14 — Public GitHub presentation
 
-A visitor shall be able to identify the repository purpose, maturity, licensing posture, public-data boundary, five-minute evaluation path, and non-claims without relying on private context.
+A visitor shall be able to identify the repository purpose, maturity, licensing posture, public-data boundary, five-minute evaluation path, reading order, and non-claims without relying on private context.
 
 ## AC-15 — Clean-user evaluation
 
@@ -74,3 +74,11 @@ The public release record shall bind the accepted tag to the exact passing commi
 ## AC-17 — Scientific Discovery Assurance
 
 The bundled synthetic scientific-discovery records shall validate as a linked contract set while preserving unresolved assurance state: local time alone shall not establish trusted priority, a research-boundary attestation shall remain declaration-only, proof-checker `PASS` shall remain separate from specification-equivalence review, partial replication shall remain visible, and the synthetic Discovery Passport shall remain `REVIEW_REQUIRED` until those evidence gates are satisfied.
+
+## AC-18 — Fresh reproduction integrity
+
+A pre-existing valid output shall never be sufficient for `fma reproduce` to pass. Version-2 reproduction shall run in a fresh temporary workspace that contains the receipt, declared code, and declared inputs but no declared outputs before execution. A command that exits successfully without producing a required output shall fail closed. Modified declared code without a matching receipt hash shall fail before command execution.
+
+## AC-19 — Controlled CLI errors and deterministic reports
+
+Malformed YAML/JSON, directory paths supplied where files are required, invalid arguments, and other controlled input failures shall exit `2` without a Python traceback. `fma report` shall support byte-reproducible output when `SOURCE_DATE_EPOCH` is set to the same valid value.

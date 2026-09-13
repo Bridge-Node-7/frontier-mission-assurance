@@ -1,11 +1,15 @@
-receipt_version: "1.0"
+receipt_version: "2.0"
 experiment:
   id: DEMO-Z-EXPECTATION
   command: "python analysis.py"
+  entrypoint: analysis.py
   seed: 1111
-  purpose: "Demonstrate immutable inputs/outputs and numerical verification"
+  purpose: "Demonstrate fresh code-bound reproduction and numerical verification"
 environment:
   runtime: "Python >=3.11, standard library only"
+code:
+  - path: analysis.py
+    sha256: 6ab39307fd1a275a972eb301debe5bfebc79728419a2163a2cd8666b579c518b
 inputs:
   - path: data/measurements.csv
     sha256: afac4acef548f23e1787a9bb70b3455284ddbd961e985e48b9f17a828f8a3f56

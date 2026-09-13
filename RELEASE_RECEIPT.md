@@ -1,22 +1,26 @@
-# Source Release Receipt — v0.3.5
+# Source Release Receipt — v0.4.0
 
 **Release type:** stable public reference  
 **Date:** 2026-09-12
 
 ## Purpose
 
-Establish a durable public product baseline around mission-oriented technical review while preserving FMA runtime semantics, release integrity, and the synthetic-only public-data boundary.
+Strengthen Frontier Mission Assurance so a reproduction PASS means the declared version-2 code and inputs were checked, the trusted entrypoint ran from a fresh declared-artifact workspace, and the declared outputs were present only after that execution and passed their declared integrity and numerical checks.
 
-## Material changes in v0.3.5
+## Material changes in v0.4.0
 
-- Normalized release evidence and regression-test naming for a durable public surface.
-- Kept the Mission Decision Packet and explicit reopen conditions as first-class parts of the public decision-review experience.
-- Preserved Scientific Discovery Assurance semantics, cross-platform verification, immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, and human consequential decision authority.
-- No assurance-graph, schema, CLI, runtime, or workflow semantics changed from v0.3.4.
+- Introduced the executable Research Receipt v2 contract with explicit code artifacts and `experiment.entrypoint`.
+- Bound declared analysis code by SHA-256 before execution.
+- Changed `fma reproduce` to stage only the receipt, declared code, and declared inputs into a fresh temporary workspace; declared outputs are intentionally absent before execution.
+- Made a zero-exit command that produces no required output fail closed instead of permitting a stale source-tree output to satisfy reproduction.
+- Retained legacy version-1 receipts for non-executing historical verification while requiring version 2 for a current fresh-reproduction PASS.
+- Made receipt PASS messages enumerate the controls actually executed and reject empty version-2 assurance sections.
+- Added controlled exit-2 handling for malformed inputs, CLI discoverability improvements, dependency-cycle/self-loop warnings, deterministic report support through `SOURCE_DATE_EPOCH`, and expanded adversarial rejection-path regressions.
+- Preserved Scientific Discovery Assurance, Mission Decision Packets, cross-platform verification, immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, and human consequential decision authority.
 
 ## Source-level evidence
 
-The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, public-boundary validation, deterministic reproduction, packaging, dependency review, CodeQL, and release-surface validation.
+The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, public-boundary validation, fresh code-bound reproduction integrity, rejection-path regressions, deterministic report behavior, packaging, dependency review, CodeQL, and release-surface validation.
 
 ## Hosted evidence rule
 
@@ -28,7 +32,7 @@ The public release record binds the accepted tag to the exact commit, successful
 
 ## Non-claims
 
-This receipt does not claim scientific truth, mission readiness, legal priority, research-boundary enforcement, independent scientific acceptance, or the permanent absence of future dependency vulnerabilities.
+A version-2 reproduction workspace is an integrity control, not a sandbox or hermetic environment. This receipt does not claim scientific truth, mission readiness, legal priority, research-boundary enforcement, independent scientific acceptance, authorization for consequential action, or the permanent absence of future dependency vulnerabilities.
 
 ## Release gate
 

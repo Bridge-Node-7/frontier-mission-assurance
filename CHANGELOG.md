@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — reproduction integrity
+
+- Upgraded executable research receipts to version 2.0 with explicit code artifacts and a declared execution entrypoint.
+- Changed `fma reproduce` to run from a fresh temporary workspace containing only the receipt, declared code, and declared inputs; declared outputs must be created by that run before hashes and numerical checks can pass.
+- Bound declared execution code by SHA-256 and reject reproduction when the declared command does not reference the receipt entrypoint.
+- Retained non-executing verification compatibility for legacy version-1 receipts while requiring version 2.0 for fresh reproduction.
+- Made receipt success messages report the controls that actually ran and reject empty code/input/output/check sections for version-2 receipts.
+- Converted malformed YAML, directory paths, and other controlled input failures into one-line exit-2 CLI failures without Python tracebacks.
+- Added positional CLI help, command examples, and a first-run pointer to the five-minute evaluation.
+- Added warning-level detection for `depends_on` self-loops and cycles while preserving finite dependency traversal.
+- Added deterministic report generation through `SOURCE_DATE_EPOCH` and expanded adversarial rejection-path regression coverage.
+- Preserved the public/synthetic boundary, one-runtime-dependency design, cross-platform V&V, immutable Action pins, protected-main release gate, Scientific Discovery Assurance, Mission Decision Packets, and human consequential decision authority.
+
 ## 0.3.5 — durable public-release polish
 
 - Refined release evidence and regression naming so the current source reads as a finished product rather than a maintenance narrative.
