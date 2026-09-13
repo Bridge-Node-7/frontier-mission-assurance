@@ -36,8 +36,8 @@ def _write_local_v3(
     code_bytes = (
         "from pathlib import Path\n"
         "Path('outputs').mkdir(exist_ok=True)\n"
-        f"Path('outputs/result.json').write_text('{{\"value\": {value}}}\\n', encoding='utf-8')\n"
-    ).encode("utf-8")
+        f"Path('outputs/result.json').write_bytes(b'{{\"value\": {value}}}\\n')\n"
+    ).encode()
     input_bytes = b"declared v3 input\n"
     output = {"path": "outputs/result.json"}
     if reference_sha256 is not None:
@@ -111,9 +111,7 @@ def test_v3_exact_acceptance_rejects_reference_hash_mismatch(tmp_path: Path):
         reference_sha256="0" * 64,
     )
     (tmp_path / "outputs").mkdir()
-    (tmp_path / "outputs" / "result.json").write_text(
-        '{"value": 1.0004}\n', encoding="utf-8"
-    )
+    (tmp_path / "outputs" / "result.json").write_bytes(b'{"value": 1.0004}\n')
     result = verify_receipt(receipt)
     assert not result.ok
     assert any("reference sha256 mismatch" in error for error in result.errors)
@@ -145,9 +143,7 @@ def test_v3_required_stale_calibration_fails(tmp_path: Path):
     }
     receipt = _write_local_v3(tmp_path, calibration=calibration)
     (tmp_path / "outputs").mkdir()
-    (tmp_path / "outputs" / "result.json").write_text(
-        '{"value": 1.0004}\n', encoding="utf-8"
-    )
+    (tmp_path / "outputs" / "result.json").write_bytes(b'{"value": 1.0004}\n')
     result = verify_receipt(receipt)
     assert not result.ok
     assert any("outside declared validity window" in error for error in result.errors)
@@ -161,9 +157,7 @@ def test_v3_review_if_missing_calibration_is_review_required(tmp_path: Path):
     }
     receipt = _write_local_v3(tmp_path, calibration=calibration)
     (tmp_path / "outputs").mkdir()
-    (tmp_path / "outputs" / "result.json").write_text(
-        '{"value": 1.0004}\n', encoding="utf-8"
-    )
+    (tmp_path / "outputs" / "result.json").write_bytes(b'{"value": 1.0004}\n')
     result = verify_receipt(receipt)
     assert not result.ok
     assert any(
