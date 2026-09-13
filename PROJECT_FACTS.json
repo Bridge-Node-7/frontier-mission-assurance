@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "maturity": "public reference",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -14,7 +14,7 @@
     "expose direct evidence gaps on critical nodes",
     "show dependency impact through declared depends_on/requires relations",
     "verify declared code, input, and output artifact hashes plus numerical acceptance checks",
-    "explicitly reproduce trusted version-2 receipts in a fresh declared-artifact workspace with code-bound entrypoints and freshly generated outputs",
+    "explicitly reproduce trusted version-2 receipts in a fresh declared-artifact workspace with SHA-256-bound code, direct declared-entrypoint execution, and freshly generated outputs",
     "verify that decision-receipt basis references exist in a valid graph",
     "validate portable scientific-discovery assurance contracts and their synthetic cross-record references",
     "keep formal proof-checker state separate from specification-equivalence state",

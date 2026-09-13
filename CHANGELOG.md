@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.2 — reproduction entrypoint binding
+
+- Tightened version-2 reproduction so a Python command must execute the declared entrypoint as its first script argument; merely mentioning the entrypoint later in `argv` no longer satisfies the binding control.
+- Reject interpreter execution modes such as `python -c`, `python -m`, stdin execution, and other decoy-token shapes from satisfying declared-entrypoint binding.
+- Added adversarial regression coverage for interpreter-mode and decoy-entrypoint command shapes while preserving successful `python <entrypoint> ...` reproduction.
+- Made the clean-adopter evaluation path install the exact pinned build backend inside its isolated environment and use that reviewed backend without build-isolation drift.
+- Preserved fresh-output verification, SHA-256 code/input/output binding, cross-platform V&V, Scientific Discovery Assurance, Mission Decision Packets, local-only runtime, synthetic-only public fixtures, All Rights Reserved licensing, and human consequential decision authority.
+
 ## 0.4.1 — portable contract identity
 
 - Added stable `$id` identifiers to the core Research Receipt v2 and Decision Receipt v1 schemas, completing consistent identifiers across the three core FMA contracts.

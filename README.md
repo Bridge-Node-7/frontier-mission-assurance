@@ -55,13 +55,14 @@ FMA makes that loop inspectable without pretending that machine-readable structu
 
 ## Five-minute evaluation
 
-Requires Python 3.11 or newer. The bounded evaluation is local-only, non-executing with respect to research receipt commands, and uses synthetic fixtures.
+Requires Python 3.11 or newer. The bounded evaluation is local-only, non-executing with respect to research receipt commands, and uses synthetic fixtures. The clean-adopter path installs the exact pinned build backend inside the isolated environment before the editable install.
 
 ### macOS / Linux
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -e .
+.venv/bin/python -m pip install "setuptools==84.0.0" "wheel==0.48.0"
+.venv/bin/python -m pip install --no-build-isolation -e .
 .venv/bin/python scripts/evaluate_public_reference.py
 ```
 
@@ -69,7 +70,8 @@ python3 -m venv .venv
 
 ```powershell
 py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m pip install "setuptools==84.0.0" "wheel==0.48.0"
+.\.venv\Scripts\python.exe -m pip install --no-build-isolation -e .
 .\.venv\Scripts\python.exe scripts/evaluate_public_reference.py
 ```
 
@@ -88,7 +90,7 @@ The synthetic fixture intentionally retains a visible critical evidence gap. A P
 - **Evidence coverage** — identify critical mission/claim/requirement nodes without direct supporting evidence.
 - **Dependency impact** — show which declared nodes depend transitively on a changed dependency.
 - **Research receipts** — SHA-256-bind declared code, input, and output artifacts to numerical acceptance checks.
-- **Fresh code-bound reproduction** — version-2 receipts verify code and inputs, execute a declared entrypoint in a fresh temporary workspace where declared outputs are absent, then verify newly present outputs and numerical criteria.
+- **Fresh code-bound reproduction** — version-2 receipts verify code and inputs, require direct execution of the declared entrypoint (or the declared entrypoint as the first Python script argument), run in a fresh temporary workspace where declared outputs are absent, then verify newly present outputs and numerical criteria.
 - **Decision receipts** — verify that a declared decision basis references nodes in a valid assurance graph.
 - **Mission Decision Packets** — connect a consequential human decision to evidence, assumptions, reproduction state, dependencies, and explicit reopen conditions.
 - **Scientific Discovery Assurance** — portable contracts for discovery provenance, priority evidence, research-boundary declarations, formal-proof/specification separation, replication, and attribution chronology.
@@ -138,7 +140,7 @@ checks:
 
 `fma receipt ...` is non-executing. It verifies the declared artifacts and checks and reports how many controls actually passed.
 
-`fma reproduce ...` is an explicit trusted-code operation. It verifies declared code and inputs first, creates a fresh temporary workspace containing the receipt plus declared code and inputs, intentionally does **not** stage declared outputs, executes the declared entrypoint with `shell=False`, and then verifies the outputs and numerical criteria. A successful command that produces no required output fails closed rather than reusing a stale result from the caller's working directory.
+`fma reproduce ...` is an explicit trusted-code operation. It verifies declared code and inputs first, requires the command to execute the declared entrypoint directly or as the first Python script argument, creates a fresh temporary workspace containing the receipt plus declared code and inputs, intentionally does **not** stage declared outputs, executes with `shell=False`, and then verifies the outputs and numerical criteria. Interpreter modes such as `python -c`, `python -m`, or stdin execution cannot satisfy entrypoint binding merely by mentioning the declared entrypoint later in the command. A successful command that produces no required output fails closed rather than reusing a stale result from the caller's working directory.
 
 The reproduction workspace is an integrity boundary, **not a sandbox or hermetic environment**. Trusted code still runs with the permissions and ambient capabilities of the host. Legacy version-1 receipts remain available for non-executing historical verification but do not receive the current fresh-reproduction PASS. See [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md) and [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md).
 

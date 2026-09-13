@@ -308,15 +308,23 @@ def reproduce_receipt(receipt_path: str | Path, timeout: int = 300) -> ReceiptRe
         return result
 
     normalized_entrypoint = _normalized_command_path(entrypoint)
-    command_paths = {_normalized_command_path(token) for token in argv[1:]}
-    if _normalized_command_path(argv[0]) == normalized_entrypoint:
-        command_paths.add(normalized_entrypoint)
-    if normalized_entrypoint not in command_paths:
-        result.errors.append("experiment.command must execute the declared experiment.entrypoint")
-        return result
-
-    if argv[0].lower() in {"python", "python3", "python.exe"}:
+    launcher_name = argv[0].replace("\\", "/").rsplit("/", 1)[-1].lower()
+    python_launchers = {"python", "python3", "python.exe"}
+    if launcher_name in python_launchers:
+        if len(argv) < 2 or _normalized_command_path(argv[1]) != normalized_entrypoint:
+            result.errors.append(
+                "experiment.command must execute the declared experiment.entrypoint as the "
+                "first Python script argument; interpreter modes or decoy entrypoint tokens "
+                "are not accepted"
+            )
+            return result
         argv[0] = sys.executable
+    elif _normalized_command_path(argv[0]) != normalized_entrypoint:
+        result.errors.append(
+            "experiment.command must execute the declared experiment.entrypoint directly or "
+            "as the first Python script argument"
+        )
+        return result
 
     source_base = receipt_path.parent.resolve()
     with tempfile.TemporaryDirectory(prefix="fma-reproduce-") as temp_dir:

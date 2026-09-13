@@ -33,7 +33,7 @@ Version-2 research receipts shall require non-empty declared code, inputs, outpu
 
 ## AC-07 — Trusted reproduction boundary
 
-Receipt verification shall remain non-executing. Fresh reproduction shall execute only when explicitly invoked on a version-2 receipt, shall verify declared code and inputs before execution, shall require the declared command to reference the declared entrypoint, and shall use `shell=False`. Reproduction is not a sandbox.
+Receipt verification shall remain non-executing. Fresh reproduction shall execute only when explicitly invoked on a version-2 receipt, shall verify declared code and inputs before execution, shall require the declared entrypoint to be executed directly or as the first Python script argument, and shall use `shell=False`. Interpreter modes or later decoy tokens shall not satisfy entrypoint binding. Reproduction is not a sandbox.
 
 ## AC-08 — Decision-basis verification
 
