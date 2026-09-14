@@ -4,6 +4,7 @@ import hashlib
 import json
 import subprocess
 import sys
+import uuid
 import zipfile
 from pathlib import Path
 
@@ -36,6 +37,15 @@ def test_release_sbom_is_deterministic_and_binds_wheel(tmp_path: Path):
     document = json.loads(first.read_text(encoding="utf-8"))
     component = document["metadata"]["component"]
     expected = hashlib.sha256(wheel.read_bytes()).hexdigest()
+    expected_serial = "urn:uuid:" + str(
+        uuid.uuid5(
+            uuid.NAMESPACE_URL,
+            f"pkg:pypi/frontier-mission-assurance@9.9.9#sha256:{expected}",
+        )
+    )
+    assert document["bomFormat"] == "CycloneDX"
+    assert document["specVersion"] == "1.6"
+    assert document["serialNumber"] == expected_serial
     assert component["hashes"] == [{"alg": "SHA-256", "content": expected}]
     assert component["version"] == "9.9.9"
     assert document["components"][0]["name"] == "PyYAML"

@@ -8,6 +8,7 @@
 - Added external execution chronology checks for `submitted_at <= started_at <= completed_at <= collected_at` and bound required calibration validity to the declared execution interval.
 - Preserved Research Receipt 3.0 compatibility while making the strengthened 3.1 semantics explicit rather than silently redefining the existing contract.
 - Hardened generated Mission Assurance Reports against decision laundering by carrying the PASS non-claims in the portable artifact, labeling evidence coverage as declared/unverified, surfacing validation-warning counts, and distinguishing undeclared assumptions from proof that no assumptions exist.
+- Added a deterministic CycloneDX release SBOM plus GitHub build-provenance and SBOM attestations, including clean-user attestation verification before release closeout.
 - Updated CLI summaries and public documentation so declared acceptance, scientific truth, and authenticated authorship remain visibly distinct.
 - Updated current maturity, source validation, release receipt, package metadata, and citation metadata to the v0.6 line.
 
