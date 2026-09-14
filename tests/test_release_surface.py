@@ -63,6 +63,17 @@ def test_github_actions_are_immutably_pinned():
     assert not floating, "\n".join(floating)
 
 
+def test_stable_release_requires_explicit_main_dispatch():
+    workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(
+        encoding="utf-8"
+    )
+    assert "  workflow_dispatch:" in workflow
+    assert "workflow_run:" not in workflow
+    assert "if: github.ref == 'refs/heads/main'" in workflow
+    assert "permissions:\n  contents: read" in workflow
+    assert "      contents: write" in workflow
+
+
 def test_release_identity_is_consistent():
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     assert re.fullmatch(r"\d+\.\d+\.\d+", version)
