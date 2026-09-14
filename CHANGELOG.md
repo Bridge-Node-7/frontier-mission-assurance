@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.0 — resilience and trust semantics
+
+- Made the authoritative public release-boundary scan operate on every Git-tracked file regardless of directory name, closing force-tracked build/cache disclosure bypasses while allowing untracked ephemeral caches to remain outside release scope.
+- Added Research Receipt 3.1 with explicit per-output `EXACT`, `SEMANTICALLY_CHECKED`, and `RECORD_ONLY` assurance semantics while preserving an observed SHA-256 for every output.
+- Required semantic outputs to name the exact same-output checks that define their bounded equivalence claim; record-only outputs make no equivalence claim.
+- Added external execution chronology checks for `submitted_at <= started_at <= completed_at <= collected_at` and bound required calibration validity to the declared execution interval.
+- Preserved Research Receipt 3.0 compatibility while making the strengthened 3.1 semantics explicit rather than silently redefining the existing contract.
+- Updated CLI summaries and public documentation so declared acceptance, scientific truth, and authenticated authorship remain visibly distinct.
+- Updated current maturity, source validation, release receipt, package metadata, and citation metadata to the v0.6 line.
+
 ## 0.5.0 — research receipt v3
 
 - Added Research Receipt v3 with explicit `EXACT_SHA256`, `NUMERIC_CHECKS`, and `HYBRID` output-acceptance modes while keeping declared code and inputs SHA-256 exact.
