@@ -17,6 +17,10 @@ def _scan(path: Path):
     )
 
 
+def _git_init(path: Path) -> None:
+    subprocess.run(["git", "init", "-q", str(path)], check=True)
+
+
 def test_public_boundary_scanner_rejects_unapproved_external_url(tmp_path):
     (tmp_path / "README.md").write_text("https://" + "example.invalid/private", encoding="utf-8")
     result = _scan(tmp_path)
@@ -29,3 +33,30 @@ def test_public_boundary_scanner_rejects_risky_binary_extension(tmp_path):
     result = _scan(tmp_path)
     assert result.returncode == 2
     assert "forbidden sensitive-looking file" in result.stdout
+
+
+def test_public_boundary_scans_force_tracked_file_inside_ephemeral_directory(tmp_path):
+    _git_init(tmp_path)
+    hidden = tmp_path / "build" / "private-note.txt"
+    hidden.parent.mkdir()
+    hidden.write_text("token=synthetic_secret_value_for_boundary_test", encoding="utf-8")
+    subprocess.run(["git", "-C", str(tmp_path), "add", "-f", "build/private-note.txt"], check=True)
+
+    result = _scan(tmp_path)
+    assert result.returncode == 2
+    assert "generic-secret-assignment" in result.stdout
+    assert "build/private-note.txt" in result.stdout
+
+
+def test_public_boundary_ignores_untracked_ephemeral_cache_in_git_worktree(tmp_path):
+    _git_init(tmp_path)
+    readme = tmp_path / "README.md"
+    readme.write_text("public fixture\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(tmp_path), "add", "README.md"], check=True)
+    cache = tmp_path / ".pytest_cache" / "private-note.txt"
+    cache.parent.mkdir()
+    cache.write_text("token=synthetic_secret_value_for_boundary_test", encoding="utf-8")
+
+    result = _scan(tmp_path)
+    assert result.returncode == 0
+    assert "PUBLIC BOUNDARY PASS" in result.stdout
