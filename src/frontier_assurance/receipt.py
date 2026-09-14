@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from .io import load_structured
-from .receipt_v3 import V3, V3_VERSIONS, execution_mode, validate_v3_shape, verify_v3_provenance
+from .receipt_v3 import V3_VERSIONS, execution_mode, validate_v3_shape, verify_v3_provenance
 
 SUPPORTED_RECEIPT_VERSIONS = {"1.0", "2.0", *V3_VERSIONS}
 FRESH_REPRODUCTION_VERSIONS = {"2.0", *V3_VERSIONS}
