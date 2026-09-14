@@ -1,110 +1,101 @@
-# Source Validation Report — v0.4.1
+# Source Validation Report — v0.6.0
 
-**Date:** 2026-09-12  
+**Date:** 2026-09-13  
 **Role:** bounded public reference for evidence-native verification, validation, reproducibility, traceability, and mission assurance
 
-This report records deterministic validation properties of the source candidate. Commit-specific hosted CI evidence is maintained by GitHub Actions and tagged release metadata rather than embedded here. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
+This report records deterministic validation properties of the source candidate. Commit-specific hosted CI evidence belongs in GitHub Actions and tagged release metadata rather than being copied into source. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
 
 ## Functional V&V
 
 - Python compilation: **PASS required**
 - Automated tests: **PASS required**
-- Assurance-graph validation: **PASS required**
-- Runtime/schema contract alignment regressions: **PASS required**
-- Core schema `$id` identifiers: **stable and unique required**
-- Open-assumption visibility: **PASS required**
-- Direct evidence-coverage analysis: **PASS required**
-- Dependency-impact traversal: **PASS required**
-- Warning-level detection of `depends_on` self-loops and cycles: **PASS required**
-- Research-receipt code/input/output SHA-256 verification: **PASS required**
-- Research-receipt numerical acceptance: **PASS required**
-- Version-2 fresh reproduction from a workspace that does not contain pre-existing declared outputs: **PASS required**
-- Version-2 entrypoint code binding before execution: **PASS required**
-- Stale-output/no-output regression: **must fail closed**
-- Legacy version-1 receipt non-executing verification compatibility: **PASS required**
-- Legacy version-1 fresh reproduction: **must fail closed**
-- Empty version-2 code/input/output/check sections: **must fail closed**
+- Assurance-graph validation and rejection branches: **PASS required**
+- Stable, unique core schema identifiers: **PASS required**
+- Open-assumption visibility without automated priority scoring: **PASS required**
+- Evidence coverage and dependency-impact traversal: **PASS required**
+- Warning-level dependency self-loop/cycle detection: **PASS required**
+- Version-2 exact fresh reproduction with code/input binding and stale-output rejection: **PASS required**
+- Research Receipt v3.0 backward compatibility: **PASS required**
+- Research Receipt v3.1 exact / semantic / record-only output assurance: **PASS required**
+- Every v3.1 output: **observed SHA-256 required**
+- `SEMANTICALLY_CHECKED` outputs: **explicit same-output check identifiers required**
+- `RECORD_ONLY` outputs: **no equivalence claim permitted**
+- External v3.1 chronology `submitted <= started <= completed <= collected`: **PASS required**
+- Required calibration state covers declared execution interval: **PASS required**
+- External job identity, manifests, terminal state, and collected output hashes: **PASS required**
+- External scheduler execution itself: **not claimed**
 - Malformed YAML, directory paths, and controlled input errors: **exit 2 without traceback required**
 - Decision-basis receipt verification: **PASS required**
-- Decision and graph rejection branches: **adversarial regression coverage required**
-- Mission Decision Packet documentation and worked synthetic example: **present required**
-- Bounded public-reference evaluation: **PASS required**
-- Markdown assurance-report generation: **PASS required**
-- `SOURCE_DATE_EPOCH` deterministic report generation: **PASS required**
-- Scientific Discovery Assurance schema + synthetic cross-record validation: **PASS required**
-- Local-time priority guard: **PASS required**
-- Research-boundary declaration-only guard: **PASS required**
-- Formal-proof / specification-equivalence separation: **PASS required**
-- Replication-state guard: **PASS required**
-- CLI version contract: **0.4.1 required**
+- Mission Decision Packet synthetic example: **present required**
+- Deterministic Markdown report under `SOURCE_DATE_EPOCH`: **PASS required**
+- Scientific Discovery Assurance linked synthetic profile: **PASS required**
+- Formal proof / specification-equivalence separation: **PASS required**
+- Replication and priority guards: **PASS required**
 - Runtime no-network-client import regression: **PASS required**
-- Public-safe environment-fingerprint regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
 - Local Markdown-link integrity: **PASS required**
-- GitHub Actions immutable-SHA check: **PASS required**
+- GitHub Actions immutable-SHA pins: **PASS required**
 - Pull-request dependency vulnerability review: **PASS required on pull requests**
 - Protected-main CodeQL analysis: **PASS required on main pushes**
-- Checkout credential persistence disabled: **required**
-- Hosted-job timeout / artifact-retention controls declared: **required**
+
+## Public-boundary V&V
+
+The authoritative release boundary is the Git-tracked file set. Directory names such as `build/`, `dist/`, `.pytest_cache/`, or `__pycache__/` do not exempt a force-tracked file from inspection.
+
+Required behavior:
+
+- every Git-tracked candidate file is scanned regardless of directory name;
+- untracked ephemeral caches do not become release content and may be ignored by the release-boundary control;
+- prohibited credential/private-key/local-path/private-IP patterns fail closed;
+- unapproved external URLs fail closed;
+- high-risk binary/archive/document extensions fail closed unless the public contract intentionally changes;
+- non-text tracked files outside the prohibited set require visible manual review;
+- public examples remain synthetic;
+- proper nouns, sensitive technical values, and relationship context still require human public-surface review.
+
+A current-tree boundary PASS does not prove that historical Git objects never contained sensitive material.
+
+## Research Receipt v3.1 assurance contract
+
+Version 3.1 preserves an observed hash for every output and separates three output meanings:
+
+- `EXACT`: observed hash must equal the declared reference hash;
+- `SEMANTICALLY_CHECKED`: bounded equivalence is defined only by the explicitly referenced numerical checks for that output;
+- `RECORD_ONLY`: output identity is recorded without an equivalence claim.
+
+Aggregate output-acceptance modes remain `EXACT_SHA256`, `NUMERIC_CHECKS`, and `HYBRID`, but v3.1 requires per-output scope so a small passing numerical subset cannot silently imply total output equivalence.
+
+For external evidence, v3.1 requires submission and collection job identity plus `submitted_at`, `started_at`, `completed_at`, and `collected_at` chronology. When calibration is required, its declared validity window must cover the execution interval. These records remain assertions unless a separate trust mechanism authenticates their issuer.
 
 ## Reproduction integrity contract
 
-`fma receipt` is non-executing. For the current version-2 receipt contract it verifies declared code, input, and output artifacts plus numerical acceptance checks and reports the number of controls that actually passed.
+`fma receipt` is non-executing. `fma reproduce` is an explicit trusted-code operation for local code-bound receipts. It verifies declared code and inputs, stages only declared source artifacts into a fresh temporary workspace, leaves declared outputs absent, executes with `shell=False`, and verifies the newly created outputs according to the declared versioned assurance semantics.
 
-`fma reproduce` accepts only version-2 receipts. It verifies declared code and inputs before execution, requires the declared command to reference the declared entrypoint, stages only the receipt, declared code, and declared inputs into a fresh temporary workspace, executes the trusted command with `shell=False`, and then verifies that declared outputs now exist with the expected hashes and numerical values. Pre-existing outputs from the source working directory are not staged into the reproduction workspace.
+The workspace is an integrity boundary, **not a sandbox or hermetic environment**. Trusted code still executes with host permissions and ambient capabilities.
 
-This strengthens causal reproduction evidence but does not provide a sandbox or hermetic environment. Trusted reproduction code still executes with the permissions and ambient capabilities of the invoking host.
-
-## Interoperability contract
-
-The assurance graph, Research Receipt v2, and Decision Receipt v1 schemas must each expose a stable `$id`. Richer domain records may map into these contracts without surrendering local semantics. Adapter logic must preserve source provenance and fail visibly rather than inventing missing meaning.
-
-The standards-positioning document must preserve the non-claim boundary: FMA uses established assurance, provenance, hashing, reproducibility, and regression-testing ideas and differentiates through bounded composition and operational discipline rather than claiming novelty for those primitives.
-
-## Dependency V&V
+## Dependency / packaging V&V
 
 - Development test runner: **pytest 9.1.1 required**
 - Project optional dev range: **pytest >=9.1.1,<10 required**
 - Supported Python and cross-platform verification: **PASS required**
-
-## Packaging V&V
-
-- Wheel and source-distribution build: **PASS required**
-- Build backend/tooling pins: **setuptools 84.0.0, wheel 0.48.0, build 1.6.1 required**
-- Package build runs without isolated dependency re-resolution in hosted package smoke: **required**
-- PEP 639 license metadata: **`LicenseRef-Proprietary` required**
-- License file included in wheel metadata: **required**
-- Public package-index upload guard: **`Private :: Do Not Upload` required**
+- Wheel and source build: **PASS required**
+- Build tooling: **setuptools 84.0.0, wheel 0.48.0, build 1.6.1 required**
+- PEP 639 license metadata and license file: **required**
+- Public package-index upload guard: **required**
 - Clean wheel install and CLI smoke: **PASS required**
 
-## Public-boundary V&V
+## Expected core synthetic behavior
 
-- Automated public-boundary scanner: **PASS required**
-- Unapproved external URLs: **must fail scanner**
-- High-risk binary/log artifact types: **must fail scanner**
-- Worked examples: **synthetic only**
-- Scientific Discovery Assurance worked example: **explicitly synthetic and intentionally unresolved**
-- No personal email addresses, credentials, private keys, local home paths, private URLs, real program identities, or nonpublic evidence in the public candidate
-- Security-reporting policy, threat model, interoperability contract, standards positioning, acceptance criteria, release acceptance, and scientific-discovery limitations present
-- Public-facing artifacts and regression names use product-facing boundary and acceptance terminology
-- Contribution/IP boundary explicit
-
-## Expected core synthetic example behavior
-
-The core fixture intentionally contains three critical mission/claim nodes, two with direct evidence support:
-
-- critical nodes: **3**
+- critical mission/claim/requirement nodes: **3**
 - directly covered: **2**
 - direct coverage ratio: **66.7%**
 - visible critical evidence gap: `CLAIM-CYCLE-TARGET`
 - unresolved assumptions: **3**, listed without automated priority scoring
 - decision disposition: **HOLD** until the declared evidence gap is resolved or the dependency basis changes
 
-The version-2 research receipt additionally binds its analysis entrypoint, input data, output result, and numerical expectation. A reproduction PASS requires fresh output generation in the isolated declared-artifact workspace.
+## Scientific Discovery Assurance
 
-## Expected Scientific Discovery Assurance behavior
-
-The synthetic discovery fixture intentionally preserves unresolved assurance state:
+The synthetic discovery case intentionally remains bounded:
 
 - proof checker: **PASS**
 - specification equivalence: **PARTIAL**
@@ -113,14 +104,12 @@ The synthetic discovery fixture intentionally preserves unresolved assurance sta
 - research-boundary independent verification: **NOT_ASSESSED**
 - Discovery Passport disposition: **REVIEW_REQUIRED**
 
-The profile validator must pass because the records are structurally and semantically consistent with those bounded states. It must not elevate them into scientific truth, trusted priority, proven boundary enforcement, complete specification equivalence, or completed replication.
-
-These are fixture behaviors, not claims about any external program or discovery.
+The validator must preserve those unresolved states rather than elevate them into scientific truth, trusted priority, proven boundary enforcement, complete specification equivalence, or completed replication.
 
 ## Hosted acceptance
 
-The exact pushed commit must independently pass the declared hosted Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, public-boundary validation, version-2 fresh reproduction, adversarial rejection regressions, deterministic report behavior, Scientific Discovery Assurance validation, core-schema identifier regression, dependency review where applicable, protected-main CodeQL, and fresh wheel installation. The Actions run attached to that commit is the authoritative hosted evidence.
+The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-boundary validation, adversarial receipt regressions, Scientific Discovery Assurance validation, protected-main CodeQL, dependency review where applicable, and clean wheel installation. The Actions run attached to that exact commit is authoritative hosted evidence.
 
 ## Disposition rule
 
-**SOURCE PASS** means this candidate satisfies the deterministic source-level contract. It is not equivalent to scientific truth, mission readiness, legal priority, or publication/deployment authorization. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
+**SOURCE PASS** means the candidate satisfies this deterministic source contract. It is not scientific truth, authenticated authorship, mission readiness, legal priority, certification, or deployment authorization. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
