@@ -37,7 +37,7 @@ def test_cli_subcommand_help_describes_positionals():
 
     completed = _run("reproduce", "--help")
     assert completed.returncode == 0
-    assert "Path to a version 2.0 research receipt" in completed.stdout
+    assert "Path to a local code-bound research receipt" in completed.stdout
     assert "Maximum command runtime" in completed.stdout
 
 
