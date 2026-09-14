@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-import os
 from datetime import UTC, datetime
+import os
 from typing import Any
 
 from .analysis import evidence_coverage, open_assumptions
 from .validate import validate_graph
-
 
 NON_CLAIMS = (
     "A PASS proves only the declared mechanics. It does not establish scientific truth, "
@@ -42,9 +41,11 @@ def render_markdown_report(graph: dict[str, Any]) -> str:
         "",
         NON_CLAIMS,
         "",
-        "Evidence coverage below is **declared and unverified by this report**. It measures "
-        "whether graph nodes have declared evidence links; it does not establish that the "
-        "underlying evidence exists, is authentic, is independent, or proves the claim.",
+        (
+            "Evidence coverage below is **declared and unverified by this report**. It measures "
+            "whether graph nodes have declared evidence links; it does not establish that the "
+            "underlying evidence exists, is authentic, is independent, or proves the claim."
+        ),
         "",
         "## Declared evidence coverage (unverified)",
         "",
