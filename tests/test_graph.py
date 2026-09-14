@@ -192,7 +192,7 @@ def test_report_does_not_turn_undeclared_assumptions_into_no_assumptions_claim()
     graph = _graph()
     for node in graph["nodes"]:
         if node.get("kind") == "assumption":
-            node["status"] = "complete"
+            node["status"] = "verified"
     report = render_markdown_report(graph)
     assert "No unresolved assumptions are **declared** in this graph" in report
     assert "does not establish that no real-world assumptions exist" in report
