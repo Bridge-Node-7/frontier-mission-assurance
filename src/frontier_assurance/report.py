@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
 import os
+from datetime import UTC, datetime
 from typing import Any
 
 from .analysis import evidence_coverage, open_assumptions
