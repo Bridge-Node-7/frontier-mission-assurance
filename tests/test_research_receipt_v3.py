@@ -144,8 +144,9 @@ def test_v31_record_only_output_does_not_claim_semantic_equivalence(tmp_path: Pa
     )
     code = (tmp_path / "analysis.py").read_text(encoding="utf-8")
     code += "Path('outputs/trace.txt').write_text('trace\\n', encoding='utf-8')\n"
-    (tmp_path / "analysis.py").write_text(code, encoding="utf-8")
-    document["code"][0]["sha256"] = _sha256(code.encode())
+    code_bytes = code.encode("utf-8")
+    (tmp_path / "analysis.py").write_bytes(code_bytes)
+    document["code"][0]["sha256"] = _sha256(code_bytes)
     receipt.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
     result = reproduce_receipt(receipt, timeout=30)
     assert result.ok, result.errors
