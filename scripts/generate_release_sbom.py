@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
+import uuid
 import zipfile
 from email.parser import Parser
 from pathlib import Path
@@ -47,6 +48,10 @@ def main() -> int:
     output = Path(sys.argv[2])
     name, version, requirements = wheel_metadata(wheel)
     root_ref = f"pkg:pypi/{name}@{version}"
+    wheel_sha256 = sha256_file(wheel)
+    serial_number = "urn:uuid:" + str(
+        uuid.uuid5(uuid.NAMESPACE_URL, f"{root_ref}#sha256:{wheel_sha256}")
+    )
     components = []
     dependency_refs = []
     for requirement in sorted(requirements):
@@ -69,6 +74,7 @@ def main() -> int:
     document = {
         "bomFormat": "CycloneDX",
         "specVersion": "1.6",
+        "serialNumber": serial_number,
         "version": 1,
         "metadata": {
             "component": {
@@ -78,7 +84,7 @@ def main() -> int:
                 "bom-ref": root_ref,
                 "purl": root_ref,
                 "hashes": [
-                    {"alg": "SHA-256", "content": sha256_file(wheel)}
+                    {"alg": "SHA-256", "content": wheel_sha256}
                 ],
                 "properties": [
                     {
