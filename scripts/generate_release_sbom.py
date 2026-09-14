@@ -32,11 +32,11 @@ def wheel_metadata(path: Path) -> tuple[str, str, list[str]]:
 
 
 def requirement_name(requirement: str) -> str:
-    token = requirement.split(";", 1)[0].strip()
+    requirement_token = requirement.split(";", 1)[0].strip()
     for separator in (" ", "(", "<", ">", "=", "!", "~", "["):
-        if separator in token:
-            token = token.split(separator, 1)[0]
-    return token.strip()
+        if separator in requirement_token:
+            requirement_token = requirement_token.split(separator, 1)[0]
+    return requirement_token.strip()
 
 
 def main() -> int:
