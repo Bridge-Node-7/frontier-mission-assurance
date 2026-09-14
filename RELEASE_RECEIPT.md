@@ -1,38 +1,42 @@
-# Source Release Receipt — v0.4.1
+# Source Release Receipt — v0.6.0
 
-**Release type:** stable public reference  
-**Date:** 2026-09-12
+**Release type:** stable public reference candidate  
+**Date:** 2026-09-13
 
 ## Purpose
 
-Harden FMA's portability boundary so the three core contracts are consistently identifiable, richer domain systems can map into FMA without losing local semantics, and public positioning is explicit about established assurance/provenance prior art and unsigned-receipt limits.
+Strengthen FMA's trust semantics and public-release boundary without expanding it into a universal assurance platform. Version 0.6.0 adds Git-tracked release-surface scanning, Research Receipt 3.1 chronology, explicit per-output assurance scope, and clearer non-claims around unsigned external provenance.
 
-## Material changes in v0.4.1
+## Material changes in v0.6.0
 
-- Added stable `$id` identifiers to the core Research Receipt v2 and Decision Receipt v1 schemas, completing stable identifiers across all three core portable contracts.
-- Clarified interoperability as an adapter problem rather than a mandate for one universal evidence or decision ontology.
-- Added explicit adapter rules: preserve source provenance, retain richer domain semantics in the owning system, and fail visibly on ambiguity or information loss.
-- Added public standards positioning that does not claim novelty for established assurance-case, provenance, hashing, reproducibility, or regression-testing primitives.
-- Clarified that unsigned core receipts establish declared integrity/consistency, not authorship or signer identity.
-- Preserved the v0.4.0 fresh code-bound reproduction contract, Scientific Discovery Assurance, Mission Decision Packets, cross-platform verification, immutable Action pins, dependency review, CodeQL, All Rights Reserved licensing, synthetic-only fixtures, local-only runtime, and human consequential decision authority.
+- The authoritative public-boundary scan now evaluates every Git-tracked release file regardless of directory name; force-tracked content under build/cache paths cannot bypass the release boundary.
+- Research Receipt 3.1 explicitly distinguishes `EXACT`, `SEMANTICALLY_CHECKED`, and `RECORD_ONLY` outputs while preserving an observed SHA-256 for every output.
+- Semantic output acceptance must name the checks that define bounded equivalence for that output; record-only outputs carry no equivalence claim.
+- External receipt evidence now binds `submitted_at`, `started_at`, `completed_at`, and `collected_at` chronology.
+- Required calibration state must cover the declared external execution interval.
+- Research Receipt 3.0 remains supported as a legacy compatibility contract; 3.1 receives the strengthened semantics.
+- Public documentation now states the current v0.6 maturity line and surfaces the evaluation/reference-use licensing boundary near onboarding.
+- Existing graph, decision, Scientific Discovery Assurance, fresh-workspace reproduction, cross-platform, immutable-Action, dependency-review, CodeQL, local-runtime, synthetic-fixture, and human-authority controls remain in scope.
 
 ## Source-level evidence
 
-The candidate must pass the checks documented in `VALIDATION_REPORT.md`, including the full Python/cross-platform suite, core/profile tests, schema/runtime alignment, stable core schema identifiers, public-boundary validation, fresh code-bound reproduction integrity, rejection-path regressions, deterministic report behavior, packaging, dependency review, CodeQL, and release-surface validation.
+The candidate must satisfy `VALIDATION_REPORT.md`, including Python/cross-platform verification, schema/runtime alignment, public-boundary adversarial tests, exact/semantic/record-only output tests, external chronology and calibration-interval mutation tests, fresh reproduction integrity, deterministic reporting, packaging, dependency review, CodeQL, and release-surface validation.
 
 ## Hosted evidence rule
 
-Commit-specific hosted evidence belongs in GitHub Actions and tagged release metadata, not in this source-controlled receipt. This avoids recursive receipts in which recording a commit SHA requires creating a new commit with a different SHA.
+Commit-specific hosted evidence belongs in GitHub Actions and tagged release metadata, not in this source-controlled receipt. This avoids recursive receipts in which recording a commit SHA creates a different commit SHA.
 
 ## Tagged-release evidence rule
 
-The public release record binds the accepted tag to the exact commit, successful hosted Actions run, source archive, wheel, tracked-source SHA-256 manifest, and release-artifact SHA-256 manifest.
+The public release record must bind the accepted tag to the exact commit, successful hosted Actions run, source archive, wheel, tracked-source SHA-256 manifest, and release-artifact SHA-256 manifest. Additional provenance or SBOM artifacts may strengthen supply-chain assurance, but absence of an external signature must never be presented as authenticated authorship.
 
 ## Non-claims
 
-FMA does not claim invention of assurance cases, provenance records, content hashing, reproducible workflows, numerical regression checks, or cryptographic attestation. Core FMA receipts are unsigned and therefore do not independently establish authorship or signer identity. A version-2 reproduction workspace remains an integrity control, not a sandbox or hermetic environment.
+FMA does not claim invention of assurance cases, provenance records, content hashing, reproducible workflows, numerical regression checks, or cryptographic attestation. Core FMA receipts are unsigned unless wrapped by a separate authenticated mechanism and therefore do not independently establish authorship or signer identity.
 
-This receipt does not claim scientific truth, mission readiness, legal priority, research-boundary enforcement, independent scientific acceptance, authorization for consequential action, or the permanent absence of future dependency vulnerabilities.
+An observed output hash establishes artifact identity. A semantic check establishes only the declared bounded criterion. Neither establishes scientific truth. The fresh reproduction workspace is an integrity control, not a sandbox or hermetic environment. External scheduler records are declarations unless a separate trust mechanism authenticates their issuer.
+
+This receipt does not claim mission readiness, legal priority, research-boundary enforcement, independent scientific acceptance, authorization for consequential action, certification, compliance, or permanent absence of future vulnerabilities.
 
 ## Release gate
 
