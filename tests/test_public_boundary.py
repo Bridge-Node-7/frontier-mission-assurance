@@ -52,7 +52,7 @@ def test_public_boundary_scans_force_tracked_file_inside_ephemeral_directory(tmp
     result = _scan(tmp_path)
     assert result.returncode == 2
     assert "generic-secret-assignment" in result.stdout
-    assert "build/private-note.txt" in result.stdout
+    assert "build/private-note.txt" in result.stdout.replace("\\", "/")
 
 
 def test_public_boundary_ignores_untracked_ephemeral_cache_in_git_worktree(tmp_path):
