@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bridge-node-7.github.io/frontier-mission-assurance/research-receipt-v3.schema.json",
-  "title": "Executable Research Receipt v3",
+  "title": "Executable Research Receipt v3.x",
   "type": "object",
   "additionalProperties": false,
   "required": ["receipt_version", "experiment", "execution", "output_acceptance", "calibration", "code", "inputs", "outputs", "checks"],
   "properties": {
-    "receipt_version": {"const": "3.0"},
+    "receipt_version": {"enum": ["3.0", "3.1"]},
     "experiment": {
       "type": "object",
       "additionalProperties": true,
@@ -61,6 +61,8 @@
               "required": ["job_ref", "collected_at", "terminal_state", "timeout_seconds", "cancellation_semantics", "outputs"],
               "properties": {
                 "job_ref": {"type": "string", "minLength": 1},
+                "started_at": {"type": "string", "format": "date-time"},
+                "completed_at": {"type": "string", "format": "date-time"},
                 "collected_at": {"type": "string", "format": "date-time"},
                 "terminal_state": {"enum": ["SUCCEEDED", "FAILED", "CANCELLED", "TIMED_OUT"]},
                 "timeout_seconds": {"type": "integer", "minimum": 1},
@@ -129,6 +131,7 @@
         "additionalProperties": false,
         "required": ["name", "path", "json_path", "expected"],
         "properties": {
+          "id": {"type": "string", "minLength": 1},
           "name": {"type": "string", "minLength": 1},
           "path": {"type": "string", "minLength": 1},
           "json_path": {"type": "string", "minLength": 1},
@@ -165,9 +168,46 @@
         "required": ["path"],
         "properties": {
           "path": {"type": "string", "minLength": 1},
-          "reference_sha256": {"$ref": "#/$defs/sha256"}
+          "reference_sha256": {"$ref": "#/$defs/sha256"},
+          "assurance": {"enum": ["EXACT", "SEMANTICALLY_CHECKED", "RECORD_ONLY"]},
+          "semantic_check_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          }
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"receipt_version": {"const": "3.1"}}},
+      "then": {
+        "properties": {
+          "checks": {
+            "minItems": 1,
+            "items": {
+              "required": ["id", "name", "path", "json_path", "expected"]
+            }
+          },
+          "outputs": {
+            "items": {
+              "required": ["path", "assurance"]
+            }
+          },
+          "execution": {
+            "if": {"properties": {"mode": {"const": "EXTERNAL"}}},
+            "then": {
+              "properties": {
+                "collection_receipt": {
+                  "required": ["job_ref", "started_at", "completed_at", "collected_at", "terminal_state", "timeout_seconds", "cancellation_semantics", "outputs"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }
