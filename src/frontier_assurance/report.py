@@ -5,6 +5,14 @@ from datetime import UTC, datetime
 from typing import Any
 
 from .analysis import evidence_coverage, open_assumptions
+from .validate import validate_graph
+
+NON_CLAIMS = (
+    "A PASS proves only the declared mechanics. It does not establish scientific truth, "
+    "authenticated authorship, regulatory compliance, supplier qualification, mission "
+    "readiness, legal priority, research-boundary enforcement, or authorization for "
+    "consequential decisions."
+)
 
 
 def _generation_time() -> datetime:
@@ -23,20 +31,37 @@ def _generation_time() -> datetime:
 def render_markdown_report(graph: dict[str, Any]) -> str:
     coverage = evidence_coverage(graph)
     assumptions = open_assumptions(graph)
+    validation = validate_graph(graph)
     lines = [
         "# Mission Assurance Report",
         "",
         f"Generated: {_generation_time().isoformat()}",
         "",
-        "## Evidence coverage",
+        "## Assurance boundary",
+        "",
+        NON_CLAIMS,
+        "",
+        (
+            "Evidence coverage below is **declared and unverified by this report**. It measures "
+            "whether graph nodes have declared evidence links; it does not establish that the "
+            "underlying evidence exists, is authentic, is independent, or proves the claim."
+        ),
+        "",
+        "## Declared evidence coverage (unverified)",
         "",
         f"- Critical nodes: **{coverage['critical_count']}**",
-        f"- Directly covered: **{coverage['covered_count']}**",
-        f"- Coverage ratio: **{coverage['coverage_ratio']:.1%}**",
+        f"- Directly covered by declared evidence links: **{coverage['covered_count']}**",
+        f"- Declared evidence coverage ratio (unverified): **{coverage['coverage_ratio']:.1%}**",
+        f"- Graph validation warnings: **{len(validation.warnings)}**",
         "",
     ]
+    if validation.warnings:
+        lines += ["### Validation warnings", ""]
+        lines += [f"- {warning}" for warning in validation.warnings]
+        lines.append("")
+
     if coverage["uncovered"]:
-        lines += ["### Critical nodes without direct evidence", ""]
+        lines += ["### Critical nodes without direct declared evidence", ""]
         lines += [f"- `{node_id}`" for node_id in coverage["uncovered"]]
         lines.append("")
 
@@ -46,7 +71,10 @@ def render_markdown_report(graph: dict[str, Any]) -> str:
         for node in assumptions:
             lines.append(f"| `{node['id']}` | {node['status']} | {node['title']} |")
     else:
-        lines.append("No unresolved assumptions are declared in this graph.")
+        lines.append(
+            "No unresolved assumptions are **declared** in this graph. This does not establish "
+            "that no real-world assumptions exist."
+        )
 
     lines += [
         "",
@@ -58,6 +86,8 @@ def render_markdown_report(graph: dict[str, Any]) -> str:
             "allocation, and final decisions remain human-owned or belong to private program "
             "policy."
         ),
+        "",
+        NON_CLAIMS,
         "",
     ]
     return "\n".join(lines)

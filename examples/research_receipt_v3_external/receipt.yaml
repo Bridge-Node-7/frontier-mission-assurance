@@ -1,4 +1,4 @@
-receipt_version: "3.0"
+receipt_version: "3.1"
 experiment:
   id: EXTERNAL-SYNTHETIC-001
   command: "python analysis.py"
@@ -20,6 +20,8 @@ execution:
       container_digest: "sha256:synthetic-container-reference"
   collection_receipt:
     job_ref: SYN-JOB-001
+    started_at: "2026-09-13T00:01:00Z"
+    completed_at: "2026-09-13T00:04:00Z"
     collected_at: "2026-09-13T00:05:00Z"
     terminal_state: SUCCEEDED
     timeout_seconds: 3600
@@ -31,7 +33,7 @@ output_acceptance:
   mode: NUMERIC_CHECKS
 calibration:
   policy: REQUIRED
-  as_of: "2026-09-13T00:00:00Z"
+  as_of: "2026-09-13T00:02:00Z"
   instruments:
     - instrument_id: INST-SYN-001
       state_id: STATE-SYN-001
@@ -48,8 +50,12 @@ inputs:
     sha256: 5039d2f9c0183f5093217361486b04efa6d3c631eab8af3c58d7fba98fc71d8e
 outputs:
   - path: outputs/result.json
+    assurance: SEMANTICALLY_CHECKED
+    semantic_check_ids:
+      - CHK-VALUE
 checks:
-  - name: value
+  - id: CHK-VALUE
+    name: value
     path: outputs/result.json
     json_path: value
     expected: 1.0

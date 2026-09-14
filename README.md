@@ -12,6 +12,8 @@ in ordinary version-controlled files. It is designed for small, interdisciplinar
 
 > **Public boundary:** this repository contains software, public documentation, and synthetic fixtures. It is not a repository for real mission evidence or sensitive program data. See [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md) and [`SECURITY.md`](SECURITY.md).
 
+> **Use boundary:** this is a public evaluation/reference implementation. Copyright © 2026 Bridge Node 7. All rights reserved; this release grants no reuse license. See [`LICENSE`](LICENSE).
+
 ## Start here
 
 For the shortest useful evaluation path, read in this order:
@@ -89,8 +91,10 @@ The synthetic fixture intentionally retains a visible critical evidence gap. A P
 - **Open-assumption visibility** — list unresolved assumptions without assigning an automated priority score.
 - **Evidence coverage** — identify critical mission/claim/requirement nodes without direct supporting evidence.
 - **Dependency impact** — show which declared nodes depend transitively on a changed dependency.
-- **Research receipts** — SHA-256-bind declared code, input, and output artifacts to numerical acceptance checks.
-- **Fresh code-bound reproduction** — version-2 receipts verify code and inputs, require direct execution of the declared entrypoint (or the declared entrypoint as the first Python script argument), run in a fresh temporary workspace where declared outputs are absent, then verify newly present outputs and numerical criteria.
+- **Research receipts** — SHA-256-bind declared code and inputs, record an observed hash for every output, and apply versioned exact or semantic acceptance without collapsing those meanings.
+- **Fresh code-bound reproduction** — version-2 and local version-3 receipts verify code and inputs, require direct execution of the declared entrypoint, run in a fresh temporary workspace where declared outputs are absent, then evaluate the declared output assurance.
+- **External execution evidence** — version-3.1 receipts can bind submission/collection identity, execution chronology, environment identity, output hashes, and calibration coverage without claiming that FMA itself launched the scheduler job.
+- **Tracked-file public-boundary scanning** — public release checks examine every Git-tracked file regardless of directory name; local untracked caches are not treated as release content.
 - **Decision receipts** — verify that a declared decision basis references nodes in a valid assurance graph.
 - **Mission Decision Packets** — connect a consequential human decision to evidence, assumptions, reproduction state, dependencies, and explicit reopen conditions.
 - **Scientific Discovery Assurance** — portable contracts for discovery provenance, priority evidence, research-boundary declarations, formal-proof/specification separation, replication, and attribution chronology.
@@ -112,7 +116,7 @@ That turns a one-time review into a change-sensitive decision record without aut
 
 ## Research receipt v2
 
-The current executable receipt binds the code entrypoint as well as input/output artifacts:
+Version 2 binds the code entrypoint as well as input/output artifacts and requires exact output hashes:
 
 ```yaml
 receipt_version: "2.0"
@@ -142,7 +146,28 @@ checks:
 
 `fma reproduce ...` is an explicit trusted-code operation. It verifies declared code and inputs first, requires the command to execute the declared entrypoint directly or as the first Python script argument, creates a fresh temporary workspace containing the receipt plus declared code and inputs, intentionally does **not** stage declared outputs, executes with `shell=False`, and then verifies the outputs and numerical criteria. Interpreter modes such as `python -c`, `python -m`, or stdin execution cannot satisfy entrypoint binding merely by mentioning the declared entrypoint later in the command. A successful command that produces no required output fails closed rather than reusing a stale result from the caller's working directory.
 
-The reproduction workspace is an integrity boundary, **not a sandbox or hermetic environment**. Trusted code still runs with the permissions and ambient capabilities of the host. Legacy version-1 receipts remain available for non-executing historical verification but do not receive the current fresh-reproduction PASS. See [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md) and [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md).
+The reproduction workspace is an integrity boundary, **not a sandbox or hermetic environment**. Trusted code still runs with the permissions and ambient capabilities of the host. Legacy version-1 receipts remain available for non-executing historical verification but do not receive the current fresh-reproduction PASS.
+
+## Research receipt v3.1
+
+Version 3.1 makes the output claim explicit instead of treating every successful check as the same kind of reproduction:
+
+- `EXACT` — an observed output hash must match the declared reference hash.
+- `SEMANTICALLY_CHECKED` — the newly produced output receives its own observed SHA-256, and explicitly named numerical checks define the bounded equivalence claim.
+- `RECORD_ONLY` — the fresh output is cryptographically recorded, but FMA makes no equivalence claim for it.
+
+For external execution evidence, version 3.1 also binds `submitted_at`, `started_at`, `completed_at`, and `collected_at` chronology. When calibration evidence is required, the declared calibration validity window must cover the execution interval. A syntactically valid scheduler/job record is still an assertion unless an external trust mechanism authenticates its issuer.
+
+Example output interpretation:
+
+```text
+Exact outputs:        declared exact comparisons only
+Semantic outputs:     declared check scope only
+Record-only outputs:  identity recorded, no equivalence claim
+Scientific truth:     NOT ESTABLISHED
+```
+
+See [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md) and [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md).
 
 ## Scientific Discovery Assurance
 
@@ -228,7 +253,7 @@ Recommended node statuses:
 
 ## What a PASS means
 
-A passing FMA validator means the checked artifact met this repository's declared machine-checkable rules. It does **not** establish scientific truth, certify a supplier or subsystem, approve acquisition, establish regulatory compliance, prove mission readiness, establish legal priority, or replace authorized human review.
+A passing FMA validator means the checked artifact met this repository's declared machine-checkable rules. It does **not** establish scientific truth, certify a supplier or subsystem, approve acquisition, establish regulatory compliance, prove mission readiness, authenticate an unsigned artifact's author, establish legal priority, or replace authorized human review.
 
 See [`DISCLAIMER.md`](DISCLAIMER.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), and [`SECURITY.md`](SECURITY.md).
 
@@ -240,7 +265,7 @@ python -m pip install --no-deps -e .
 make check
 ```
 
-Hosted CI additionally rehearses supported Python versions, multiple operating systems, fresh wheel installation, the public release boundary, adversarial rejection behavior, fresh reproduction integrity, and the Scientific Discovery Assurance synthetic profile.
+Hosted CI additionally rehearses supported Python versions, multiple operating systems, fresh wheel installation, the tracked-file public release boundary, adversarial rejection behavior, fresh reproduction integrity, and the Scientific Discovery Assurance synthetic profile.
 
 ## Design principles
 
@@ -259,7 +284,7 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/INTEROPERABILITY.md`]
 
 ## Current maturity
 
-The current source identity is defined by [`VERSION`](VERSION). The v0.4 line strengthens fresh reproduction integrity while preserving the deliberately small public scope, Mission Decision Packets, Scientific Discovery Assurance, cross-platform verification, and stable-release automation.
+The current source identity is defined by [`VERSION`](VERSION). The v0.6 line strengthens tracked-file public-boundary enforcement, explicit output-assurance scope, external execution chronology, and calibration-to-execution validity while preserving FMA's deliberately small public scope, Mission Decision Packets, Scientific Discovery Assurance, cross-platform verification, and stable-release automation.
 
 Current deterministic validation expectations and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 

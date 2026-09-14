@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "maturity": "public reference",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -15,9 +15,10 @@
     "show dependency impact through declared depends_on/requires relations",
     "verify declared code and input artifact hashes plus versioned output acceptance and numerical checks",
     "explicitly reproduce trusted version-2 receipts and local version-3 receipts in a fresh declared-artifact workspace with SHA-256-bound code, direct declared-entrypoint execution, and freshly generated outputs",
-    "verify version-3 stochastic or hybrid output acceptance without discarding observed output hashes",
-    "validate version-3 calibration/instrument-state provenance and declared validity windows",
+    "verify version-3.1 exact, semantic, record-only, and hybrid output assurance while preserving an observed SHA-256 for every output",
+    "validate version-3.1 external execution chronology and calibration coverage over the declared execution interval",
     "verify synthetic external-job submission and collection provenance without claiming to run a real scheduler in public CI",
+    "scan every Git-tracked release file regardless of directory name before public release eligibility",
     "verify that decision-receipt basis references exist in a valid graph",
     "validate portable scientific-discovery assurance contracts and their synthetic cross-record references",
     "keep formal proof-checker state separate from specification-equivalence state",
@@ -32,13 +33,13 @@
     "serve as a public storage location for real program evidence",
     "provide a sandbox or hermetic execution environment for reproduction",
     "launch external scheduler or cluster jobs",
+    "authenticate authorship of unsigned core receipts",
     "establish trusted scientific priority from a local clock value alone",
     "prove enforcement of a declared research-data boundary",
-    "treat proof-checker success as automatic specification validation",
-    "claim authorship or signer identity for unsigned core receipts"
+    "treat proof-checker success as automatic specification validation"
   ],
   "distribution": "GitHub source and release workflow; public package-index upload intentionally blocked by package metadata.",
   "evidence_lifecycle": "Source-controlled validation defines deterministic expectations; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata.",
   "interoperability": "Versioned core schemas use stable identifiers. Richer domain records may map into FMA contracts without collapsing local evidence, calibration, acceptance, or decision semantics.",
-  "maintenance": "Keep main as the protected long-lived branch, use immutable GitHub Action pins, dependency review, protected-main CodeQL, bounded dependency updates, and full V&V after material source changes."
+  "maintenance": "Keep main as the protected long-lived branch, use immutable GitHub Action pins, dependency review, protected-main CodeQL, bounded dependency updates, tracked-file public-boundary scanning, and full V&V after material source changes."
 }

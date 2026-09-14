@@ -4,7 +4,7 @@ message: "If this public reference implementation informs published work, cite t
 type: software
 authors:
   - name: "Bridge Node 7"
-version: "0.5.0"
+version: "0.6.0"
 date-released: 2026-09-13
 repository-code: "https://github.com/Bridge-Node-7/frontier-mission-assurance"
 url: "https://bridgenode7.com/"

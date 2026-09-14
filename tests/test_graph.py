@@ -169,3 +169,30 @@ def test_report_is_byte_reproducible_with_source_date_epoch(monkeypatch):
     second = render_markdown_report(_graph())
     assert first == second
     assert "Generated: 1970-01-01T00:00:00+00:00" in first
+
+
+def test_report_carries_nonclaims_and_labels_declared_coverage():
+    report = render_markdown_report(_graph())
+    assert "A PASS proves only the declared mechanics" in report
+    assert "Declared evidence coverage (unverified)" in report
+    assert "underlying evidence exists, is authentic, is independent, or proves the claim" in report
+    assert "Declared evidence coverage ratio (unverified)" in report
+
+
+def test_report_carries_validation_warning_count_and_warning_text():
+    graph = _graph()
+    evidence = next(node for node in graph["nodes"] if node["kind"] == "evidence")
+    evidence.pop("source", None)
+    report = render_markdown_report(graph)
+    assert "Graph validation warnings: **1**" in report
+    assert "evidence has no source/provenance field" in report
+
+
+def test_report_does_not_turn_undeclared_assumptions_into_no_assumptions_claim():
+    graph = _graph()
+    for node in graph["nodes"]:
+        if node.get("kind") == "assumption":
+            node["status"] = "verified"
+    report = render_markdown_report(graph)
+    assert "No unresolved assumptions are **declared** in this graph" in report
+    assert "does not establish that no real-world assumptions exist" in report

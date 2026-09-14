@@ -32,6 +32,7 @@ def _write_local_v3(
     acceptance: str = "NUMERIC_CHECKS",
     reference_sha256: str | None = None,
     calibration: dict | None = None,
+    version: str = "3.1",
 ) -> Path:
     code_bytes = (
         "from pathlib import Path\n"
@@ -39,7 +40,22 @@ def _write_local_v3(
         f"Path('outputs/result.json').write_bytes(b'{{\"value\": {value}}}\\n')\n"
     ).encode()
     input_bytes = b"declared v3 input\n"
-    output = {"path": "outputs/result.json"}
+    output: dict[str, object] = {"path": "outputs/result.json"}
+    check: dict[str, object] = {
+        "name": "value",
+        "path": "outputs/result.json",
+        "json_path": "value",
+        "expected": 1.0,
+        "atol": 0.001,
+        "rtol": 0.0,
+    }
+    if version == "3.1":
+        check["id"] = "CHK-VALUE"
+        if acceptance == "EXACT_SHA256":
+            output["assurance"] = "EXACT"
+        else:
+            output["assurance"] = "SEMANTICALLY_CHECKED"
+            output["semantic_check_ids"] = ["CHK-VALUE"]
     if reference_sha256 is not None:
         output["reference_sha256"] = reference_sha256
     if calibration is None:
@@ -54,7 +70,7 @@ def _write_local_v3(
     (tmp_path / "data" / "input.txt").write_bytes(input_bytes)
 
     receipt = {
-        "receipt_version": "3.0",
+        "receipt_version": version,
         "experiment": {
             "id": "LOCAL-V3",
             "command": "python analysis.py",
@@ -67,16 +83,7 @@ def _write_local_v3(
         "code": [{"path": "analysis.py", "sha256": _sha256(code_bytes)}],
         "inputs": [{"path": "data/input.txt", "sha256": _sha256(input_bytes)}],
         "outputs": [output],
-        "checks": [
-            {
-                "name": "value",
-                "path": "outputs/result.json",
-                "json_path": "value",
-                "expected": 1.0,
-                "atol": 0.001,
-                "rtol": 0.0,
-            }
-        ],
+        "checks": [check],
     }
     path = tmp_path / "receipt.yaml"
     path.write_text(yaml.safe_dump(receipt, sort_keys=False), encoding="utf-8")
@@ -88,9 +95,10 @@ def test_v3_schema_and_synthetic_external_example_are_valid():
     Draft202012Validator.check_schema(schema)
     document = load_structured(EXTERNAL_EXAMPLE)
     Draft202012Validator(schema).validate(document)
+    assert document["receipt_version"] == "3.1"
 
 
-def test_v3_numeric_acceptance_allows_nonidentical_output_and_preserves_observed_hash(
+def test_v31_numeric_acceptance_allows_nonidentical_output_and_preserves_observed_hash(
     tmp_path: Path,
 ):
     receipt = _write_local_v3(tmp_path)
@@ -98,13 +106,14 @@ def test_v3_numeric_acceptance_allows_nonidentical_output_and_preserves_observed
     assert result.ok, result.errors
     assert result.acceptance_mode == "NUMERIC_CHECKS"
     assert result.numerical_checks == 1
+    assert result.output_assurance_counts["semantic"] == 1
     observed = result.observed_output_hashes["outputs/result.json"]
     expected_observed = _sha256(b'{"value": 1.0004}\n')
     assert observed == expected_observed
     assert any("observed output sha256" in check for check in result.checks)
 
 
-def test_v3_exact_acceptance_rejects_reference_hash_mismatch(tmp_path: Path):
+def test_v31_exact_acceptance_rejects_reference_hash_mismatch(tmp_path: Path):
     receipt = _write_local_v3(
         tmp_path,
         acceptance="EXACT_SHA256",
@@ -115,6 +124,34 @@ def test_v3_exact_acceptance_rejects_reference_hash_mismatch(tmp_path: Path):
     result = verify_receipt(receipt)
     assert not result.ok
     assert any("reference sha256 mismatch" in error for error in result.errors)
+
+
+def test_v31_semantic_output_must_reference_declared_check_for_same_output(tmp_path: Path):
+    receipt = _write_local_v3(tmp_path)
+    document = load_structured(receipt)
+    document["outputs"][0]["semantic_check_ids"] = ["MISSING-CHECK"]
+    receipt.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+    result = verify_receipt(receipt)
+    assert not result.ok
+    assert any("references unknown check" in error for error in result.errors)
+
+
+def test_v31_record_only_output_does_not_claim_semantic_equivalence(tmp_path: Path):
+    receipt = _write_local_v3(tmp_path)
+    document = load_structured(receipt)
+    document["outputs"].append(
+        {"path": "outputs/trace.txt", "assurance": "RECORD_ONLY"}
+    )
+    code = (tmp_path / "analysis.py").read_text(encoding="utf-8")
+    code += "Path('outputs/trace.txt').write_text('trace\\n', encoding='utf-8')\n"
+    code_bytes = code.encode("utf-8")
+    (tmp_path / "analysis.py").write_bytes(code_bytes)
+    document["code"][0]["sha256"] = _sha256(code_bytes)
+    receipt.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+    result = reproduce_receipt(receipt, timeout=30)
+    assert result.ok, result.errors
+    assert result.output_assurance_counts["record_only"] == 1
+    assert any("record-only output recorded" in check for check in result.checks)
 
 
 def test_v3_code_and_input_hashes_remain_exact(tmp_path: Path):
@@ -166,7 +203,7 @@ def test_v3_review_if_missing_calibration_is_review_required(tmp_path: Path):
     )
 
 
-def test_v3_external_submission_and_collection_are_provenance_bound():
+def test_v31_external_submission_collection_chronology_and_calibration_are_bound():
     result = verify_receipt(EXTERNAL_EXAMPLE)
     assert result.ok, result.errors
     assert any("external submission code manifest OK" in check for check in result.checks)
@@ -182,7 +219,7 @@ def test_v3_external_submission_and_collection_are_provenance_bound():
     )
 
 
-def test_v3_external_job_mismatch_and_failed_terminal_state_fail_closed(tmp_path: Path):
+def _copy_external_fixture(tmp_path: Path) -> Path:
     source_dir = EXTERNAL_EXAMPLE.parent
     (tmp_path / "analysis.py").write_bytes((source_dir / "analysis.py").read_bytes())
     (tmp_path / "data").mkdir()
@@ -194,9 +231,37 @@ def test_v3_external_job_mismatch_and_failed_terminal_state_fail_closed(tmp_path
         (source_dir / "outputs" / "result.json").read_bytes()
     )
     document = load_structured(EXTERNAL_EXAMPLE)
+    receipt = tmp_path / "receipt.yaml"
+    receipt.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+    return receipt
+
+
+def test_v31_external_chronology_inversion_fails_closed(tmp_path: Path):
+    receipt = _copy_external_fixture(tmp_path)
+    document = load_structured(receipt)
+    document["execution"]["collection_receipt"]["started_at"] = "2026-09-13T00:06:00Z"
+    receipt.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+    result = verify_receipt(receipt)
+    assert not result.ok
+    assert any("external execution chronology" in error for error in result.errors)
+
+
+def test_v31_external_execution_outside_calibration_window_fails(tmp_path: Path):
+    receipt = _copy_external_fixture(tmp_path)
+    document = load_structured(receipt)
+    instrument = document["calibration"]["instruments"][0]
+    instrument["valid_until"] = "2026-09-13T00:02:00Z"
+    receipt.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+    result = verify_receipt(receipt)
+    assert not result.ok
+    assert any("does not cover declared execution interval" in error for error in result.errors)
+
+
+def test_v31_external_job_mismatch_and_failed_terminal_state_fail_closed(tmp_path: Path):
+    receipt = _copy_external_fixture(tmp_path)
+    document = load_structured(receipt)
     document["execution"]["collection_receipt"]["job_ref"] = "OTHER-JOB"
     document["execution"]["collection_receipt"]["terminal_state"] = "FAILED"
-    receipt = tmp_path / "receipt.yaml"
     receipt.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
     result = verify_receipt(receipt)
     assert not result.ok
@@ -204,10 +269,18 @@ def test_v3_external_job_mismatch_and_failed_terminal_state_fail_closed(tmp_path
     assert any("external job did not succeed" in error for error in result.errors)
 
 
-def test_v3_external_receipt_is_not_executed_as_local_subprocess():
+def test_v31_external_receipt_is_not_executed_as_local_subprocess():
     result = reproduce_receipt(EXTERNAL_EXAMPLE, timeout=30)
     assert not result.ok
     assert any("collection-verification only" in error for error in result.errors)
+
+
+def test_v30_legacy_shape_remains_verifiable(tmp_path: Path):
+    receipt = _write_local_v3(tmp_path, version="3.0")
+    (tmp_path / "outputs").mkdir()
+    (tmp_path / "outputs" / "result.json").write_bytes(b'{"value": 1.0004}\n')
+    result = verify_receipt(receipt)
+    assert result.ok, result.errors
 
 
 def test_undeclared_helper_diagnostic_preserves_raw_child_error_and_adds_bounded_hint(
