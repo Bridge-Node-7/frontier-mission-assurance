@@ -27,13 +27,20 @@ def _graph(path: str):
 
 
 def _receipt_summary(result: ReceiptResult) -> str:
-    return (
+    base = (
         f"receipt_version={result.receipt_version} "
         f"code={result.artifact_counts.get('code', 0)} "
         f"inputs={result.artifact_counts.get('inputs', 0)} "
         f"outputs={result.artifact_counts.get('outputs', 0)} "
         f"numerical_checks={result.numerical_checks}"
     )
+    if result.receipt_version == "3.1":
+        base += (
+            f" exact_outputs={result.output_assurance_counts.get('exact', 0)}"
+            f" semantic_outputs={result.output_assurance_counts.get('semantic', 0)}"
+            f" record_only_outputs={result.output_assurance_counts.get('record_only', 0)}"
+        )
+    return base
 
 
 def _run() -> None:
@@ -86,8 +93,8 @@ def _run() -> None:
 
     p_receipt = sub.add_parser(
         "receipt",
-        help="Verify hashes and numerical checks in a research receipt without executing code",
-        epilog="Example: fma receipt examples/research_receipt/receipt.yaml",
+        help="Verify declared receipt integrity, provenance, and acceptance controls without executing code",
+        epilog="Example: fma receipt examples/research_receipt_v3_external/receipt.yaml",
     )
     p_receipt.add_argument(
         "receipt", metavar="RECEIPT", help="Path to a research-receipt YAML/JSON file"
@@ -95,11 +102,11 @@ def _run() -> None:
 
     p_reproduce = sub.add_parser(
         "reproduce",
-        help="Execute a trusted v2 receipt in a fresh declared-artifact workspace",
+        help="Execute trusted local v2/v3 receipt code in a fresh declared-artifact workspace",
         epilog="Example: fma reproduce examples/research_receipt/receipt.yaml --timeout 30",
     )
     p_reproduce.add_argument(
-        "receipt", metavar="RECEIPT", help="Path to a version 2.0 research receipt"
+        "receipt", metavar="RECEIPT", help="Path to a local code-bound research receipt"
     )
     p_reproduce.add_argument(
         "--timeout",
@@ -182,7 +189,9 @@ def _run() -> None:
             raise SystemExit(2)
         print(f"RECEIPT PASS: {_receipt_summary(result)}")
         if result.receipt_version == "1.0":
-            print("WARN: legacy receipt verified; fresh reproduction requires receipt_version 2.0")
+            print("WARN: legacy receipt verified; fresh reproduction requires receipt_version 2.0+")
+        if result.receipt_version == "3.1":
+            print("NOTICE: declared acceptance passed; scientific truth and external authorship are not established by this receipt.")
         return
 
     if args.command == "reproduce":
@@ -190,8 +199,7 @@ def _run() -> None:
             raise ValueError("--timeout must be greater than zero")
         print(
             "NOTICE: reproduction executes trusted receipt-declared code in a fresh "
-            "artifact workspace; "
-            "it is not a sandbox."
+            "artifact workspace; it is not a sandbox."
         )
         result = reproduce_receipt(args.receipt, timeout=args.timeout)
         if result.stdout.strip():
@@ -205,6 +213,8 @@ def _run() -> None:
                 print(f"FAIL: {error}")
             raise SystemExit(2)
         print(f"REPRODUCTION PASS: fresh code-bound execution verified; {_receipt_summary(result)}")
+        if result.receipt_version == "3.1":
+            print("NOTICE: semantic output acceptance is scoped to declared checks; record-only outputs carry no equivalence claim.")
         return
 
     if args.command == "decision":
