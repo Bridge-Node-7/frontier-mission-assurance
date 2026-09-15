@@ -66,6 +66,25 @@ def _protocol_hash(protocol: dict) -> str:
     return hashlib.sha256(canonical).hexdigest()
 
 
+def _linear_sample(rng: random.Random, bounds: list[float]) -> float:
+    low, high = bounds
+    return float(low) + (float(high) - float(low)) * rng.random()
+
+
+def _sample_state(
+    rng: random.Random,
+    states: tuple[d.WorldState, ...],
+    probabilities: list[float],
+) -> d.WorldState:
+    draw = rng.random()
+    cumulative = 0.0
+    for index, probability in enumerate(probabilities):
+        cumulative += probability
+        if draw < cumulative or index == len(states) - 1:
+            return states[index]
+    raise AssertionError("unreachable cumulative sampler state")
+
+
 def run(protocol: dict) -> dict:
     rng = random.Random(protocol["seed"])
     count = int(protocol["case_count"])
@@ -107,7 +126,9 @@ def run(protocol: dict) -> dict:
     )
     options = (augment, retire)
     base_success = {
-        "external_augmentation": float(protocol["generator"]["augment_unconditional_success_rate"]),
+        "external_augmentation": float(
+            protocol["generator"]["augment_unconditional_success_rate"]
+        ),
         "controlled_retirement": 0.97,
     }
 
@@ -121,17 +142,18 @@ def run(protocol: dict) -> dict:
     for _index in range(count):
         stable_class = rng.random() < protocol["generator"]["stable_class_probability"]
         if stable_class:
-            alpha, beta = protocol["generator"]["stable_posterior_beta"]
-            q = rng.betavariate(alpha, beta)
+            q = _linear_sample(rng, protocol["generator"]["stable_rf_ok_range"])
             probabilities = [q, 1.0 - q, 0.0]
         else:
-            alphas = protocol["generator"]["uncertain_posterior_dirichlet"]
-            raw = [rng.gammavariate(alpha, 1) for alpha in alphas]
+            raw = [
+                _linear_sample(rng, bounds)
+                for bounds in protocol["generator"]["uncertain_weight_ranges"]
+            ]
             total = sum(raw)
             probabilities = [value / total for value in raw]
 
         posterior = d.Posterior(tuple(zip(states, probabilities)))
-        true_state = rng.choices(list(states), probabilities)[0]
+        true_state = _sample_state(rng, states, probabilities)
 
         gates = d.GateInputs(
             {
@@ -214,7 +236,7 @@ def run(protocol: dict) -> dict:
         base_forecasts.append((base_success[augment.name], realized))
 
     result = {
-        "benchmark_version": "1.2",
+        "benchmark_version": "1.3",
         "record_class": "synthetic",
         "protocol_sha256": _protocol_hash(protocol),
         "seed": protocol["seed"],
