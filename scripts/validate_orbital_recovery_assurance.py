@@ -62,34 +62,25 @@ def main() -> int:
         try:
             schema = json.loads(path.read_text(encoding="utf-8"))
             schema_map[path.name] = schema
-        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-            problems.append(f"schema invalid: {path.name}: {exc}")
-            continue
-        profile_version = schema.get("properties", {}).get("profile_version", {}).get("const")
-        if profile_version != EXPECTED_PROFILE_VERSION:
-            problems.append(
-                f"schema profile_version const drifted: {path.name}: {profile_version!r}"
-            )
-        classes = schema.get("properties", {}).get("record_class", {}).get("enum", [])
-        if "private" not in classes:
-            problems.append(f"schema does not support partner-private records: {path.name}")
-        if jsonschema is not None:
-            try:
+            profile_version = schema.get("properties", {}).get("profile_version", {}).get("const")
+            if profile_version != EXPECTED_PROFILE_VERSION:
+                problems.append(f"schema profile_version const drifted: {path.name}: {profile_version!r}")
+            classes = schema.get("properties", {}).get("record_class", {}).get("enum", [])
+            if "private" not in classes:
+                problems.append(f"schema does not support partner-private records: {path.name}")
+            if jsonschema is not None:
                 jsonschema.validators.validator_for(schema).check_schema(schema)
-            except jsonschema.exceptions.SchemaError as exc:
-                problems.append(f"schema invalid: {path.name}: {exc}")
+        except Exception as exc:
+            problems.append(f"schema invalid: {path.name}: {exc}")
 
-    records = {
-        p.name: json.loads(p.read_text(encoding="utf-8"))
-        for p in sorted(examples.glob("*.json"))
-    }
+    records = {p.name: json.loads(p.read_text(encoding="utf-8")) for p in sorted(examples.glob("*.json"))}
     expected_schema = {
-        "recovery-evidence-record.json": "recovery-evidence-record.schema.json",
-        "post-recovery-evidence-record.json": "recovery-evidence-record.schema.json",
-        "recovery-option-assessment.json": "recovery-option-assessment.schema.json",
-        "recovery-chain-view.json": "recovery-chain-view.schema.json",
-        "requalification-record.json": "requalification-record.schema.json",
-        "recovery-timeline.json": "recovery-timeline.schema.json",
+        "recovery-evidence-record.json":"recovery-evidence-record.schema.json",
+        "post-recovery-evidence-record.json":"recovery-evidence-record.schema.json",
+        "recovery-option-assessment.json":"recovery-option-assessment.schema.json",
+        "recovery-chain-view.json":"recovery-chain-view.schema.json",
+        "requalification-record.json":"requalification-record.schema.json",
+        "recovery-timeline.json":"recovery-timeline.schema.json",
     }
     if jsonschema is not None:
         for filename, schema_name in expected_schema.items():
@@ -100,7 +91,7 @@ def main() -> int:
                     format_checker=jsonschema.FormatChecker(),
                 )
                 validator.validate(records[filename])
-            except jsonschema.exceptions.ValidationError as exc:
+            except Exception as exc:
                 problems.append(f"example/schema mismatch: {filename}: {exc}")
 
     for filename, record in records.items():
@@ -123,10 +114,7 @@ def main() -> int:
         problems.extend(ev.validate_evidence_record(record))
 
     components = ev.provenance_correlation_components(records["recovery-evidence-record.json"])
-    if not any(
-        {"EVIDENCE-002", "EVIDENCE-003"}.issubset(set(group))
-        for group in components
-    ):
+    if not any({"EVIDENCE-002","EVIDENCE-003"}.issubset(set(group)) for group in components):
         problems.append("shared provenance root was not collapsed into a correlation component")
 
     expected_assessment = sc.assessment_json()
@@ -156,6 +144,8 @@ def main() -> int:
         )
     if "trust" in chain_view.get("chain", {}) or "authority" in chain_view.get("chain", {}):
         problems.append("trust and authority must remain overlays, not serial recovery-chain stages")
+    if "authority" in chain_view.get("chain", {}):
+        problems.append("authority must remain an overlay, not a serial recovery-chain stage")
 
     option_names = {row["name"] for row in assessment["options"]}
     row_robust = {row["name"] for row in assessment["options"] if row.get("robust")}
@@ -165,14 +155,13 @@ def main() -> int:
     if row_eligible != set(assessment["eligible_options"]):
         problems.append("option-row eligible flags do not match eligible_options")
     for row in assessment["options"]:
-        expected_advantage = row["expected_utility"] - assessment["hold_utility"]
-        if abs(expected_advantage - row["utility_advantage_vs_hold"]) > 1e-9:
+        if abs((row["expected_utility"] - assessment["hold_utility"]) - row["utility_advantage_vs_hold"]) > 1e-9:
             problems.append(f"option utility advantage drifted: {row['name']}")
         if row["robust"] and row["unsafe_hypotheses"]:
             problems.append(f"robust option lists unsafe hypotheses: {row['name']}")
         if row["eligible"] and (not row["robust"] or row["gate_failures"]):
             problems.append(f"eligible option has unresolved blockers: {row['name']}")
-    for key in ("robust_options", "eligible_options"):
+    for key in ("robust_options","eligible_options"):
         unknown = set(assessment[key]) - option_names
         if unknown:
             problems.append(f"{key} references unknown option(s): {sorted(unknown)}")
@@ -186,11 +175,7 @@ def main() -> int:
     if next_observation is not None and next_observation not in candidate_names:
         problems.append("next_best_observation does not resolve")
     if next_observation is not None:
-        row = next(
-            row
-            for row in assessment["candidate_observations"]
-            if row["name"] == next_observation
-        )
+        row = next(row for row in assessment["candidate_observations"] if row["name"] == next_observation)
         if row["nevoi"] <= 0:
             problems.append("next_best_observation must have positive NEVOI")
     expected_disposition = (
@@ -221,15 +206,11 @@ def main() -> int:
             else "HOLD_FAIL_CLOSED"
         )
         if rq["review_state"] != expected_review:
-            problems.append(
-                "requalification review_state is inconsistent with requirement states"
-            )
+            problems.append("requalification review_state is inconsistent with requirement states")
 
     benchmark_dir = profile / "benchmark"
     protocol = json.loads((benchmark_dir / "protocol.json").read_text(encoding="utf-8"))
-    checked_result = json.loads(
-        (benchmark_dir / "results.json").read_text(encoding="utf-8")
-    )
+    checked_result = json.loads((benchmark_dir / "results.json").read_text(encoding="utf-8"))
     sys.path.insert(0, str(reference))
     try:
         sb = _load("ora_synthetic_benchmark", reference / "synthetic_benchmark.py")
@@ -242,12 +223,8 @@ def main() -> int:
         problems.append("current synthetic benchmark protocol did not pass")
     if regenerated.get("policy", {}).get("unsafe_action_rate") != 0.0:
         problems.append("synthetic benchmark policy violated the declared safety invariant")
-    stress_protocol = json.loads(
-        (benchmark_dir / "stress-matrix.json").read_text(encoding="utf-8")
-    )
-    checked_stress = json.loads(
-        (benchmark_dir / "stress-results.json").read_text(encoding="utf-8")
-    )
+    stress_protocol = json.loads((benchmark_dir / "stress-matrix.json").read_text(encoding="utf-8"))
+    checked_stress = json.loads((benchmark_dir / "stress-results.json").read_text(encoding="utf-8"))
     regenerated_stress = sb.run_stress_matrix(protocol, stress_protocol)
     if checked_stress != regenerated_stress:
         problems.append("checked-in stress benchmark results drifted from current protocol/code")
@@ -268,7 +245,7 @@ def main() -> int:
     url_re = re.compile(r"https?://", re.IGNORECASE)
     email_re = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE)
     for path in sorted(profile.rglob("*")):
-        if not path.is_file() or path.suffix.lower() not in {".md", ".py", ".json", ".txt"}:
+        if not path.is_file() or path.suffix.lower() not in {".md",".py",".json",".txt"}:
             continue
         text = path.read_text(encoding="utf-8")
         if url_re.search(text):
