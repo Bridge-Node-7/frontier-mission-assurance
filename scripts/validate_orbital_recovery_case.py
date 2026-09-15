@@ -15,8 +15,10 @@ from pathlib import Path
 
 try:
     import jsonschema
+    from jsonschema.exceptions import SchemaError, ValidationError
 except ImportError:  # fail closed for real-case structural validation
     jsonschema = None
+    SchemaError = ValidationError = ValueError
 
 EXPECTED_PROFILE_VERSION = "0.5"
 SCHEMA_FOR = {
@@ -88,7 +90,7 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
         try:
             record = json.loads(path.read_text(encoding="utf-8"))
             records[filename] = record
-        except Exception as exc:
+        except (OSError, json.JSONDecodeError) as exc:
             problems.append(f"invalid JSON: {filename}: {exc}")
             continue
         if record.get("profile_version") != EXPECTED_PROFILE_VERSION:
@@ -103,7 +105,7 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
             validator_cls = jsonschema.validators.validator_for(schema)
             validator = validator_cls(schema, format_checker=jsonschema.FormatChecker())
             validator.validate(record)
-        except Exception as exc:
+        except (SchemaError, ValidationError) as exc:
             problems.append(f"schema validation failed: {filename}: {exc}")
 
     if len(classes) > 1:
@@ -115,7 +117,8 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
         )
 
     evidence_records = [
-        r for name, r in records.items()
+        r
+        for name, r in records.items()
         if name in {"recovery-evidence-record.json", "post-recovery-evidence-record.json"}
     ]
     by_record_id = {r.get("record_id"): r for r in evidence_records if r.get("record_id")}
@@ -140,7 +143,9 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
         stages = ["power", "contact", "telemetry", "command", "capability"]
         chain_keys = set(chain.get("chain", {}))
         if chain_keys != set(stages):
-            problems.append("recovery-chain stages must be exactly power/contact/telemetry/command/capability")
+            problems.append(
+                "recovery-chain stages must be exactly power/contact/telemetry/command/capability"
+            )
         if "trust" in chain.get("chain", {}) or "authority" in chain.get("chain", {}):
             problems.append("trust and authority must remain overlays, not serial chain stages")
         refs: list[str] = []
@@ -152,7 +157,9 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
             refs.extend(row.get("evidence_refs", []))
         unresolved = ev.resolve_refs(refs, evidence_records)
         if unresolved:
-            problems.append(f"recovery-chain evidence refs do not resolve: {sorted(set(unresolved))}")
+            problems.append(
+                f"recovery-chain evidence refs do not resolve: {sorted(set(unresolved))}"
+            )
 
     if assessment:
         if assessment.get("evidence_record_ref") not in by_record_id:
@@ -166,7 +173,9 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
         if row_eligible != set(assessment.get("eligible_options", [])):
             problems.append("option-row eligible flags do not match eligible_options")
         for row in option_rows:
-            expected_advantage = row.get("expected_utility", 0) - assessment.get("hold_utility", 0)
+            expected_advantage = row.get("expected_utility", 0) - assessment.get(
+                "hold_utility", 0
+            )
             if abs(expected_advantage - row.get("utility_advantage_vs_hold", 0)) > 1e-9:
                 problems.append(f"option utility advantage drifted: {row.get('name')}")
             if row.get("robust") and row.get("unsafe_hypotheses"):
@@ -186,7 +195,8 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
             problems.append("highest_ranked_eligible_option must be eligible")
         expected = (
             "ELIGIBLE_FOR_DECISION_PREPARATION"
-            if assessment.get("eligible_options") else "HOLD_FAIL_CLOSED"
+            if assessment.get("eligible_options")
+            else "HOLD_FAIL_CLOSED"
         )
         if assessment.get("disposition") != expected:
             problems.append("assessment disposition is inconsistent with eligible_options")
@@ -197,10 +207,16 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
         if evidence_record is None:
             problems.append("requalification evidence_record_ref does not resolve")
         else:
-            refs = [ref for req in rq.get("requirements", []) for ref in req.get("evidence_refs", [])]
+            refs = [
+                ref
+                for req in rq.get("requirements", [])
+                for ref in req.get("evidence_refs", [])
+            ]
             unresolved = ev.resolve_refs(refs, [evidence_record])
             if unresolved:
-                problems.append(f"requalification evidence refs do not resolve: {sorted(set(unresolved))}")
+                problems.append(
+                    f"requalification evidence refs do not resolve: {sorted(set(unresolved))}"
+                )
         states = [row.get("state") for row in rq.get("requirements", [])]
         expected = (
             "READY_FOR_HUMAN_REVIEW"
@@ -218,7 +234,7 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
             problems.append("timeline assessment_ref does not resolve")
         try:
             tm.compute_timeline_metrics(timeline.get("events", {}))
-        except Exception as exc:
+        except (KeyError, TypeError, ValueError) as exc:
             problems.append(f"timeline invalid: {exc}")
 
     return problems
@@ -238,7 +254,9 @@ def lifecycle_coverage(case_dir: Path) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("case_dir", type=Path)
-    parser.add_argument("--quiet", action="store_true", help="suppress local identifiers in failure output")
+    parser.add_argument(
+        "--quiet", action="store_true", help="suppress local identifiers in failure output"
+    )
     parser.add_argument(
         "--require-stage",
         choices=tuple(STAGE_REQUIREMENTS),
@@ -257,7 +275,10 @@ def main() -> int:
         return 2
     print("ORBITAL RECOVERY PRIVATE CASE PASS")
     print(f"Lifecycle coverage: {lifecycle_coverage(case_dir)}; required: {args.require_stage}")
-    print("NOTE: PASS is structural/cross-reference validation only; no real-world truth or authorization claim is made.")
+    print(
+        "NOTE: PASS is structural/cross-reference validation only; "
+        "no real-world truth or authorization claim is made."
+    )
     return 0
 
 
