@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -16,6 +17,7 @@ except ImportError:
     SchemaError = ValidationError = ValueError
 
 EXPECTED_PROFILE_VERSION = "0.5"
+BENCHMARK_FLOAT_TOLERANCE = 1e-12
 
 
 def _load(name: str, path: Path):
@@ -26,6 +28,28 @@ def _load(name: str, path: Path):
     sys.modules[name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def _benchmark_equivalent(actual, expected) -> bool:
+    """Compare benchmark records without treating float byte identity as a contract."""
+    if isinstance(actual, bool) or isinstance(expected, bool):
+        return actual is expected
+    if isinstance(actual, (int, float)) and isinstance(expected, (int, float)):
+        return math.isclose(
+            float(actual),
+            float(expected),
+            rel_tol=BENCHMARK_FLOAT_TOLERANCE,
+            abs_tol=BENCHMARK_FLOAT_TOLERANCE,
+        )
+    if isinstance(actual, dict) and isinstance(expected, dict):
+        return actual.keys() == expected.keys() and all(
+            _benchmark_equivalent(actual[key], expected[key]) for key in actual
+        )
+    if isinstance(actual, list) and isinstance(expected, list):
+        return len(actual) == len(expected) and all(
+            _benchmark_equivalent(a, e) for a, e in zip(actual, expected)
+        )
+    return actual == expected
 
 
 def main() -> int:
@@ -227,8 +251,8 @@ def main() -> int:
     finally:
         sys.path.pop(0)
     regenerated = sb.run(protocol)
-    if checked_result != regenerated:
-        problems.append("checked-in synthetic benchmark results drifted from current protocol/code")
+    if not _benchmark_equivalent(checked_result, regenerated):
+        problems.append("checked-in synthetic benchmark results drifted beyond tolerance")
     if regenerated.get("status") != "PASS":
         problems.append("current synthetic benchmark protocol did not pass")
     if regenerated.get("policy", {}).get("unsafe_action_rate") != 0.0:
@@ -240,8 +264,8 @@ def main() -> int:
         (benchmark_dir / "stress-results.json").read_text(encoding="utf-8")
     )
     regenerated_stress = sb.run_stress_matrix(protocol, stress_protocol)
-    if checked_stress != regenerated_stress:
-        problems.append("checked-in stress benchmark results drifted from current protocol/code")
+    if not _benchmark_equivalent(checked_stress, regenerated_stress):
+        problems.append("checked-in stress benchmark results drifted beyond tolerance")
     if regenerated_stress.get("status") != "PASS":
         problems.append("synthetic stress benchmark did not pass")
 
@@ -278,6 +302,10 @@ def main() -> int:
     print(f"Timeline metrics (seconds): {metrics}")
     if jsonschema is None:
         print("WARN: jsonschema unavailable; structural schema validation deferred to full repo dev gate")
+    print(
+        "NOTE: benchmark case generation and discrete results are deterministic; "
+        f"aggregate float snapshots use {BENCHMARK_FLOAT_TOLERANCE:g} comparison tolerance."
+    )
     print("NOTE: PASS is bounded to declared synthetic contracts and checks.")
     return 0
 
