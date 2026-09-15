@@ -88,7 +88,7 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
         try:
             record = json.loads(path.read_text(encoding="utf-8"))
             records[filename] = record
-        except Exception as exc:
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
             problems.append(f"invalid JSON: {filename}: {exc}")
             continue
         if record.get("profile_version") != EXPECTED_PROFILE_VERSION:
@@ -103,7 +103,7 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
             validator_cls = jsonschema.validators.validator_for(schema)
             validator = validator_cls(schema, format_checker=jsonschema.FormatChecker())
             validator.validate(record)
-        except Exception as exc:
+        except jsonschema.exceptions.ValidationError as exc:
             problems.append(f"schema validation failed: {filename}: {exc}")
 
     if len(classes) > 1:
@@ -218,7 +218,7 @@ def validate_case(case_dir: Path, repo_root: Path, required_stage: str = "mapped
             problems.append("timeline assessment_ref does not resolve")
         try:
             tm.compute_timeline_metrics(timeline.get("events", {}))
-        except Exception as exc:
+        except ValueError as exc:
             problems.append(f"timeline invalid: {exc}")
 
     return problems
