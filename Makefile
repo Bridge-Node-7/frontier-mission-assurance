@@ -1,4 +1,4 @@
-.PHONY: install test lint validate assumptions coverage impact receipt reproduce report schema boundary evaluate fingerprint demo check clean
+.PHONY: install test lint validate assumptions coverage impact receipt reproduce report schema boundary evaluate fingerprint orbital-recovery orbital-recovery-benchmark demo check clean
 
 install:
 	python -m pip install -e '.[dev]'
@@ -44,9 +44,15 @@ evaluate:
 fingerprint:
 	python scripts/environment_fingerprint.py --out build/environment-fingerprint.json
 
+orbital-recovery:
+	python scripts/validate_orbital_recovery_assurance.py .
+
+orbital-recovery-benchmark:
+	python scripts/run_orbital_recovery_synthetic_benchmark.py .
+
 demo: evaluate
 
-check: lint test validate assumptions coverage receipt reproduce report evaluate fingerprint boundary
+check: lint test validate assumptions coverage receipt reproduce report evaluate fingerprint orbital-recovery orbital-recovery-benchmark boundary
 
 clean:
 	rm -rf build dist .pytest_cache .ruff_cache .coverage *.egg-info src/*.egg-info
