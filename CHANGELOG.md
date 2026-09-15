@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.7.0 — Orbital Recovery Assurance
+
+- Added a bounded Orbital Recovery Assurance profile under `profiles/orbital-recovery-assurance/` rather than creating a new institutional repository.
+- Added the Mission Recovery Chain view `Power → Contact → Telemetry → Command → Capability` with trust and authority as cross-cutting overlays.
+- Added physical/trust/authority state separation, provenance-aware evidence handling, validity envelopes, robust-action filtering, option-specific fail-closed gates, and next-best-evidence evaluation over admissible options.
+- Added explicit HOLD/no-consequential-action utility, per-option unsafe hypotheses, gate failures, eligibility, and utility advantage versus HOLD so blocked options remain explainable.
+- Added post-intervention requalification and event-derived TTC/TTE/TTMC/TTT/TTV recovery metrics.
+- Added a source-neutral synthetic known-truth benchmark with preregistered safe baselines, deterministic checked-in results, protocol-history preservation, and stress-matrix validation.
+- Added a local-only validator for partner-controlled private cases with lifecycle gates for mapped, assessed, post-intervention, and requalification-review stages; public CI never receives real mission evidence.
+- Added partner adoption, private-workspace, Recovery Assurance Package, Epistemic Firewall, evidence-quorum, Black-Sky exercise, recovery-pathway, real-case, and bounded intervention-experiment guidance.
+- Added Orbital profile validation to the existing Python matrix, cross-platform smoke, Makefile gate, and deliberate stable-release source verification without creating a parallel workflow.
+- Preserved Mission Graph ownership of dependencies/strategic options, downstream human decision preparation, and accountable human consequential authority.
+- Preserved the public/synthetic repository boundary and made the source-vs-wheel distribution boundary explicit.
+
 ## 0.6.0 — resilience and trust semantics
 
 - Made the authoritative public release-boundary scan operate on every Git-tracked file regardless of directory name, closing force-tracked build/cache disclosure bypasses while allowing untracked ephemeral caches to remain outside release scope.
