@@ -1,1 +1,112 @@
-{"$id":"urn:bn7:orbital-recovery-assurance:recovery-evidence-record:0.5","title":"Recovery Evidence Record (v0.5)","type":"object","additionalProperties":false,"required":["profile_version","record_class","record_id","phase","asset_id","as_of","planes","evidence"],"properties":{"profile_version":{"const":"0.5"},"record_class":{"enum":["synthetic","sanitized","private"]},"asset_id":{"type":"string","pattern":"^[A-Z][A-Z0-9_-]+$"},"as_of":{"type":"string","format":"date-time"},"planes":{"type":"object","additionalProperties":false,"required":["physical","trust","authority"],"properties":{"physical":{"$ref":"#/$defs/physicalMap"},"trust":{"$ref":"#/$defs/trustMap"},"authority":{"$ref":"#/$defs/authorityMap"}}},"evidence":{"type":"array","items":{"$ref":"#/$defs/evidenceItem"}},"record_id":{"type":"string","pattern":"^EVIDENCE-RECORD-[A-Z0-9_-]+$"},"phase":{"enum":["pre_recovery","post_intervention","requalification"]}},"$defs":{"citation":{"type":"array","items":{"type":"string","pattern":"^EVIDENCE-[A-Z0-9_-]+$"}},"physicalMap":{"type":"object","additionalProperties":{"type":"object","additionalProperties":false,"required":["state","confidence","evidence_refs"],"properties":{"state":{"enum":["functional","degraded","failed","unknown"]},"confidence":{"type":"number","minimum":0,"maximum":1},"evidence_refs":{"$ref":"#/$defs/citation"},"operating_envelope":{"type":"string"}},"if":{"properties":{"state":{"not":{"const":"unknown"}}}},"then":{"properties":{"evidence_refs":{"minItems":1}}}}},"trustMap":{"type":"object","additionalProperties":{"type":"object","additionalProperties":false,"required":["state","confidence","evidence_refs"],"properties":{"state":{"enum":["verified","supported","contested","unknown","refuted"]},"confidence":{"type":"number","minimum":0,"maximum":1},"evidence_refs":{"$ref":"#/$defs/citation"}},"if":{"properties":{"state":{"not":{"const":"unknown"}}}},"then":{"properties":{"evidence_refs":{"minItems":1}}}}},"authorityMap":{"type":"object","additionalProperties":{"type":"object","additionalProperties":false,"required":["state","confidence","evidence_refs"],"properties":{"state":{"enum":["verified","declared","disputed","unknown","expired"]},"confidence":{"type":"number","minimum":0,"maximum":1},"evidence_refs":{"$ref":"#/$defs/citation"}},"if":{"properties":{"state":{"not":{"const":"unknown"}}}},"then":{"properties":{"evidence_refs":{"minItems":1}}}}},"rootRef":{"type":"string","pattern":"^[A-Z][A-Z0-9_-]+$"},"evidenceItem":{"type":"object","additionalProperties":false,"required":["id","source_ref","source_class","timestamp","method","evidence_class"],"properties":{"id":{"type":"string","pattern":"^EVIDENCE-[A-Z0-9_-]+$"},"source_ref":{"type":"string","pattern":"^SRC-[A-Z0-9_-]+$"},"source_class":{"enum":["instrument","operator_record","configuration_record","test","inspection","analysis","other"]},"timestamp":{"type":"string","format":"date-time"},"method":{"type":"string"},"evidence_class":{"enum":["observed","calculated","inferred","simulated","reported"]},"chain_of_custody":{"type":"string"},"provenance_roots":{"type":"object","additionalProperties":false,"properties":{"sensor_source":{"$ref":"#/$defs/rootRef"},"clock_source":{"$ref":"#/$defs/rootRef"},"identity_source":{"$ref":"#/$defs/rootRef"},"software_pipeline":{"$ref":"#/$defs/rootRef"}}},"validity":{"type":"object","additionalProperties":false,"properties":{"software_version":{"type":"string"},"firmware_revision":{"type":"string"},"orbit_regime":{"type":"string"},"intended_use":{"type":"array","items":{"type":"string"}},"invalidated_by":{"type":"array","items":{"type":"string"}},"reviewed_at":{"type":"string","format":"date-time"}}}}}}}
+{
+  "$id": "urn:bn7:orbital-recovery-assurance:recovery-evidence-record:0.5",
+  "title": "Recovery Evidence Record (v0.5)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile_version", "record_class", "record_id", "phase", "asset_id", "as_of", "planes", "evidence"],
+  "properties": {
+    "profile_version": {"const": "0.5"},
+    "record_class": {"enum": ["synthetic", "sanitized", "private"]},
+    "asset_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]+$"},
+    "as_of": {"type": "string", "format": "date-time"},
+    "planes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["physical", "trust", "authority"],
+      "properties": {
+        "physical": {"$ref": "#/$defs/physicalMap"},
+        "trust": {"$ref": "#/$defs/trustMap"},
+        "authority": {"$ref": "#/$defs/authorityMap"}
+      }
+    },
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidenceItem"}},
+    "record_id": {"type": "string", "pattern": "^EVIDENCE-RECORD-[A-Z0-9_-]+$"},
+    "phase": {"enum": ["pre_recovery", "post_intervention", "requalification"]}
+  },
+  "$defs": {
+    "citation": {"type": "array", "items": {"type": "string", "pattern": "^EVIDENCE-[A-Z0-9_-]+$"}},
+    "physicalMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["state", "confidence", "evidence_refs"],
+        "properties": {
+          "state": {"enum": ["functional", "degraded", "failed", "unknown"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "evidence_refs": {"$ref": "#/$defs/citation"},
+          "operating_envelope": {"type": "string"}
+        },
+        "if": {"properties": {"state": {"not": {"const": "unknown"}}}},
+        "then": {"properties": {"evidence_refs": {"minItems": 1}}}
+      }
+    },
+    "trustMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["state", "confidence", "evidence_refs"],
+        "properties": {
+          "state": {"enum": ["verified", "supported", "contested", "unknown", "refuted"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "evidence_refs": {"$ref": "#/$defs/citation"}
+        },
+        "if": {"properties": {"state": {"not": {"const": "unknown"}}}},
+        "then": {"properties": {"evidence_refs": {"minItems": 1}}}
+      }
+    },
+    "authorityMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["state", "confidence", "evidence_refs"],
+        "properties": {
+          "state": {"enum": ["verified", "declared", "disputed", "unknown", "expired"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "evidence_refs": {"$ref": "#/$defs/citation"}
+        },
+        "if": {"properties": {"state": {"not": {"const": "unknown"}}}},
+        "then": {"properties": {"evidence_refs": {"minItems": 1}}}
+      }
+    },
+    "rootRef": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]+$"},
+    "evidenceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_ref", "source_class", "timestamp", "method", "evidence_class"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^EVIDENCE-[A-Z0-9_-]+$"},
+        "source_ref": {"type": "string", "pattern": "^SRC-[A-Z0-9_-]+$"},
+        "source_class": {"enum": ["instrument", "operator_record", "configuration_record", "test", "inspection", "analysis", "other"]},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "method": {"type": "string"},
+        "evidence_class": {"enum": ["observed", "calculated", "inferred", "simulated", "reported"]},
+        "chain_of_custody": {"type": "string"},
+        "provenance_roots": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sensor_source": {"$ref": "#/$defs/rootRef"},
+            "clock_source": {"$ref": "#/$defs/rootRef"},
+            "identity_source": {"$ref": "#/$defs/rootRef"},
+            "software_pipeline": {"$ref": "#/$defs/rootRef"}
+          }
+        },
+        "validity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "software_version": {"type": "string"},
+            "firmware_revision": {"type": "string"},
+            "orbit_regime": {"type": "string"},
+            "intended_use": {"type": "array", "items": {"type": "string"}},
+            "invalidated_by": {"type": "array", "items": {"type": "string"}},
+            "reviewed_at": {"type": "string", "format": "date-time"}
+          }
+        }
+      }
+    }
+  }
+}
