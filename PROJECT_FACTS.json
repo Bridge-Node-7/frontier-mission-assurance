@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "maturity": "public reference",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -24,6 +24,11 @@
     "keep formal proof-checker state separate from specification-equivalence state",
     "preserve explicit research-priority, research-boundary, attribution, and replication states",
     "connect consequential decisions to explicit reopen conditions through Mission Decision Packets",
+    "validate bounded Orbital Recovery Assurance contracts and synthetic cross-record invariants",
+    "project a Mission Recovery Chain view across power, contact, telemetry, command, and capability while keeping trust and authority cross-cutting",
+    "assess robust recovery-option eligibility under declared synthetic models without issuing operational authorization",
+    "validate partner-controlled private orbital-recovery case structure locally without uploading real mission evidence",
+    "preserve post-intervention requalification and Time-to-Trust evidence as distinct from technical restoration",
     "publish stable identifiers for versioned portable contracts"
   ],
   "does_not": [
@@ -36,9 +41,12 @@
     "authenticate authorship of unsigned core receipts",
     "establish trusted scientific priority from a local clock value alone",
     "prove enforcement of a declared research-data boundary",
-    "treat proof-checker success as automatic specification validation"
+    "treat proof-checker success as automatic specification validation",
+    "control orbital assets or issue spacecraft commands",
+    "establish orbital ownership or legal authority",
+    "claim real-world recovery probability calibration from synthetic benchmarks"
   ],
-  "distribution": "GitHub source and release workflow; public package-index upload intentionally blocked by package metadata.",
+  "distribution": "GitHub source and release workflow; public package-index upload intentionally blocked by package metadata. Bounded assurance profiles are distributed in the repository/source archive rather than the core wheel.",
   "evidence_lifecycle": "Source-controlled validation defines deterministic expectations; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata.",
   "interoperability": "Versioned core schemas use stable identifiers. Richer domain records may map into FMA contracts without collapsing local evidence, calibration, acceptance, or decision semantics.",
   "maintenance": "Keep main as the protected long-lived branch, use immutable GitHub Action pins, dependency review, protected-main CodeQL, bounded dependency updates, tracked-file public-boundary scanning, and full V&V after material source changes."
