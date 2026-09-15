@@ -62,18 +62,22 @@ def main() -> int:
         try:
             schema = json.loads(path.read_text(encoding="utf-8"))
             schema_map[path.name] = schema
-            profile_version = schema.get("properties", {}).get("profile_version", {}).get("const")
-            if profile_version != EXPECTED_PROFILE_VERSION:
-                problems.append(
-                    f"schema profile_version const drifted: {path.name}: {profile_version!r}"
-                )
-            classes = schema.get("properties", {}).get("record_class", {}).get("enum", [])
-            if "private" not in classes:
-                problems.append(f"schema does not support partner-private records: {path.name}")
-            if jsonschema is not None:
-                jsonschema.validators.validator_for(schema).check_schema(schema)
-        except Exception as exc:
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
             problems.append(f"schema invalid: {path.name}: {exc}")
+            continue
+        profile_version = schema.get("properties", {}).get("profile_version", {}).get("const")
+        if profile_version != EXPECTED_PROFILE_VERSION:
+            problems.append(
+                f"schema profile_version const drifted: {path.name}: {profile_version!r}"
+            )
+        classes = schema.get("properties", {}).get("record_class", {}).get("enum", [])
+        if "private" not in classes:
+            problems.append(f"schema does not support partner-private records: {path.name}")
+        if jsonschema is not None:
+            try:
+                jsonschema.validators.validator_for(schema).check_schema(schema)
+            except jsonschema.exceptions.SchemaError as exc:
+                problems.append(f"schema invalid: {path.name}: {exc}")
 
     records = {
         p.name: json.loads(p.read_text(encoding="utf-8"))
@@ -96,7 +100,7 @@ def main() -> int:
                     format_checker=jsonschema.FormatChecker(),
                 )
                 validator.validate(records[filename])
-            except Exception as exc:
+            except jsonschema.exceptions.ValidationError as exc:
                 problems.append(f"example/schema mismatch: {filename}: {exc}")
 
     for filename, record in records.items():
