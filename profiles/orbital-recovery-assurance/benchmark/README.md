@@ -4,7 +4,9 @@ This benchmark tests the bounded recovery-assessment policy under a declared syn
 
 ## Current protocol
 
-`protocol.json` is protocol 1.2. It generates a posterior first and samples the latent truth from that posterior so the probability semantics are coherent inside the synthetic experiment. The policy receives the posterior and declared gate state; it does not receive the sampled truth.
+`protocol.json` is protocol 1.3. It generates a posterior first and samples the latent truth from that posterior so the probability semantics are coherent inside the synthetic experiment. The policy receives the posterior and declared gate state; it does not receive the sampled truth.
+
+For cross-version reproducibility, the current generator uses only the stable `random()` stream plus explicit deterministic transforms and cumulative truth sampling rather than distribution helper algorithms whose exact sequences are not a portable release contract.
 
 The deterministic primary run uses 5,000 cases. A separate stress matrix perturbs the random seed and the stable/uncertain case mix.
 
