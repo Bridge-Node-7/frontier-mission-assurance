@@ -1,0 +1,20 @@
+{
+  "claim_boundary": "Stress-matrix PASS establishes only that the current synthetic policy acceptance criteria remain satisfied across the declared generator perturbations.",
+  "record_class": "synthetic",
+  "run_count": 12,
+  "runs": [
+    {"always_hold_mean_decision_regret":25.8115,"always_retire_mean_decision_regret":31.247700000000002,"base_rate_augment_brier":0.22155726562499997,"model_augment_brier":0.21908104642284712,"policy_mean_decision_regret":21.87077,"policy_unsafe_action_rate":0.0,"seed":111,"stable_class_probability":0.35,"status":"PASS"},
+    {"always_hold_mean_decision_regret":26.884,"always_retire_mean_decision_regret":32.34138,"base_rate_augment_brier":0.219343515625,"model_augment_brier":0.21430762573297674,"policy_mean_decision_regret":22.46345,"policy_unsafe_action_rate":0.0,"seed":333,"stable_class_probability":0.35,"status":"PASS"},
+    {"always_hold_mean_decision_regret":25.311,"always_retire_mean_decision_regret":30.66954,"base_rate_augment_brier":0.22946351562499998,"model_augment_brier":0.22483447271616905,"policy_mean_decision_regret":21.30734,"policy_unsafe_action_rate":0.0,"seed":777,"stable_class_probability":0.35,"status":"PASS"},
+    {"always_hold_mean_decision_regret":27.2415,"always_retire_mean_decision_regret":32.8189,"base_rate_augment_brier":0.216497265625,"model_augment_brier":0.21058617084957962,"policy_mean_decision_regret":21.92675,"policy_unsafe_action_rate":0.0,"seed":999,"stable_class_probability":0.35,"status":"PASS"},
+    {"always_hold_mean_decision_regret":26.2405,"always_retire_mean_decision_regret":31.45784,"base_rate_augment_brier":0.223805,"model_augment_brier":0.21847168859974692,"policy_mean_decision_regret":16.633170000000003,"policy_unsafe_action_rate":0.0,"seed":111,"stable_class_probability":0.6,"status":"PASS"},
+    {"always_hold_mean_decision_regret":29.8155,"always_retire_mean_decision_regret":35.1458,"base_rate_augment_brier":0.214195,"model_augment_brier":0.2084861772364846,"policy_mean_decision_regret":15.683380000000001,"policy_unsafe_action_rate":0.0,"seed":333,"stable_class_probability":0.6,"status":"PASS"},
+    {"always_hold_mean_decision_regret":28.171,"always_retire_mean_decision_regret":33.600139999999996,"base_rate_augment_brier":0.218845,"model_augment_brier":0.21054707624260025,"policy_mean_decision_regret":17.345670000000002,"policy_unsafe_action_rate":0.0,"seed":777,"stable_class_probability":0.6,"status":"PASS"},
+    {"always_hold_mean_decision_regret":29.887,"always_retire_mean_decision_regret":35.24554,"base_rate_augment_brier":0.211405,"model_augment_brier":0.20136026884328875,"policy_mean_decision_regret":17.359689999999997,"policy_unsafe_action_rate":0.0,"seed":999,"stable_class_probability":0.6,"status":"PASS"},
+    {"always_hold_mean_decision_regret":31.746,"always_retire_mean_decision_regret":37.26692,"base_rate_augment_brier":0.2196365625,"model_augment_brier":0.21278748277645693,"policy_mean_decision_regret":10.71406,"policy_unsafe_action_rate":0.0,"seed":111,"stable_class_probability":0.9,"status":"PASS"},
+    {"always_hold_mean_decision_regret":32.175,"always_retire_mean_decision_regret":37.60414,"base_rate_augment_brier":0.21237656249999998,"model_augment_brier":0.19920532836075278,"policy_mean_decision_regret":10.40489,"policy_unsafe_action_rate":0.0,"seed":333,"stable_class_probability":0.9,"status":"PASS"},
+    {"always_hold_mean_decision_regret":31.746,"always_retire_mean_decision_regret":37.2175,"base_rate_augment_brier":0.2166115625,"model_augment_brier":0.20291387432449354,"policy_mean_decision_regret":11.419319999999999,"policy_unsafe_action_rate":0.0,"seed":777,"stable_class_probability":0.9,"status":"PASS"},
+    {"always_hold_mean_decision_regret":31.603,"always_retire_mean_decision_regret":37.09568,"base_rate_augment_brier":0.2099565625,"model_augment_brier":0.19671868512184434,"policy_mean_decision_regret":11.423,"policy_unsafe_action_rate":0.0,"seed":999,"stable_class_probability":0.9,"status":"PASS"}
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,53 @@
+{
+  "protocol_version": "1.3",
+  "record_class": "synthetic",
+  "seed": 777,
+  "case_count": 5000,
+  "utility_space": "normalized_multi_attribute_v1",
+  "credible_coverage": 1.0,
+  "hold_utility": 0.0,
+  "generator": {
+    "stable_class_probability": 0.6,
+    "augment_unconditional_success_rate": 0.655,
+    "stable_rf_ok_range": [
+      0.55,
+      0.95
+    ],
+    "uncertain_weight_ranges": [
+      [
+        0.35,
+        0.65
+      ],
+      [
+        0.15,
+        0.35
+      ],
+      [
+        0.15,
+        0.35
+      ]
+    ]
+  },
+  "safe_baselines": [
+    "always_hold",
+    "always_retire_when_gate_clear"
+  ],
+  "contrast_baselines": [
+    "gate_only_base_rate_ranker"
+  ],
+  "metrics": [
+    "mean_decision_regret",
+    "unsafe_action_rate",
+    "augment_brier_score",
+    "augment_log_loss",
+    "augment_expected_calibration_error_10bin"
+  ],
+  "acceptance": {
+    "policy_unsafe_action_rate_max": 0.0,
+    "policy_mean_regret_must_be_lower_than_safe_baselines": true,
+    "augment_brier_must_be_lower_than_base_rate": true,
+    "augment_log_loss_must_be_lower_than_base_rate": true
+  },
+  "calibration_diagnostic_only": true,
+  "claim_boundary": "Passing this synthetic benchmark demonstrates only behavior under the declared synthetic generator. Calibration diagnostics apply only to that generator and do not establish real-world calibration, safety, recoverability, demand, or mission readiness."
+}

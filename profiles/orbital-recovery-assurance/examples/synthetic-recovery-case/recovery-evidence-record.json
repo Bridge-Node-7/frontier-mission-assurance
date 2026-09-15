@@ -1,0 +1,187 @@
+{
+  "profile_version": "0.5",
+  "record_class": "synthetic",
+  "asset_id": "ASSET-SYN-001",
+  "as_of": "2030-01-01T00:00:00Z",
+  "planes": {
+    "physical": {
+      "PROP": {
+        "state": "failed",
+        "confidence": 0.98,
+        "evidence_refs": [
+          "EVIDENCE-001"
+        ]
+      },
+      "RF": {
+        "state": "functional",
+        "confidence": 0.78,
+        "evidence_refs": [
+          "EVIDENCE-002",
+          "EVIDENCE-003"
+        ]
+      }
+    },
+    "trust": {
+      "command": {
+        "state": "unknown",
+        "confidence": 0.3,
+        "evidence_refs": []
+      }
+    },
+    "authority": {
+      "operator": {
+        "state": "declared",
+        "confidence": 0.8,
+        "evidence_refs": [
+          "EVIDENCE-004"
+        ]
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "EVIDENCE-001",
+      "source_ref": "SRC-001",
+      "source_class": "instrument",
+      "timestamp": "2029-12-31T23:00:00Z",
+      "method": "state estimate",
+      "evidence_class": "observed",
+      "provenance_roots": {
+        "clock_source": "CLOCK-001",
+        "software_pipeline": "PIPE-001"
+      },
+      "validity": {
+        "intended_use": [
+          "propulsion-state-assessment"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-002",
+      "source_ref": "SRC-002",
+      "source_class": "instrument",
+      "timestamp": "2029-12-31T23:10:00Z",
+      "method": "signal characterization",
+      "evidence_class": "observed",
+      "provenance_roots": {
+        "clock_source": "CLOCK-001",
+        "identity_source": "IDENTITY-001"
+      },
+      "validity": {
+        "intended_use": [
+          "rf-state-assessment"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-003",
+      "source_ref": "SRC-003",
+      "source_class": "operator_record",
+      "timestamp": "2029-12-31T23:11:00Z",
+      "method": "record review",
+      "evidence_class": "reported",
+      "provenance_roots": {
+        "clock_source": "CLOCK-001",
+        "identity_source": "IDENTITY-002"
+      },
+      "validity": {
+        "intended_use": [
+          "rf-state-assessment"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-004",
+      "source_ref": "SRC-004",
+      "source_class": "operator_record",
+      "timestamp": "2029-12-31T20:00:00Z",
+      "method": "authority record review",
+      "evidence_class": "reported",
+      "provenance_roots": {
+        "identity_source": "IDENTITY-003"
+      },
+      "validity": {
+        "intended_use": [
+          "authority-assessment"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-005",
+      "source_ref": "SRC-005",
+      "source_class": "instrument",
+      "timestamp": "2029-12-31T23:20:00Z",
+      "method": "power-state observation",
+      "evidence_class": "observed",
+      "provenance_roots": {
+        "clock_source": "CLOCK-002",
+        "software_pipeline": "PIPE-002"
+      },
+      "validity": {
+        "intended_use": [
+          "recovery-chain-power"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-006",
+      "source_ref": "SRC-006",
+      "source_class": "instrument",
+      "timestamp": "2029-12-31T23:22:00Z",
+      "method": "communications-link observation",
+      "evidence_class": "observed",
+      "provenance_roots": {
+        "clock_source": "CLOCK-003",
+        "software_pipeline": "PIPE-003"
+      },
+      "validity": {
+        "intended_use": [
+          "recovery-chain-contact"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-007",
+      "source_ref": "SRC-007",
+      "source_class": "instrument",
+      "timestamp": "2029-12-31T23:25:00Z",
+      "method": "partial telemetry reception test",
+      "evidence_class": "observed",
+      "provenance_roots": {
+        "clock_source": "CLOCK-003",
+        "software_pipeline": "PIPE-004"
+      },
+      "validity": {
+        "intended_use": [
+          "recovery-chain-telemetry"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-008",
+      "source_ref": "SRC-008",
+      "source_class": "analysis",
+      "timestamp": "2029-12-31T23:30:00Z",
+      "method": "mission-service state calculation",
+      "evidence_class": "calculated",
+      "provenance_roots": {
+        "software_pipeline": "PIPE-005"
+      },
+      "validity": {
+        "intended_use": [
+          "recovery-chain-capability"
+        ],
+        "reviewed_at": "2030-01-01T00:00:00Z"
+      }
+    }
+  ],
+  "record_id": "EVIDENCE-RECORD-SYN-PRE",
+  "phase": "pre_recovery"
+}

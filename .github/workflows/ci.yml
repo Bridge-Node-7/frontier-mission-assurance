@@ -68,6 +68,8 @@ jobs:
         run: fma decision examples/frontier_program/graph.yaml examples/frontier_program/decision-receipt.yaml
       - name: Validate Scientific Discovery Assurance profile
         run: python scripts/validate_scientific_discovery.py .
+      - name: Validate Orbital Recovery Assurance profile
+        run: python scripts/validate_orbital_recovery_assurance.py .
       - name: Run bounded public-reference evaluation
         run: python scripts/evaluate_public_reference.py
       - name: Analyze with CodeQL
@@ -109,6 +111,7 @@ jobs:
       - run: fma receipt examples/research_receipt/receipt.yaml
       - run: fma reproduce examples/research_receipt/receipt.yaml --timeout 30
       - run: python scripts/validate_scientific_discovery.py .
+      - run: python scripts/validate_orbital_recovery_assurance.py .
 
   package-smoke:
     name: Wheel build + fresh install

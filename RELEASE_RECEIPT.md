@@ -1,26 +1,27 @@
-# Source Release Receipt — v0.6.0
+# Source Release Receipt — v0.7.0
 
 **Release type:** stable public reference candidate  
-**Date:** 2026-09-13
+**Date:** 2026-09-15
 
 ## Purpose
 
-Strengthen FMA's trust semantics and public-release boundary without expanding it into a universal assurance platform. Version 0.6.0 adds Git-tracked release-surface scanning, Research Receipt 3.1 chronology, explicit per-output assurance scope, and clearer non-claims around unsigned external provenance.
+Add bounded Orbital Recovery Assurance to FMA without expanding the repository into a universal orbital platform or operational command system. Version 0.7.0 adds a source-distributed profile for mission recovery-chain mapping, evidence integrity, robust option eligibility, next-best evidence, private local case validation, post-intervention requalification, and Time-to-Trust while preserving accountable human authority.
 
-## Material changes in v0.6.0
+## Material changes in v0.7.0
 
-- The authoritative public-boundary scan now evaluates every Git-tracked release file regardless of directory name; force-tracked content under build/cache paths cannot bypass the release boundary.
-- Research Receipt 3.1 explicitly distinguishes `EXACT`, `SEMANTICALLY_CHECKED`, and `RECORD_ONLY` outputs while preserving an observed SHA-256 for every output.
-- Semantic output acceptance must name the checks that define bounded equivalence for that output; record-only outputs carry no equivalence claim.
-- External receipt evidence now binds `submitted_at`, `started_at`, `completed_at`, and `collected_at` chronology.
-- Required calibration state must cover the declared external execution interval.
-- Research Receipt 3.0 remains supported as a legacy compatibility contract; 3.1 receives the strengthened semantics.
-- Public documentation now states the current v0.6 maturity line and surfaces the evaluation/reference-use licensing boundary near onboarding.
-- Existing graph, decision, Scientific Discovery Assurance, fresh-workspace reproduction, cross-platform, immutable-Action, dependency-review, CodeQL, local-runtime, synthetic-fixture, and human-authority controls remain in scope.
+- Added `profiles/orbital-recovery-assurance/` as a bounded FMA profile rather than a new repository.
+- Added the Mission Recovery Chain view `Power → Contact → Telemetry → Command → Capability`, with trust and authority retained as overlays.
+- Added provenance-aware evidence handling, validity envelopes, robust-action filtering, option-specific fail-closed gates, explicit HOLD utility, next-best-evidence evaluation, requalification, and event-derived recovery metrics.
+- Added a deterministic synthetic known-truth benchmark, preserved invalidated protocol history, and required a stress matrix rather than treating one passing run as sufficient evidence.
+- Added a local-only validator for partner-controlled private cases with explicit lifecycle gates; real mission evidence is not uploaded to this public repository or public CI.
+- Added partner/adoption, private-workspace, epistemic-assurance, evidence-quorum, Black-Sky exercise, recovery-pathway, real-case, Recovery Assurance Package, and bounded intervention-experiment guidance.
+- Added Orbital profile validation to existing source, Python-matrix, cross-platform, and stable-release verification paths.
+- Kept the core wheel boundary unchanged: bounded profile assets are distributed through the repository/source archive rather than silently becoming wheel runtime authority.
+- Preserved Mission Graph ownership of dependencies and strategic options, downstream human decision preparation, and accountable human consequential authority.
 
 ## Source-level evidence
 
-The candidate must satisfy `VALIDATION_REPORT.md`, including Python/cross-platform verification, schema/runtime alignment, public-boundary adversarial tests, exact/semantic/record-only output tests, external chronology and calibration-interval mutation tests, fresh reproduction integrity, deterministic reporting, packaging, dependency review, CodeQL, and release-surface validation.
+The candidate must satisfy `VALIDATION_REPORT.md`, including the complete existing FMA regression surface plus Orbital profile contracts, synthetic cross-record invariants, 27 Orbital-specific closure/regression tests across the two Orbital test modules, deterministic benchmark/result binding, private-case lifecycle behavior, cross-platform profile validation, packaging, dependency review, and public-boundary controls.
 
 ## Hosted evidence rule
 
@@ -28,16 +29,16 @@ Commit-specific hosted evidence belongs in GitHub Actions and tagged release met
 
 ## Tagged-release evidence rule
 
-The public release record must bind the accepted tag to the exact commit, successful hosted Actions run, source archive, wheel, tracked-source SHA-256 manifest, and release-artifact SHA-256 manifest. Additional provenance or SBOM artifacts may strengthen supply-chain assurance, but absence of an external signature must never be presented as authenticated authorship.
+The public release record must bind the accepted tag to the exact commit, successful hosted Actions run, source archive, wheel, tracked-source SHA-256 manifest, release-artifact SHA-256 manifest, SBOM, and available provenance attestations. Clean-user verification of the published source archive must exercise both bounded profile validators.
 
-## Non-claims
+## Claim boundary
 
-FMA does not claim invention of assurance cases, provenance records, content hashing, reproducible workflows, numerical regression checks, or cryptographic attestation. Core FMA receipts are unsigned unless wrapped by a separate authenticated mechanism and therefore do not independently establish authorship or signer identity.
+A passing Orbital Recovery Assurance control establishes only its declared structural, arithmetic, reference-resolution, synthetic-policy, or timeline property. It does not establish legal authority, ownership, spacecraft recoverability, flight safety, real-world probability calibration, mission qualification, commercial demand, or authorization for consequential action.
 
-An observed output hash establishes artifact identity. A semantic check establishes only the declared bounded criterion. Neither establishes scientific truth. The fresh reproduction workspace is an integrity control, not a sandbox or hermetic environment. External scheduler records are declarations unless a separate trust mechanism authenticates their issuer.
+An option may be robust and gate-clear yet still be unattractive relative to HOLD. Eligibility is not recommendation and is never operational authorization.
 
-This receipt does not claim mission readiness, legal priority, research-boundary enforcement, independent scientific acceptance, authorization for consequential action, certification, compliance, or permanent absence of future vulnerabilities.
+The public repository contains synthetic/source-neutral examples. Named real-world evidence and sensitive mission records remain outside the public release surface.
 
 ## Release gate
 
-A source candidate may advance only when deterministic source validation passes. Stable release additionally requires successful hosted V&V on the exact commit and successful clean-user verification of the published artifacts.
+A source candidate may advance only when deterministic source validation passes. Stable release additionally requires successful protected hosted V&V on the exact main commit and successful clean-user verification of the published artifacts. The stable release remains a deliberate workflow-dispatch ceremony rather than an automatic side effect of merge.

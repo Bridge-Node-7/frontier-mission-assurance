@@ -1,0 +1,28 @@
+{
+  "$id": "urn:bn7:orbital-recovery-assurance:recovery-chain-view:0.5",
+  "title": "Mission Recovery Chain View (v0.5)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile_version","record_class","view_id","evidence_record_ref","asset_id","mission_capability","as_of","chain","trust_overlay","authority_overlay","authorization_note"],
+  "properties": {
+    "profile_version": {"const": "0.5"},
+    "record_class": {"enum": ["synthetic","sanitized","private"]},
+    "view_id": {"type": "string","pattern": "^RECOVERY-CHAIN-[A-Z0-9_-]+$"},
+    "evidence_record_ref": {"type": "string","pattern": "^EVIDENCE-RECORD-[A-Z0-9_-]+$"},
+    "asset_id": {"type": "string","pattern": "^[A-Z][A-Z0-9_-]+$"},
+    "mission_capability": {"type": "string","pattern": "^[A-Z][A-Z0-9_-]+$"},
+    "as_of": {"type": "string","format": "date-time"},
+    "chain": {"type":"object","additionalProperties":false,"required":["power","contact","telemetry","command","capability"],"properties":{"power":{"$ref":"#/$defs/stage"},"contact":{"$ref":"#/$defs/stage"},"telemetry":{"$ref":"#/$defs/stage"},"command":{"$ref":"#/$defs/stage"},"capability":{"$ref":"#/$defs/stage"}}},
+    "trust_overlay": {"type":"object","additionalProperties":{"$ref":"#/$defs/trustOverlay"}},
+    "authority_overlay": {"type":"object","additionalProperties":{"$ref":"#/$defs/authorityOverlay"}},
+    "current_blocking_stages": {"type":"array","uniqueItems":true,"items":{"enum":["power","contact","telemetry","command","capability"]}},
+    "reopen_conditions": {"type":"array","items":{"type":"string"}},
+    "authorization_note": {"type":"string","minLength":1}
+  },
+  "$defs": {
+    "evidenceRefs": {"type":"array","uniqueItems":true,"items":{"type":"string","pattern":"^EVIDENCE-[A-Z0-9_-]+$"}},
+    "stage": {"type":"object","additionalProperties":false,"required":["state","evidence_refs","recovery_options"],"properties":{"state":{"enum":["available","degraded","unavailable","unknown"]},"evidence_refs":{"$ref":"#/$defs/evidenceRefs"},"recovery_options":{"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}},"note":{"type":"string"}},"if":{"properties":{"state":{"not":{"const":"unknown"}}}},"then":{"properties":{"evidence_refs":{"minItems":1}}}},
+    "trustOverlay": {"type":"object","additionalProperties":false,"required":["stage","state","evidence_refs"],"properties":{"stage":{"enum":["power","contact","telemetry","command","capability"]},"state":{"enum":["verified","supported","contested","unknown","refuted"]},"evidence_refs":{"$ref":"#/$defs/evidenceRefs"},"note":{"type":"string"}},"if":{"properties":{"state":{"not":{"const":"unknown"}}}},"then":{"properties":{"evidence_refs":{"minItems":1}}}},
+    "authorityOverlay": {"type":"object","additionalProperties":false,"required":["stage","state","evidence_refs"],"properties":{"stage":{"enum":["power","contact","telemetry","command","capability"]},"state":{"enum":["verified","declared","disputed","unknown","expired"]},"evidence_refs":{"$ref":"#/$defs/evidenceRefs"},"note":{"type":"string"}},"if":{"properties":{"state":{"not":{"const":"unknown"}}}},"then":{"properties":{"evidence_refs":{"minItems":1}}}}
+  }
+}

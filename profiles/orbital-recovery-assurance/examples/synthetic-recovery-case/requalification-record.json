@@ -1,0 +1,35 @@
+{
+  "profile_version": "0.5",
+  "record_class": "synthetic",
+  "configuration_id": "CONFIG-SYN-002",
+  "mission_capability_id": "CAPABILITY-SYN-001",
+  "requirements": [
+    {
+      "requirement_id": "REQ-001",
+      "state": "verified",
+      "evidence_refs": [
+        "EVIDENCE-010"
+      ],
+      "operating_envelope": "declared synthetic envelope",
+      "limitations": []
+    },
+    {
+      "requirement_id": "REQ-002",
+      "state": "supported",
+      "evidence_refs": [
+        "EVIDENCE-011"
+      ],
+      "limitations": [
+        "bounded synthetic evidence; human review still required"
+      ]
+    }
+  ],
+  "review_state": "READY_FOR_HUMAN_REVIEW",
+  "reopen_conditions": [
+    "material configuration change",
+    "evidence validity changes"
+  ],
+  "authorization_note": "Review state does not authorize operational use.",
+  "requalification_id": "REQUAL-SYN-001",
+  "evidence_record_ref": "EVIDENCE-RECORD-SYN-POST"
+}

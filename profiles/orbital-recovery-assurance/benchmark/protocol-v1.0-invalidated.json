@@ -1,0 +1,37 @@
+{
+  "protocol_version": "1.0",
+  "record_class": "synthetic",
+  "seed": 777,
+  "case_count": 2000,
+  "utility_space": "normalized_multi_attribute_v1",
+  "credible_coverage": 1.0,
+  "hold_utility": 0.0,
+  "generator": {
+    "stable_class_probability": 0.60,
+    "stable_true_state_weights": {"RF_OK": 0.72, "RF_DEAD": 0.28},
+    "uncertain_true_state_weights": {"RF_OK": 0.50, "RF_DEAD": 0.20, "UNSTABLE": 0.30},
+    "augment_unconditional_success_rate": 0.69
+  },
+  "baselines": [
+    "always_hold",
+    "always_retire_when_gate_clear",
+    "gate_only_base_rate_ranker"
+  ],
+  "metrics": [
+    "mean_decision_regret",
+    "unsafe_action_rate",
+    "augment_brier_score",
+    "augment_log_loss"
+  ],
+  "acceptance": {
+    "policy_unsafe_action_rate_max": 0.0,
+    "policy_mean_regret_must_be_lower_than": [
+      "always_hold",
+      "always_retire_when_gate_clear",
+      "gate_only_base_rate_ranker"
+    ],
+    "augment_brier_must_be_lower_than_base_rate": true,
+    "augment_log_loss_must_be_lower_than_base_rate": true
+  },
+  "claim_boundary": "Passing this synthetic benchmark demonstrates only behavior under the declared synthetic generator. It does not establish real-world calibration, safety, recoverability, demand, or mission readiness."
+}

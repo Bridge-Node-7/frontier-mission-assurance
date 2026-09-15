@@ -1,0 +1,86 @@
+{
+  "profile_version": "0.5",
+  "record_class": "synthetic",
+  "assessment_id": "ASSESSMENT-SYN-001",
+  "evidence_record_ref": "EVIDENCE-RECORD-SYN-PRE",
+  "asset_id": "ASSET-SYN-001",
+  "as_of": "2030-01-01T00:00:00Z",
+  "utility_space": "normalized_multi_attribute_v1",
+  "credible_coverage": 1.0,
+  "credible_hypotheses": [
+    "STATE-RF-AVAILABLE",
+    "STATE-RF-UNAVAILABLE",
+    "STATE-UNSTABLE-ATTITUDE"
+  ],
+  "hold_utility": 0.0,
+  "options": [
+    {
+      "name": "external_augmentation",
+      "p_success": 0.75,
+      "expected_utility": 48.25,
+      "hold_utility": 0.0,
+      "utility_advantage_vs_hold": 48.25,
+      "robust": false,
+      "unsafe_hypotheses": [
+        "STATE-UNSTABLE-ATTITUDE"
+      ],
+      "required_gates": [
+        "approach_safety",
+        "authority",
+        "command_trust"
+      ],
+      "gate_failures": [
+        "gate 'authority' not satisfied",
+        "gate 'command_trust' not satisfied"
+      ],
+      "eligible": false
+    },
+    {
+      "name": "controlled_retirement",
+      "p_success": 0.97,
+      "expected_utility": -7.0600000000000005,
+      "hold_utility": 0.0,
+      "utility_advantage_vs_hold": -7.0600000000000005,
+      "robust": true,
+      "unsafe_hypotheses": [],
+      "required_gates": [
+        "authority",
+        "native_command_trust"
+      ],
+      "gate_failures": [
+        "gate 'authority' not satisfied",
+        "gate 'native_command_trust' not satisfied"
+      ],
+      "eligible": false
+    }
+  ],
+  "robust_options": [
+    "controlled_retirement"
+  ],
+  "eligible_options": [],
+  "highest_ranked_eligible_option": null,
+  "candidate_observations": [
+    {
+      "name": "integrated_recovery_evidence_review",
+      "nevoi": 56.2,
+      "cost": 1.0
+    }
+  ],
+  "next_best_observation": "integrated_recovery_evidence_review",
+  "disposition": "HOLD_FAIL_CLOSED",
+  "hold_reasons": [
+    "external_augmentation: unsafe under credible hypothesis 'STATE-UNSTABLE-ATTITUDE'",
+    "external_augmentation: gate 'authority' not satisfied",
+    "external_augmentation: gate 'command_trust' not satisfied",
+    "controlled_retirement: gate 'authority' not satisfied",
+    "controlled_retirement: gate 'native_command_trust' not satisfied"
+  ],
+  "reopen_conditions": [
+    "resolve: external_augmentation: unsafe under credible hypothesis 'STATE-UNSTABLE-ATTITUDE'",
+    "resolve: external_augmentation: gate 'authority' not satisfied",
+    "resolve: external_augmentation: gate 'command_trust' not satisfied",
+    "resolve: controlled_retirement: gate 'authority' not satisfied",
+    "resolve: controlled_retirement: gate 'native_command_trust' not satisfied"
+  ],
+  "authorization_note": "Advisory assessment only. This record does not authorize, approve, select, or record a consequential decision. Accountable human authority remains external."
+}
