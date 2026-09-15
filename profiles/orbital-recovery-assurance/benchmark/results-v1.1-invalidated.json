@@ -1,0 +1,60 @@
+{
+  "acceptance_checks": {
+    "forecast_brier_vs_base_rate": true,
+    "forecast_ece_vs_base_rate": false,
+    "forecast_log_loss_vs_base_rate": true,
+    "policy_regret_vs_safe_baselines": true,
+    "policy_unsafe_action_rate": true
+  },
+  "benchmark_version": "1.1",
+  "case_count": 2000,
+  "claim_boundary": "Passing this synthetic benchmark demonstrates only behavior under the declared synthetic generator. It does not establish real-world calibration, safety, recoverability, demand, or mission readiness.",
+  "contrast_baselines": {
+    "gate_only_base_rate_ranker": {
+      "choices": {
+        "HOLD": 717,
+        "external_augmentation": 1283
+      },
+      "mean_decision_regret": 7.853625,
+      "unsafe_action_rate": 0.07
+    }
+  },
+  "forecast": {
+    "base_rate_augment_brier": 0.21713,
+    "base_rate_augment_ece_10bin": 0.008499999999999952,
+    "base_rate_augment_log_loss": 0.62590167847654,
+    "model_augment_brier": 0.1459124346699593,
+    "model_augment_ece_10bin": 0.13067446222408202,
+    "model_augment_log_loss": 0.4682703106119853
+  },
+  "policy": {
+    "choices": {
+      "HOLD": 339,
+      "controlled_retirement": 1029,
+      "external_augmentation": 632
+    },
+    "mean_decision_regret": 14.176745,
+    "unsafe_action_rate": 0.0
+  },
+  "protocol_sha256": "e853cbe2dcd97468915b0343390f9728cc8dc4d5c0cd1922fe5e32519da6bb88",
+  "record_class": "synthetic",
+  "safe_baselines": {
+    "always_hold": {
+      "choices": {
+        "HOLD": 2000
+      },
+      "mean_decision_regret": 28.314,
+      "unsafe_action_rate": 0.0
+    },
+    "always_retire_when_gate_clear": {
+      "choices": {
+        "HOLD": 453,
+        "controlled_retirement": 1547
+      },
+      "mean_decision_regret": 33.774910000000006,
+      "unsafe_action_rate": 0.0
+    }
+  },
+  "seed": 777,
+  "status": "FAIL"
+}

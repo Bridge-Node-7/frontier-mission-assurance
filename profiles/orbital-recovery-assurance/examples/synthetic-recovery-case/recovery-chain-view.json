@@ -1,0 +1,110 @@
+{
+  "profile_version": "0.5",
+  "record_class": "synthetic",
+  "view_id": "RECOVERY-CHAIN-SYN-001",
+  "evidence_record_ref": "EVIDENCE-RECORD-SYN-PRE",
+  "asset_id": "ASSET-SYN-001",
+  "mission_capability": "CAPABILITY-SYN-001",
+  "as_of": "2030-01-01T00:00:00Z",
+  "chain": {
+    "power": {
+      "state": "available",
+      "evidence_refs": [
+        "EVIDENCE-005"
+      ],
+      "recovery_options": [
+        "preserve_power_margin"
+      ]
+    },
+    "contact": {
+      "state": "available",
+      "evidence_refs": [
+        "EVIDENCE-006"
+      ],
+      "recovery_options": [
+        "alternate_contact_window"
+      ]
+    },
+    "telemetry": {
+      "state": "degraded",
+      "evidence_refs": [
+        "EVIDENCE-007"
+      ],
+      "recovery_options": [
+        "additional_characterization"
+      ]
+    },
+    "command": {
+      "state": "unknown",
+      "evidence_refs": [],
+      "recovery_options": [
+        "establish_command_trust_and_authority"
+      ]
+    },
+    "capability": {
+      "state": "unavailable",
+      "evidence_refs": [
+        "EVIDENCE-008"
+      ],
+      "recovery_options": [
+        "external_augmentation",
+        "controlled_retirement"
+      ]
+    }
+  },
+  "trust_overlay": {
+    "power_state_observation": {
+      "stage": "power",
+      "state": "supported",
+      "evidence_refs": [
+        "EVIDENCE-005"
+      ]
+    },
+    "contact_path": {
+      "stage": "contact",
+      "state": "supported",
+      "evidence_refs": [
+        "EVIDENCE-006"
+      ]
+    },
+    "telemetry_integrity": {
+      "stage": "telemetry",
+      "state": "contested",
+      "evidence_refs": [
+        "EVIDENCE-007"
+      ],
+      "note": "Telemetry is partial; additional corroboration is required."
+    },
+    "command_path": {
+      "stage": "command",
+      "state": "unknown",
+      "evidence_refs": []
+    },
+    "capability_basis": {
+      "stage": "capability",
+      "state": "supported",
+      "evidence_refs": [
+        "EVIDENCE-008"
+      ]
+    }
+  },
+  "authority_overlay": {
+    "command_authority": {
+      "stage": "command",
+      "state": "declared",
+      "evidence_refs": [
+        "EVIDENCE-004"
+      ]
+    }
+  },
+  "current_blocking_stages": [
+    "command",
+    "capability"
+  ],
+  "reopen_conditions": [
+    "establish trusted command path",
+    "verify command authority",
+    "obtain sufficient telemetry corroboration"
+  ],
+  "authorization_note": "Projection only. This view does not authorize an intervention or establish mission readiness."
+}

@@ -1,0 +1,14 @@
+{
+  "profile_version": "0.5",
+  "record_class": "synthetic",
+  "events": {
+    "anomaly_recognized": "2030-01-01T00:00:00Z",
+    "contained": "2030-01-01T00:05:00Z",
+    "evidence_established": "2030-01-01T00:12:00Z",
+    "minimum_credible_capability": "2030-01-01T00:20:00Z",
+    "trust_reestablished": "2030-01-01T00:28:00Z",
+    "recovery_verified": "2030-01-01T00:35:00Z"
+  },
+  "timeline_id": "TIMELINE-SYN-001",
+  "assessment_ref": "ASSESSMENT-SYN-001"
+}

@@ -1,0 +1,7 @@
+{
+  "record_class": "synthetic",
+  "seeds": [111, 333, 777, 999],
+  "stable_class_probabilities": [0.35, 0.60, 0.90],
+  "case_count_per_run": 1000,
+  "claim_boundary": "Stress-matrix PASS establishes only that the current synthetic policy acceptance criteria remain satisfied across the declared generator perturbations."
+}

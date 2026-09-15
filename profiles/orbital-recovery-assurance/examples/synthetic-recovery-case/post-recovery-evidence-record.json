@@ -1,0 +1,93 @@
+{
+  "profile_version": "0.5",
+  "record_class": "synthetic",
+  "record_id": "EVIDENCE-RECORD-SYN-POST",
+  "phase": "requalification",
+  "asset_id": "ASSET-SYN-001",
+  "as_of": "2030-01-01T00:35:00Z",
+  "planes": {
+    "physical": {
+      "RF": {
+        "state": "functional",
+        "confidence": 0.9,
+        "evidence_refs": [
+          "EVIDENCE-010"
+        ],
+        "operating_envelope": "declared synthetic envelope"
+      }
+    },
+    "trust": {
+      "command": {
+        "state": "verified",
+        "confidence": 0.92,
+        "evidence_refs": [
+          "EVIDENCE-011"
+        ]
+      }
+    },
+    "authority": {
+      "operator": {
+        "state": "verified",
+        "confidence": 0.95,
+        "evidence_refs": [
+          "EVIDENCE-012"
+        ]
+      }
+    }
+  },
+  "evidence": [
+    {
+      "id": "EVIDENCE-010",
+      "source_ref": "SRC-010",
+      "source_class": "test",
+      "timestamp": "2030-01-01T00:31:00Z",
+      "method": "post-intervention functional test",
+      "evidence_class": "observed",
+      "provenance_roots": {
+        "clock_source": "CLOCK-010",
+        "software_pipeline": "PIPE-010"
+      },
+      "validity": {
+        "intended_use": [
+          "requalification"
+        ],
+        "reviewed_at": "2030-01-01T00:35:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-011",
+      "source_ref": "SRC-011",
+      "source_class": "test",
+      "timestamp": "2030-01-01T00:32:00Z",
+      "method": "command-path verification",
+      "evidence_class": "observed",
+      "provenance_roots": {
+        "clock_source": "CLOCK-011",
+        "identity_source": "IDENTITY-011"
+      },
+      "validity": {
+        "intended_use": [
+          "requalification"
+        ],
+        "reviewed_at": "2030-01-01T00:35:00Z"
+      }
+    },
+    {
+      "id": "EVIDENCE-012",
+      "source_ref": "SRC-012",
+      "source_class": "configuration_record",
+      "timestamp": "2030-01-01T00:33:00Z",
+      "method": "authority-state verification",
+      "evidence_class": "reported",
+      "provenance_roots": {
+        "identity_source": "IDENTITY-012"
+      },
+      "validity": {
+        "intended_use": [
+          "authority-assessment"
+        ],
+        "reviewed_at": "2030-01-01T00:35:00Z"
+      }
+    }
+  ]
+}
