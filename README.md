@@ -98,7 +98,8 @@ The synthetic fixture intentionally retains a visible critical evidence gap. A P
 - **Decision receipts** — verify that a declared decision basis references nodes in a valid assurance graph.
 - **Mission Decision Packets** — connect a consequential human decision to evidence, assumptions, reproduction state, dependencies, and explicit reopen conditions.
 - **Scientific Discovery Assurance** — portable contracts for discovery provenance, priority evidence, research-boundary declarations, formal-proof/specification separation, replication, and attribution chronology.
-- **CI-native V&V** — exercise graph, receipt, decision, schema, package, scientific-discovery, adversarial rejection, and public-boundary controls on supported environments.
+- **Orbital Recovery Assurance** — bounded source contracts and tools for Mission Recovery Chain mapping, physical/trust/authority separation, provenance-aware evidence handling, robust option eligibility, next-best evidence, requalification, Time-to-Trust metrics, and synthetic known-truth evaluation under uncertainty.
+- **CI-native V&V** — exercise graph, receipt, decision, schema, package, bounded profiles, adversarial rejection, and public-boundary controls on supported environments.
 
 ## Mission Decision Packet
 
@@ -116,37 +117,9 @@ That turns a one-time review into a change-sensitive decision record without aut
 
 ## Research receipt v2
 
-Version 2 binds the code entrypoint as well as input/output artifacts and requires exact output hashes:
+Version 2 binds the code entrypoint as well as input/output artifacts and requires exact output hashes. `fma receipt ...` is non-executing. `fma reproduce ...` is an explicit trusted-code operation. The reproduction workspace is an integrity boundary, **not a sandbox or hermetic environment**. Trusted code still runs with the permissions and ambient capabilities of the host.
 
-```yaml
-receipt_version: "2.0"
-experiment:
-  id: DEMO-Z-EXPECTATION
-  command: python analysis.py
-  entrypoint: analysis.py
-  seed: 1111
-code:
-  - path: analysis.py
-    sha256: "..."
-inputs:
-  - path: data/measurements.csv
-    sha256: "..."
-outputs:
-  - path: outputs/result.json
-    sha256: "..."
-checks:
-  - name: z_expectation
-    path: outputs/result.json
-    json_path: estimate_z
-    expected: 0.6
-    atol: 1.0e-12
-```
-
-`fma receipt ...` is non-executing. It verifies the declared artifacts and checks and reports how many controls actually passed.
-
-`fma reproduce ...` is an explicit trusted-code operation. It verifies declared code and inputs first, requires the command to execute the declared entrypoint directly or as the first Python script argument, creates a fresh temporary workspace containing the receipt plus declared code and inputs, intentionally does **not** stage declared outputs, executes with `shell=False`, and then verifies the outputs and numerical criteria. Interpreter modes such as `python -c`, `python -m`, or stdin execution cannot satisfy entrypoint binding merely by mentioning the declared entrypoint later in the command. A successful command that produces no required output fails closed rather than reusing a stale result from the caller's working directory.
-
-The reproduction workspace is an integrity boundary, **not a sandbox or hermetic environment**. Trusted code still runs with the permissions and ambient capabilities of the host. Legacy version-1 receipts remain available for non-executing historical verification but do not receive the current fresh-reproduction PASS.
+See [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md) and [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md).
 
 ## Research receipt v3.1
 
@@ -158,29 +131,9 @@ Version 3.1 makes the output claim explicit instead of treating every successful
 
 For external execution evidence, version 3.1 also binds `submitted_at`, `started_at`, `completed_at`, and `collected_at` chronology. When calibration evidence is required, the declared calibration validity window must cover the execution interval. A syntactically valid scheduler/job record is still an assertion unless an external trust mechanism authenticates its issuer.
 
-Example output interpretation:
-
-```text
-Exact outputs:        declared exact comparisons only
-Semantic outputs:     declared check scope only
-Record-only outputs:  identity recorded, no equivalence claim
-Scientific truth:     NOT ESTABLISHED
-```
-
-See [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md) and [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md).
-
 ## Scientific Discovery Assurance
 
-[`profiles/scientific-discovery/`](profiles/scientific-discovery/) adds a bounded contract set for machine-assisted or computational discovery:
-
-- `DiscoveryPassport` records the claimed result, contributors, execution context, provenance, verification state, attribution chronology, limitations, and accountable decision authority.
-- `ResearchPriorityReceipt` binds an artifact hash to declared priority evidence; a local runtime clock alone remains untrusted.
-- `ResearchBoundaryAttestation` records a declared research-data boundary; the declaration is not proof that the boundary was enforced.
-- `FormalProofRecord` keeps proof-checker state separate from specification-equivalence review.
-- `ReplicationReceipt` preserves independent reproduction state and unresolved discrepancies.
-- `AgentProvenanceRef` provides bounded machine-run references without requiring a remote telemetry service.
-
-The bundled synthetic case intentionally remains `REVIEW_REQUIRED`: proof checking passes, but specification equivalence and replication are incomplete.
+[`profiles/scientific-discovery/`](profiles/scientific-discovery/) adds a bounded contract set for machine-assisted or computational discovery. The bundled synthetic case intentionally remains `REVIEW_REQUIRED`: proof checking passes, but specification equivalence and replication are incomplete.
 
 ```bash
 python scripts/validate_scientific_discovery.py .
@@ -194,6 +147,46 @@ SCIENTIFIC DISCOVERY PROFILE PASS
 
 That PASS establishes only the declared contracts and synthetic cross-record invariants; it does not certify the discovery.
 
+## Orbital Recovery Assurance
+
+[`profiles/orbital-recovery-assurance/`](profiles/orbital-recovery-assurance/) is a bounded assurance profile for degraded or uncertain orbital mission capability. It does not control orbital assets, authorize operations, establish ownership, or certify recoverability or mission readiness.
+
+Its operator-facing Mission Recovery Chain is:
+
+```text
+Power → Contact → Telemetry → Command → Capability
+```
+
+Trust and authority remain cross-cutting overlays rather than a sixth serial link. The doctrine is **count independent recovery paths, not merely assets**.
+
+The real-user flow is:
+
+```text
+Map → Count → Exercise → Assess → Acquire Evidence → Human Decision
+    → Intervene → Requalify → Measure Time to Trust → Reassess
+```
+
+Public examples are synthetic and source-neutral. Real mission evidence remains partner-governed outside this public repository. Machine outputs stop at eligibility for downstream human decision preparation.
+
+Evaluate the source-distributed profile with:
+
+```bash
+python -m pip install "jsonschema==4.26.0"
+python scripts/validate_orbital_recovery_assurance.py .
+python -m unittest tests.test_orbital_recovery_assurance -v
+python scripts/run_orbital_recovery_synthetic_benchmark.py .
+```
+
+For a partner-controlled private case:
+
+```bash
+python scripts/validate_orbital_recovery_case.py /path/to/private-case --require-stage mapped
+```
+
+The private-case validator is local-only and structural. Later lifecycle gates can require `assessed`, `post-intervention`, or `requalification-review`.
+
+The Orbital profile is distributed in the repository/source archive, not the core Python wheel. Public visibility is not a grant of operational or commercial reuse beyond the repository's stated license; such use requires rights explicitly granted by Bridge Node 7 or a separate agreement.
+
 ## Runtime privacy
 
 The installed FMA runtime makes no remote API calls, emits no telemetry, and performs no default uploads. Package installation and hosted CI may use their configured package/repository networks; runtime assurance checks operate on local files.
@@ -205,7 +198,8 @@ frontier-mission-assurance/
 ├── src/frontier_assurance/      # reference implementation
 ├── schemas/                     # portable JSON Schemas
 ├── profiles/                    # bounded assurance profiles
-│   └── scientific-discovery/    # scientific-discovery contracts
+│   ├── scientific-discovery/    # scientific-discovery contracts
+│   └── orbital-recovery-assurance/ # orbital-recovery contracts and source tools
 ├── examples/                    # synthetic worked examples
 ├── tests/                       # regression, tamper, adversarial, and boundary tests
 ├── docs/                        # architecture, acceptance, and adoption guidance
@@ -226,30 +220,7 @@ Core relations:
 
 `supports`, `depends_on`, `contradicts`, `verifies`, `validates`, `implements`, `requires`, `generated_by`, `supersedes`, `mitigates`.
 
-A minimal assumption:
-
-```yaml
-- id: ASSUMP-001
-  kind: assumption
-  title: Integrated behavior remains inside the declared envelope
-  status: open
-```
-
 FMA intentionally does **not** calculate an engineering priority score from assumption fields. It exposes assumptions, gaps, and dependency impact; consequence, urgency, resource allocation, and final priority remain human-owned.
-
-## Status semantics
-
-Recommended node statuses:
-
-- `proposed` — not yet accepted into the baseline
-- `open` — unresolved assumption/risk/evidence gap
-- `active` — accepted current baseline
-- `verified` — declared verification evidence meets its stated acceptance criteria
-- `validated` — declared physical/operational evidence supports intended use
-- `planned` — planned activity or experiment
-- `complete` — completed activity where `verified`/`validated` is not the correct semantic
-- `retired` — intentionally no longer active
-- `superseded` — replaced by a newer node
 
 ## What a PASS means
 
@@ -265,7 +236,7 @@ python -m pip install --no-deps -e .
 make check
 ```
 
-Hosted CI additionally rehearses supported Python versions, multiple operating systems, fresh wheel installation, the tracked-file public release boundary, adversarial rejection behavior, fresh reproduction integrity, and the Scientific Discovery Assurance synthetic profile.
+Hosted CI additionally rehearses supported Python versions, multiple operating systems, fresh wheel installation, the tracked-file public release boundary, adversarial rejection behavior, fresh reproduction integrity, and both bounded assurance profiles.
 
 ## Design principles
 
@@ -284,7 +255,7 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/INTEROPERABILITY.md`]
 
 ## Current maturity
 
-The current source identity is defined by [`VERSION`](VERSION). The v0.6 line strengthens tracked-file public-boundary enforcement, explicit output-assurance scope, external execution chronology, and calibration-to-execution validity while preserving FMA's deliberately small public scope, Mission Decision Packets, Scientific Discovery Assurance, cross-platform verification, and stable-release automation.
+The current source identity is defined by [`VERSION`](VERSION). The v0.7 line adds bounded Orbital Recovery Assurance with source-neutral Mission Recovery Chain mapping, robust option eligibility, private local case validation, synthetic known-truth benchmarking, post-intervention requalification, and Time-to-Trust while preserving FMA's deliberately small public scope, Mission Decision Packets, Scientific Discovery Assurance, cross-platform verification, and deliberate stable-release automation.
 
 Current deterministic validation expectations and residual limitations are recorded in [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md).
 
