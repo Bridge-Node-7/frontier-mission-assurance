@@ -1,8 +1,6 @@
 # Recovery Assurance Package
 
-This is a bounded human-review template for presenting the basis of an orbital recovery
-assessment. It is not an authorization, certification, ownership record, or operational
-command.
+This template presents the evidence basis for an orbital recovery assessment in a consistent review format. It connects current mission state, evidence quality, recovery-path diversity, option eligibility, requalification obligations, and reopen conditions for accountable decision review.
 
 ## 1. Assessment identity
 
@@ -15,8 +13,7 @@ command.
 
 ## 2. Mission outcome
 
-State the capability that matters and the minimum useful service level to be restored,
-requalified, repurposed, or retired.
+State the capability that matters and the minimum useful service level to be restored, requalified, repurposed, or retired.
 
 ## 3. Mission Recovery Chain
 
@@ -28,12 +25,10 @@ For every stage record:
 
 - current state;
 - evidence references;
-- recovery/bypass options;
-- current blocking condition if any.
+- recovery or bypass options;
+- current blocking condition, if any.
 
-Record trust and authority as overlays across the chain rather than serial stages.
-State the currently binding constraint or candidate constraints without implying that a
-view is itself a source of truth. Count independent recovery paths, not raw assets.
+Record trust and authority as overlays across the chain rather than serial stages. Identify the currently binding constraint or candidate constraints and count independent recovery paths rather than raw assets.
 
 ## 4. Current state
 
@@ -44,8 +39,7 @@ Summarize supported, degraded, failed, contested, or unknown physical capability
 Summarize telemetry, command-path, software, identity, and data-integrity trust state.
 
 ### Authority
-Summarize whether the relevant authority is verified, declared, disputed, unknown, or
-otherwise bounded by the local governance model.
+Summarize the applicable authority state under the governing mission model.
 
 ## 5. Evidence basis
 
@@ -59,12 +53,11 @@ For each material claim record:
 - unresolved contradiction;
 - applicability to the current configuration.
 
-Do not count correlated evidence as independent merely because it appears in multiple
-documents.
+Treat evidence independence as a provenance question. Multiple records that share a material root remain correlated evidence.
 
 ## 6. Recovery pathways considered
 
-For each pathway:
+For each pathway record:
 
 - pathway ID;
 - objective;
@@ -74,27 +67,29 @@ For each pathway:
 - intervention-success model;
 - utility space;
 - HOLD utility baseline;
-- per-option unsafe hypotheses, required gates, gate failures, eligibility, and utility advantage relative to HOLD;
+- unsafe hypotheses;
+- gate failures;
+- eligibility;
+- utility advantage relative to HOLD;
 - unresolved assumptions.
 
-## 7. Robust-action result
+## 7. Robust-option result
 
-Record which pathways remain acceptable across the declared credible state set and which
-are excluded.
+Record which pathways remain acceptable across the declared credible state set and the evidence supporting any exclusions.
 
-A robust-action result is not an authorization.
+Robust-option membership establishes consistency with the declared safety envelope; the governing decision process retains authorization authority.
 
 ## 8. Decision-relevant evidence
 
 Record any positive-value next observation:
 
 - observation ID;
-- cost/risk basis;
+- cost or risk basis;
 - possible outcomes;
 - expected change to admissible options;
 - net expected value of information.
 
-If no observation has positive expected value, say so explicitly.
+If no observation has positive expected value, record that result explicitly.
 
 ## 9. Eligibility for decision preparation
 
@@ -105,13 +100,11 @@ For each pathway state:
 - evidence gaps;
 - reason for HOLD where applicable.
 
-Machine output may make an option eligible for downstream decision preparation. It does
-not select or authorize the option.
+Machine output can establish eligibility for downstream decision preparation. The accountable authority selects and authorizes consequential action.
 
-## 10. Human decision reference
+## 10. Decision reference
 
-If a consequential decision is made, reference the downstream governed decision record.
-Do not silently convert this package into the decision authority.
+When a consequential decision is made, reference the downstream governed decision record and preserve the evidence basis used at that time.
 
 ## 11. Post-intervention requalification
 
@@ -125,8 +118,7 @@ For the resulting configuration record:
 - operating envelope;
 - requalification disposition.
 
-A technically successful intervention is not the same as a requalified mission
-capability.
+Requalification requires evidence against declared mission requirements and remains distinct from intervention success.
 
 ## 12. Recovery timeline
 
@@ -138,23 +130,12 @@ Where available, record:
 - time to trust;
 - time to verification.
 
-These are descriptive measures derived from declared timeline events.
+These measures show both technical recovery and the time required to establish a trustworthy mission state.
 
 ## 13. Reopen conditions
 
-List the changes that invalidate or require reassessment of this package, including
-configuration, evidence validity, authority, software, interface state, mission
-requirement, or new contradictory evidence.
+List the changes that invalidate or require reassessment of this package, including configuration, evidence validity, authority, software, interface state, mission requirement, dependency state, or new contradictory evidence.
 
-## 14. Non-claims
+## 14. Authority and qualification scope
 
-This package does not by itself establish:
-
-- ownership;
-- legal authority;
-- operational authorization;
-- flight safety;
-- mission readiness;
-- real-world probability calibration;
-- certification;
-- scientific truth.
+This package supports assurance review and decision preparation. Ownership, legal authority, operational authorization, flight safety, mission readiness, mission-specific probability calibration, certification, and scientific validity remain governed by the evidence and approval processes responsible for those determinations.
