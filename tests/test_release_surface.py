@@ -103,9 +103,9 @@ def test_release_identity_is_consistent():
 
 
 def test_proprietary_candidate_does_not_claim_open_source():
-    disclaimer = (ROOT / "DISCLAIMER.md").read_text(encoding="utf-8").lower()
-    assert "open-source" not in disclaimer
-    assert "open source" not in disclaimer
+    assurance_scope = (ROOT / "ASSURANCE_SCOPE.md").read_text(encoding="utf-8").lower()
+    assert "open-source" not in assurance_scope
+    assert "open source" not in assurance_scope
 
 
 def test_release_evidence_lifecycle_is_non_recursive():
