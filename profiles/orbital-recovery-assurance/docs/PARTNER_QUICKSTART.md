@@ -1,37 +1,18 @@
 # Partner Quickstart
 
-This guide is for engineering, assurance, program, and integration teams evaluating
-Orbital Recovery Assurance from the public Frontier Mission Assurance repository. For an
-actual mission case, use this quickstart together with `REAL_CASE_PROTOCOL.md`.
+This guide gives engineering, assurance, program, and integration teams the shortest path to evaluate and apply Orbital Recovery Assurance while keeping mission evidence under established governance.
 
-The profile is intentionally designed so real mission evidence does **not** need to be
-committed to the public repository.
+The profile is designed to **map into existing systems rather than replace them**.
 
-## Operational-use and distribution boundary
+## Distribution and rights
 
-Use a repository checkout or verified FMA source archive when evaluating this profile. The installed FMA wheel provides the core CLI/package but does not install bounded profile directories.
+Use a repository checkout or verified FMA source archive for the Orbital profile. The installed FMA wheel provides the core CLI/package; profile schemas, examples, benchmark assets, and mission guidance are distributed with the matching source release.
 
-The public repository is an evaluation/reference implementation under its stated license. Operational or commercial use must remain within rights explicitly granted by Bridge Node 7 or a separate agreement; public visibility alone is not an operational-use license.
+The public repository is a reference implementation under its stated license. Operational or commercial use follows the rights explicitly granted by Bridge Node 7 or a separate agreement.
 
-For a real private case, keep the case directory outside the public repository and run:
+## 1. Verify the reference
 
-```bash
-python scripts/validate_orbital_recovery_case.py /path/to/private-case
-```
-
-That command performs local structural and cross-reference validation only. It does not upload the case, authenticate the evidence, establish real-world probability calibration, or authorize an action.
-
-Use `--require-stage mapped|assessed|post-intervention|requalification-review` when the workflow requires a minimum artifact stage. A structural PASS at an earlier stage is not a claim that later recovery or requalification work is complete.
-
-## 1. Verify the public reference
-
-### Distribution note
-
-Use a repository checkout or verified FMA source archive when evaluating this profile.
-The installed FMA wheel contains the core CLI/package but does not install bounded profile
-directories such as `profiles/orbital-recovery-assurance/`.
-
-From the Frontier Mission Assurance repository root, install the bounded profile validator dependency in the evaluation environment, then run the profile checks:
+From the Frontier Mission Assurance repository root:
 
 ```bash
 python -m pip install "jsonschema==4.26.0"
@@ -40,57 +21,56 @@ python -m unittest tests.test_orbital_recovery_assurance -v
 python scripts/run_orbital_recovery_synthetic_benchmark.py .
 ```
 
-A PASS establishes only the declared public contracts, invariants, synthetic fixtures,
-and benchmark behavior. It does not establish mission readiness, flight safety,
-recoverability, authorization, ownership, or real-world probability calibration.
+Expected profile result:
 
-## 2. Review the synthetic example
+```text
+ORBITAL RECOVERY ASSURANCE PROFILE PASS
+```
+
+A PASS confirms the declared profile contracts, invariants, reference cases, and benchmark acceptance checks exercised by the validation set.
+
+## 2. Review the reference case
 
 Start with:
 
 - `examples/synthetic-recovery-case/recovery-evidence-record.json`
+- `examples/synthetic-recovery-case/recovery-chain-view.json`
 - `examples/synthetic-recovery-case/recovery-option-assessment.json`
 - `examples/synthetic-recovery-case/requalification-record.json`
 - `examples/synthetic-recovery-case/recovery-timeline.json`
 
-Use the example to understand structure and semantics before mapping any real program data.
+The reference case shows the complete structure before mission-specific evidence is mapped.
 
-## 3. Map → Count → Exercise the recovery chain
+## 3. Map → Count → Exercise
 
-Before ranking recovery options, build a recovery-chain view for each essential mission capability.
-See `RECOVERY_CHAIN.md`.
-
-### MAP
-
-Identify what must remain available, trustworthy, and recoverable across:
+Build a Mission Recovery Chain for each essential capability:
 
 `Power → Contact → Telemetry → Command → Capability`
 
 Treat trust and authority as cross-cutting overlays.
 
+### MAP
+
+Map the required state and evidence from the systems that already own it.
+
 ### COUNT
 
-Count functionally capable independent recovery paths rather than raw asset totals. Preserve
-shared dependencies explicitly; separate assets may still depend on the same identity, timing,
-software/update, cloud, ground-capacity, communications, supplier, or authority root.
+Count functionally capable independent recovery paths rather than raw asset totals. Preserve shared roots explicitly; separate assets may still depend on the same identity, timing, software/update, ground-capacity, communications, supplier, configuration, or authority dependency.
 
 ### EXERCISE
 
-Use synthetic or controlled scenarios to combine technical failure, ambiguous diagnosis,
-communications degradation, trust degradation, authority uncertainty, and post-intervention
-evidence gaps. Identify the binding constraint before choosing the response.
+Use synthetic or controlled scenarios to combine technical failure, ambiguous diagnosis, communications degradation, trust degradation, authority uncertainty, and post-intervention evidence gaps.
 
-The solution follows the bottleneck; the profile must not begin with a favored intervention.
+Identify the binding constraint before selecting an intervention path.
 
-## 4. Create a private assessment workspace
+## 4. Create a governed assessment workspace
 
-Create a workspace **outside the public repository** and outside any automatically
-published or synchronized location.
+Keep mission-specific evidence in an access-controlled workspace or the partner's existing governed systems.
 
-Recommended private layout:
+Recommended local layout:
 
 ```text
-assessment-private/
+assessment-governed/
 ├── evidence/
 ├── option-assessments/
 ├── requalification/
@@ -99,14 +79,11 @@ assessment-private/
 └── review/
 ```
 
-Real asset identifiers, telemetry, source identities, authority records, economics,
-and mission-sensitive evidence stay in that private workspace or in the partner's
-existing governed systems.
+Asset identifiers, telemetry, source identities, authority records, economics, and mission-sensitive evidence remain inside that governed boundary.
 
-## 5. Map rather than migrate
+## 5. Map the minimum required evidence
 
-Do not copy an entire mission data environment into Frontier Mission Assurance.
-Map only the bounded fields required by the profile:
+Map only the fields required by the profile:
 
 - physical state;
 - trust state;
@@ -117,31 +94,47 @@ Map only the bounded fields required by the profile:
 - declared utility space;
 - requalification requirements.
 
-Where a richer system already owns a record, retain that ownership and use a local
-reference or adapter rather than creating a second source of truth.
+Where another system owns a record, preserve that ownership and reference it through a local mapping or adapter instead of creating a second source of truth.
 
-The public reference does not infer your real posterior, calibrate intervention success, or determine your local safety predicates. Those remain governed partner inputs.
+Posterior estimates, intervention-success calibration, safety predicates, and local admissibility rules remain governed mission inputs.
 
-## 6. Run the assessment
+## 6. Validate the local case
+
+From a matching FMA source checkout or verified source archive:
+
+```bash
+python scripts/validate_orbital_recovery_case.py /path/to/private-case --require-stage mapped
+```
+
+The validator performs local schema and cross-reference checks and makes no network calls. Evidence authenticity, mission calibration, and authorization remain inputs from the governing mission process.
+
+Lifecycle gates are available through:
+
+```text
+mapped | assessed | post-intervention | requalification-review
+```
+
+Each stage proves only the artifacts required for that point in the lifecycle.
+
+## 7. Run the assessment
 
 Use the profile to answer:
 
-1. What capability may remain?
-2. Which evidence is trustworthy and applicable?
-3. Which recovery pathways are robust across the declared credible state set?
-4. Which options remain blocked by trust, authority, safety, or evidence gates?
-5. Which observation has positive expected decision value?
-6. What must be demonstrated after intervention before the intended capability can be
-   considered requalified?
+1. What capability remains?
+2. Which evidence is current, applicable, and trustworthy?
+3. How many independent recovery paths are available?
+4. Which pathways remain robust across the declared credible state set?
+5. Which options are blocked by trust, authority, safety, or evidence gates?
+6. Which observation has positive expected decision value?
+7. What must be demonstrated before the resulting capability is requalified?
 
-## 7. Prepare the human review artifact
+## 8. Prepare the decision-review package
 
-Use `RECOVERY_ASSURANCE_PACKAGE.md` as the bounded handoff structure.
+Use [`RECOVERY_ASSURANCE_PACKAGE.md`](RECOVERY_ASSURANCE_PACKAGE.md) to present the current evidence basis, uncertainty, recovery-path state, option eligibility, requalification obligations, timeline metrics, and reopen conditions.
 
-The package presents the evidence basis, uncertainty, option eligibility,
-requalification state, and reopen conditions. It is not an authorization record.
+The package feeds the governing decision process while preserving accountable human authority.
 
-## 8. Reassess after material change
+## 9. Reassess on material change
 
 Re-run the assessment when any declared condition materially changes, including:
 
@@ -155,4 +148,12 @@ Re-run the assessment when any declared condition materially changes, including:
 - intervention design;
 - post-intervention test result.
 
-The profile is useful only while its declared basis remains current.
+A strong assurance basis stays synchronized with the system it describes.
+
+## Next references
+
+- [`RECOVERY_CHAIN.md`](RECOVERY_CHAIN.md) — recovery-path model.
+- [`REAL_CASE_PROTOCOL.md`](REAL_CASE_PROTOCOL.md) — governed mission-case protocol.
+- [`ADOPTION_PATH.md`](ADOPTION_PATH.md) — adoption lifecycle.
+- [`PRIVATE_WORKSPACE_PATTERN.md`](PRIVATE_WORKSPACE_PATTERN.md) — data-handling pattern.
+- [`../ASSURANCE_SCOPE.md`](../ASSURANCE_SCOPE.md) — profile verification and authority scope.
