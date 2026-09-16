@@ -103,9 +103,9 @@ def test_release_identity_is_consistent():
 
 
 def test_proprietary_candidate_does_not_claim_open_source():
-    disclaimer = (ROOT / "DISCLAIMER.md").read_text(encoding="utf-8").lower()
-    assert "open-source" not in disclaimer
-    assert "open source" not in disclaimer
+    assurance_scope = (ROOT / "ASSURANCE_SCOPE.md").read_text(encoding="utf-8").lower()
+    assert "open-source" not in assurance_scope
+    assert "open source" not in assurance_scope
 
 
 def test_release_evidence_lifecycle_is_non_recursive():
@@ -140,7 +140,7 @@ def test_scientific_discovery_profile_surface_is_present():
         ROOT / "profiles" / "scientific-discovery" / "README.md",
         ROOT / "profiles" / "scientific-discovery" / "SPECIFICATION_EQUIVALENCE.md",
         ROOT / "profiles" / "scientific-discovery" / "ATTRIBUTION.md",
-        ROOT / "profiles" / "scientific-discovery" / "LIMITATIONS.md",
+        ROOT / "profiles" / "scientific-discovery" / "ASSURANCE_SCOPE.md",
         ROOT / "scripts" / "validate_scientific_discovery.py",
         ROOT / "tests" / "test_scientific_discovery.py",
     ]

@@ -1,9 +1,9 @@
-# Source Validation Report — v0.7.1
+# Source Validation Report — v0.7.2
 
 **Date:** 2026-09-15  
-**Role:** bounded public reference for evidence-native verification, validation, reproducibility, traceability, and mission assurance
+**Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
 
-This report records deterministic validation requirements for the source candidate. Commit-specific hosted CI evidence belongs in GitHub Actions and tagged release metadata rather than being copied into source. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
+This report defines the deterministic validation contract for the source candidate. Commit-specific hosted CI evidence belongs in GitHub Actions and tagged release metadata rather than being copied into source. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
 
 ## Core functional V&V
 
@@ -21,9 +21,9 @@ This report records deterministic validation requirements for the source candida
 - External v3.1 chronology and calibration-interval coverage: **PASS required**
 - Malformed input failures: **exit 2 without traceback required**
 - Decision-basis receipt verification: **PASS required**
-- Mission Decision Packet synthetic example: **present required**
+- Mission Decision Packet reference example: **present required**
 - Deterministic Markdown report under `SOURCE_DATE_EPOCH`: **PASS required**
-- Scientific Discovery Assurance linked synthetic profile: **PASS required**
+- Scientific Discovery Assurance linked reference profile: **PASS required**
 - Runtime no-network-client import regression: **PASS required**
 - JSON / YAML / CFF parse checks: **PASS required**
 - Local Markdown-link integrity: **PASS required**
@@ -33,10 +33,10 @@ This report records deterministic validation requirements for the source candida
 
 ## Orbital Recovery Assurance V&V
 
-The v0.7.1 source candidate validates the bounded source-distributed Orbital Recovery Assurance profile and its hardened public surface. Release eligibility requires:
+The v0.7.2 source candidate validates the source-distributed Orbital Recovery Assurance profile and its refined public experience. Release eligibility requires:
 
-- profile schemas and synthetic records agree on profile contract `0.5`;
-- public synthetic examples remain source-neutral;
+- profile schemas and reference records agree on profile contract `0.5`;
+- public examples remain source-neutral;
 - physical, trust, and authority semantics remain distinct;
 - the Mission Recovery Chain contains exactly power/contact/telemetry/command/capability, with trust and authority as overlays;
 - recovery-chain evidence references resolve;
@@ -44,39 +44,39 @@ The v0.7.1 source candidate validates the bounded source-distributed Orbital Rec
 - robust-option filtering is non-vacuous and fail-closed;
 - unsafe credible hypotheses and gate failures remain visible per option;
 - HOLD/no-consequential-action remains an explicit utility baseline;
-- next-best evidence is evaluated over the admissible policy and is surfaced only when positive-value;
-- machine output stops at eligibility for downstream human decision preparation;
+- next-best evidence is evaluated over the admissible policy and surfaced only when positive-value;
+- machine output stops at eligibility for accountable decision preparation;
 - post-intervention requalification evidence references resolve and fail closed when incomplete;
 - TTC/TTE/TTMC/TTT/TTV metrics remain event-derived;
 - the checked-in synthetic benchmark is deterministic and matches current protocol/code;
-- the primary known-truth benchmark uses 5,000 cases and must PASS its declared protocol;
-- the declared stress matrix must PASS;
-- the synthetic bounded policy unsafe-action rate must remain 0.0 under the declared generator;
-- private-case structural validation remains local-only and supports mapped, assessed, post-intervention, and requalification-review lifecycle gates;
-- private-case quiet failures must not echo unresolved private identifiers;
-- JSON object serialization order must not become part of the recovery-chain contract;
-- Orbital profile validation must pass on the supported Python matrix and explicit Ubuntu/macOS/Windows smoke path.
+- the primary known-truth benchmark uses 5,000 cases and passes its declared protocol;
+- the declared stress matrix passes;
+- the reference policy unsafe-action rate remains 0.0 under the declared synthetic generator;
+- governed local case validation remains local-only and supports mapped, assessed, post-intervention, and requalification-review lifecycle gates;
+- local-case quiet failures do not echo unresolved protected identifiers;
+- JSON object serialization order does not become part of the recovery-chain contract;
+- Orbital profile validation passes on the supported Python matrix and explicit Ubuntu/macOS/Windows smoke path.
 
-These controls demonstrate only behavior under the declared contracts and synthetic generator. They do not establish real-world spacecraft recoverability, flight safety, ownership, authority, probability calibration, commercial demand, or mission readiness.
+These controls establish behavior under the declared contracts and synthetic generator. Mission recoverability, flight safety, ownership, authority, mission-specific probability calibration, and mission readiness remain governed by the evidence and approval processes responsible for the actual system.
 
-## Public-boundary V&V
+## Public release V&V
 
-The authoritative release boundary is the Git-tracked file set. Required behavior:
+The authoritative release surface is the Git-tracked file set. Required behavior:
 
 - every Git-tracked candidate file is scanned regardless of directory name;
 - prohibited credential/private-key/local-path/private-IP patterns fail closed;
 - unapproved external URLs fail closed;
 - high-risk binary/archive/document extensions fail closed unless the public contract intentionally changes;
-- public examples remain synthetic;
-- proper nouns, sensitive technical values, and relationship context still require human public-surface review.
+- public examples remain source-neutral;
+- proper nouns, sensitive technical values, and relationship context receive human public-surface review.
 
-A current-tree boundary PASS does not prove that historical Git objects never contained sensitive material.
+A current-tree release-policy PASS attests to the tracked source state under review; historical Git objects remain separate durable history.
 
 ## Reproduction integrity contract
 
-`fma receipt` is non-executing. `fma reproduce` is an explicit trusted-code operation for local code-bound receipts. The workspace is an integrity boundary, **not a sandbox or hermetic environment**. Trusted code still executes with host permissions and ambient capabilities.
+`fma receipt` verifies receipt structure and declared integrity without executing the receipt command. `fma reproduce` is the explicit trusted-code operation for local code-bound receipts. The fresh workspace prevents stale declared outputs from satisfying reproduction; trusted code still executes with host permissions and ambient capabilities.
 
-## Dependency / packaging V&V
+## Dependency and packaging V&V
 
 - Development test runner: **pytest 9.1.1 required**
 - Project optional dev range: **pytest >=9.1.1,<10 required**
@@ -87,12 +87,12 @@ A current-tree boundary PASS does not prove that historical Git objects never co
 - Public package-index upload guard: **required**
 - Clean wheel install and CLI smoke: **PASS required**
 
-Bounded profiles are distributed through the repository/source archive. The core wheel remains the `frontier_assurance` package and CLI surface.
+Assurance profiles are distributed through the repository/source archive. The core wheel remains the `frontier_assurance` package and CLI surface.
 
 ## Hosted acceptance
 
-The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-boundary validation, adversarial regressions, both bounded profile validators, dependency review where applicable, protected-main CodeQL on main, and clean wheel installation. The Actions run attached to that exact commit is authoritative hosted evidence.
+The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-release validation, adversarial regressions, both assurance profile validators, dependency review where applicable, protected-main CodeQL on main, and clean wheel installation. The Actions run attached to that exact commit is the authoritative hosted evidence.
 
 ## Disposition rule
 
-**SOURCE PASS** means the candidate satisfies this deterministic source contract. It is not scientific truth, authenticated authorship, mission readiness, certification, or deployment authorization. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
+**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, and consequential authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).

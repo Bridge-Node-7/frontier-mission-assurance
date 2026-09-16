@@ -1,25 +1,30 @@
-# Source Release Receipt — v0.7.1
+# Source Release Receipt — v0.7.2
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-15  
-**Canonical release gate:** READY
+**Canonical release gate:** PENDING
 
 ## Purpose
 
-Publish the accepted post-v0.7.0 public-surface hardening as an exact patch release without expanding Frontier Mission Assurance into a new authority, platform, or operational control system. Version 0.7.1 aligns source identity, validation records, and the Orbital Recovery Assurance profile with the hardened source-neutral public surface already accepted on protected `main`.
+Publish the refined Frontier Mission Assurance public experience as a coherent patch release while preserving the validated runtime, schema, assurance, authority, and release semantics of v0.7.1.
 
-## Material changes in v0.7.1
+Version 0.7.2 presents the system with a capability-first information architecture: product value first, verification evidence second, scope stated once, and governed authority made explicit without defensive repetition.
 
-- Aligned the repository, package, citation, project-facts, validation, and profile release identity to `0.7.1`.
-- Generalized Orbital Recovery Assurance interoperability and resilience terminology so public documentation stays source-neutral and reusable.
-- Removed internal/private research-program detail, roadmap/topology material, and bench-specific internal research content from the public Orbital profile surface.
-- Preserved the Mission Recovery Chain, physical/trust/authority separation, provenance-aware evidence handling, robust option eligibility, next-best evidence, requalification, Time-to-Trust, private-case validation, and synthetic benchmark semantics.
-- Preserved the public/synthetic boundary and accountable human consequential authority.
-- Added no new spacecraft-control, operational-authorization, certification, or real-world calibration claim.
+## Material changes in v0.7.2
+
+- Rebuilt the root README as a clear front door for technical evaluation and adoption.
+- Reframed public assurance boundaries as `Assurance Scope`, `Public Release Policy`, `Decision Authority`, and `Verification Scope`.
+- Replaced profile `LIMITATIONS.md` surfaces with `ASSURANCE_SCOPE.md` for both Orbital Recovery Assurance and Scientific Discovery Assurance.
+- Replaced `REAL_WORLD_ADOPTION.md` with the source-neutral `ADOPTION_PATH.md` and refined the mission-case protocol and partner quickstart.
+- Generalized Orbital profile interoperability language so public contracts expose stable interfaces rather than internal portfolio topology.
+- Refined release notes, standards positioning, acceptance criteria, evaluation guidance, and machine-readable project facts for consistent product voice.
+- Preserved the Mission Recovery Chain, physical/trust/authority separation, provenance-aware evidence handling, robust option eligibility, next-best evidence, requalification, Time-to-Trust, governed local-case validation, and synthetic benchmark semantics.
+- Preserved accountable human consequential authority and source-neutral public examples.
+- Changed no core assurance-graph, receipt, decision, schema, benchmark, or CLI semantics.
 
 ## Source-level evidence
 
-The candidate must satisfy `VALIDATION_REPORT.md`, including the complete existing FMA regression surface plus both bounded profile validators, Orbital synthetic cross-record invariants, deterministic benchmark/result binding, private-case lifecycle behavior, cross-platform validation, packaging, dependency review, and public-boundary controls.
+The candidate must satisfy `VALIDATION_REPORT.md`, including the complete FMA regression surface, both assurance profile validators, Orbital cross-record invariants, deterministic benchmark/result binding, governed local-case lifecycle behavior, cross-platform validation, packaging, dependency review, CodeQL on protected main, and public-release controls.
 
 ## Hosted evidence rule
 
@@ -27,16 +32,12 @@ Commit-specific hosted evidence belongs in GitHub Actions and tagged release met
 
 ## Tagged-release evidence rule
 
-The public release record must bind the accepted tag to the exact commit, successful hosted Actions run, source archive, wheel, tracked-source SHA-256 manifest, release-artifact SHA-256 manifest, SBOM, and available provenance attestations. Clean-user verification of the published source archive must exercise both bounded profile validators.
+The stable release record binds the accepted tag to the exact protected-main commit, successful hosted Actions run, source archive, wheel, tracked-source SHA-256 manifest, release-artifact SHA-256 manifest, CycloneDX SBOM, and available provenance attestations. Clean-user verification exercises the published source archive and both assurance profiles.
 
-## Claim boundary
+## Verification scope
 
-A passing Orbital Recovery Assurance control establishes only its declared structural, arithmetic, reference-resolution, synthetic-policy, or timeline property. It does not establish legal authority, ownership, spacecraft recoverability, flight safety, real-world probability calibration, mission qualification, commercial demand, or authorization for consequential action.
-
-An option may be robust and gate-clear yet still be unattractive relative to HOLD. Eligibility is not recommendation and is never operational authorization.
-
-The public repository contains synthetic/source-neutral examples. Named real-world evidence and sensitive mission records remain outside the public release surface.
+A PASS attests that the declared controls satisfied their acceptance criteria. Scientific validity, mission recoverability, flight safety, legal authority, mission-specific calibration, mission qualification, and consequential decision authority remain with the governing evidence and approval processes responsible for those determinations.
 
 ## Release gate
 
-A source candidate may advance only when deterministic source validation passes. Stable release additionally requires successful protected hosted V&V on the exact `main` commit and successful clean-user verification of the published artifacts. The stable release remains a deliberate workflow-dispatch ceremony rather than an automatic side effect of merge.
+Deterministic source validation and protected hosted V&V on the exact `main` commit must pass before the canonical release gate advances to `READY`. Stable publication then requires successful clean-user verification of the published artifacts through the explicit release workflow.

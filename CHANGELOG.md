@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.2 — public experience refinement
+
+- Rebuilt the repository front door around FMA's core value: evidence-native verification and validation for high-consequence frontier systems.
+- Reorganized public documentation around capabilities, verification evidence, accountable authority, and direct adoption paths rather than repeated defensive caveats.
+- Replaced profile `LIMITATIONS.md` surfaces with `ASSURANCE_SCOPE.md` for Orbital Recovery Assurance and Scientific Discovery Assurance.
+- Replaced the Orbital `REAL_WORLD_ADOPTION.md` surface with the source-neutral `ADOPTION_PATH.md` and refined partner, mission-case, validation, benchmark, and decision-review guidance.
+- Generalized Orbital interoperability language so public contracts expose stable interfaces without publishing internal portfolio topology.
+- Refined standards positioning, acceptance criteria, release notes, project facts, and public release policy for a consistent institutional voice.
+- Preserved runtime, schema, benchmark, receipt, decision, fail-closed assurance, source-neutral evidence handling, and accountable human authority semantics.
+
 ## 0.7.1 — public-surface hardening
 
 - Aligned the current source, package, citation, project-facts, validation, and Orbital profile release identity after the accepted v0.7.0 hardening work.
