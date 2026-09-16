@@ -1,7 +1,8 @@
 # Source Release Receipt — v0.7.1
 
 **Release type:** stable public reference candidate  
-**Date:** 2026-09-15
+**Date:** 2026-09-15  
+**Canonical release gate:** READY
 
 ## Purpose
 
