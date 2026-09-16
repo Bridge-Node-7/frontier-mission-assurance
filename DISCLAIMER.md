@@ -1,7 +1,7 @@
-# Disclaimer
+# Assurance Scope
 
-Frontier Mission Assurance is a bounded public reference for evidence-centered engineering workflows.
+Frontier Mission Assurance is a public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance.
 
-It is not a certification authority, regulatory determination, safety approval, flight qualification, acquisition approval, legal opinion, scientific peer review, security authorization, or guarantee of system performance.
+A machine PASS attests that the tested artifact satisfied the repository's declared machine-checkable controls. Scientific validation, regulatory approval, safety acceptance, flight qualification, acquisition authority, security authorization, and consequential mission decisions remain governed by the qualified reviewers and authorities responsible for those determinations.
 
-A passing validator means only that the tested artifact met the repository's declared machine-checkable rules. Human technical judgment, independent review, source evaluation, domain-specific requirements, and authorized decision ownership remain necessary.
+FMA is designed to strengthen those processes with inspectable evidence, explicit assumptions, reproducible checks, and durable decision basis—not to collapse distinct approval responsibilities into a single automated state.
