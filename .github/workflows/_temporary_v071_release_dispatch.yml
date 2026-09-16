@@ -16,19 +16,20 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Cancel superseded helper and wait for final protected-main release state
+      - name: Cancel superseded helpers and wait for final protected-main release gate
         shell: bash
         run: |
           set -euo pipefail
           gh run cancel 35045115726 --repo "$GITHUB_REPOSITORY" || true
+          gh run cancel 35045495123 --repo "$GITHUB_REPOSITORY" || true
           for _ in $(seq 1 120); do
             VERSION="$(gh api "repos/$GITHUB_REPOSITORY/contents/VERSION?ref=main" --jq .content | base64 -d | tr -d '\r\n')"
             RECEIPT="$(gh api "repos/$GITHUB_REPOSITORY/contents/RELEASE_RECEIPT.md?ref=main" --jq .content | base64 -d)"
-            if [[ "$VERSION" == "0.7.1" ]] && grep -Fq '**Release type:** stable public reference  ' <<<"$RECEIPT"; then
+            if [[ "$VERSION" == "0.7.1" ]] && grep -Fq '**Canonical release gate:** READY' <<<"$RECEIPT"; then
               gh workflow run release.yml --repo "$GITHUB_REPOSITORY" --ref main
               exit 0
             fi
             sleep 5
           done
-          echo "Timed out waiting for final v0.7.1 release state" >&2
+          echo "Timed out waiting for final v0.7.1 release gate" >&2
           exit 1
