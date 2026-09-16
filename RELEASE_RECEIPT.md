@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-15  
-**Canonical release gate:** PENDING
+**Canonical release gate:** READY
 
 ## Purpose
 
