@@ -1,46 +1,50 @@
-# Standards positioning
+# Standards Positioning
 
-Frontier Mission Assurance is a deliberately small public reference layer. It does not claim that assurance cases, provenance records, artifact hashing, reproducible workflows, numerical regression checks, or signed attestations are new inventions.
+Frontier Mission Assurance composes established assurance primitives into a compact, portable decision-evidence layer for frontier engineering teams.
 
-## What FMA is
+Its contribution is the system-level integration of traceability, artifact identity, reproducibility, evidence-state separation, dependency impact, explicit decision basis, and human-owned authority into a workflow that remains inspectable in ordinary version-controlled artifacts.
 
-FMA combines a small set of established engineering ideas into a bounded workflow for frontier teams:
+## Product contribution
 
-- a graph of missions, claims, assumptions, evidence, dependencies, risks, and decisions;
-- content-addressed research receipts with explicit acceptance checks;
+FMA combines:
+
+- a mission assurance graph connecting missions, claims, assumptions, evidence, dependencies, risks, and decisions;
+- content-addressed research receipts with explicit acceptance semantics;
 - fresh code-bound reproduction for trusted receipt-declared code;
-- thin decision receipts tied to graph-valid basis nodes;
-- explicit PASS semantics that refuse to convert machine checks into scientific truth or decision authority.
+- decision receipts tied to graph-valid basis nodes;
+- Mission Decision Packets with explicit reopen conditions;
+- profile contracts for specialized assurance domains;
+- precise PASS semantics that keep machine verification distinct from scientific or institutional authority.
 
-The product claim is therefore about **composition, restraint, portability, and user experience**, not novelty of the underlying primitives.
+The product value is in **composition, precision, portability, verification discipline, and operator experience**.
 
-## Assurance-case relationship
+## Assurance-case interoperability
 
-Structured assurance cases are an established field. FMA's assurance graph is intentionally less expressive than full assurance-case metamodels: it does not currently require dedicated strategy, context, justification, or defeater node classes.
+Structured assurance cases are an established field. FMA uses a compact portable projection optimized for evidence traceability and decision preparation while allowing richer assurance-case models to remain authoritative in the systems that own them.
 
-That is a deliberate minimum-sufficient-assurance choice, not a claim that richer assurance-case formalisms are unnecessary. Teams that require those constructs should keep them in the owning domain model or use a richer assurance-case tool and map the portable subset into FMA.
+Teams that require dedicated strategy, context, justification, defeater, or domain-specific constructs can retain those semantics locally and map the portable subset into FMA through explicit adapters.
 
-## Provenance and supply-chain relationship
+## Provenance and attestations
 
-Research Receipt v2 binds declared code, inputs, outputs, and numerical checks with SHA-256 and records the command/entrypoint needed for trusted fresh reproduction.
+Research receipts bind declared code, inputs, outputs, execution identity, and acceptance checks using SHA-256 and versioned semantics.
 
-Core FMA receipts are **not signed attestations**. Hash consistency can establish artifact integrity relative to the receipt; it does not establish who authored, approved, or witnessed the receipt. Authorship, signer identity, external timestamping, and trust-root policy require separate evidence.
+Core receipt integrity establishes exact artifact relationships relative to the receipt. Authorship, signer identity, external timestamping, and trust-root policy can be layered through external attestations when the mission requires them.
 
-Scientific Discovery Assurance can record external anchor and signature evidence for research-priority claims, but that is distinct from signing every core FMA receipt.
+Scientific Discovery Assurance additionally records external anchor and signature evidence for research-priority claims while keeping those functions distinct from the core receipt model.
 
-## Reproducibility relationship
+## Reproducibility
 
-FMA keeps exact artifact identity and semantic acceptance as separate concepts.
+FMA keeps exact artifact identity and semantic acceptance separate:
 
-- SHA-256 identifies exact bytes.
-- Numerical checks express declared acceptance criteria.
-- Fresh reproduction verifies that required outputs were created after execution in a fresh declared-artifact workspace.
-- A PASS still does not prove scientific truth, independent replication, or adequacy of the declared acceptance criteria.
+- SHA-256 identifies exact bytes;
+- numerical checks express declared acceptance criteria;
+- fresh reproduction verifies that required outputs were created after execution in a fresh declared-artifact workspace;
+- profile-specific controls can add domain acceptance semantics without weakening artifact identity.
 
-For stochastic or nondeterministic workloads, future profiles should preserve exact hashes for each run while allowing separately declared statistical acceptance semantics rather than weakening hash identity.
+For stochastic or nondeterministic workloads, FMA preserves exact hashes for each run and supports separately declared statistical acceptance semantics.
 
-## Portfolio rule
+## Portfolio interoperability
 
-Bridge Node 7 repositories should converge through explicit adapters and stable contract identifiers, not by forcing one giant evidence or decision ontology.
+Bridge Node 7 systems converge through explicit adapters, stable contract identifiers, and clear ownership boundaries.
 
-The owning domain system keeps the richer record. FMA carries the portable assurance projection. Cross-repository adapters must be deterministic, provenance-preserving, synthetic in public examples, and independently validated.
+Domain systems keep their richer records. FMA carries the portable assurance projection. Cross-system adapters are deterministic, provenance-preserving, source-neutral in public examples, and independently validated.
