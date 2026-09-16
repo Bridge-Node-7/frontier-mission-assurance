@@ -1,55 +1,64 @@
 # Scientific Discovery Assurance
 
-Scientific Discovery Assurance is a bounded FMA profile for machine-assisted or computational discovery where provenance, specification, priority, reproduction, and human decision authority must remain explicit.
+**Evidence architecture for machine-assisted and computational discovery.**
 
-It is not a scientific certification system and it does not determine truth.
+Scientific Discovery Assurance keeps provenance, specification, priority, proof state, replication, attribution, and accountable decision ownership explicit from candidate discovery through institutional review.
+
+The profile is designed for work where computational speed can exceed the natural pace of evidence organization. Its role is to preserve a reviewable chain from the originating problem and source material to proof, replication, attribution, and the final governed decision.
 
 ## Contract set
 
-- `DiscoveryPassport` — discovery claim, contributors, provenance, verification state, attribution chronology, limitations, and decision authority.
-- `ResearchPriorityReceipt` — artifact hash plus declared priority evidence. Local runtime time alone remains untrusted.
-- `ResearchBoundaryAttestation` — declared research-data handling boundary. A declaration is not proof of enforcement.
-- `FormalProofRecord` — proof-system result kept separate from specification-equivalence review.
+- `DiscoveryPassport` — discovery claim, contributors, provenance, verification state, attribution chronology, scope, and decision authority.
+- `ResearchPriorityReceipt` — artifact hash with declared priority evidence.
+- `ResearchBoundaryAttestation` — declared research-data handling boundary and supporting evidence references.
+- `FormalProofRecord` — proof-system result kept distinct from specification-equivalence review.
 - `ReplicationReceipt` — independent reproduction state and unresolved discrepancies.
-- `AgentProvenanceRef` — bounded references to machine runs without publishing a full internal telemetry graph.
+- `AgentProvenanceRef` — portable references to machine runs without exposing an internal telemetry graph.
 
 ## Assurance path
 
 ```text
-problem specification
+Problem specification
         ↓
-candidate discovery
+Candidate discovery
         ↓
-source + trigger provenance
+Source + trigger provenance
         ↓
-priority receipt
+Priority evidence
         ↓
-research-boundary declaration
+Research-boundary evidence
         ↓
-formal proof record when applicable
+Formal proof when applicable
         ↓
-adversarial review
+Adversarial review
         ↓
-independent replication
+Independent replication
         ↓
 Discovery Passport
         ↓
-accountable human / institutional decision
+Accountable institutional decision
 ```
 
-## Deliberate boundaries
+## Decision semantics
 
-- A valid schema does not establish a scientifically valid result.
-- A local timestamp does not establish trusted priority.
-- A research-boundary attestation records a declaration; independent evidence is required to establish enforcement.
-- A proof checker can establish that a formal statement follows under its declared assumptions, but that does not by itself establish that the formal statement matches the intended scientific or mathematical claim.
-- Replication remains a separate evidence object.
-- Attribution events can coexist; the profile does not collapse credit into a single automated winner.
-- Public worked examples are synthetic only.
+The profile keeps distinct evidence states distinct:
 
-## Synthetic evaluation
+- artifact identity is separate from scientific validity;
+- a research-boundary declaration is separate from evidence of enforcement;
+- proof-checker success is separate from specification equivalence;
+- replication is a separate evidence object;
+- attribution events can coexist without forcing an automated single-winner conclusion;
+- consequential publication, deployment, and mission decisions remain with accountable authorities.
 
-Run:
+This separation is a strength of the profile: machine-verifiable evidence can accelerate review without collapsing scientific judgment into a single automated state.
+
+See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md), [`SPECIFICATION_EQUIVALENCE.md`](SPECIFICATION_EQUIVALENCE.md), and [`ATTRIBUTION.md`](ATTRIBUTION.md).
+
+## Public release policy
+
+Public worked examples are synthetic or sanitized. Research evidence, protected identities, unpublished results, and sensitive program context remain in their governed environments.
+
+## Verify
 
 ```bash
 python scripts/validate_scientific_discovery.py .
@@ -61,4 +70,8 @@ Expected result:
 SCIENTIFIC DISCOVERY PROFILE PASS
 ```
 
-The bundled synthetic case intentionally remains `REVIEW_REQUIRED` because specification-equivalence review and replication are incomplete. That unresolved state is part of the demonstration.
+## Verification scope
+
+The bundled reference case remains `REVIEW_REQUIRED` by design because specification-equivalence review and independent replication are incomplete. That state demonstrates that the profile preserves unresolved scientific obligations rather than converting partial evidence into a stronger claim.
+
+A PASS confirms the declared profile contracts and cross-record invariants exercised by the validation set. Scientific conclusions remain tied to the evidence and review processes responsible for the underlying discovery.
