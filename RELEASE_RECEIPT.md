@@ -13,11 +13,11 @@ Add bounded Orbital Recovery Assurance to FMA without expanding the repository i
 - Added the Mission Recovery Chain view `Power → Contact → Telemetry → Command → Capability`, with trust and authority retained as overlays.
 - Added provenance-aware evidence handling, validity envelopes, robust-action filtering, option-specific fail-closed gates, explicit HOLD utility, next-best-evidence evaluation, requalification, and event-derived recovery metrics.
 - Added a deterministic synthetic known-truth benchmark, preserved invalidated protocol history, and required a stress matrix rather than treating one passing run as sufficient evidence.
-- Added a local-only validator for partner-controlled private cases with explicit lifecycle gates; real mission evidence is not uploaded to this public repository or public CI.
-- Added partner/adoption, private-workspace, epistemic-assurance, evidence-quorum, Black-Sky exercise, recovery-pathway, real-case, Recovery Assurance Package, and bounded intervention-experiment guidance.
+- Added a local-only validator for governed private cases with explicit lifecycle gates; real mission evidence is not uploaded to this public repository or public CI.
+- Added evaluation/adoption, private-workspace, epistemic-assurance, evidence-quorum, evidence-degradation exercise, recovery-pathway, real-case, Recovery Assurance Package, and bounded intervention-experiment guidance.
 - Added Orbital profile validation to existing source, Python-matrix, cross-platform, and stable-release verification paths.
 - Kept the core wheel boundary unchanged: bounded profile assets are distributed through the repository/source archive rather than silently becoming wheel runtime authority.
-- Preserved Mission Graph ownership of dependencies and strategic options, downstream human decision preparation, and accountable human consequential authority.
+- Preserved governed evidence/dependency ownership, downstream human decision preparation, and accountable human consequential authority.
 
 ## Source-level evidence
 
