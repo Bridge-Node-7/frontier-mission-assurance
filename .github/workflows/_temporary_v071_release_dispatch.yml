@@ -1,0 +1,33 @@
+name: Temporary v0.7.1 Release Dispatch
+
+on:
+  push:
+    branches:
+      - orbital-recovery-assurance-v0.1
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Wait for finalized v0.7.1 protected main and dispatch canonical release
+        shell: bash
+        run: |
+          set -euo pipefail
+          for _ in $(seq 1 120); do
+            VERSION="$(gh api "repos/$GITHUB_REPOSITORY/contents/VERSION?ref=main" --jq .content | base64 -d | tr -d '\r\n')"
+            PROFILE="$(gh api "repos/$GITHUB_REPOSITORY/contents/profiles/orbital-recovery-assurance/PROFILE_CONTRACT.md?ref=main" --jq .content | base64 -d)"
+            if [[ "$VERSION" == "0.7.1" ]] && grep -Fq 'Containing FMA release: `0.7.1`' <<<"$PROFILE"; then
+              gh workflow run release.yml --repo "$GITHUB_REPOSITORY" --ref main
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Timed out waiting for finalized v0.7.1 main state" >&2
+          exit 1
