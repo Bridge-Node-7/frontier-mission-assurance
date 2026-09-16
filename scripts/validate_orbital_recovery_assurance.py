@@ -74,8 +74,8 @@ def main() -> int:
     required_docs = [
         "EPISTEMIC_ASSURANCE.md",
         "EVIDENCE_QUORUM_PATTERN.md",
-        "BLACK_SKY_EXERCISE_PATTERN.md",
-        "FUTURE_ARCHITECTURE_BOUNDARIES.md",
+        "EVIDENCE_DEGRADATION_EXERCISE_PATTERN.md",
+        "INTEROPERABILITY.md",
         "RECOVERY_CHAIN.md",
         "REAL_CASE_PROTOCOL.md",
     ]
