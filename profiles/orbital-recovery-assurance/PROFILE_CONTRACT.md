@@ -3,43 +3,40 @@
 ## Contract version
 
 **Orbital Recovery Assurance profile contract:** `0.5`  
-**Containing FMA release:** `0.7.1`
+**Containing FMA release:** `0.7.2`
 
 The profile contract version is independent from the containing FMA release version. Consumers should pin both the FMA release and the `profile_version` carried by profile records. Breaking profile-contract changes require a profile-version change.
 
 ## Purpose
 
-Provide bounded public assurance contracts and a synthetic reference policy for orbital
-recovery assessment under uncertain physical state, digital trust, authority, and
-post-intervention mission fitness.
+Provide source-neutral assurance contracts and a deterministic reference policy for orbital recovery assessment under uncertain physical state, digital trust, authority, and post-intervention mission fitness.
 
 ## Architectural class
 
-**Frontier Mission Assurance profile.** This is not a standalone system of record and
-not a new decision authority.
+**Frontier Mission Assurance profile.** The profile is a portable assurance layer that integrates with governed evidence systems and human decision workflows through explicit references and contracts.
 
-## Owns
+## Profile ownership
 
-- the public profile schemas under this directory;
-- the synthetic validation fixtures and reference policy used to exercise them;
-- profile-specific assurance invariants for evidence, option eligibility, and
-  requalification;
-- the portable Mission Recovery Chain view schema as a non-canonical projection.
+The profile owns:
 
-## Does not own
+- the public schemas under this directory;
+- the synthetic validation fixtures and deterministic reference policy;
+- profile-specific assurance invariants for evidence, option eligibility, and requalification;
+- the portable Mission Recovery Chain view schema as a non-canonical projection;
+- profile validation and synthetic benchmark contracts.
 
-- canonical institutional evidence;
-- real mission or customer records;
-- Mission Graph dependency relations, ProofRequests, or strategic options;
-- a consequential human decision;
+## Retained system ownership
+
+The surrounding mission environment retains ownership of:
+
+- canonical mission evidence and identity records;
+- dependency and strategic-option records owned by other governed systems;
 - generic decision-engine semantics;
-- operational authority;
-- orbital command/control;
-- a universal spacecraft ontology;
-- generalized institutional learning.
+- operational authority and command/control;
+- the final consequential decision;
+- institutional learning outside this profile's declared contracts.
 
-The synthetic option-assessment policy is a reference demonstrator, not a portable
-BN7 decision standard.
+The option-assessment policy is a reference implementation for the profile contract. Local mission policy, calibration, authority, and approval rules remain governed inputs.
 
 ## Inputs
 
@@ -52,21 +49,19 @@ BN7 decision standard.
 
 ## Outputs
 
-- optional Mission Recovery Chain projection;
-- advisory option assessment;
-- robust-action membership;
-- gate eligibility for downstream decision preparation;
-- positive-value next-observation candidate;
+- Mission Recovery Chain projection;
+- option assessment;
+- robust-option membership;
+- gate eligibility for decision preparation;
+- positive-value next-observation candidate when available;
 - requalification review state;
-- recovery timeline metrics;
-- bounded validation findings.
+- recovery timeline and Time-to-Trust metrics;
+- validation findings.
 
 ## Decision authority
 
-Human and downstream governed decision workflow. Machine output does not authorize,
-approve, select, or record a consequential action.
+Machine outputs provide evidence, filtering, ranking, and eligibility for downstream review. The accountable human and governing mission process retain consequential decision authority.
 
-## Public content rule
+## Public release policy
 
-Examples are synthetic or sanitized and contain no real personal, customer, partner,
-supplier, investor, operator, or asset identity.
+Examples are synthetic or sanitized and contain no real personal, customer, partner, supplier, investor, operator, or asset identity. Mission-specific evidence and external identity mappings remain in governed environments.
