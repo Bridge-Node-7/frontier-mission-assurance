@@ -1,15 +1,15 @@
 # Stable Release Acceptance
 
-A stable Frontier Mission Assurance release is acceptable only when the published artifact set is bound to an exact passing commit and the public reference remains inside its declared boundary.
+A stable Frontier Mission Assurance release binds one exact source state to one verified public artifact set. Promotion occurs only after the source, hosted verification, release metadata, and clean-user checks agree on the same identity.
 
 ## Repository state
 
 A stable release requires:
 
-- `main` as the protected default branch;
-- the intended release commit to be the exact accepted source state;
+- protected `main` as the default branch;
+- the intended release commit as the exact accepted source state;
 - only intentional long-lived branches and collaboration state;
-- public documentation, schemas, software, and synthetic fixtures only.
+- a source-neutral public surface containing approved documentation, schemas, software, and reference fixtures.
 
 ## Hosted verification
 
@@ -18,47 +18,49 @@ The required hosted verification surface includes:
 - Python 3.11, 3.12, and 3.13 validation on Ubuntu;
 - Ubuntu, macOS, and Windows smoke validation;
 - wheel build and fresh installation;
-- lint, unit, regression, schema, tamper, and boundary tests;
+- lint, unit, regression, schema, tamper, and public-release tests;
 - adversarial rejection-path tests for assurance-graph and decision validation;
-- version-2 code-binding and fresh-output reproduction-integrity regressions;
+- code-binding and fresh-output reproduction-integrity regressions;
 - controlled malformed-input CLI behavior with exit code `2` and no traceback;
 - deterministic report regression under `SOURCE_DATE_EPOCH`;
 - dependency review where applicable;
 - protected-main static analysis before stable release eligibility;
 - Scientific Discovery Assurance validation when present;
-- public-boundary validation.
+- Orbital Recovery Assurance validation when present;
+- tracked-file public release verification.
 
-A required check that is red, unexpectedly skipped, or materially different from the reviewed candidate blocks stable promotion.
+Any required check that is red, unexpectedly skipped, or materially different from the reviewed candidate blocks stable promotion.
 
 ## Reproduction-integrity release gate
 
-The stable candidate must demonstrate that:
+The stable candidate demonstrates that:
 
-- declared version-2 code and input hashes are verified before trusted execution;
-- the receipt command references the declared entrypoint;
+- declared code and input hashes are verified before trusted execution;
+- the receipt command is bound to the declared entrypoint;
 - the reproduction workspace begins without declared outputs;
-- a successful no-output execution fails receipt verification rather than reusing a stale source-tree result;
-- newly generated outputs match declared hashes and numerical acceptance checks;
-- legacy version-1 receipts remain non-executingly verifiable but do not receive a current fresh-reproduction PASS;
-- reproduction is described accurately as a trusted-code integrity workflow rather than a sandbox or hermetic execution environment.
+- a successful no-output execution cannot reuse a stale source-tree result;
+- newly generated outputs satisfy declared hashes and acceptance checks;
+- legacy receipt formats retain their documented verification semantics;
+- reproduction is described accurately as a trusted-code integrity workflow.
 
 ## Public experience
 
-The release surface must make the following easy to establish:
+The release surface makes the following immediately clear:
 
-- what FMA does and does not prove;
-- how to run the bounded evaluation path;
-- the recommended documentation reading order;
+- what FMA validates and the scope of a PASS;
+- how to run the reference evaluation;
+- the recommended documentation path;
 - how assumptions, evidence gaps, reproducibility, dependencies, and decision basis are represented;
-- how the Mission Decision Packet connects evidence to a human decision and explicit reopen conditions;
+- how Mission Decision Packets connect evidence to accountable decisions and explicit reopen conditions;
+- how specialized assurance profiles integrate without replacing governed systems;
 - how to report a security issue privately;
-- what licensing applies.
+- what licensing and distribution rights apply.
 
-Examples remain synthetic and generic. Real program evidence does not belong in this public repository.
+Public examples remain source-neutral. Mission-specific and protected evidence remains in governed environments.
 
 ## Release evidence
 
-The stable release record must bind:
+The stable release record binds:
 
 - the exact accepted commit;
 - the stable tag;
@@ -66,6 +68,8 @@ The stable release record must bind:
 - wheel;
 - SHA-256 artifact manifest;
 - tracked-source manifest generated from the release commit;
+- software bill of materials;
+- available provenance attestations;
 - successful clean-user verification of the published artifacts.
 
 Commit-specific hosted evidence belongs in GitHub Actions and release metadata rather than being recursively embedded back into the source tree.
