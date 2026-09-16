@@ -1,12 +1,12 @@
 # Mission-Oriented Adoption
 
-Frontier Mission Assurance is designed to earn its place inside a fast technical program. Start with one consequential decision, not a program-wide process rollout.
+Frontier Mission Assurance is designed to earn its place inside a fast technical program. Start with one consequential decision rather than a program-wide process rollout.
 
 The adoption question is simple:
 
 > **Does this make an important technical decision faster to understand, harder to overclaim, and easier to revisit when evidence changes?**
 
-If the answer is no, reduce the assurance structure until it does.
+Scale the assurance structure to the smallest form that reliably improves that decision.
 
 ## The CTO fit test
 
@@ -20,9 +20,7 @@ Examples of the *shape* of a suitable decision include:
 - whether an externally supplied subsystem satisfies the assumptions placed on its interface;
 - whether an AI-generated result has enough provenance, specification review, and reproduction evidence to influence engineering work.
 
-Do not begin by modeling the whole organization.
-
-For that one decision, encode only what is necessary to answer:
+Begin with that one decision and encode only what is necessary to answer:
 
 1. **Mission** — what mission outcome does the decision serve?
 2. **Claim or requirement** — what must be true?
@@ -32,7 +30,7 @@ For that one decision, encode only what is necessary to answer:
 6. **Dependencies and interfaces** — what changes would force reconsideration?
 7. **Decision basis** — what evidence is sufficient for the accountable human to act now?
 
-The useful output is not a bigger graph. It is a smaller amount of uncertainty that is easier to see.
+The useful output is not a bigger graph. It is less hidden uncertainty around a consequential decision.
 
 ## A frontier-program pattern
 
@@ -61,9 +59,7 @@ SYSTEM EVIDENCE
 ACCOUNTABLE HUMAN DECISION
 ```
 
-FMA is not a replacement for any box in that diagram.
-
-It provides a portable assurance layer across the boundaries:
+FMA sits across those boundaries as a portable assurance layer:
 
 - what is claimed;
 - what is assumed;
@@ -74,20 +70,20 @@ It provides a portable assurance layer across the boundaries:
 - what changed;
 - which decision depends on it.
 
-This is especially useful where one discipline can produce a technically valid artifact that is still insufficient for another discipline's decision.
+Each discipline keeps its authoritative systems and richer semantics. FMA carries the minimum assurance projection needed for cross-boundary review.
 
 ## AI-assisted research acceptance path
 
-AI can increase hypothesis, design, code, analysis, and proof-generation velocity. It does not automatically increase evidence quality.
+AI can increase hypothesis, design, code, analysis, and proof-generation velocity. FMA gives evidence quality a structure that can scale with that velocity.
 
-A bounded acceptance path is:
+A practical assurance path is:
 
 ```text
 AI / MACHINE OUTPUT
         ↓
 PROVENANCE
         ↓
-CLAIM + DECLARED LIMITATIONS
+CLAIM + DECLARED SCOPE
         ↓
 SPECIFICATION / APPLICABILITY REVIEW
         ↓
@@ -98,26 +94,24 @@ EVIDENCE GAP REVIEW
 HUMAN DECISION
 ```
 
-The Scientific Discovery Assurance profile provides public reference contracts for this class of problem. In particular:
+The Scientific Discovery Assurance profile preserves the distinctions that matter:
 
-- provenance is not proof of correctness;
-- a local timestamp is not trusted priority evidence;
-- proof-checker success is distinct from specification equivalence;
-- a declared research boundary is not proof that the boundary was enforced;
-- incomplete replication remains visible instead of being converted into a false PASS.
+- provenance establishes origin and lineage;
+- trusted priority uses evidence stronger than a local clock value alone;
+- proof-checker state remains separate from specification equivalence;
+- research-boundary declarations remain separate from evidence of enforcement;
+- incomplete replication remains visible until the evidence closes it.
 
 See [`../profiles/scientific-discovery/README.md`](../profiles/scientific-discovery/README.md).
 
 ## Cross-organization and supplier boundaries
 
-Mission programs often depend on evidence that crosses organizational boundaries.
-
-FMA can represent the shareable side of that interface without requiring either side to disclose more context than the decision needs:
+Mission programs often depend on evidence that crosses organizational boundaries. FMA provides a shareable contract surface without requiring either side to disclose more context than the decision needs:
 
 ```text
 SOURCE SYSTEM / LOCAL STATE
         │
-        │ bounded contract
+        │ portable contract
         ▼
 CLAIM + REQUIREMENT + EVIDENCE + RECEIPT
         │
@@ -128,11 +122,11 @@ INTERFACE REVIEW
 DEPENDENT MISSION DECISION
 ```
 
-This allows an interface review to define what must be demonstrated while sensitive program data remains outside the public repository.
+This lets an interface review define what must be demonstrated while protected program data stays inside the systems authorized to hold it.
 
-## What a useful pilot should measure
+## Pilot value measures
 
-A pilot should be judged by engineering value, not by graph size or number of records.
+Judge a pilot by engineering value, not by graph size or record count.
 
 Useful measures include:
 
@@ -144,11 +138,11 @@ Useful measures include:
 - **Review rework** — repeated requests for the same provenance, evidence, or rationale.
 - **Integration escapes** — interface assumptions discovered only after downstream work had already depended on them.
 
-The goal is not to maximize every metric. The goal is to determine whether the assurance layer earns its operational cost.
+The objective is faster justified decisions with less reconstruction and fewer hidden assumptions.
 
 ## Minimum viable adoption
 
-A disciplined first deployment can be very small:
+A disciplined first deployment can be compact:
 
 ```text
 1 mission node
@@ -160,33 +154,27 @@ one research receipt where reproducibility matters
 one decision receipt
 ```
 
-Run the normal FMA validation and review the output with the people who own the engineering decision.
-
-If the structure improves the conversation, keep it.
-
-If a field or artifact does not help a real reviewer make or revisit the decision, remove it.
+Run the normal FMA validation and review the output with the people who own the engineering decision. Retain only the fields and artifacts that materially improve the ability to make or revisit that decision.
 
 ## Worked Mission Decision Packet
 
-For a concrete, synthetic example of the full path from mission objective to a change-sensitive human disposition, see [`MISSION_DECISION_PACKET.md`](MISSION_DECISION_PACKET.md) and [`../examples/frontier_program/README.md`](../examples/frontier_program/README.md).
+For a concrete source-neutral example of the full path from mission objective to a change-sensitive human disposition, see [`MISSION_DECISION_PACKET.md`](MISSION_DECISION_PACKET.md) and [`../examples/frontier_program/README.md`](../examples/frontier_program/README.md).
 
-The key idea is the **reopen contract**: the decision receipt states not only why the current disposition is justified, but what new evidence, changed dependency, or revised requirement should force the decision to be reconsidered.
+The key idea is the **reopen contract**: the decision receipt states why the current disposition is justified and what new evidence, changed dependency, or revised requirement should force reconsideration.
 
-## What not to do
+## Operating discipline
 
-Do **not**:
+Minimum sufficient assurance is an architectural constraint:
 
-- graph the entire organization before proving value on one decision;
-- treat schema validity as scientific or engineering truth;
-- use automated scoring to replace accountable technical judgment;
-- centralize sensitive program evidence merely to make the graph complete;
-- make every low-consequence engineering action pass through an assurance gate;
-- accept AI-generated output as evidence solely because it is reproducible;
-- turn FMA into a mandatory workflow that is slower than the risk it is meant to control.
+- model the decision before modeling the organization;
+- keep schema validity distinct from scientific or engineering validity;
+- keep prioritization and consequential judgment human-owned;
+- preserve sensitive evidence in its governed source system;
+- scale assurance gates with consequence;
+- require evidence quality beyond reproducibility alone for AI-generated work;
+- keep the assurance layer faster than the risk it is designed to control.
 
-Minimum sufficient assurance is an architectural constraint.
-
-## What success feels like
+## Success state
 
 For a technical leader, the system is working when a review can quickly answer:
 
@@ -204,4 +192,4 @@ For a technical leader, the system is working when a review can quickly answer:
 
 > Who owns the consequential decision?
 
-That is the intended user experience: **less reconstruction, less hidden uncertainty, faster justified decisions.**
+That is the intended user experience: **less reconstruction, visible uncertainty, faster justified decisions.**
