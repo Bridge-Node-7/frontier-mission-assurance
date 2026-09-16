@@ -53,6 +53,6 @@ A real deployment is creating value when it helps a team:
 
 ## Epistemic-resilience rehearsal
 
-Before relying on the method for a consequential real case, teams can run synthetic Black-Sky exercises to test whether contradictory evidence, authority uncertainty, configuration drift, or common-mode evidence dependencies remain visible and fail closed. See `BLACK_SKY_EXERCISE_PATTERN.md`.
+Before relying on the method for a consequential real case, teams can run synthetic Evidence-Degradation exercises to test whether contradictory evidence, authority uncertainty, configuration drift, or common-mode evidence dependencies remain visible and fail closed. See `EVIDENCE_DEGRADATION_EXERCISE_PATTERN.md`.
 
-The purpose is not to prove the mission safe. It is to expose where the organization's evidence architecture, recovery gates, or Time-to-Trust process is weak before a real anomaly.
+The purpose is not to prove the mission safe. It is to expose where the organization's evidence architecture, recovery gates, or Time-to-Trust process needs strengthening before a real anomaly.
