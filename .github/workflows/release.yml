@@ -51,14 +51,14 @@ jobs:
           echo "TAG=$TAG" >> "$GITHUB_ENV"
           echo "RELEASE_SHA=$SHA" >> "$GITHUB_ENV"
 
-      - name: Install bounded release toolchain
+      - name: Install release toolchain
         if: env.RELEASE_ELIGIBLE == '1'
         run: >-
           python -m pip install
           "setuptools==84.0.0" "wheel==0.48.0" "build==1.6.1"
           "PyYAML==6.0.3" "jsonschema==4.26.0"
 
-      - name: Reverify public release boundary
+      - name: Reverify public release policy
         if: env.RELEASE_ELIGIBLE == '1'
         run: |
           python scripts/public_boundary_scan.py .
@@ -118,14 +118,14 @@ jobs:
         run: |
           set -euo pipefail
           cat > release-notes.md <<EOF
-          Frontier Mission Assurance v${VERSION} is a stable public reference release for evidence-native verification, validation, reproducibility, traceability, and human-owned decision basis.
+          Frontier Mission Assurance v${VERSION} is a stable public reference release for evidence-native verification, validation, reproducibility, traceability, and mission assurance.
 
-          This release was published during an explicit release ceremony for a main commit. Release artifacts have GitHub build provenance attestations; the wheel also has an SBOM attestation. See CHANGELOG.md for material changes.
+          This release is bound to an exact protected-main commit and includes verified source and wheel artifacts, SHA-256 manifests, a CycloneDX SBOM, and GitHub build-provenance attestations. See CHANGELOG.md for material changes.
 
           Release ceremony run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${{ github.run_id }}
           Commit: ${RELEASE_SHA}
 
-          A PASS proves only the declared mechanics. It does not establish scientific truth, authenticated authorship of unsigned receipts, regulatory compliance, supplier qualification, mission readiness, legal priority, research-boundary enforcement, or authorization for consequential decisions.
+          Verification scope: a PASS attests that the declared controls satisfied their acceptance criteria. Scientific validity, regulatory approval, safety acceptance, mission qualification, and consequential decision authority remain with the governing processes responsible for those determinations.
 
           License posture: All Rights Reserved. No reuse license is granted by this release.
           EOF
