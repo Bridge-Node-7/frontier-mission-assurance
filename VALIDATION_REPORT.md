@@ -1,4 +1,4 @@
-# Source Validation Report — v0.7.0
+# Source Validation Report — v0.7.1
 
 **Date:** 2026-09-15  
 **Role:** bounded public reference for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -33,7 +33,7 @@ This report records deterministic validation requirements for the source candida
 
 ## Orbital Recovery Assurance V&V
 
-The v0.7 source candidate adds a bounded source-distributed Orbital Recovery Assurance profile. Release eligibility requires:
+The v0.7.1 source candidate validates the bounded source-distributed Orbital Recovery Assurance profile and its hardened public surface. Release eligibility requires:
 
 - profile schemas and synthetic records agree on profile contract `0.5`;
 - public synthetic examples remain source-neutral;
