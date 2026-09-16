@@ -1,128 +1,133 @@
 # Orbital Recovery Assurance
 
-**Profile contract version:** `0.5`  
+**Profile contract version:** `0.5`
 
-A bounded Frontier Mission Assurance profile for evaluating whether recovery options
-have a sufficiently explicit evidence, safety, trust, authority, and requalification
-basis to enter accountable human decision preparation.
+**Evidence-driven recovery assurance for degraded, legacy, or uncertain orbital capability.**
 
-The profile is **advisory, synthetic-first, and non-operational**. It does not control
-orbital assets, authorize operations, establish ownership, certify recoverability,
-own canonical mission evidence, or record the final consequential decision.
+Orbital Recovery Assurance organizes the path from uncertain system state to trusted mission capability. It brings physical condition, digital trust, authority, recovery-path diversity, evidence lineage, option robustness, requalification, and Time-to-Trust into one inspectable assurance flow.
 
-## Mission Opportunity
+Mission systems retain their established sources of record, command paths, and decision authority. Orbital Recovery Assurance provides the evidence and verification layer that makes the recovery basis clear, reviewable, and reproducible.
 
-A degraded or legacy orbital system may retain useful capability while its true
-state, command trust, authority, or fitness for a new mission remains uncertain.
-Orbital Recovery Assurance provides a structured way to establish what capability remains,
-what evidence deserves trust, which pathways remain viable, and what must be requalified
-before accountable reuse.
+## Mission objective
 
-The profile structures:
+A degraded or legacy orbital system may retain valuable capability even when its current condition, command path, authority state, or mission fitness is incomplete or contested. The profile helps teams establish:
 
-`Observe → Establish State → Establish Trust → Acquire Decision-Relevant Evidence → Filter Robust Options → Assess Eligible Options → Human Decision Preparation → Requalify → Verify Capability`
+- what capability remains;
+- which evidence is current, applicable, and trustworthy;
+- how many independent recovery paths are actually available;
+- which recovery options remain robust across the declared credible state set;
+- which evidence would most improve the decision basis;
+- what must be demonstrated before the resulting capability is requalified.
 
-## What the profile adds
+The assurance path is:
 
-- separate physical, trust, and authority semantics;
-- evidence references, provenance-correlation roots, and validity envelopes;
-- intervention-success marginalization over declared latent states;
-- additive expected utility in one declared utility space with an explicit HOLD baseline;
-- robust-action filtering over an explicit posterior-coverage policy;
-- option-specific fail-closed gates and per-option blocking findings;
-- net expected value of information over the admissible option set;
-- recovery requalification records;
-- Time-to-Trust family timeline metrics;
-- generic hindcast scoring primitives;
-- a preregistered synthetic known-truth benchmark with safe baselines and stress runs;
-- deterministic synthetic examples;
-- a machine-readable Mission Recovery Chain projection for operator-facing recovery-path analysis;
-- source-neutral target/pathway taxonomy for responsiveness, interface preparedness, and Observe/Contact/Interface decomposition;
-- bounded experimental-intervention guidance without operational command authority.
-
-## Architecture boundary
-
-The profile owns its public contracts and synthetic checks only. It does not replace governed evidence storage, richer dependency systems, downstream human-governed decision workflows, or accountable human decision authority.
-
-See `docs/INTEROPERABILITY.md`.
-
-## Trust rule
-
-Optimization may rank. Evidence may support. Robust filtering may exclude. A gate may
-mark an option eligible for decision preparation. **None of those operations is a
-decision or authorization.**
-
-## Source-neutral public boundary
-
-The profile contains no real customer, partner, supplier, operator, investor, asset,
-or person identity. Named evidence and external identity mappings remain outside this
-public profile.
-
-## For real-world users
-
-Start with `docs/PARTNER_QUICKSTART.md`.
-
-Real mission evidence should remain in an authorized governed private workspace or existing
-governed system. See `docs/PRIVATE_WORKSPACE_PATTERN.md`.
-
-For human review, `docs/RECOVERY_ASSURANCE_PACKAGE.md` provides a bounded handoff
-structure for evidence basis, option eligibility, requalification, timeline metrics, and
-reopen conditions. It is not an authorization record.
-
-For a real governed case, use `python scripts/validate_orbital_recovery_case.py /path/to/private-case`. The command is local-only and validates structure/cross-references, not real-world truth or authorization.
-
-See `docs/REAL_CASE_PROTOCOL.md` for bounded application to actual mission cases and
-`docs/REAL_WORLD_ADOPTION.md` for the intended evaluate → map → count/exercise → assess →
-decide → requalify → learn lifecycle.
+`Observe → Establish State → Establish Trust → Map Recovery Paths → Acquire Decision-Relevant Evidence → Assess Robust Options → Human Decision → Requalify → Verify Capability`
 
 ## Mission Recovery Chain
 
-Use `docs/RECOVERY_CHAIN.md` as the front-end recovery lens:
+The operator-facing recovery lens is:
 
 `Power → Contact → Telemetry → Command → Capability`
 
-Trust and authority are modeled as cross-cutting overlays rather than a sixth serial link.
-The chain is a projection over governed evidence, not a new canonical record or decision
-authority. Count independent recovery paths, not merely assets.
+Trust and authority are cross-cutting overlays across the chain. Recovery resilience is measured by **independent recovery paths**, not raw asset count.
 
-The assessment workflow begins with **Map → Count → Exercise** before option assessment.
-The synthetic view is `examples/synthetic-recovery-case/recovery-chain-view.json`.
+The working sequence is:
+
+**Map → Count → Exercise → Assess → Acquire Evidence → Decide → Requalify → Measure Time to Trust → Reassess**
+
+See [`docs/RECOVERY_CHAIN.md`](docs/RECOVERY_CHAIN.md).
+
+## Assurance capabilities
+
+The profile adds:
+
+- distinct physical, trust, and authority state semantics;
+- evidence references with provenance-correlation roots and validity envelopes;
+- intervention-success marginalization over declared latent states;
+- expected utility in one declared utility space with an explicit HOLD baseline;
+- robust-option filtering over a declared credible-state coverage policy;
+- option-specific trust, authority, safety, and evidence gates;
+- net expected value of information over admissible options;
+- recovery requalification records;
+- Time-to-Trust timeline metrics;
+- hindcast scoring primitives;
+- a preregistered synthetic known-truth benchmark with safety-respecting baselines and stress runs;
+- deterministic synthetic reference cases;
+- a machine-readable Mission Recovery Chain projection;
+- source-neutral recovery-pathway taxonomy for responsiveness and interface preparedness;
+- structured experiment patterns for recovery-enabling hypotheses.
+
+## Decision authority
+
+Optimization can rank. Evidence can support. Robust filtering can exclude. Gates can establish eligibility for decision preparation.
+
+**Consequential decisions remain with the accountable human and the governing mission process.**
+
+That separation is deliberate: the system automates what can be proven while preserving human authority where judgment and authorization matter.
+
+## System role
+
+Orbital Recovery Assurance owns its public contracts, reference policy, synthetic fixtures, and profile-specific verification logic.
+
+Canonical mission evidence, dependency ownership, operational authority, command/control, and final decision records remain with the governed systems responsible for them. Integration is performed through references and portable contracts rather than duplicate sources of truth.
+
+See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) and [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md).
+
+## Public release policy
+
+The public profile is intentionally source-neutral. Examples use synthetic or sanitized identifiers and contain no real customer, partner, supplier, operator, investor, asset, or personal identity.
+
+Mission-specific evidence and external identity mappings remain in their governed environments. See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and [`docs/PRIVATE_WORKSPACE_PATTERN.md`](docs/PRIVATE_WORKSPACE_PATTERN.md).
+
+## Adoption path
+
+Start with [`docs/PARTNER_QUICKSTART.md`](docs/PARTNER_QUICKSTART.md).
+
+For a governed mission case, retain mission evidence in the owning environment and validate the local assessment workspace with:
+
+```bash
+python scripts/validate_orbital_recovery_case.py /path/to/private-case --require-stage mapped
+```
+
+The local validator checks schema and cross-record integrity without moving mission data into the public repository.
+
+Use [`docs/RECOVERY_ASSURANCE_PACKAGE.md`](docs/RECOVERY_ASSURANCE_PACKAGE.md) for the decision-review handoff, [`docs/REAL_CASE_PROTOCOL.md`](docs/REAL_CASE_PROTOCOL.md) for mission-case application, and [`docs/ADOPTION_PATH.md`](docs/ADOPTION_PATH.md) for the evaluate → map → count/exercise → assess → decide → requalify → learn lifecycle.
 
 ## Epistemic assurance
 
-The profile keeps observed, calculated, inferred, simulated, and reported evidence classes distinct and applies an **Epistemic Firewall**: analysis may generate hypotheses or next tests, but it may not silently promote itself into observed or verified evidence. See `docs/EPISTEMIC_ASSURANCE.md`.
+The profile keeps observed, calculated, inferred, simulated, and reported evidence classes distinct and applies an **Epistemic Firewall**: analysis may generate hypotheses and next tests, while evidence-state promotion requires admissible evidence under the declared policy.
 
-For multi-source corroboration, use provenance-correlation components rather than raw record count. See `docs/EVIDENCE_QUORUM_PATTERN.md`. Synthetic resilience exercises may use `docs/EVIDENCE_DEGRADATION_EXERCISE_PATTERN.md`.
+For multi-source corroboration, provenance-correlation components are used instead of raw record count. See [`docs/EPISTEMIC_ASSURANCE.md`](docs/EPISTEMIC_ASSURANCE.md), [`docs/EVIDENCE_QUORUM_PATTERN.md`](docs/EVIDENCE_QUORUM_PATTERN.md), and [`docs/EVIDENCE_DEGRADATION_EXERCISE_PATTERN.md`](docs/EVIDENCE_DEGRADATION_EXERCISE_PATTERN.md).
 
-## Distribution boundary
+## Distribution
 
-The Orbital Recovery Assurance profile is a **source-repository/source-archive profile**.
-The FMA Python wheel provides the core `frontier_assurance` package and CLI; it does not
-package this profile directory. Users who need the profile schemas, synthetic examples,
-evaluation guidance, or benchmark assets should use a repository checkout or the verified
-source archive for the matching release.
+Orbital Recovery Assurance is distributed with the FMA repository and verified source archive. The FMA Python wheel provides the core `frontier_assurance` package and CLI; profile schemas, examples, benchmark assets, and mission guidance remain in the matching source release.
 
-## Validate
+## Verify
 
 ```bash
+python -m pip install "jsonschema==4.26.0"
 python scripts/validate_orbital_recovery_assurance.py .
 python -m unittest tests.test_orbital_recovery_assurance -v
 python scripts/run_orbital_recovery_synthetic_benchmark.py .
 ```
 
-## PASS meaning
+Expected profile result:
 
-A PASS establishes only the declared synthetic contracts, arithmetic invariants,
-cross-record references, robust-envelope behavior, gate behavior, timeline calculations, and the
-declared synthetic benchmark/stress acceptance checks exercised by the validation set.
+```text
+ORBITAL RECOVERY ASSURANCE PROFILE PASS
+```
 
-It does **not** establish real-world safety, recoverability, authorization, mission
-readiness, flight qualification, economic value, or scientific truth.
+## Verification scope
 
-See `LIMITATIONS.md`, `PROFILE_CONTRACT.md`, and `docs/VALIDATION.md`.
+A PASS confirms the declared profile contracts, arithmetic invariants, cross-record references, robust-envelope behavior, gate behavior, timeline calculations, and synthetic benchmark acceptance checks exercised by the validation set.
 
-## Engineering guidance
+Mission qualification, operational authority, flight safety, and mission-specific probability calibration remain governed by the evidence and approval processes responsible for the actual system.
 
-The profile intentionally avoids turning FMA into an orbital ontology. Domain guidance is kept source-neutral and bounded. See `docs/RECOVERY_PATHWAY_TAXONOMY.md` for target responsiveness, interface preparedness, Observe/Contact/Interface layers, and generic recovery pathways.
+See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and [`docs/VALIDATION.md`](docs/VALIDATION.md).
 
-Bounded experiment protocols may test recovery-enabling hypotheses, but public guidance does not disclose private research programs or establish live operational procedures or mission authority.
+## Engineering model
+
+The profile publishes a portable assurance layer rather than a universal orbital ontology. Domain systems retain their richer operational semantics; FMA carries the reusable evidence, verification, requalification, and decision-preparation contracts.
+
+See [`docs/RECOVERY_PATHWAY_TAXONOMY.md`](docs/RECOVERY_PATHWAY_TAXONOMY.md) for the source-neutral recovery pathway model and [`docs/INTERVENTION_EXPERIMENT_PATTERN.md`](docs/INTERVENTION_EXPERIMENT_PATTERN.md) for structured experiment design.
