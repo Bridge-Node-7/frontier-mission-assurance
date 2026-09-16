@@ -9,7 +9,7 @@ def test_orbital_profile_release_surface_is_present():
     required = [
         ROOT / "profiles" / "orbital-recovery-assurance" / "README.md",
         ROOT / "profiles" / "orbital-recovery-assurance" / "PROFILE_CONTRACT.md",
-        ROOT / "profiles" / "orbital-recovery-assurance" / "LIMITATIONS.md",
+        ROOT / "profiles" / "orbital-recovery-assurance" / "ASSURANCE_SCOPE.md",
         ROOT / "scripts" / "validate_orbital_recovery_assurance.py",
         ROOT / "scripts" / "validate_orbital_recovery_case.py",
         ROOT / "scripts" / "run_orbital_recovery_synthetic_benchmark.py",
