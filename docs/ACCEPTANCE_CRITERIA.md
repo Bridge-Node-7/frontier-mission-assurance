@@ -7,9 +7,9 @@ These criteria define the expected behavior of the public Frontier Mission Assur
 A technical user should understand within five minutes:
 
 - what FMA validates;
-- what it does not prove;
-- how public/synthetic data is separated from real program data;
-- how to run the example validation path.
+- the verification scope of a PASS;
+- how public reference data is separated from mission-specific evidence;
+- how to run the reference validation path.
 
 ## AC-02 — Graph validation
 
@@ -33,23 +33,23 @@ Version-2 research receipts shall require non-empty declared code, inputs, outpu
 
 ## AC-07 — Trusted reproduction boundary
 
-Receipt verification shall remain non-executing. Fresh reproduction shall execute only when explicitly invoked on a version-2 receipt, shall verify declared code and inputs before execution, shall require the declared entrypoint to be executed directly or as the first Python script argument, and shall use `shell=False`. Interpreter modes or later decoy tokens shall not satisfy entrypoint binding. Reproduction is not a sandbox.
+Receipt verification shall remain non-executing. Fresh reproduction shall execute only when explicitly invoked on a version-2 receipt, shall verify declared code and inputs before execution, shall require the declared entrypoint to be executed directly or as the first Python script argument, and shall use `shell=False`. Interpreter modes or later decoy tokens shall not satisfy entrypoint binding. Reproduction is an integrity workflow and trusted code runs with host permissions.
 
 ## AC-08 — Decision-basis verification
 
 A decision receipt shall fail if its declared basis references nodes absent from the validated graph.
 
-## AC-09 — Public boundary
+## AC-09 — Public release policy
 
-Automated and human review shall reject credentials, personal paths, private URLs, real program identities, and nonpublic evidence from the public source and release surface.
+Automated and human review shall reject credentials, personal paths, private URLs, mission-specific identities, and nonpublic evidence from the public source and release surface.
 
 ## AC-10 — Clean package consumer
 
 A wheel built from the exact release commit shall install into a clean environment and run the documented public example commands.
 
-## AC-11 — Bounded one-command evaluation
+## AC-11 — One-command evaluation
 
-After installation, `python scripts/evaluate_public_reference.py` shall complete the non-executing public-reference journey and end with `RESULT - PUBLIC REFERENCE EVALUATION PASS`.
+After installation, `python scripts/evaluate_public_reference.py` shall complete the public-reference journey and end with `RESULT - PUBLIC REFERENCE EVALUATION PASS`.
 
 ## AC-12 — Runtime privacy
 
@@ -61,11 +61,11 @@ Published schema constraints for contract versions and graph statuses shall alig
 
 ## AC-14 — Public GitHub presentation
 
-A visitor shall be able to identify the repository purpose, maturity, licensing posture, public-data boundary, five-minute evaluation path, reading order, and non-claims without relying on private context.
+A visitor shall be able to identify the repository purpose, maturity, licensing posture, public release policy, five-minute evaluation path, reading order, core capabilities, and verification scope without relying on private context.
 
 ## AC-15 — Clean-user evaluation
 
-An independent user starting from a clean supported environment shall be able to follow only documented commands and reach the declared bounded evaluation result without author-machine assumptions.
+An independent user starting from a clean supported environment shall be able to follow only documented commands and reach the declared reference evaluation result without author-machine assumptions.
 
 ## AC-16 — Release provenance
 
@@ -95,6 +95,6 @@ Version-3 receipts shall record an `as_of` time and an explicit calibration poli
 
 A version-3 `EXTERNAL` receipt shall separate submission/environment evidence from collection evidence, preserve scheduler/job identity, exact code/input manifests, environment identity, timeout and cancellation semantics, terminal state, and collected-output hashes. Public CI shall validate a synthetic reference contract without claiming to execute a real cluster. `fma reproduce` shall not launch an external scheduler job.
 
-## AC-23 — Actionable bounded diagnostics
+## AC-23 — Actionable diagnostics
 
-When local reproduction fails on a Python import error, raw child stderr shall remain visible and FMA may add a bounded hint that a declared code artifact or runtime dependency could be missing. Unsupported graph statuses shall report the rejected value and the sorted allowed set without changing graph-validation semantics.
+When local reproduction fails on a Python import error, raw child stderr shall remain visible and FMA may add a concise hint that a declared code artifact or runtime dependency could be missing. Unsupported graph statuses shall report the rejected value and the sorted allowed set without changing graph-validation semantics.
