@@ -201,6 +201,7 @@ frontier-mission-assurance/
 ├── tests/                           # regression, tamper, adversarial, and boundary tests
 ├── docs/                            # architecture, contracts, doctrine, and adoption guidance
 ├── .github/                         # CI and release workflows
+├── ASSURANCE_SCOPE.md               # verification and authority scope
 ├── PUBLIC_BOUNDARY.md               # public release policy
 ├── SECURITY.md                      # security guidance
 ├── VALIDATION_REPORT.md             # deterministic validation contract
@@ -223,7 +224,7 @@ FMA exposes assumptions, evidence gaps, and dependency impact while leaving cons
 
 A machine PASS means the checked artifact satisfied the declared machine-checkable controls exercised by that command or workflow.
 
-Scientific validation, regulatory approval, safety acceptance, mission qualification, security authorization, and consequential decision authority remain governed by the qualified processes responsible for those determinations. See [`DISCLAIMER.md`](DISCLAIMER.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), and [`SECURITY.md`](SECURITY.md).
+Scientific validation, regulatory approval, safety acceptance, mission qualification, security authorization, and consequential decision authority remain governed by the qualified processes responsible for those determinations. See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md), [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md), and [`SECURITY.md`](SECURITY.md).
 
 ## Development
 
