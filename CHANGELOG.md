@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.1 — public-surface hardening
+
+- Aligned the current source, package, citation, project-facts, validation, and Orbital profile release identity after the accepted v0.7.0 hardening work.
+- Generalized Orbital Recovery Assurance interoperability and resilience terminology so the public profile stays source-neutral and reusable.
+- Removed internal/private research-program detail, roadmap/topology material, and bench-specific internal research content from the public Orbital surface.
+- Preserved runtime, schema, benchmark, fail-closed assurance, human-authority, and public/private evidence-boundary semantics.
+
 ## 0.7.0 — Orbital Recovery Assurance
 
 - Added a bounded Orbital Recovery Assurance profile under `profiles/orbital-recovery-assurance/` rather than creating a new institutional repository.

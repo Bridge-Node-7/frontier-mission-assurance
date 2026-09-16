@@ -3,7 +3,7 @@
 ## Contract version
 
 **Orbital Recovery Assurance profile contract:** `0.5`  
-**Containing FMA release:** `0.7.0`
+**Containing FMA release:** `0.7.1`
 
 The profile contract version is independent from the containing FMA release version. Consumers should pin both the FMA release and the `profile_version` carried by profile records. Breaking profile-contract changes require a profile-version change.
 
