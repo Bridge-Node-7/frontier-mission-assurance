@@ -8,10 +8,10 @@
 - Added explicit HOLD/no-consequential-action utility, per-option unsafe hypotheses, gate failures, eligibility, and utility advantage versus HOLD so blocked options remain explainable.
 - Added post-intervention requalification and event-derived TTC/TTE/TTMC/TTT/TTV recovery metrics.
 - Added a source-neutral synthetic known-truth benchmark with preregistered safe baselines, deterministic checked-in results, protocol-history preservation, and stress-matrix validation.
-- Added a local-only validator for partner-controlled private cases with lifecycle gates for mapped, assessed, post-intervention, and requalification-review stages; public CI never receives real mission evidence.
-- Added partner adoption, private-workspace, Recovery Assurance Package, Epistemic Firewall, evidence-quorum, Black-Sky exercise, recovery-pathway, real-case, and bounded intervention-experiment guidance.
+- Added a local-only validator for governed private cases with lifecycle gates for mapped, assessed, post-intervention, and requalification-review stages; public CI never receives real mission evidence.
+- Added evaluation/adoption, private-workspace, Recovery Assurance Package, Epistemic Firewall, evidence-quorum, evidence-degradation exercise, recovery-pathway, real-case, and bounded intervention-experiment guidance.
 - Added Orbital profile validation to the existing Python matrix, cross-platform smoke, Makefile gate, and deliberate stable-release source verification without creating a parallel workflow.
-- Preserved Mission Graph ownership of dependencies/strategic options, downstream human decision preparation, and accountable human consequential authority.
+- Preserved governed evidence/dependency ownership, downstream human decision preparation, and accountable human consequential authority.
 - Preserved the public/synthetic repository boundary and made the source-vs-wheel distribution boundary explicit.
 
 ## 0.6.0 — resilience and trust semantics

@@ -1,6 +1,6 @@
-# Black-Sky Exercise Pattern
+# Evidence-Degradation Exercise Pattern
 
-A Black-Sky exercise is a synthetic or isolated assurance exercise used to test whether unsupported assumptions are prevented from becoming operational truth when mission evidence degrades or conflicts.
+An Evidence-Degradation exercise is a synthetic or isolated assurance exercise used to test whether unsupported assumptions are prevented from becoming operational truth when mission evidence degrades or conflicts.
 
 It is not a cyberattack playbook and does not contain live command procedures.
 

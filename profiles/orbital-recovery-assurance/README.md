@@ -10,10 +10,13 @@ The profile is **advisory, synthetic-first, and non-operational**. It does not c
 orbital assets, authorize operations, establish ownership, certify recoverability,
 own canonical mission evidence, or record the final consequential decision.
 
-## Problem
+## Mission Opportunity
 
-A degraded or legacy orbital system can retain valuable capability while its true
+A degraded or legacy orbital system may retain useful capability while its true
 state, command trust, authority, or fitness for a new mission remains uncertain.
+Orbital Recovery Assurance provides a structured way to establish what capability remains,
+what evidence deserves trust, which pathways remain viable, and what must be requalified
+before accountable reuse.
 
 The profile structures:
 
@@ -35,18 +38,13 @@ The profile structures:
 - deterministic synthetic examples;
 - a machine-readable Mission Recovery Chain projection for operator-facing recovery-path analysis;
 - source-neutral target/pathway taxonomy for responsiveness, interface preparedness, and Observe/Contact/Interface decomposition;
-- bounded experimental-intervention guidance, including the SECOND LIGHT bench protocol;
+- bounded experimental-intervention guidance without operational command authority.
 
 ## Architecture boundary
 
-The profile owns its public contracts and synthetic checks only. It does not replace:
+The profile owns its public contracts and synthetic checks only. It does not replace governed evidence storage, richer dependency systems, downstream human-governed decision workflows, or accountable human decision authority.
 
-- governed evidence storage;
-- Mission Graph dependency, ProofRequest, or strategic-option ownership;
-- Frontier Decision Engine decision preparation;
-- accountable human decision authority.
-
-See `docs/BN7_INTEROPERABILITY.md`.
+See `docs/INTEROPERABILITY.md`.
 
 ## Trust rule
 
@@ -64,14 +62,14 @@ public profile.
 
 Start with `docs/PARTNER_QUICKSTART.md`.
 
-Real mission evidence should remain in a partner-controlled private workspace or existing
+Real mission evidence should remain in an authorized governed private workspace or existing
 governed system. See `docs/PRIVATE_WORKSPACE_PATTERN.md`.
 
 For human review, `docs/RECOVERY_ASSURANCE_PACKAGE.md` provides a bounded handoff
 structure for evidence basis, option eligibility, requalification, timeline metrics, and
 reopen conditions. It is not an authorization record.
 
-For a real partner-controlled case, use `python scripts/validate_orbital_recovery_case.py /path/to/private-case`. The command is local-only and validates structure/cross-references, not real-world truth or authorization.
+For a real governed case, use `python scripts/validate_orbital_recovery_case.py /path/to/private-case`. The command is local-only and validates structure/cross-references, not real-world truth or authorization.
 
 See `docs/REAL_CASE_PROTOCOL.md` for bounded application to actual mission cases and
 `docs/REAL_WORLD_ADOPTION.md` for the intended evaluate → map → count/exercise → assess →
@@ -87,21 +85,21 @@ Trust and authority are modeled as cross-cutting overlays rather than a sixth se
 The chain is a projection over governed evidence, not a new canonical record or decision
 authority. Count independent recovery paths, not merely assets.
 
-The partner workflow begins with **Map → Count → Exercise** before option assessment.
+The assessment workflow begins with **Map → Count → Exercise** before option assessment.
 The synthetic view is `examples/synthetic-recovery-case/recovery-chain-view.json`.
 
 ## Epistemic assurance
 
 The profile keeps observed, calculated, inferred, simulated, and reported evidence classes distinct and applies an **Epistemic Firewall**: analysis may generate hypotheses or next tests, but it may not silently promote itself into observed or verified evidence. See `docs/EPISTEMIC_ASSURANCE.md`.
 
-For multi-source corroboration, use provenance-correlation components rather than raw record count. See `docs/EVIDENCE_QUORUM_PATTERN.md`. Synthetic resilience exercises may use `docs/BLACK_SKY_EXERCISE_PATTERN.md`. Broader research concepts and their BN7 ownership boundaries are mapped in `docs/FUTURE_ARCHITECTURE_BOUNDARIES.md`.
+For multi-source corroboration, use provenance-correlation components rather than raw record count. See `docs/EVIDENCE_QUORUM_PATTERN.md`. Synthetic resilience exercises may use `docs/EVIDENCE_DEGRADATION_EXERCISE_PATTERN.md`.
 
 ## Distribution boundary
 
 The Orbital Recovery Assurance profile is a **source-repository/source-archive profile**.
 The FMA Python wheel provides the core `frontier_assurance` package and CLI; it does not
 package this profile directory. Users who need the profile schemas, synthetic examples,
-partner guidance, or benchmark assets should use a repository checkout or the verified
+evaluation guidance, or benchmark assets should use a repository checkout or the verified
 source archive for the matching release.
 
 ## Validate
@@ -125,9 +123,6 @@ See `LIMITATIONS.md`, `PROFILE_CONTRACT.md`, and `docs/VALIDATION.md`.
 
 ## Engineering guidance
 
-The profile intentionally avoids turning FMA into an orbital ontology. Domain guidance is kept source-neutral and bounded:
+The profile intentionally avoids turning FMA into an orbital ontology. Domain guidance is kept source-neutral and bounded. See `docs/RECOVERY_PATHWAY_TAXONOMY.md` for target responsiveness, interface preparedness, Observe/Contact/Interface layers, and generic recovery pathways.
 
-- `docs/RECOVERY_PATHWAY_TAXONOMY.md` — target responsiveness, interface preparedness, Observe/Contact/Interface layers, and generic recovery pathways.
-- `docs/SECOND_LIGHT_BENCH_PROTOCOL.md` — mission-to-link-to-antenna bench protocol for a passive-aperture reuse hypothesis.
-
-These documents support assurance reasoning; they do not establish live operational procedures or mission authority.
+Bounded experiment protocols may test recovery-enabling hypotheses, but public guidance does not disclose private research programs or establish live operational procedures or mission authority.

@@ -32,5 +32,4 @@ See `RECOVERY_PATHWAY_TAXONOMY.md`.
 
 ## Experimental intervention pattern
 
-The profile may carry bounded experiment protocols that test a recovery-enabling hypothesis without elevating the hypothesis into operational capability. `SECOND_LIGHT_BENCH_PROTOCOL.md` is one example: it treats passive-aperture reuse as a mission-requirement-driven bench question and closes the loop through requalification evidence rather than an arbitrary performance percentage.
-
+The profile may use bounded experiment protocols to test a recovery-enabling hypothesis without elevating the hypothesis into operational capability. Acceptance remains mission-requirement-driven and must close the loop through requalification evidence rather than an arbitrary performance threshold. Private research programs and implementation-specific experiment designs remain outside the public profile.
