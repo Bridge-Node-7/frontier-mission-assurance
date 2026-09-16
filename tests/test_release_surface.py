@@ -140,7 +140,7 @@ def test_scientific_discovery_profile_surface_is_present():
         ROOT / "profiles" / "scientific-discovery" / "README.md",
         ROOT / "profiles" / "scientific-discovery" / "SPECIFICATION_EQUIVALENCE.md",
         ROOT / "profiles" / "scientific-discovery" / "ATTRIBUTION.md",
-        ROOT / "profiles" / "scientific-discovery" / "LIMITATIONS.md",
+        ROOT / "profiles" / "scientific-discovery" / "ASSURANCE_SCOPE.md",
         ROOT / "scripts" / "validate_scientific_discovery.py",
         ROOT / "tests" / "test_scientific_discovery.py",
     ]
