@@ -1,10 +1,10 @@
 # Five-Minute Evaluation
 
-This path demonstrates the public reference without executing receipt commands or contacting a remote service.
+This path validates the public FMA reference locally using source-neutral fixtures and the reviewed build toolchain.
 
 ## 1. Create an isolated environment
 
-FMA pins its build backend so the clean-adopter path is explicit and reproducible. Install those exact build tools inside the isolated environment before the editable install, then disable build isolation so pip uses the reviewed local backend versions.
+FMA pins its build backend so the clean evaluation path is explicit and reproducible. Install the reviewed build tools inside the isolated environment, then use them for the editable install.
 
 ### macOS / Linux
 
@@ -22,7 +22,7 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --no-build-isolation -e .
 ```
 
-## 2. Run the bounded evaluation
+## 2. Run the reference evaluation
 
 ### macOS / Linux
 
@@ -42,12 +42,14 @@ Expected final line:
 RESULT - PUBLIC REFERENCE EVALUATION PASS
 ```
 
-The synthetic fixture intentionally retains a visible critical evidence gap. A PASS means the reference mechanics behaved as declared; it does not mean the synthetic system is mission-ready.
+The reference fixture includes a deliberate critical evidence gap. The PASS confirms that FMA surfaced and handled the declared condition as designed rather than converting incomplete evidence into a stronger mission claim.
 
-## 3. Optional deeper inspection
+## 3. Inspect individual controls
 
 Use `fma validate`, `fma assumptions`, `fma coverage`, `fma impact`, `fma receipt`, `fma decision`, and `fma report` for individual checks. Each subcommand provides positional help and an example through `fma <command> --help`.
 
-`fma receipt` remains non-executing. The bundled version-2 receipt binds declared code, inputs, outputs, and numerical acceptance checks.
+`fma receipt` verifies receipt structure, declared hashes, and acceptance metadata without executing the receipt command.
 
-`fma reproduce` is intentionally excluded from the bounded evaluation because it executes trusted receipt-declared code. For a version-2 receipt it first verifies code and inputs, requires the command to execute the declared entrypoint directly (or as the first Python script argument), then runs that entrypoint in a fresh temporary workspace where declared outputs are absent, and finally verifies the new outputs and numerical criteria. Interpreter modes such as `python -c`, `python -m`, or stdin execution cannot satisfy entrypoint binding merely by mentioning the entrypoint later in the command. The workspace prevents stale outputs from satisfying a reproduction PASS, but it is not a sandbox or hermetic environment. Run reproduction only on trusted code after review.
+`fma reproduce` is the explicit trusted-code reproduction path. For a version-2 receipt it verifies code and inputs, requires the command to execute the declared entrypoint directly, runs that entrypoint in a fresh temporary workspace where declared outputs are absent, and then verifies the newly produced outputs and numerical criteria.
+
+Interpreter modes such as `python -c`, `python -m`, or stdin execution cannot satisfy entrypoint binding merely by mentioning the entrypoint later in the command. The fresh workspace is an integrity boundary that prevents stale outputs from satisfying reproduction. Trusted code executes with the permissions and ambient capabilities of the host, so reproduction belongs in an environment appropriate for that code.
