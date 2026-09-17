@@ -2,7 +2,7 @@
 
 FTQC resource estimates are conditional outputs. Their decision meaning depends on the workload, algorithm representation, QEC assumptions, logical error target, physical model, architecture constraints, estimator identity, version, and configuration.
 
-FMA-Q does not create a new quantum resource estimator.
+FTQC Assurance does not create a new quantum resource estimator.
 
 The `Resource Estimate Receipt` records:
 
