@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — FTQC Assurance
+
+- Added FTQC Assurance as a bounded Frontier Mission Assurance profile rather than creating a separate institutional repository.
+- Added a modality-neutral Workload-to-System Assurance Chain with a synthetic neutral-atom Algorithm-to-Atom reference view.
+- Added four profile contracts: FTQC System Concept, Resource Estimate Receipt, Evidence Validity Envelope, and Expert Adjudication Record.
+- Added declared-versus-established evidence-applicability semantics so structural records cannot silently create scientific authority.
+- Added internal, external, and independent-review classes without treating them as epistemically equivalent.
+- Added a source-neutral changed-assumption reference case that makes resource estimates stale, moves evidence outside its declared envelope, reopens expert review, traces affected claims, and reopens the dependent decision.
+- Added a human-readable Decision Basis report that separates software/contract PASS from technical-decision HOLD.
+- Added one-command local evaluation, deterministic profile validation, regression coverage, Makefile integration, and CI coverage on the supported Python and operating-system matrix.
+- Preserved the FMA core graph ontology, Mission Decision Packet semantics, local-first runtime, public/private evidence boundary, and accountable human consequential authority.
+- Kept QBI material as a bounded public-source crosswalk with no readiness score, affiliation claim, or representation of evaluator internals.
+
 ## 0.7.2 — public experience refinement
 
 - Rebuilt the repository front door around FMA's core value: evidence-native verification and validation for high-consequence frontier systems.
@@ -69,7 +82,7 @@
 - Added public standards positioning that distinguishes FMA's bounded composition and UX from established assurance-case, provenance, hashing, reproducibility, and attestation primitives.
 - Clarified that unsigned core receipts establish declared integrity and consistency, not authorship or signer identity.
 - Added regression coverage for stable, unique core schema identifiers.
-- Preserved v0.4.0 reproduction integrity, cross-platform V&V, Scientific Discovery Assurance, Mission Decision Packets, local-only runtime, synthetic-only public fixtures, and human consequential decision authority.
+- Preserved v0.4.0 reproduction integrity, cross-platform V&V, Scientific Discovery Assurance, Mission Decision Packets, local-only runtime, synthetic-only fixtures, and human consequential decision authority.
 
 ## 0.4.0 — reproduction integrity
 

@@ -1,0 +1,27 @@
+{
+  "profile_version": "0.1",
+  "record_class": "synthetic",
+  "record_id": "MODEL-RESOURCE-001",
+  "system_ref": "FTQC-SYNTHETIC-001",
+  "estimator": {
+    "name": "synthetic_reference_estimator",
+    "version": "0.1",
+    "configuration_ref": "CONFIG-SYNTHETIC-001"
+  },
+  "problem": {
+    "workload_ref": "WORKLOAD-001",
+    "algorithm_ref": "ALGORITHM-SYNTHETIC-001"
+  },
+  "assumption_refs": ["ASSUMPTION-QEC-001", "ASSUMPTION-DECODER-001", "ASSUMPTION-LOSS-001", "ASSUMPTION-SCALE-001"],
+  "result": {
+    "physical_qubits": 12000,
+    "runtime_seconds": 7200,
+    "synthetic_only": true
+  },
+  "provenance": {
+    "status": "DECLARED_ONLY",
+    "research_receipt_ref": null
+  },
+  "applicability_envelope_ref": "ENV-RESOURCE-001",
+  "review_state": "CURRENT"
+}

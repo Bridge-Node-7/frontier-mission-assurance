@@ -1,0 +1,21 @@
+{
+  "profile_version": "0.1",
+  "record_class": "synthetic",
+  "reviews": [
+    {
+      "review_id": "EXPERT-REVIEW-001",
+      "claim_ref": "CLAIM-002",
+      "review_class": "INTERNAL_DOMAIN_REVIEW",
+      "competency_domains": ["quantum_error_correction"],
+      "question": "Does the declared synthetic evidence support the QEC assumption inside the current physical-model envelope?",
+      "evidence_refs": ["EVIDENCE-QEC-001"],
+      "mandatory": true,
+      "conclusion": "SUPPORTED_WITHIN_SCOPE",
+      "uncertainties": ["No claim is made outside the declared synthetic scale and physical-model envelope."],
+      "exclusions": ["This record does not establish independent V&V or real hardware performance."],
+      "reopen_when_refs": ["ASSUMPTION-QEC-001", "ASSUMPTION-DECODER-001", "ASSUMPTION-LOSS-001"],
+      "authority_note": "Synthetic internal-domain review for profile behavior only.",
+      "reviewer_ref": null
+    }
+  ]
+}

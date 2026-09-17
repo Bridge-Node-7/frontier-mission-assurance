@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "maturity": "stable public reference implementation",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -29,6 +29,10 @@
     "assess robust recovery-option eligibility under declared models",
     "validate governed local orbital-recovery case structure without moving mission evidence into the public repository",
     "preserve post-intervention requalification and Time-to-Trust evidence as distinct from technical restoration",
+    "validate FTQC Assurance contracts for system concept, resource-estimate meaning, evidence applicability, and expert adjudication",
+    "separate software-contract PASS from FTQC technical-decision disposition",
+    "detect when a changed FTQC assumption makes a resource estimate stale, moves evidence outside its declared envelope, reopens expert review, and requires decision reconsideration",
+    "preserve a modality-neutral Workload-to-System Assurance Chain while providing a synthetic neutral-atom reference view",
     "publish stable identifiers for versioned portable contracts"
   ],
   "governed_externally": [
@@ -44,10 +48,15 @@
     "specification equivalence for formal scientific or engineering claims",
     "orbital command and control",
     "orbital ownership and legal authority",
-    "mission-specific recovery probability calibration"
+    "mission-specific recovery probability calibration",
+    "quantum error-correction theory and decoder validity",
+    "quantum hardware fidelity, error/loss characterization, calibration, and metrology",
+    "FTQC resource-estimator correctness and system-specific configuration",
+    "supplier, manufacturing, and system-integration qualification for real quantum programs",
+    "government-program eligibility, independence, conflict, and evaluator determinations"
   ],
   "distribution": "GitHub source and stable release workflow; public package-index upload is intentionally blocked by package metadata. Assurance profiles are distributed in the repository/source archive while the core wheel carries the frontier_assurance package and CLI.",
   "evidence_lifecycle": "Source-controlled validation defines deterministic expectations; commit-specific hosted proof belongs to GitHub Actions and tagged release metadata.",
-  "interoperability": "Versioned core schemas use stable identifiers. Richer domain records map into FMA contracts through explicit adapters while preserving local evidence, calibration, acceptance, and decision semantics.",
+  "interoperability": "Versioned core schemas use stable identifiers. Richer domain records map into FMA contracts through explicit adapters while preserving local evidence, calibration, acceptance, and decision semantics. FTQC Assurance references authoritative laboratory, modeling, estimator, expert-review, and supplier systems rather than replacing them.",
   "maintenance": "Keep main as the protected long-lived branch, use immutable GitHub Action pins, dependency review, protected-main CodeQL, reviewed dependency updates, tracked-file public-release scanning, and full V&V after material source changes."
 }

@@ -1,0 +1,35 @@
+{
+  "$id": "urn:bn7:ftqc-assurance:expert-adjudication-record:0.1",
+  "title": "FTQC Expert Adjudication Record Set (v0.1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile_version", "record_class", "reviews"],
+  "properties": {
+    "profile_version": {"const": "0.1"},
+    "record_class": {"enum": ["synthetic", "private"]},
+    "reviews": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["review_id", "claim_ref", "review_class", "competency_domains", "question", "evidence_refs", "mandatory", "conclusion", "uncertainties", "exclusions", "reopen_when_refs", "authority_note"],
+        "properties": {
+          "review_id": {"type": "string", "minLength": 1},
+          "claim_ref": {"type": "string", "minLength": 1},
+          "review_class": {"enum": ["INTERNAL_DOMAIN_REVIEW", "EXTERNAL_DOMAIN_REVIEW", "INDEPENDENT_VV_REVIEW"]},
+          "competency_domains": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "question": {"type": "string", "minLength": 1},
+          "evidence_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "mandatory": {"type": "boolean"},
+          "conclusion": {"enum": ["SUPPORTED_WITHIN_SCOPE", "REVIEW_REQUIRED", "NOT_REVIEWED", "NOT_SUPPORTED_WITHIN_SCOPE"]},
+          "uncertainties": {"type": "array", "items": {"type": "string"}},
+          "exclusions": {"type": "array", "items": {"type": "string"}},
+          "reopen_when_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "authority_note": {"type": "string", "minLength": 1},
+          "reviewer_ref": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "profile_version": "0.1",
+  "record_class": "synthetic",
+  "system_id": "FTQC-SYNTHETIC-001",
+  "modality": "neutral_atom",
+  "architecture_revision": "synthetic-r1",
+  "mission_objective": "Determine whether the declared evidence basis is mature enough to advance the synthetic architecture into its next integration and risk-retirement phase.",
+  "decision_ref": "DECISION-001",
+  "workload": {
+    "id": "WORKLOAD-001",
+    "description": "Synthetic utility-scale workload used only to demonstrate assurance behavior."
+  },
+  "assumptions": [
+    {"id": "ASSUMPTION-QEC-001", "domain": "qec", "name": "QEC code family", "value": "synthetic_code_a", "unit": null, "status": "REVIEWED", "source_ref": "EXPERT-REVIEW-001"},
+    {"id": "ASSUMPTION-DECODER-001", "domain": "qec", "name": "Decoder family", "value": "synthetic_decoder_a", "unit": null, "status": "REVIEWED", "source_ref": "EXPERT-REVIEW-001"},
+    {"id": "ASSUMPTION-LOSS-001", "domain": "physical_model", "name": "Movement loss regime", "value": "baseline", "unit": null, "status": "DECLARED", "source_ref": "EVIDENCE-LOSS-001"},
+    {"id": "ASSUMPTION-SCALE-001", "domain": "architecture", "name": "Array scale target", "value": 800, "unit": "synthetic_units", "status": "DECLARED", "source_ref": "EVIDENCE-LOSS-001"},
+    {"id": "ASSUMPTION-PHOTONIC-001", "domain": "interface", "name": "Photonic interface regime", "value": "baseline", "unit": null, "status": "REVIEWED", "source_ref": "EVIDENCE-PHOTONIC-001"}
+  ]
+}

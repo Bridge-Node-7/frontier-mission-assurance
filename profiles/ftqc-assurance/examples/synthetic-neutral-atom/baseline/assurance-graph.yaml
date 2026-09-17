@@ -1,0 +1,48 @@
+graph_version: "1.0"
+metadata:
+  record_class: synthetic
+  profile: ftqc-assurance
+  profile_version: "0.1"
+nodes:
+  - {id: MISSION-001, kind: mission, title: "Advance synthetic FTQC architecture only when its decision basis is reviewable", status: active, criticality: 5}
+  - {id: CLAIM-001, kind: claim, title: "Logical resource requirement is adequately characterized for the current decision", status: active, criticality: 5}
+  - {id: CLAIM-002, kind: claim, title: "Selected QEC assumptions are applicable to the declared physical model", status: active, criticality: 5}
+  - {id: CLAIM-003, kind: claim, title: "Physical loss and scale assumptions remain inside the evidence envelope supporting the current estimate", status: active, criticality: 5}
+  - {id: CLAIM-004, kind: claim, title: "The declared photonic control interface has a credible integration evidence path", status: active, criticality: 5}
+  - {id: ASSUMPTION-QEC-001, kind: assumption, title: "Synthetic QEC code family remains applicable", status: active, criticality: 5}
+  - {id: ASSUMPTION-DECODER-001, kind: assumption, title: "Synthetic decoder family remains applicable", status: active, criticality: 5}
+  - {id: ASSUMPTION-LOSS-001, kind: assumption, title: "Synthetic movement loss regime", status: active, criticality: 5}
+  - {id: ASSUMPTION-SCALE-001, kind: assumption, title: "Synthetic array scale target", status: active, criticality: 5}
+  - {id: ASSUMPTION-PHOTONIC-001, kind: assumption, title: "Synthetic photonic interface regime", status: active, criticality: 4}
+  - {id: MODEL-RESOURCE-001, kind: model, title: "Synthetic FTQC resource estimate", status: active, criticality: 5}
+  - {id: EVIDENCE-QEC-001, kind: evidence, title: "Synthetic QEC support evidence", status: active, criticality: 5}
+  - {id: EVIDENCE-LOSS-001, kind: evidence, title: "Synthetic loss evidence", status: active, criticality: 5}
+  - {id: EXPERT-REVIEW-001, kind: evidence, title: "Synthetic QEC expert adjudication", status: active, criticality: 5}
+  - {id: INTERFACE-PHOTONIC-001, kind: interface, title: "Synthetic photonic control interface", status: active, criticality: 4}
+  - {id: COMPONENT-OPTICAL-001, kind: component, title: "Synthetic optical component dependency", status: active, criticality: 4}
+  - {id: EVIDENCE-PHOTONIC-001, kind: evidence, title: "Synthetic photonic interface evidence", status: active, criticality: 4}
+  - {id: RISK-QEC-001, kind: risk, title: "QEC applicability changes invalidate downstream decision basis", status: open, criticality: 5}
+  - {id: DECISION-001, kind: decision, title: "Advance to next integration and risk-retirement phase", status: proposed, criticality: 5}
+edges:
+  - {from: MODEL-RESOURCE-001, to: ASSUMPTION-QEC-001, relation: depends_on}
+  - {from: MODEL-RESOURCE-001, to: ASSUMPTION-DECODER-001, relation: depends_on}
+  - {from: MODEL-RESOURCE-001, to: ASSUMPTION-LOSS-001, relation: depends_on}
+  - {from: MODEL-RESOURCE-001, to: ASSUMPTION-SCALE-001, relation: depends_on}
+  - {from: CLAIM-001, to: MODEL-RESOURCE-001, relation: depends_on}
+  - {from: CLAIM-002, to: ASSUMPTION-QEC-001, relation: depends_on}
+  - {from: CLAIM-002, to: ASSUMPTION-DECODER-001, relation: depends_on}
+  - {from: CLAIM-002, to: ASSUMPTION-LOSS-001, relation: depends_on}
+  - {from: EXPERT-REVIEW-001, to: CLAIM-002, relation: supports}
+  - {from: EVIDENCE-QEC-001, to: EXPERT-REVIEW-001, relation: supports}
+  - {from: CLAIM-003, to: ASSUMPTION-LOSS-001, relation: depends_on}
+  - {from: CLAIM-003, to: ASSUMPTION-SCALE-001, relation: depends_on}
+  - {from: EVIDENCE-LOSS-001, to: CLAIM-003, relation: supports}
+  - {from: INTERFACE-PHOTONIC-001, to: ASSUMPTION-PHOTONIC-001, relation: depends_on}
+  - {from: CLAIM-004, to: INTERFACE-PHOTONIC-001, relation: depends_on}
+  - {from: EVIDENCE-PHOTONIC-001, to: CLAIM-004, relation: supports}
+  - {from: COMPONENT-OPTICAL-001, to: INTERFACE-PHOTONIC-001, relation: implements}
+  - {from: RISK-QEC-001, to: ASSUMPTION-QEC-001, relation: depends_on}
+  - {from: DECISION-001, to: CLAIM-001, relation: depends_on}
+  - {from: DECISION-001, to: CLAIM-002, relation: depends_on}
+  - {from: DECISION-001, to: CLAIM-003, relation: depends_on}
+  - {from: DECISION-001, to: CLAIM-004, relation: depends_on}
