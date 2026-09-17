@@ -19,10 +19,11 @@ FMA is built for teams working at the edge of science and engineering, where the
 For the shortest evaluation path:
 
 1. [`docs/FIVE_MINUTE_EVALUATION.md`](docs/FIVE_MINUTE_EVALUATION.md) — run the reference evaluation.
-2. [`docs/CLI_CONTRACT.md`](docs/CLI_CONTRACT.md) — commands, exit codes, receipt versions, and PASS semantics.
-3. [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md) — verification and validation doctrine.
-4. [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md) — adopt FMA around one consequential decision.
-5. [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md) — build a reviewable mission decision basis.
+2. [`profiles/ftqc-assurance/README.md`](profiles/ftqc-assurance/README.md) — evaluate FTQC decision-basis continuity and changed-assumption propagation.
+3. [`docs/CLI_CONTRACT.md`](docs/CLI_CONTRACT.md) — commands, exit codes, receipt versions, and PASS semantics.
+4. [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md) — verification and validation doctrine.
+5. [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md) — adopt FMA around one consequential decision.
+6. [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md) — build a reviewable mission decision basis.
 
 For deeper engineering context, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md), and [`docs/STANDARDS_POSITIONING.md`](docs/STANDARDS_POSITIONING.md).
 
@@ -101,6 +102,7 @@ The reference fixture includes a deliberate critical evidence gap so evaluators 
 - **Public release controls** — scan tracked files, verify structured artifacts, pin Actions, exercise tamper paths, and preserve deterministic release evidence.
 - **Scientific Discovery Assurance** — portable contracts for discovery provenance, priority evidence, specification, proof state, replication, and attribution chronology.
 - **Orbital Recovery Assurance** — evidence-driven recovery assurance for mission-state assessment, recovery-path diversity, robust option eligibility, next-best evidence, requalification, and Time-to-Trust.
+- **FTQC Assurance** — preserve the decision basis of fault-tolerant quantum programs as assumptions, evidence, estimates, interfaces, and expert reviews change.
 - **CI-native V&V** — run the complete assurance surface across supported Python versions and operating systems.
 
 ## Mission Decision Packet
@@ -184,6 +186,49 @@ python scripts/validate_orbital_recovery_case.py /path/to/private-case --require
 
 See [`profiles/orbital-recovery-assurance/README.md`](profiles/orbital-recovery-assurance/README.md) and [`profiles/orbital-recovery-assurance/docs/PARTNER_QUICKSTART.md`](profiles/orbital-recovery-assurance/docs/PARTNER_QUICKSTART.md).
 
+## FTQC Assurance
+
+[`profiles/ftqc-assurance/`](profiles/ftqc-assurance/) preserves **decision-basis continuity** for fault-tolerant quantum programs.
+
+It connects system concepts, resource-estimation assumptions, bounded evidence applicability, interface and component dependencies, expert review, and human decisions without turning FMA into a quantum simulator or certification authority.
+
+Its architecture-neutral Workload-to-System Assurance Chain is:
+
+```text
+Utility / mission objective
+→ Workload
+→ Algorithm
+→ Logical resource requirement
+→ QEC assumptions
+→ Resource estimate
+→ Physical error / loss assumptions
+→ Control / movement / scheduling
+→ Physical architecture
+→ Subsystem and interface dependencies
+→ Industrial dependencies
+→ Risk-retirement evidence
+→ Expert adjudication
+→ Mission decision
+```
+
+The public neutral-atom reference case changes one physical-model assumption and demonstrates which estimate, evidence envelope, expert review, claims, and decision must be reconsidered.
+
+Evaluate it with:
+
+```bash
+python scripts/evaluate_ftqc_reference.py .
+```
+
+Expected final line:
+
+```text
+RESULT - FTQC REFERENCE EVALUATION PASS
+```
+
+The output deliberately distinguishes **software / contract validation** from **technical decision readiness**. A profile PASS does not establish quantum performance, QEC validity, hardware readiness, independent V&V, or mission approval.
+
+See [`profiles/ftqc-assurance/README.md`](profiles/ftqc-assurance/README.md).
+
 ## Runtime privacy
 
 The installed FMA runtime makes no remote API calls, emits no telemetry, and performs no default uploads. Runtime assurance checks operate on local files. Package installation and hosted CI use only the networks configured for those environments.
@@ -196,7 +241,8 @@ frontier-mission-assurance/
 ├── schemas/                         # portable JSON Schemas
 ├── profiles/                        # specialized assurance profiles
 │   ├── scientific-discovery/        # discovery assurance contracts
-│   └── orbital-recovery-assurance/  # orbital recovery assurance contracts
+│   ├── orbital-recovery-assurance/  # orbital recovery assurance contracts
+│   └── ftqc-assurance/              # FTQC decision-basis continuity contracts
 ├── examples/                        # source-neutral worked examples
 ├── tests/                           # regression, tamper, adversarial, and boundary tests
 ├── docs/                            # architecture, contracts, doctrine, and adoption guidance
@@ -234,7 +280,7 @@ python -m pip install --no-deps -e .
 make check
 ```
 
-Hosted CI exercises supported Python versions, Ubuntu/macOS/Windows smoke paths, fresh wheel installation, dependency review, CodeQL, public release controls, adversarial rejection behavior, fresh reproduction integrity, and both assurance profiles.
+Hosted CI exercises supported Python versions, Ubuntu/macOS/Windows smoke paths, fresh wheel installation, dependency review, CodeQL, public release controls, adversarial rejection behavior, fresh reproduction integrity, and all assurance profiles.
 
 ## Design principles
 

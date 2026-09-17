@@ -70,6 +70,10 @@ jobs:
         run: python scripts/validate_scientific_discovery.py .
       - name: Validate Orbital Recovery Assurance profile
         run: python scripts/validate_orbital_recovery_assurance.py .
+      - name: Validate FTQC Assurance profile
+        run: python scripts/validate_ftqc_assurance.py .
+      - name: Evaluate FTQC synthetic reference
+        run: python scripts/evaluate_ftqc_reference.py .
       - name: Run public reference evaluation
         run: python scripts/evaluate_public_reference.py
       - name: Analyze with CodeQL
@@ -83,6 +87,7 @@ jobs:
           name: validation-artifacts-py${{ matrix.python-version }}
           path: |
             build/assurance-report.md
+            build/ftqc-decision-basis.md
             build/environment-fingerprint.json
           if-no-files-found: error
           retention-days: 7
@@ -112,6 +117,8 @@ jobs:
       - run: fma reproduce examples/research_receipt/receipt.yaml --timeout 30
       - run: python scripts/validate_scientific_discovery.py .
       - run: python scripts/validate_orbital_recovery_assurance.py .
+      - run: python scripts/validate_ftqc_assurance.py .
+      - run: python scripts/evaluate_ftqc_reference.py .
 
   package-smoke:
     name: Wheel build + fresh install
