@@ -1,4 +1,4 @@
-# Source Validation Report — v0.8.0
+# Source Validation Report — v0.8.1
 
 **Date:** 2026-09-17  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -71,9 +71,11 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.8.0 source candidate adds FTQC Assurance profile contract `0.1`. Release eligibility requires:
+The v0.8.1 source candidate retains FTQC Assurance profile contract `0.1` and hardens the external reported-resource-estimate boundary. Release eligibility requires:
 
 - FTQC profile schemas and public reference records agree on profile contract `0.1`;
+- profile contract `0.1` Resource Estimate Receipts remain synthetic/reference-only;
+- public guidance keeps third-party reported resource estimates distinct from fresh reproduction, independent replication, expert adjudication, and system applicability;
 - public FTQC examples remain synthetic and source-neutral;
 - the universal FMA graph ontology remains unchanged by the domain profile;
 - system-concept assumption references resolve to FMA assumption nodes;
