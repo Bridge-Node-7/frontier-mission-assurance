@@ -1,0 +1,10 @@
+manifest_version: "1.0"
+profile_id: orbital-recovery-assurance
+profile_name: Orbital Recovery Assurance
+profile_version: "0.5"
+introduced_in_fma_release: "0.7.0"
+profile_contract: profiles/orbital-recovery-assurance/PROFILE_CONTRACT.md
+validator: scripts/validate_orbital_recovery_assurance.py
+description: >-
+  Source-neutral assurance contracts for orbital recovery assessment under uncertain
+  physical state, digital trust, authority, and post-intervention mission fitness.
