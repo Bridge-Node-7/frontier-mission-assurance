@@ -6,6 +6,8 @@ Scientific Discovery Assurance keeps provenance, specification, priority, proof 
 
 The profile is designed for work where computational speed can exceed the natural pace of evidence organization. Its role is to preserve a reviewable chain from the originating problem and source material to proof, replication, attribution, and the final governed decision.
 
+See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) for the profile boundary, ownership model, and decision-authority contract.
+
 ## Contract set
 
 - `DiscoveryPassport` — discovery claim, contributors, provenance, verification state, attribution chronology, scope, and decision authority.
