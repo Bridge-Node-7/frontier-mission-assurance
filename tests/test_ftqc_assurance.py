@@ -86,3 +86,29 @@ def test_stable_release_reverifies_ftqc_profile_and_reference():
     assert "python scripts/evaluate_ftqc_reference.py ." in workflow
     assert workflow.count("scripts/validate_ftqc_assurance.py .") >= 2
     assert workflow.count("scripts/evaluate_ftqc_reference.py .") >= 2
+
+
+def test_external_reported_resource_estimate_boundary_is_explicit():
+    schema = json.loads(
+        (
+            ROOT
+            / "profiles"
+            / "ftqc-assurance"
+            / "schemas"
+            / "resource-estimate-receipt.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert schema["properties"]["result"]["properties"]["synthetic_only"]["const"] is True
+
+    scope = (
+        ROOT / "profiles" / "ftqc-assurance" / "ASSURANCE_SCOPE.md"
+    ).read_text(encoding="utf-8")
+    adoption = (ROOT / "docs" / "EXTERNAL_RESEARCH_ADOPTION.md").read_text(
+        encoding="utf-8"
+    )
+
+    for text in (scope, adoption):
+        assert "external" in text.lower()
+        assert "reported" in text.lower()
+        assert "freshly reproduced" in text.lower()
+        assert "applicab" in text.lower()
