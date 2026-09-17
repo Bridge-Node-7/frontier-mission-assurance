@@ -1,6 +1,6 @@
-# Source Validation Report — v0.7.2
+# Source Validation Report — v0.8.0
 
-**Date:** 2026-09-15  
+**Date:** 2026-09-17  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
 
 This report defines the deterministic validation contract for the source candidate. Commit-specific hosted CI evidence belongs in GitHub Actions and tagged release metadata rather than being copied into source. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
@@ -33,31 +33,35 @@ This report defines the deterministic validation contract for the source candida
 
 ## Orbital Recovery Assurance V&V
 
-The v0.7.2 source candidate validates the source-distributed Orbital Recovery Assurance profile and its refined public experience. Release eligibility requires:
+Release eligibility requires the accepted Orbital Recovery Assurance profile contract and regression surface to remain green, including source-neutral records, physical/trust/authority separation, Mission Recovery Chain invariants, provenance correlation, fail-closed robust-option eligibility, next-best-evidence behavior, requalification, event-derived recovery metrics, governed local-case validation, deterministic benchmarks, and cross-platform smoke paths.
 
-- profile schemas and reference records agree on profile contract `0.5`;
-- public examples remain source-neutral;
-- physical, trust, and authority semantics remain distinct;
-- the Mission Recovery Chain contains exactly power/contact/telemetry/command/capability, with trust and authority as overlays;
-- recovery-chain evidence references resolve;
-- evidence validity and provenance-correlation controls remain explicit;
-- robust-option filtering is non-vacuous and fail-closed;
-- unsafe credible hypotheses and gate failures remain visible per option;
-- HOLD/no-consequential-action remains an explicit utility baseline;
-- next-best evidence is evaluated over the admissible policy and surfaced only when positive-value;
-- machine output stops at eligibility for accountable decision preparation;
-- post-intervention requalification evidence references resolve and fail closed when incomplete;
-- TTC/TTE/TTMC/TTT/TTV metrics remain event-derived;
-- the checked-in synthetic benchmark is deterministic and matches current protocol/code;
-- the primary known-truth benchmark uses 5,000 cases and passes its declared protocol;
-- the declared stress matrix passes;
-- the reference policy unsafe-action rate remains 0.0 under the declared synthetic generator;
-- governed local case validation remains local-only and supports mapped, assessed, post-intervention, and requalification-review lifecycle gates;
-- local-case quiet failures do not echo unresolved protected identifiers;
-- JSON object serialization order does not become part of the recovery-chain contract;
-- Orbital profile validation passes on the supported Python matrix and explicit Ubuntu/macOS/Windows smoke path.
+These controls establish behavior under the declared contracts and synthetic generator. Mission recoverability, flight safety, ownership, authority, mission-specific probability calibration, and mission readiness remain governed externally.
 
-These controls establish behavior under the declared contracts and synthetic generator. Mission recoverability, flight safety, ownership, authority, mission-specific probability calibration, and mission readiness remain governed by the evidence and approval processes responsible for the actual system.
+## FTQC Assurance V&V
+
+The v0.8.0 source candidate adds FTQC Assurance profile contract `0.1`. Release eligibility requires:
+
+- FTQC profile schemas and public reference records agree on profile contract `0.1`;
+- public FTQC examples remain synthetic and source-neutral;
+- the universal FMA graph ontology remains unchanged by the domain profile;
+- system-concept assumption references resolve to FMA assumption nodes;
+- resource-estimate assumption references resolve and remain distinct from estimator correctness;
+- evidence envelopes name an evidence class, explicit applicability conditions, applicability basis, authority state, and decision-gate state;
+- `ESTABLISHED` applicability cannot rest only on a declared-assumption basis;
+- internal, external, and independent-review classes remain explicit and non-equivalent;
+- mandatory expert gates cannot coexist with an `APPROVE` synthetic Decision Receipt unless supported within scope;
+- the public baseline remains `HOLD` while a decision-gating applicability envelope is only declared;
+- the changed-assumption scenario modifies exactly one declared physical-model assumption;
+- that change makes the dependent synthetic resource estimate stale;
+- evidence outside its declared applicability envelope is surfaced without inferring architecture failure;
+- the QEC expert review reopens when its declared physical-model dependency changes;
+- affected claims and the dependent decision are surfaced through declared dependency/support relationships;
+- the human-readable Decision Basis report clearly separates software/contract PASS from technical-decision HOLD;
+- the evaluator is deterministic across repeated runs;
+- the QBI crosswalk remains documentation-only and makes no readiness, affiliation, or evaluator-internal claim;
+- profile validation and evaluation pass on the supported Python matrix and Ubuntu/macOS/Windows smoke paths.
+
+These controls establish declared profile behavior only. They do not establish quantum-physics validity, QEC correctness, resource-estimator correctness, hardware performance, supplier qualification, independent V&V, government-program readiness, or consequential decision authority.
 
 ## Public release V&V
 
@@ -91,8 +95,8 @@ Assurance profiles are distributed through the repository/source archive. The co
 
 ## Hosted acceptance
 
-The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-release validation, adversarial regressions, both assurance profile validators, dependency review where applicable, protected-main CodeQL on main, and clean wheel installation. The Actions run attached to that exact commit is the authoritative hosted evidence.
+The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-release validation, adversarial regressions, all assurance profile validators, dependency review where applicable, protected-main CodeQL on main, and clean wheel installation. The Actions run attached to that exact commit is the authoritative hosted evidence.
 
 ## Disposition rule
 
-**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, and consequential authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
+**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, quantum-performance, independent-evaluator, and consequential-authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).

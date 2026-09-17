@@ -3,7 +3,7 @@
 ## Contract version
 
 **FTQC Assurance profile contract:** `0.1`  
-**Minimum compatible FMA source baseline:** `0.7.2`
+**Containing FMA release:** `0.8.0`
 
 The profile contract version is independent from the containing FMA release version. Consumers should pin both the FMA release and the `profile_version` carried by profile records. Breaking profile-contract changes require a profile-version change.
 
