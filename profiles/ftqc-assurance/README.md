@@ -22,7 +22,7 @@ expert review
 technical decisions
 ```
 
-When one changes, FMA-Q identifies what must be reconsidered.
+When one changes, FTQC Assurance identifies what must be reconsidered.
 
 The profile does **not** determine quantum truth, certify hardware, validate QEC performance, reproduce a government evaluation process, or replace qualified scientific and engineering judgment.
 
