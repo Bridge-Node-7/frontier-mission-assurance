@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-17  
-**Canonical release gate:** NOT READY
+**Canonical release gate:** READY
 
 ## Purpose
 
@@ -33,4 +33,4 @@ A PASS attests that the declared software and documentation controls satisfied t
 
 ## Release gate
 
-The v0.9.0 source gate remains **NOT READY** until the bounded contract change passes protected pull-request V&V and the complete protected-main hosted V&V contract. Stable publication remains a separate explicit release action.
+The bounded assurance-context contract change passed protected pull-request V&V and then passed the complete protected-main hosted V&V contract, including the supported Python/OS matrix, clean wheel installation, public-boundary validation, all assurance-profile checks, and protected-main CodeQL. The v0.9.0 source gate is therefore **READY**. Stable publication remains a separate explicit release action and must bind the final READY protected-main commit to the published release artifacts and clean-user verification.
