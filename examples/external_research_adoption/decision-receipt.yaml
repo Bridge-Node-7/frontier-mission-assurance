@@ -1,0 +1,21 @@
+decision_version: "1.0"
+decision:
+  id: DEC-USE-EXTERNAL-RESULT
+  disposition: HOLD
+  rationale: >-
+    The synthetic paper identity and source revision are identified, but fresh reproduction
+    and system-specific applicability remain unresolved. The reported result may be studied,
+    but it should not yet be promoted into the consequential system decision as established evidence.
+  reopen_when:
+    - "A fresh bounded reproduction closes the declared environment assumption."
+    - "Qualified review establishes or revises the applicability boundary for the system under review."
+    - "The frozen source revision or reported claim materially changes."
+basis:
+  node_refs:
+    - CLAIM-REPORTED-RESULT
+    - CLAIM-IMPLEMENTATION-RELATIONSHIP
+    - ASSUMP-ENVIRONMENT
+    - ASSUMP-APPLICABILITY
+    - EVID-PAPER-IDENTITY
+    - EVID-SOURCE-REVISION
+    - EXP-FRESH-REPRODUCTION
