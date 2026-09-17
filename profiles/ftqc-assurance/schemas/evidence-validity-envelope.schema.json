@@ -1,0 +1,65 @@
+{
+  "$id": "urn:bn7:ftqc-assurance:evidence-validity-envelope:0.1",
+  "title": "FTQC Evidence Validity Envelope Set (v0.1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile_version", "record_class", "envelopes"],
+  "properties": {
+    "profile_version": {"const": "0.1"},
+    "record_class": {"enum": ["synthetic", "private"]},
+    "envelopes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["envelope_id", "evidence_ref", "evidence_class", "basis", "applicability", "review"],
+        "properties": {
+          "envelope_id": {"type": "string", "minLength": 1},
+          "evidence_ref": {"type": "string", "minLength": 1},
+          "evidence_class": {"enum": ["THEORETICAL", "FORMAL", "SIMULATED", "CALCULATED", "EXPERIMENTAL", "REPRODUCED", "EXTERNAL_REPORTED", "EXPERT_ADJUDICATED"]},
+          "basis": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "refs"],
+            "properties": {
+              "type": {"enum": ["expert_review", "experiment", "model", "derivation", "declared_assumption"]},
+              "refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+            }
+          },
+          "applicability": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["conditions"],
+            "properties": {
+              "conditions": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["subject", "operator", "value"],
+                  "properties": {
+                    "subject": {"type": "string", "minLength": 1},
+                    "operator": {"enum": ["eq", "in", "lte", "gte", "between"]},
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "review": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["status", "authority_state", "decision_gate"],
+            "properties": {
+              "status": {"enum": ["IN_SCOPE", "REVIEW_REQUIRED", "OUTSIDE_ENVELOPE"]},
+              "authority_state": {"enum": ["DECLARED", "ESTABLISHED"]},
+              "decision_gate": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
