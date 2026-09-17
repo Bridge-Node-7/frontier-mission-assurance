@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-17  
-**Canonical release gate:** PENDING
+**Canonical release gate:** READY
 
 ## Purpose
 
@@ -35,7 +35,7 @@ Version 0.8.0 preserves **decision-basis continuity** for fault-tolerant quantum
 
 ## Source-level evidence
 
-This candidate must satisfy `VALIDATION_REPORT.md`, including the complete FMA regression surface, profile-manifest validation, external-research sidecar validation, all assurance profile validators, FTQC changed-assumption impact invariants, cross-platform validation, packaging, dependency review, CodeQL on protected main, and public-release controls.
+This candidate satisfies `VALIDATION_REPORT.md`, including the complete FMA regression surface, profile-manifest validation, external-research sidecar validation, all assurance profile validators, FTQC changed-assumption impact invariants, cross-platform validation, packaging, CodeQL on protected main, and public-release controls. Pull-request dependency review also passed before the operational-adoption change entered `main`.
 
 ## Hosted evidence rule
 
@@ -51,4 +51,4 @@ A PASS attests that the declared controls satisfied their acceptance criteria. S
 
 ## Release gate
 
-The source candidate has changed materially since the previous READY receipt. The gate is therefore reset to **PENDING** until the adoption-hardening change is merged through protected `main` and the exact merged commit passes the complete hosted V&V contract. Stable publication remains a separate explicit release action and additionally requires successful clean-user verification of the published artifacts through the Stable Release workflow.
+The operational-adoption change passed its protected pull-request V&V gate and then passed the complete protected-main hosted V&V contract, including CodeQL and cross-platform verification. The v0.8.0 source gate is therefore **READY**. Stable publication remains a separate explicit release action and requires the Stable Release workflow to bind the published artifacts to the final READY protected-main commit and complete its clean-user verification.
