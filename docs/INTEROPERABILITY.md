@@ -7,8 +7,10 @@ FMA exposes small public contracts intended for interchange without requiring di
 Current public contract versions:
 
 - assurance graph: `graph_version: "1.0"`;
-- executable research receipt: `receipt_version: "3.0"`;
+- current version-3 research receipt: `receipt_version: "3.1"`;
+- retained version-3 compatibility: `receipt_version: "3.0"`;
 - exact local research receipt compatibility: `receipt_version: "2.0"`;
+- historical non-executing research receipt compatibility: `receipt_version: "1.0"`;
 - decision receipt: `decision_version: "1.0"`.
 
 The versioned JSON Schemas publish stable identifiers:
@@ -20,9 +22,11 @@ The versioned JSON Schemas publish stable identifiers:
 
 Those identifiers name contracts; they do not imply that every producer must use the same internal data model.
 
-The JSON Schemas under `schemas/` are the portable structural contracts. Runtime validation additionally enforces cross-artifact invariants that JSON Schema alone does not conveniently express: declared entrypoint binding, check-to-output binding, calibration validity at the receipt `as_of` time, external job identity continuity, code/input manifest integrity, collection-output provenance, and the selected output-acceptance mode.
+The JSON Schemas under `schemas/` are the portable structural contracts. Runtime validation additionally enforces cross-artifact invariants that JSON Schema alone does not conveniently express: declared entrypoint binding, check-to-output binding, calibration validity at the receipt `as_of` time, external job identity continuity, code/input manifest integrity, collection-output provenance, and the selected output-assurance semantics.
 
-Version 2 remains the exact local-reproduction contract. Version 3 is additive: code and input hashes remain exact, output acceptance becomes explicit, calibration state can be governed, and external scheduler submission/collection evidence can be verified without pretending public CI ran a real cluster.
+Version 2 remains the exact local-reproduction contract. Version 3 is additive: code and input hashes remain exact, output assurance becomes explicit, calibration state can be governed, and external scheduler submission/collection evidence can be verified without pretending public CI ran a real cluster.
+
+Version 3.1 is the current v3 contract and strengthens the original 3.0 model with explicit per-output `EXACT`, `SEMANTICALLY_CHECKED`, and `RECORD_ONLY` assurance states. Version 3.0 remains readable under its original receipt-wide acceptance semantics. Consumers must not silently reinterpret a 3.0 receipt as a 3.1 receipt.
 
 The runtime retains non-executing verification compatibility for historical version-1 receipts. Fresh local reproduction requires version 2 or a version-3 receipt whose execution mode is `LOCAL`. Version-3 `EXTERNAL` receipts are collection-verification contracts and are not launched by `fma reproduce`.
 
@@ -44,7 +48,8 @@ Interoperability therefore means **preserve local meaning, map explicit fields, 
 - Implementations may map richer local state into these public contracts; interoperability does not require the contract to describe that implementation.
 - A future incompatible contract change requires a new contract version and migration notes.
 - A consumer must not silently upgrade a legacy receipt's assurance meaning.
-- Version-2 exact-output semantics must not be weakened by version-3 stochastic acceptance.
+- Version-2 exact-output semantics must not be weakened by version-3 stochastic or semantic acceptance.
+- Version-3.0 receipt-wide acceptance semantics must not be silently reinterpreted as version-3.1 per-output assurance semantics.
 - Adapters must preserve provenance to the source record and must not invent evidence, confidence, authority, calibration state, or outcome state that the source did not contain.
 
 ## Evidence semantics
