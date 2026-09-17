@@ -10,7 +10,7 @@ lab / source control / models / documents / supplier systems
                  │
                  │ governed references
                  ↓
-          private FMA-Q workspace
+     private FTQC Assurance workspace
                  │
                  │ bounded profile contracts
                  ↓
@@ -24,7 +24,7 @@ lab / source control / models / documents / supplier systems
 
 > **Reference the evidence. Do not relocate the evidence.**
 
-FMA-Q should retain only the minimum information needed to preserve identity, provenance reference, applicability, relationship to claims, review state, and decision relevance.
+FTQC Assurance should retain only the minimum information needed to preserve identity, provenance reference, applicability, relationship to claims, review state, and decision relevance.
 
 The authoritative source remains the system that owns the evidence.
 

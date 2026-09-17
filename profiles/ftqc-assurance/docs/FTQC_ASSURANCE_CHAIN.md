@@ -27,6 +27,6 @@ The synthetic reference case renders the same pattern as an **Algorithm-to-Atom 
 
 ## Change sensitivity
 
-A material change should not silently preserve downstream confidence. When a declared dependency changes, FMA-Q surfaces affected graph nodes, evidence envelopes, expert reviews, resource estimates, and decisions for reconsideration.
+A material change should not silently preserve downstream confidence. When a declared dependency changes, FTQC Assurance surfaces affected graph nodes, evidence envelopes, expert reviews, resource estimates, and decisions for reconsideration.
 
 The profile does not infer the new scientific answer. It identifies where the prior decision basis no longer composes cleanly.

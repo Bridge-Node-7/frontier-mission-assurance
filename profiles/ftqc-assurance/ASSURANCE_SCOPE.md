@@ -29,7 +29,7 @@ The systems, experts, laboratories, programs, and authorities responsible for th
 - safety, security, contracting, legal, regulatory, and government-program applicability;
 - final mission, program, investment, acquisition, or deployment decisions.
 
-FMA-Q can establish whether declared artifacts remain structurally connected to a decision basis. It cannot convert declared inputs into scientific truth.
+FTQC Assurance can establish whether declared artifacts remain structurally connected to a decision basis. It cannot convert declared inputs into scientific truth.
 
 ## Public release policy
 

@@ -12,20 +12,33 @@ FMA is built for teams working at the edge of science and engineering, where the
 
 > **Public release policy:** this repository contains the reusable public product surface—software, schemas, synthetic examples, documentation, and release evidence. Mission-specific and protected evidence remains in governed environments. See [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md).
 
+> **Release status:** [`VERSION`](VERSION) identifies the current source. A version is stable only when the matching tag and GitHub Release have been published by the Stable Release workflow; otherwise use the latest published release for stable artifacts.
+
 > **Rights:** Copyright © 2026 Bridge Node 7. All rights reserved. See [`LICENSE`](LICENSE).
 
 ## Start here
 
-For the shortest evaluation path:
+### Start
 
-1. [`docs/FIVE_MINUTE_EVALUATION.md`](docs/FIVE_MINUTE_EVALUATION.md) — run the reference evaluation.
-2. [`profiles/ftqc-assurance/README.md`](profiles/ftqc-assurance/README.md) — evaluate FTQC decision-basis continuity and changed-assumption propagation.
-3. [`docs/CLI_CONTRACT.md`](docs/CLI_CONTRACT.md) — commands, exit codes, receipt versions, and PASS semantics.
-4. [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md) — verification and validation doctrine.
-5. [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md) — adopt FMA around one consequential decision.
-6. [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md) — build a reviewable mission decision basis.
+1. [`docs/FIVE_MINUTE_EVALUATION.md`](docs/FIVE_MINUTE_EVALUATION.md) — evaluate the source-neutral reference locally.
+2. [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md) — apply FMA around one consequential technical decision.
+3. [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md) — build the smallest reviewable decision basis.
 
-For deeper engineering context, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md), and [`docs/STANDARDS_POSITIONING.md`](docs/STANDARDS_POSITIONING.md).
+### Choose a profile when relevant
+
+- [`profiles/scientific-discovery/README.md`](profiles/scientific-discovery/README.md) — Scientific Discovery Assurance.
+- [`profiles/ftqc-assurance/README.md`](profiles/ftqc-assurance/README.md) — FTQC Assurance and decision-basis continuity.
+- [`profiles/orbital-recovery-assurance/README.md`](profiles/orbital-recovery-assurance/README.md) — Orbital Recovery Assurance.
+
+### Reference
+
+- [`docs/CLI_CONTRACT.md`](docs/CLI_CONTRACT.md) — commands, exit codes, receipt versions, and PASS semantics.
+- [`docs/VV_DOCTRINE.md`](docs/VV_DOCTRINE.md) — verification and validation doctrine.
+- [`docs/PROFILE_ARCHITECTURE.md`](docs/PROFILE_ARCHITECTURE.md) — core/profile ownership, compatibility, and separation rules.
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — core architecture.
+- [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md) — portable contracts and compatibility.
+- [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md) — trust and execution boundaries.
+- [`docs/STANDARDS_POSITIONING.md`](docs/STANDARDS_POSITIONING.md) — standards and non-claim positioning.
 
 ## The mission question
 
@@ -88,6 +101,8 @@ RESULT - PUBLIC REFERENCE EVALUATION PASS
 
 The reference fixture includes a deliberate critical evidence gap so evaluators can see how FMA surfaces unresolved mission-critical assumptions rather than hiding them behind a green status.
 
+Next, use [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md) to apply the same pattern around one consequential decision in work your team already owns.
+
 ## Core capabilities
 
 - **Assurance-graph validation** — validate nodes, relations, references, dependencies, and graph integrity.
@@ -146,7 +161,7 @@ Expected result:
 SCIENTIFIC DISCOVERY PROFILE PASS
 ```
 
-See [`profiles/scientific-discovery/README.md`](profiles/scientific-discovery/README.md).
+See [`profiles/scientific-discovery/README.md`](profiles/scientific-discovery/README.md) and [`profiles/scientific-discovery/PROFILE_CONTRACT.md`](profiles/scientific-discovery/PROFILE_CONTRACT.md).
 
 ## Orbital Recovery Assurance
 
@@ -295,7 +310,7 @@ Hosted CI exercises supported Python versions, Ubuntu/macOS/Windows smoke paths,
 9. Human judgment owns prioritization and consequential decisions.
 10. V&V should accelerate justified decisions, not add paperwork.
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/ACCEPTANCE_CRITERIA.md`](docs/ACCEPTANCE_CRITERIA.md), [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md), [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md), and [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md).
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/PROFILE_ARCHITECTURE.md`](docs/PROFILE_ARCHITECTURE.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), [`docs/ACCEPTANCE_CRITERIA.md`](docs/ACCEPTANCE_CRITERIA.md), [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md), [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md), and [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md).
 
 ## Release and citation
 
