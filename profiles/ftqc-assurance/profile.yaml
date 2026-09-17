@@ -1,0 +1,10 @@
+manifest_version: "1.0"
+profile_id: ftqc-assurance
+profile_name: FTQC Assurance
+profile_version: "0.1"
+introduced_in_fma_release: "0.8.0"
+profile_contract: profiles/ftqc-assurance/PROFILE_CONTRACT.md
+validator: scripts/validate_ftqc_assurance.py
+description: >-
+  Decision-basis continuity for fault-tolerant quantum programs as assumptions,
+  evidence, resource estimates, interfaces, and expert judgments change.
