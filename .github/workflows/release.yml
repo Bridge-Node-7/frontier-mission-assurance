@@ -65,6 +65,8 @@ jobs:
           PYTHONPATH=src python scripts/evaluate_public_reference.py
           python scripts/validate_scientific_discovery.py .
           python scripts/validate_orbital_recovery_assurance.py .
+          python scripts/validate_ftqc_assurance.py .
+          python scripts/evaluate_ftqc_reference.py .
 
       - name: Build release artifacts, SBOM, and manifests
         if: env.RELEASE_ELIGIBLE == '1'
@@ -107,10 +109,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh attestation verify "dist/frontier_mission_assurance-${VERSION}-py3-none-any.whl" \
-            --repo "$GITHUB_REPOSITORY"
-          gh attestation verify "dist/frontier-mission-assurance-v${VERSION}.zip" \
-            --repo "$GITHUB_REPOSITORY"
+          gh attestation verify "dist/frontier_mission_assurance-${VERSION}-py3-none-any.whl" --repo "$GITHUB_REPOSITORY"
+          gh attestation verify "dist/frontier-mission-assurance-v${VERSION}.zip" --repo "$GITHUB_REPOSITORY"
 
       - name: Publish GitHub Release
         if: env.RELEASE_ELIGIBLE == '1'
@@ -168,6 +168,8 @@ jobs:
           "$VERIFY/.venv/bin/python" scripts/evaluate_public_reference.py
           "$VERIFY/.venv/bin/python" scripts/validate_scientific_discovery.py .
           "$VERIFY/.venv/bin/python" scripts/validate_orbital_recovery_assurance.py .
+          "$VERIFY/.venv/bin/python" scripts/validate_ftqc_assurance.py .
+          "$VERIFY/.venv/bin/python" scripts/evaluate_ftqc_reference.py .
           "$VERIFY/.venv/bin/fma" reproduce examples/research_receipt/receipt.yaml --timeout 30
           "$VERIFY/.venv/bin/fma" receipt examples/research_receipt_v3_external/receipt.yaml
           grep -Fq "CLAIM-CYCLE-TARGET" build/assurance-report.md

@@ -51,15 +51,7 @@ def test_profile_validator_passes():
 def test_changed_assumption_produces_expected_impact():
     result = evaluator.evaluate_case(ROOT)
     expected = json.loads(
-        (
-            ROOT
-            / "profiles"
-            / "ftqc-assurance"
-            / "examples"
-            / "synthetic-neutral-atom"
-            / "changed-assumption"
-            / "expected-impact.json"
-        ).read_text(encoding="utf-8")
+        (ROOT / "profiles" / "ftqc-assurance" / "examples" / "synthetic-neutral-atom" / "changed-assumption" / "expected-impact.json").read_text(encoding="utf-8")
     )
     assert result["change"] == expected
     assert result["baseline"]["technical_decision_readiness"] == "HOLD"
@@ -80,17 +72,17 @@ def test_evaluator_is_deterministic_and_human_readable():
 
 def test_declared_applicability_does_not_become_established_by_structure():
     envelopes = json.loads(
-        (
-            ROOT
-            / "profiles"
-            / "ftqc-assurance"
-            / "examples"
-            / "synthetic-neutral-atom"
-            / "baseline"
-            / "evidence-envelopes.json"
-        ).read_text(encoding="utf-8")
+        (ROOT / "profiles" / "ftqc-assurance" / "examples" / "synthetic-neutral-atom" / "baseline" / "evidence-envelopes.json").read_text(encoding="utf-8")
     )
     loss = next(item for item in envelopes["envelopes"] if item["envelope_id"] == "ENV-LOSS-001")
     assert loss["basis"]["type"] == "declared_assumption"
     assert loss["review"]["authority_state"] == "DECLARED"
     assert loss["review"]["decision_gate"] is True
+
+
+def test_stable_release_reverifies_ftqc_profile_and_reference():
+    workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(encoding="utf-8")
+    assert "python scripts/validate_ftqc_assurance.py ." in workflow
+    assert "python scripts/evaluate_ftqc_reference.py ." in workflow
+    assert workflow.count("scripts/validate_ftqc_assurance.py .") >= 2
+    assert workflow.count("scripts/evaluate_ftqc_reference.py .") >= 2
