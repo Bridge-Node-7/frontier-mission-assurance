@@ -12,6 +12,7 @@ Current public contract versions:
 - exact local research receipt compatibility: `receipt_version: "2.0"`;
 - historical non-executing research receipt compatibility: `receipt_version: "1.0"`;
 - decision receipt: `decision_version: "1.0"`.
+- assurance-context export: `contract_version: "0.1.0"`.
 
 The versioned JSON Schemas publish stable identifiers:
 
@@ -19,6 +20,21 @@ The versioned JSON Schemas publish stable identifiers:
 - `https://bridge-node-7.github.io/frontier-mission-assurance/research-receipt.schema.json`
 - `https://bridge-node-7.github.io/frontier-mission-assurance/research-receipt-v3.schema.json`
 - `https://bridge-node-7.github.io/frontier-mission-assurance/decision-receipt.schema.json`
+- `https://bridge-node-7.github.io/frontier-mission-assurance/assurance-context.schema.json`
+
+## Assurance-context export
+
+The FMA-owned assurance-context export is a bounded downstream projection, not
+a replacement ontology or a copy of an operational evidence store. It carries
+release identity, decision disposition, changed-assumption impact, stale or
+review-required artifact references, evidence-applicability state, reopened
+expert review, reconsideration conditions, reevaluation opportunities, and
+authoritative record references. The contract explicitly excludes raw evidence.
+
+Consumers must pin the exact FMA release, commit, contract version, and schema
+blob they support. They must preserve `HOLD`, `REVIEW_REQUIRED`, `DECLARED`,
+`EXTERNAL_REPORTED`, and `RE-EVALUATION_OPPORTUNITY` states without promoting
+them to approval, support, establishment, reproduction, or consequential action.
 
 Those identifiers name contracts; they do not imply that every producer must use the same internal data model.
 

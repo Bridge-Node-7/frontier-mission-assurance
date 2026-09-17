@@ -134,6 +134,7 @@ Start with [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md) 
 - **Fresh code-bound reproduction** — execute trusted receipt-declared code in a fresh workspace and verify newly produced outputs.
 - **External execution evidence** — bind submission, chronology, environment identity, output hashes, and calibration coverage for externally executed work.
 - **Decision receipts** — verify that a declared decision basis resolves against the assurance graph.
+- **Assurance-context exports** — project bounded change impact and review state for downstream decision preparation without copying raw evidence or increasing authority.
 - **Mission Decision Packets** — preserve evidence, assumptions, dependencies, human disposition, and reopen conditions together.
 - **Profile manifests** — expose bounded profile identity, contract version, containing release, and validator without creating a plugin framework.
 - **Public release controls** — scan tracked files, pin Actions, exercise tamper paths, build deterministic release evidence, and verify clean installation.
