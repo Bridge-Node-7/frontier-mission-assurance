@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-17  
-**Canonical release gate:** PENDING
+**Canonical release gate:** READY
 
 ## Purpose
 
@@ -22,11 +22,15 @@ Version 0.8.0 introduces **decision-basis continuity** for fault-tolerant quantu
 - Added a human-readable Decision Basis artifact that separates software/contract validation from technical decision readiness.
 - Added one-command local evaluation, tests, Makefile integration, and hosted CI coverage without creating a parallel workflow.
 - Added a bounded QBI public crosswalk with no readiness score, implied affiliation, or representation of evaluator internals.
+- Aligned Research Receipt documentation with the current 3.1 contract while preserving 3.0, 2.0, and 1.0 compatibility semantics.
+- Aligned the canonical local maintainer gate with hosted profile validation, including Scientific Discovery Assurance.
+- Formalized the bounded profile architecture and added an explicit Scientific Discovery profile contract without changing the FMA core ontology.
+- Refined the public front door around evaluation, one-decision adoption, bounded profiles, and reference material.
 - Preserved local-first runtime, source-neutral public examples, existing Research Receipt and Decision Receipt semantics, and accountable human consequential authority.
 
 ## Source-level evidence
 
-The candidate must satisfy `VALIDATION_REPORT.md`, including the complete FMA regression surface, all assurance profile validators, FTQC changed-assumption impact invariants, cross-platform validation, packaging, dependency review, CodeQL on protected main, and public-release controls.
+The candidate satisfies `VALIDATION_REPORT.md`, including the complete FMA regression surface, all assurance profile validators, FTQC changed-assumption impact invariants, cross-platform validation, packaging, dependency review, CodeQL on protected main, and public-release controls.
 
 ## Hosted evidence rule
 
@@ -42,4 +46,4 @@ A PASS attests that the declared controls satisfied their acceptance criteria. S
 
 ## Release gate
 
-Deterministic source validation and protected hosted V&V on the exact `main` commit must pass before the canonical release gate advances to `READY`. Stable publication then requires successful clean-user verification of the published artifacts through the explicit release workflow.
+Deterministic source validation and protected hosted V&V have satisfied the source-level release gate. Stable publication remains a separate explicit release action and requires successful clean-user verification of the published artifacts through the Stable Release workflow.
