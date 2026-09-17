@@ -1,4 +1,4 @@
-.PHONY: install test lint validate assumptions coverage impact receipt reproduce report schema boundary evaluate fingerprint scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate demo check clean
+.PHONY: install test lint validate assumptions coverage impact receipt reproduce report schema boundary evaluate fingerprint profile-manifests external-adoption scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate demo check clean
 
 install:
 	python -m pip install -e '.[dev]'
@@ -44,6 +44,13 @@ evaluate:
 fingerprint:
 	python scripts/environment_fingerprint.py --out build/environment-fingerprint.json
 
+profile-manifests:
+	python scripts/validate_profile_manifests.py .
+
+external-adoption:
+	fma validate examples/external_research_adoption/graph.yaml
+	fma decision examples/external_research_adoption/graph.yaml examples/external_research_adoption/decision-receipt.yaml
+
 scientific-discovery:
 	python scripts/validate_scientific_discovery.py .
 
@@ -61,7 +68,7 @@ ftqc-evaluate:
 
 demo: evaluate
 
-check: lint test validate assumptions coverage receipt reproduce report evaluate fingerprint scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate boundary
+check: lint test validate assumptions coverage receipt reproduce report evaluate fingerprint profile-manifests external-adoption scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate boundary
 
 clean:
 	rm -rf build dist .pytest_cache .ruff_cache .coverage *.egg-info src/*.egg-info
