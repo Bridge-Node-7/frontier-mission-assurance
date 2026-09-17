@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "maturity": "stable public reference implementation",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
