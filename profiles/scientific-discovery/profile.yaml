@@ -1,0 +1,10 @@
+manifest_version: "1.0"
+profile_id: scientific-discovery
+profile_name: Scientific Discovery Assurance
+profile_version: "0.1"
+introduced_in_fma_release: "0.3.0"
+profile_contract: profiles/scientific-discovery/PROFILE_CONTRACT.md
+validator: scripts/validate_scientific_discovery.py
+description: >-
+  Evidence architecture for machine-assisted and computational discovery with explicit
+  provenance, proof state, specification equivalence, replication, attribution, and human authority.
