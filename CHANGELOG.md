@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.1 — external FTQC evidence-boundary hardening
+
+- Clarified that FTQC Assurance profile `0.1` Resource Estimate Receipts remain synthetic/reference-only.
+- Added an explicit adoption rule for third-party reported resource estimates so reported, freshly reproduced, independently replicated, expert-adjudicated, and system-applicable states cannot be silently collapsed.
+- Added regression coverage that preserves the synthetic-only v0.1 receipt contract and requires the external-evidence boundary to remain documented.
+- Preserved FTQC profile contract `0.1`, the FMA core graph ontology, existing public synthetic fixtures, and accountable human technical authority.
+
 ## 0.8.0 — FTQC Assurance
 
 - Added FTQC Assurance as a bounded Frontier Mission Assurance profile rather than creating a separate institutional repository.
