@@ -1,0 +1,41 @@
+name: Repository Metadata Closeout
+
+on:
+  push:
+    branches:
+      - ops/repo-metadata-closeout
+
+permissions:
+  contents: write
+
+jobs:
+  closeout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EXPECTED_MAIN: 01f2c4bfa53ba55246b67f1de84390f7c1beb9d8
+      OPERATOR_BRANCH: ops/repo-metadata-closeout
+    steps:
+      - name: Verify protected main identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          CURRENT_MAIN="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          [[ "$CURRENT_MAIN" == "$EXPECTED_MAIN" ]]
+
+      - name: Set repository homepage metadata when permitted
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method PATCH "repos/$GITHUB_REPOSITORY" -f homepage='https://bridgenode7.com/'
+
+      - name: Delete metadata operator branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          CURRENT_MAIN="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          [[ "$CURRENT_MAIN" == "$EXPECTED_MAIN" ]]
+          gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/${OPERATOR_BRANCH}"
