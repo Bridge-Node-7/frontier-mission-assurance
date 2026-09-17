@@ -1,26 +1,23 @@
-# Source Release Receipt — v0.8.1
+# Source Release Receipt — v0.9.0
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-17  
-**Canonical release gate:** READY
+**Canonical release gate:** NOT READY
 
 ## Purpose
 
-Harden the external FTQC resource-estimate evidence boundary without changing the FTQC profile contract, universal FMA graph ontology, runtime semantics, or public synthetic fixtures.
+Add the smallest FMA-owned assurance-context export required for governed downstream interoperability while preserving existing FMA and FTQC semantics.
 
-Version 0.8.1 preserves the v0.8.0 FTQC Assurance architecture while making one external-artifact lesson explicit: a third-party reported resource estimate must not become a fresh-reproduction, independent-validation, or system-applicability claim merely because the number is recorded in FMA.
+## Material changes in v0.9.0
 
-## Material changes in v0.8.1
-
-- Clarified in the FTQC assurance scope that profile contract `0.1` Resource Estimate Receipts remain synthetic/reference-only.
-- Added external-research adoption guidance for third-party resource estimates.
-- Added regression coverage that protects the synthetic-only receipt contract and the documented external-evidence boundary.
-- Preserved FTQC profile contract `0.1`, all existing schema identities, the public source-neutral fixture policy, the FMA core ontology, and accountable human consequential authority.
-- Updated source/package/citation/project-facts identity to v0.8.1.
+- Added assurance-context export contract `0.1.0` with stable schema identity.
+- Added a source-neutral changed-assumption fixture and fail-closed contract tests.
+- Excluded raw evidence and preserved declared authority, external-reporting, review-required, HOLD, and reevaluation-opportunity states.
+- Preserved FTQC profile contract `0.1`, the universal graph ontology, and accountable human consequential authority.
 
 ## Source-level evidence
 
-Release eligibility requires the complete deterministic FMA validation surface, including the FTQC boundary regression, all existing assurance profiles, package identity checks, public-release scanning, cross-platform hosted verification, protected-main CodeQL, and clean wheel installation.
+Release eligibility requires the complete deterministic FMA validation surface, including the new assurance-context contract regressions, all existing assurance profiles, package identity checks, public-release scanning, cross-platform hosted verification, protected-main CodeQL, and clean wheel installation.
 
 ## Hosted evidence rule
 
@@ -32,8 +29,8 @@ The stable release record must bind the accepted tag to the exact protected-main
 
 ## Verification scope
 
-A PASS attests that the declared software and documentation controls satisfied their acceptance criteria. Scientific validity, FTQC performance, QEC validity, resource-estimator correctness, hardware readiness, independent V&V, customer applicability, supplier qualification, and consequential decision authority remain with the qualified evidence and approval processes responsible for those determinations.
+A PASS attests that the declared software and documentation controls satisfied their acceptance criteria. It does not establish scientific validity, evidence credibility, customer applicability, independent validation, or consequential decision authority.
 
 ## Release gate
 
-The external-evidence-boundary change passed protected pull-request V&V and then passed the complete protected-main hosted V&V contract on the exact accepted v0.8.1 source state, including the supported Python/OS matrix, clean wheel installation, public-boundary validation, all assurance-profile checks, and protected-main CodeQL. The v0.8.1 source gate is therefore **READY**. Stable publication remains a separate explicit release action and must bind the final READY protected-main commit to the published release artifacts and clean-user verification.
+The v0.9.0 source gate remains **NOT READY** until the bounded contract change passes protected pull-request V&V and the complete protected-main hosted V&V contract. Stable publication remains a separate explicit release action.

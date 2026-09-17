@@ -15,6 +15,7 @@ def _schema(name: str):
 def test_schemas_are_valid_draft_2020_12():
     for name in (
         "assurance-graph.schema.json",
+        "assurance-context.schema.json",
         "research-receipt.schema.json",
         "decision-receipt.schema.json",
     ):
@@ -23,6 +24,10 @@ def test_schemas_are_valid_draft_2020_12():
 
 def test_examples_conform_to_published_schemas():
     cases = [
+        (
+            "assurance-context.schema.json",
+            ROOT / "examples" / "assurance_context" / "synthetic-changed-assumption.json",
+        ),
         (
             "assurance-graph.schema.json",
             ROOT / "examples" / "frontier_program" / "graph.yaml",

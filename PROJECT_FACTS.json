@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "maturity": "stable public reference implementation",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -34,7 +34,8 @@
     "detect when a changed FTQC assumption makes a resource estimate stale, moves evidence outside its declared envelope, reopens expert review, and requires decision reconsideration",
     "preserve a modality-neutral Workload-to-System Assurance Chain while providing a synthetic neutral-atom reference view",
     "publish stable identifiers for versioned portable contracts",
-    "preserve third-party FTQC resource estimates as external evidence under profile 0.1 without converting them into fresh-reproduction, independent-validation, or system-applicability claims"
+    "preserve third-party FTQC resource estimates as external evidence under profile 0.1 without converting them into fresh-reproduction, independent-validation, or system-applicability claims",
+    "validate an FMA-owned assurance-context export that preserves changed-assumption impact, review state, decision disposition, and authoritative references without copying raw evidence or increasing epistemic authority"
   ],
   "governed_externally": [
     "scientific validity and interpretation",

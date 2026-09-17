@@ -1,0 +1,75 @@
+{
+  "contract_id": "bn7.frontier-mission-assurance.assurance-context",
+  "contract_version": "0.1.0",
+  "context_id": "FMA-CTX-SYNTHETIC-001",
+  "source_release": {
+    "repository": "Bridge-Node-7/frontier-mission-assurance",
+    "release": "v0.9.0",
+    "commit": "0000000000000000000000000000000000000000"
+  },
+  "system_ref": "SYNTHETIC-SYSTEM-001",
+  "decision": {
+    "decision_ref": "SYNTHETIC-DECISION-001",
+    "current_disposition": "HOLD",
+    "reopen_required": true,
+    "reconsideration_conditions": [
+      "Reconsider only after the changed assumption is reviewed and the stale estimate is refreshed."
+    ]
+  },
+  "affected_claims": [
+    {
+      "claim_ref": "SYNTHETIC-CLAIM-001",
+      "authority_state": "DECLARED",
+      "assurance_state": "REVIEW_REQUIRED"
+    }
+  ],
+  "changed_assumptions": [
+    {
+      "assumption_ref": "SYNTHETIC-ASSUMPTION-001",
+      "impact": "The declared operating assumption changed outside the reviewed basis."
+    }
+  ],
+  "artifact_states": [
+    {
+      "artifact_ref": "SYNTHETIC-ESTIMATE-001",
+      "state": "STALE",
+      "reason": "The estimate depends on the changed assumption."
+    }
+  ],
+  "evidence_applicability_changes": [
+    {
+      "evidence_ref": "SYNTHETIC-EVIDENCE-001",
+      "previous_applicability": "IN_SCOPE",
+      "current_applicability": "OUTSIDE_ENVELOPE",
+      "authority_state": "DECLARED",
+      "reproduction_state": "EXTERNAL_REPORTED"
+    }
+  ],
+  "expert_reviews": [
+    {
+      "review_ref": "SYNTHETIC-REVIEW-001",
+      "state": "REVIEW_REQUIRED",
+      "reopened": true,
+      "question": "Does the prior bounded conclusion remain applicable under the changed assumption?"
+    }
+  ],
+  "reevaluation_opportunities": [
+    {
+      "opportunity_ref": "SYNTHETIC-REEVALUATION-001",
+      "state": "RE-EVALUATION_OPPORTUNITY",
+      "reason": "New bounded evidence may justify review; it does not authorize approval."
+    }
+  ],
+  "authoritative_source_refs": [
+    {
+      "record_id": "SYNTHETIC-AUTHORITY-001",
+      "record_version": "1",
+      "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "authoritative_location": "urn:bn7:synthetic:authority:001"
+    }
+  ],
+  "handling": {
+    "classification": "PUBLIC_REFERENCE",
+    "contains_raw_evidence": false
+  }
+}

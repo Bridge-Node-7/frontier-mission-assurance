@@ -1,4 +1,4 @@
-# Source Validation Report — v0.8.1
+# Source Validation Report — v0.9.0
 
 **Date:** 2026-09-17  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -21,6 +21,9 @@ This report defines the deterministic validation contract for the source candida
 - External v3.1 chronology and calibration-interval coverage: **PASS required**
 - Malformed input failures: **exit 2 without traceback required**
 - Decision-basis receipt verification: **PASS required**
+- Assurance-context export `0.1.0` schema and source-neutral example: **PASS required**
+- Unsupported assurance-context identity, missing release identity, and raw-evidence fields: **fail closed required**
+- HOLD, REVIEW_REQUIRED, DECLARED, EXTERNAL_REPORTED, and RE-EVALUATION_OPPORTUNITY states: **preserved required**
 - Mission Decision Packet reference example: **present required**
 - External-research adoption sidecar graph and Decision Receipt: **PASS required**
 - Profile manifests and manifest schema: **PASS required**
@@ -71,7 +74,7 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.8.1 source candidate retains FTQC Assurance profile contract `0.1` and hardens the external reported-resource-estimate boundary. Release eligibility requires:
+The v0.9.0 source candidate retains FTQC Assurance profile contract `0.1` and the external reported-resource-estimate boundary. Release eligibility requires:
 
 - FTQC profile schemas and public reference records agree on profile contract `0.1`;
 - profile contract `0.1` Resource Estimate Receipts remain synthetic/reference-only;

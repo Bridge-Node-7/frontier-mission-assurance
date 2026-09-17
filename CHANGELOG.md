@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0 — governed assurance-context interoperability
+
+- Added the FMA-owned assurance-context export contract `0.1.0` for bounded downstream interoperability.
+- Added a source-neutral changed-assumption fixture covering stale artifacts, applicability loss, reopened review, decision reconsideration, and reevaluation opportunity without automatic approval.
+- Added fail-closed schema and regression coverage for contract identity, release provenance, raw-evidence exclusion, and preserved epistemic states.
+- Preserved FTQC Assurance profile contract `0.1`, the universal FMA graph ontology, private evidence custody, and accountable human consequential authority.
+
 ## 0.8.1 — external FTQC evidence-boundary hardening
 
 - Clarified that FTQC Assurance profile `0.1` Resource Estimate Receipts remain synthetic/reference-only.
