@@ -62,6 +62,27 @@ A verified artifact identity does not establish the truth of the paper's scienti
 
 Use Scientific Discovery Assurance when proof state, specification equivalence, replication, provenance, attribution, or machine-assisted discovery semantics matter.
 
+### External reported resource estimates
+
+When an external paper reports a resource estimate, preserve the estimate as external evidence unless a separate authorized process establishes a stronger assurance state. Under FTQC Assurance profile contract `0.1`, Resource Estimate Receipts remain synthetic/reference-only.
+
+Do not convert a published number into a fresh-reproduction, independent-validation, or system-applicability claim merely by copying it into an FMA record. Keep these states distinct:
+
+```text
+author reported
+≠
+freshly reproduced
+≠
+independently replicated
+≠
+expert adjudicated
+≠
+applicable to another architecture or system revision
+```
+
+A bounded sidecar can still record the exact paper/version, reported estimate, controlling assumptions, evidence references, applicability limits, reproduction state, and decision reopen conditions without changing the authoritative source.
+
+
 ## Paper plus repository
 
 Treat the paper and repository as related but distinct evidence objects.
