@@ -1,17 +1,25 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 import yaml
-
-from scripts.validate_profile_manifests import validate_profile_manifests
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_profile_manifests_validate_current_tree():
-    assert validate_profile_manifests(ROOT) == []
+    result = subprocess.run(
+        [sys.executable, "scripts/validate_profile_manifests.py", "."],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "PROFILE MANIFESTS PASS" in result.stdout
 
 
 def test_profile_manifest_ids_are_unique_and_match_directories():
