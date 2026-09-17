@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — FTQC Assurance
+## 0.8.0 — FTQC Assurance
 
 - Added FTQC Assurance as a bounded Frontier Mission Assurance profile rather than creating a separate institutional repository.
 - Added a modality-neutral Workload-to-System Assurance Chain with a synthetic neutral-atom Algorithm-to-Atom reference view.
@@ -12,6 +12,8 @@
 - Added one-command local evaluation, deterministic profile validation, regression coverage, Makefile integration, and CI coverage on the supported Python and operating-system matrix.
 - Preserved the FMA core graph ontology, Mission Decision Packet semantics, local-first runtime, public/private evidence boundary, and accountable human consequential authority.
 - Kept QBI material as a bounded public-source crosswalk with no readiness score, affiliation claim, or representation of evaluator internals.
+- Aligned Research Receipt documentation with the current 3.1 contract while retaining 3.0, 2.0, and 1.0 compatibility semantics.
+- Aligned local and hosted profile validation, formalized the bounded profile architecture, and added an explicit Scientific Discovery profile contract.
 
 ## 0.7.2 — public experience refinement
 
