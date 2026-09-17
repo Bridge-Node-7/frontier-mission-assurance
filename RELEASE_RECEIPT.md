@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-17  
-**Canonical release gate:** PENDING HOSTED VALIDATION
+**Canonical release gate:** READY
 
 ## Purpose
 
@@ -36,4 +36,4 @@ A PASS attests that the declared software and documentation controls satisfied t
 
 ## Release gate
 
-The v0.9.1 source gate remains **PENDING HOSTED VALIDATION** until the complete protected pull-request and protected-main V&V contract has passed for the exact candidate state. Stable publication is a separate explicit release action after the source gate is marked READY.
+The FTQC verification-readiness and independence-governance candidate passed protected pull-request V&V and then passed the complete protected-main hosted V&V contract, including the supported Python/OS matrix, clean wheel installation, public-boundary validation, all assurance-profile checks, and protected-main CodeQL. The v0.9.1 source gate is therefore **READY**. Stable publication remains a separate explicit release action and must bind the final READY protected-main commit to the published release artifacts and clean-user verification.
