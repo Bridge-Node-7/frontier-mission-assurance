@@ -100,6 +100,12 @@ The initial profile adds four bounded contracts:
 
 See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) and [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md).
 
+## Verification-readiness baseline
+
+[`docs/FTQC_EVIDENCE_MISSION_RISK_BASELINE.md`](docs/FTQC_EVIDENCE_MISSION_RISK_BASELINE.md) defines the smallest bounded engagement pattern for connecting one consequential FTQC decision to its critical claims, assumptions, evidence, dependencies, expert gates, risk-retirement actions, and explicit reopen conditions.
+
+The intended outcome is **verification readiness**, not certification or a favorable technical verdict.
+
 ## Public reference boundary
 
 The public profile contains only source-neutral contracts, documentation, validation logic, and synthetic reference data. Real customer, partner, supplier, architecture, experiment, program, or controlled evidence belongs in governed systems outside this public repository.
@@ -114,6 +120,10 @@ See [`docs/PRIVATE_WORKSPACE_PATTERN.md`](docs/PRIVATE_WORKSPACE_PATTERN.md).
 
 [`docs/QBI_PUBLIC_CROSSWALK.md`](docs/QBI_PUBLIC_CROSSWALK.md) is a bounded public-source crosswalk for learning and interoperability. It is not a QBI implementation, readiness determination, or representation of any internal evaluation process.
 
+[`docs/QBI_IVV_FIT_REVIEW.md`](docs/QBI_IVV_FIT_REVIEW.md) records the current public-source fit assessment: BN7 can credibly contribute verification-readiness and evidence-to-decision infrastructure, while deep quantum adjudication, test infrastructure, evaluator eligibility, and independence determinations remain governed by qualified experts and the applicable process.
+
 ## Adoption
 
 Start with one consequential decision, not an enterprise rollout. See [`docs/ADOPTION_PATH.md`](docs/ADOPTION_PATH.md).
+
+Before accepting work that could later intersect with an independent-review role, apply the repository-level [`../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md).
