@@ -66,6 +66,12 @@ jobs:
         run: fma reproduce examples/research_receipt/receipt.yaml --timeout 30
       - name: Verify decision receipt
         run: fma decision examples/frontier_program/graph.yaml examples/frontier_program/decision-receipt.yaml
+      - name: Validate profile manifests
+        run: python scripts/validate_profile_manifests.py .
+      - name: Validate external-research adoption sidecar
+        run: |
+          fma validate examples/external_research_adoption/graph.yaml
+          fma decision examples/external_research_adoption/graph.yaml examples/external_research_adoption/decision-receipt.yaml
       - name: Validate Scientific Discovery Assurance profile
         run: python scripts/validate_scientific_discovery.py .
       - name: Validate Orbital Recovery Assurance profile
@@ -115,6 +121,9 @@ jobs:
       - run: fma validate examples/frontier_program/graph.yaml
       - run: fma receipt examples/research_receipt/receipt.yaml
       - run: fma reproduce examples/research_receipt/receipt.yaml --timeout 30
+      - run: python scripts/validate_profile_manifests.py .
+      - run: fma validate examples/external_research_adoption/graph.yaml
+      - run: fma decision examples/external_research_adoption/graph.yaml examples/external_research_adoption/decision-receipt.yaml
       - run: python scripts/validate_scientific_discovery.py .
       - run: python scripts/validate_orbital_recovery_assurance.py .
       - run: python scripts/validate_ftqc_assurance.py .
