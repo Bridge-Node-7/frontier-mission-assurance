@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.1 — FTQC verification-readiness and independence governance
+
+- Added an institution-level Independence and Conflict Policy with pre-engagement screening for role class, proprietary access, design participation, future self-review risk, financial dependence, government conflict considerations, mitigations, and disposition.
+- Added the FTQC Evidence & Mission-Risk Baseline as the smallest bounded verification-readiness engagement pattern for claims, assumptions, evidence, dependencies, expert gates, risk retirement, and decision reopening.
+- Added a dated public-source QBI IV&V fit review that states BN7's credible contribution today and explicitly preserves deep quantum adjudication, test infrastructure, evaluator eligibility, and independence determinations for qualified experts and applicable processes.
+- Preserved FTQC Assurance profile contract `0.1`, the universal FMA graph ontology, the synthetic neutral-atom reference, governed private evidence custody, and accountable human consequential authority.
+- Made no claim of QBI affiliation, government readiness, quantum certification, or full-stack independent V&V capability.
+
+
 ## 0.9.0 — governed assurance-context interoperability
 
 - Added the FMA-owned assurance-context export contract `0.1.0` for bounded downstream interoperability.
