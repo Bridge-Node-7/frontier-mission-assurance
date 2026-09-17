@@ -22,6 +22,8 @@ This report defines the deterministic validation contract for the source candida
 - Malformed input failures: **exit 2 without traceback required**
 - Decision-basis receipt verification: **PASS required**
 - Mission Decision Packet reference example: **present required**
+- External-research adoption sidecar graph and Decision Receipt: **PASS required**
+- Profile manifests and manifest schema: **PASS required**
 - Deterministic Markdown report under `SOURCE_DATE_EPOCH`: **PASS required**
 - Scientific Discovery Assurance linked reference profile: **PASS required**
 - Runtime no-network-client import regression: **PASS required**
@@ -30,6 +32,36 @@ This report defines the deterministic validation contract for the source candida
 - GitHub Actions immutable-SHA pins: **PASS required**
 - Pull-request dependency vulnerability review: **PASS required on pull requests**
 - Protected-main CodeQL analysis: **PASS required on main pushes**
+
+## Existing-work adoption V&V
+
+The public adoption surface must demonstrate that FMA can wrap work that was not authored for FMA without modifying the authoritative source repository.
+
+Release eligibility requires:
+
+- the source-neutral external-research sidecar graph validates under the core assurance-graph contract;
+- its Decision Receipt resolves against the sidecar graph;
+- the example remains explicitly synthetic/source-neutral and does not identify a real customer, partner, scientist, laboratory, or program;
+- the public documentation keeps artifact identity, reproduction, scientific validity, applicability, and consequential authority distinct;
+- trusted-code reproduction guidance does not describe the FMA fresh workspace as a security sandbox;
+- stable-install guidance preserves the source-vs-wheel distribution boundary and does not expand license rights;
+- evaluation/use guidance remains subordinate to the repository `LICENSE` and grants no new rights by documentation alone.
+
+These controls establish an adoption contract and worked public example. They do not establish customer fit, production deployment, or external validation.
+
+## Profile-manifest V&V
+
+Every directory under `profiles/` must expose a `profile.yaml` that:
+
+- validates against `schemas/profile-manifest.schema.json`;
+- uses a `profile_id` matching its directory name;
+- declares a unique profile identity and semantic profile version;
+- names the FMA release in which the profile was introduced;
+- references a profile contract contained inside the same profile directory;
+- references an existing Python validator;
+- does not declare an introduction release newer than the current FMA source version.
+
+The manifest is a discovery contract only. It is not a plugin runtime and does not establish domain fitness for a particular decision.
 
 ## Orbital Recovery Assurance V&V
 
@@ -72,7 +104,7 @@ The authoritative release surface is the Git-tracked file set. Required behavior
 - unapproved external URLs fail closed;
 - high-risk binary/archive/document extensions fail closed unless the public contract intentionally changes;
 - public examples remain source-neutral;
-- proper nouns, sensitive technical values, and relationship context receive human public-surface review.
+- proper nouns, sensitive technical values, relationship context, and customer-identifying context receive human public-surface review.
 
 A current-tree release-policy PASS attests to the tracked source state under review; historical Git objects remain separate durable history.
 
@@ -90,13 +122,14 @@ A current-tree release-policy PASS attests to the tracked source state under rev
 - PEP 639 license metadata and license file: **required**
 - Public package-index upload guard: **required**
 - Clean wheel install and CLI smoke: **PASS required**
+- Bounded dependency-update proposals remain enabled; acceptance still requires review and the relevant V&V gates.
 
 Assurance profiles are distributed through the repository/source archive. The core wheel remains the `frontier_assurance` package and CLI surface.
 
 ## Hosted acceptance
 
-The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-release validation, adversarial regressions, all assurance profile validators, dependency review where applicable, protected-main CodeQL on main, and clean wheel installation. The Actions run attached to that exact commit is the authoritative hosted evidence.
+The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-release validation, adversarial regressions, profile-manifest validation, external-research sidecar validation, all assurance profile validators, dependency review where applicable, protected-main CodeQL on main, and clean wheel installation. The Actions run attached to that exact commit is the authoritative hosted evidence.
 
 ## Disposition rule
 
-**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, quantum-performance, independent-evaluator, and consequential-authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
+**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, quantum-performance, independent-evaluator, customer-adoption, and consequential-authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
