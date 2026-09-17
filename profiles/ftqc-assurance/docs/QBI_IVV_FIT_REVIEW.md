@@ -17,14 +17,14 @@ DARPA states that QBI is designed to determine whether quantum-computing approac
 
 DARPA also maintains a separate QBI IV&V opportunity seeking innovative infrastructure, equipment, and expertise for independent verification and validation.
 
-Primary public references:
+Primary public references, by title/source rather than embedded external links:
 
-- https://www.darpa.mil/research/programs/quantum-benchmarking-initiative
-- https://www.darpa.mil/work-with-us/opportunities/darpa-pa-26-02-01
-- https://www.darpa.mil/research/programs/quantum-benchmarking-initiative/stage-b-selection
-- https://www.darpa.mil/sites/default/files/attachment/2026-03/darpa-qbi-q-a-2026.pdf
+- DARPA Quantum Benchmarking Initiative program page;
+- DARPA QBI IV&V opportunity, PA-26-02-01;
+- DARPA QBI Stage B selection materials;
+- DARPA QBI public Q&A / FAQ materials.
 
-The current DARPA program page lists the IV&V opportunity deadline as **December 30, 2026**. Solicitation amendments and the applicable submission package remain authoritative for any real proposal.
+As of this review, DARPA's current public program materials list the IV&V opportunity deadline as **December 30, 2026**. Solicitation amendments and the applicable submission package remain authoritative for any real proposal.
 
 ## What the current public FMA / FTQC surface can credibly contribute
 
@@ -91,7 +91,7 @@ When a required capability is outside the demonstrated BN7/FMA scope:
 
 ## Conflict and independence implications
 
-DARPA's public Stage A FAQ states that an entity receiving QBI IV&V support may face exclusions from performer awards because of potential organizational conflicts of interest, and that disclosure may be required in other U.S. Government quantum procurements.
+DARPA's public QBI FAQ materials state that an entity receiving QBI IV&V support may face exclusions from performer awards because of potential organizational conflicts of interest, and that disclosure may be required in other U.S. Government quantum procurements.
 
 Therefore:
 
