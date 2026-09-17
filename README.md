@@ -200,6 +200,7 @@ frontier-mission-assurance/
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — core architecture
 - [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md) — portable contracts and compatibility
 - [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md) — trust and execution boundaries
+- [`docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](docs/INDEPENDENCE_AND_CONFLICT_POLICY.md) — role classification, independence, self-review, and conflict-screening boundaries
 - [`docs/STANDARDS_POSITIONING.md`](docs/STANDARDS_POSITIONING.md) — standards and non-claim positioning
 - [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md) — repository and dependency-maintenance discipline
 
