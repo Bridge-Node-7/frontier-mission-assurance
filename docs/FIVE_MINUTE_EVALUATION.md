@@ -53,3 +53,17 @@ Use `fma validate`, `fma assumptions`, `fma coverage`, `fma impact`, `fma receip
 `fma reproduce` is the explicit trusted-code reproduction path. For a version-2 receipt it verifies code and inputs, requires the command to execute the declared entrypoint directly, runs that entrypoint in a fresh temporary workspace where declared outputs are absent, and then verifies the newly produced outputs and numerical criteria.
 
 Interpreter modes such as `python -c`, `python -m`, or stdin execution cannot satisfy entrypoint binding merely by mentioning the entrypoint later in the command. The fresh workspace is an integrity boundary that prevents stale outputs from satisfying reproduction. Trusted code executes with the permissions and ambient capabilities of the host, so reproduction belongs in an environment appropriate for that code.
+
+## 4. Next: apply FMA to work you already own
+
+The public reference proves FMA's synthetic behavior. It is not the adoption endpoint.
+
+If you already have a repository, paper, model, simulation, experiment, test result, or engineering decision, continue with [`EXTERNAL_RESEARCH_ADOPTION.md`](EXTERNAL_RESEARCH_ADOPTION.md).
+
+The default adoption rule is:
+
+> **Wrap the work. Do not reorganize the work around FMA.**
+
+For a source-neutral existing-repository sidecar, see [`../examples/external_research_adoption/`](../examples/external_research_adoption/).
+
+If the work will be evaluated under a separate governed engagement or private deployment, also review [`USE_AND_EVALUATION.md`](USE_AND_EVALUATION.md).

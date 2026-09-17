@@ -1,0 +1,88 @@
+graph_version: '1.0'
+metadata:
+  title: Synthetic external-research adoption sidecar
+  classification: PUBLIC / SYNTHETIC
+  affiliation: Independent synthetic reference fixture
+  purpose: Demonstrate how FMA can wrap an existing research artifact without modifying it
+nodes:
+- id: MISSION-EXTERNAL-RESULT
+  kind: mission
+  title: Decide whether an externally produced technical result may inform a consequential system decision
+  status: proposed
+  criticality: 5
+  notes: Synthetic public example; no real external organization or repository is represented.
+- id: CLAIM-REPORTED-RESULT
+  kind: claim
+  title: The reported external result is relevant to the decision within its declared scope
+  status: active
+  criticality: 5
+  notes: Relevance is under review; scientific validity is not established by this record.
+- id: CLAIM-IMPLEMENTATION-RELATIONSHIP
+  kind: claim
+  title: The frozen source revision is the implementation associated with the reported result
+  status: proposed
+  criticality: 4
+- id: ASSUMP-ENVIRONMENT
+  kind: assumption
+  title: The reported environment is sufficient to reproduce the decision-relevant computation
+  status: open
+  criticality: 4
+- id: ASSUMP-APPLICABILITY
+  kind: assumption
+  title: The reported result remains applicable to the system configuration under review
+  status: open
+  criticality: 5
+- id: EVID-PAPER-IDENTITY
+  kind: evidence
+  title: Synthetic paper identity and reported claim
+  status: active
+  source:
+    type: synthetic-reference
+    locator: synthetic://external-research/paper/v1
+  notes: Establishes only the identity of the synthetic reported result.
+- id: EVID-SOURCE-REVISION
+  kind: evidence
+  title: Frozen synthetic repository revision
+  status: active
+  source:
+    type: synthetic-git-revision
+    locator: synthetic://external-research/repository/0123456789abcdef
+  notes: The external source tree remains outside this FMA sidecar.
+- id: EXP-FRESH-REPRODUCTION
+  kind: experiment
+  title: Fresh bounded reproduction of the decision-relevant result
+  status: planned
+  notes: Deliberately incomplete so the example cannot overclaim reproduction.
+- id: DEC-USE-EXTERNAL-RESULT
+  kind: decision
+  title: Allow the external result to influence the system decision only after the declared evidence gap is resolved
+  status: proposed
+  criticality: 5
+edges:
+- from: EVID-PAPER-IDENTITY
+  to: CLAIM-REPORTED-RESULT
+  relation: supports
+- from: EVID-SOURCE-REVISION
+  to: CLAIM-IMPLEMENTATION-RELATIONSHIP
+  relation: supports
+- from: CLAIM-REPORTED-RESULT
+  to: CLAIM-IMPLEMENTATION-RELATIONSHIP
+  relation: depends_on
+- from: CLAIM-IMPLEMENTATION-RELATIONSHIP
+  to: ASSUMP-ENVIRONMENT
+  relation: depends_on
+- from: CLAIM-REPORTED-RESULT
+  to: ASSUMP-APPLICABILITY
+  relation: depends_on
+- from: EXP-FRESH-REPRODUCTION
+  to: ASSUMP-ENVIRONMENT
+  relation: verifies
+- from: MISSION-EXTERNAL-RESULT
+  to: CLAIM-REPORTED-RESULT
+  relation: depends_on
+- from: DEC-USE-EXTERNAL-RESULT
+  to: CLAIM-REPORTED-RESULT
+  relation: depends_on
+- from: DEC-USE-EXTERNAL-RESULT
+  to: EXP-FRESH-REPRODUCTION
+  relation: depends_on

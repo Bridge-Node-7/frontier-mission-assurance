@@ -57,11 +57,27 @@ Breaking changes to a profile-level behavioral contract require a profile-contra
 
 Consumers must not infer stronger compatibility than the declared versions provide.
 
+## Profile discovery manifest
+
+Each maintained profile exposes a small `profile.yaml` discovery manifest. The manifest identifies:
+
+- the profile ID and human-readable name;
+- the profile contract version;
+- the FMA release in which the profile was introduced;
+- the path to the authoritative public `PROFILE_CONTRACT.md`;
+- the deterministic profile validator.
+
+The manifest is validated against [`../schemas/profile-manifest.schema.json`](../schemas/profile-manifest.schema.json).
+
+This is intentionally a **discovery contract, not a plugin framework**. It does not load arbitrary code, grant domain authority, or imply that a profile is appropriate for a specific decision.
+
 ## Validation
 
 Profiles use the repository's existing assurance machinery rather than creating parallel release systems.
 
-A maintained profile should have a bounded validator and source-neutral validation fixtures. Its required validator belongs in the canonical local maintainer gate, hosted CI, and stable-release verification surface when the profile is part of the published release.
+A maintained profile has a bounded validator and source-neutral validation fixtures. Its required validator belongs in the canonical local maintainer gate, hosted CI, and stable-release verification surface when the profile is part of the published release.
+
+`python scripts/validate_profile_manifests.py .` verifies the common profile-discovery surface before profile-specific validators run.
 
 A profile PASS means its declared machine-checkable controls passed. It does not establish the truth, readiness, safety, qualification, or authorization of a real domain system.
 
@@ -98,4 +114,4 @@ Separation is an operational decision, not a cosmetic modularity goal.
 
 ## No plugin framework implied
 
-This architecture is contract-first. A profile manifest or plugin runtime is not required for a profile to be valid. Additional machinery should be introduced only when repeated operational use demonstrates a need for it.
+The architecture remains contract-first. The manifest makes bounded profiles easier for humans and automation to discover; it does not create a dynamic plugin runtime. Additional machinery should be introduced only when repeated operational use demonstrates a need for it.

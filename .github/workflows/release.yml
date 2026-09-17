@@ -63,6 +63,9 @@ jobs:
         run: |
           python scripts/public_boundary_scan.py .
           PYTHONPATH=src python scripts/evaluate_public_reference.py
+          python scripts/validate_profile_manifests.py .
+          PYTHONPATH=src python -m frontier_assurance.cli validate examples/external_research_adoption/graph.yaml
+          PYTHONPATH=src python -m frontier_assurance.cli decision examples/external_research_adoption/graph.yaml examples/external_research_adoption/decision-receipt.yaml
           python scripts/validate_scientific_discovery.py .
           python scripts/validate_orbital_recovery_assurance.py .
           python scripts/validate_ftqc_assurance.py .
@@ -166,6 +169,9 @@ jobs:
           cd source/frontier-mission-assurance
           sha256sum -c "$VERIFY/$SOURCE_SUMS"
           "$VERIFY/.venv/bin/python" scripts/evaluate_public_reference.py
+          "$VERIFY/.venv/bin/python" scripts/validate_profile_manifests.py .
+          "$VERIFY/.venv/bin/fma" validate examples/external_research_adoption/graph.yaml
+          "$VERIFY/.venv/bin/fma" decision examples/external_research_adoption/graph.yaml examples/external_research_adoption/decision-receipt.yaml
           "$VERIFY/.venv/bin/python" scripts/validate_scientific_discovery.py .
           "$VERIFY/.venv/bin/python" scripts/validate_orbital_recovery_assurance.py .
           "$VERIFY/.venv/bin/python" scripts/validate_ftqc_assurance.py .

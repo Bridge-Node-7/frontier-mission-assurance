@@ -14,6 +14,11 @@
 - Kept QBI material as a bounded public-source crosswalk with no readiness score, affiliation claim, or representation of evaluator internals.
 - Aligned Research Receipt documentation with the current 3.1 contract while retaining 3.0, 2.0, and 1.0 compatibility semantics.
 - Aligned local and hosted profile validation, formalized the bounded profile architecture, and added an explicit Scientific Discovery profile contract.
+- Added a common machine-readable profile-manifest contract and validation path without creating a plugin runtime.
+- Added source-neutral existing-work adoption for repositories, papers, models, simulations, experiments, and external execution, including a validated sidecar example that leaves the authoritative source untouched.
+- Added stable-release installation verification, bounded AI/automation guidance, and explicit evaluation/use boundaries that preserve the repository license.
+- Refined the public front door around product value, a 90-second change-impact walkthrough, evaluation, existing-work adoption, stable installation, and governed-use boundaries.
+- Restored bounded monthly dependency-update proposals while retaining human review and the normal V&V gates.
 
 ## 0.7.2 — public experience refinement
 
@@ -75,7 +80,7 @@
 - Reject interpreter execution modes such as `python -c`, `python -m`, stdin execution, and other decoy-token shapes from satisfying declared-entrypoint binding.
 - Added adversarial regression coverage for interpreter-mode and decoy-entrypoint command shapes while preserving successful `python <entrypoint> ...` reproduction.
 - Made the clean-adopter evaluation path install the exact pinned build backend inside its isolated environment and use that reviewed backend without build-isolation drift.
-- Preserved fresh-output verification, SHA-256 code/input/output binding, cross-platform V&V, Scientific Discovery Assurance, Mission Decision Packets, local-only runtime, synthetic-only public fixtures, All Rights Reserved licensing, and human consequential decision authority.
+- Preserved fresh-output verification, SHA-256 code/input/output binding, cross-platform V&V, Scientific Discovery Assurance, Mission Decision Packets, local-only runtime, synthetic-only fixtures, All Rights Reserved licensing, and human consequential decision authority.
 
 ## 0.4.1 — portable contract identity
 
