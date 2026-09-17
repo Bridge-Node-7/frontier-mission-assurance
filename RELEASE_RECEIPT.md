@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-17  
-**Canonical release gate:** PENDING HOSTED V&V
+**Canonical release gate:** READY
 
 ## Purpose
 
@@ -36,4 +36,4 @@ A PASS attests that the declared software and documentation controls satisfied t
 
 ## Release gate
 
-The v0.8.1 source candidate is not READY merely because this source record exists. It becomes READY only after the protected pull-request checks and the complete protected-main hosted V&V contract pass on the exact accepted source state. Stable publication remains a separate explicit release action.
+The external-evidence-boundary change passed protected pull-request V&V and then passed the complete protected-main hosted V&V contract on the exact accepted v0.8.1 source state, including the supported Python/OS matrix, clean wheel installation, public-boundary validation, all assurance-profile checks, and protected-main CodeQL. The v0.8.1 source gate is therefore **READY**. Stable publication remains a separate explicit release action and must bind the final READY protected-main commit to the published release artifacts and clean-user verification.
