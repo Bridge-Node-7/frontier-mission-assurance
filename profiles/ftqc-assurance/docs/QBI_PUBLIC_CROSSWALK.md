@@ -6,7 +6,7 @@ It is **not** a QBI implementation, QBI-readiness determination, representation 
 
 The crosswalk uses only broad concepts publicly associated with staged quantum-system evaluation and independent verification and validation.
 
-| Public evaluation concept | FMA-Q surface |
+| Public evaluation concept | FTQC Assurance surface |
 | --- | --- |
 | System concept | FTQC System Concept |
 | Feasibility basis | Assurance graph + Evidence Validity Envelopes |
@@ -18,6 +18,6 @@ The crosswalk uses only broad concepts publicly associated with staged quantum-s
 
 ## Boundary
 
-FMA-Q does not assign a QBI score, declare QBI readiness, reproduce evaluator criteria, or claim that a public crosswalk predicts government findings.
+FTQC Assurance does not assign a QBI score, declare QBI readiness, reproduce evaluator criteria, or claim that a public crosswalk predicts government findings.
 
 A real government opportunity or independent-evaluator role requires the applicable solicitation, conflict rules, qualified technical capabilities, and authorized review process to govern the work.
