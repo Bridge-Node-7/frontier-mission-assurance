@@ -45,8 +45,7 @@ To avoid publishing an immediately superseded intermediate artifact, v0.10.0 int
 
 ## Observed hosted evidence
 
-- Pull-request exact-head V&V run `35296572792` on `586dfa19e0c8a50c2815e169392e21d54ac1792c`: **PASS**, all seven required jobs.
-- Protected-main implementation commit `2f8504cde826c7250765eb55a9b332468d05a50f`.
+- Pull-request exact-head V&V run `35296572792`: **PASS**, all seven required jobs.
 - Protected-main V&V run `35297166566`: **PASS**, all seven required jobs, including CodeQL on `main`.
 - Generic FTQC private-case validation and governed previous/current case comparison both executed inside the protected validation surface.
 
