@@ -36,9 +36,11 @@ Operational private cases remain outside this public repository and reference au
 
 Commit-specific hosted evidence belongs in GitHub Actions and tagged release metadata, not in this source-controlled receipt.
 
-## Stable-release prerequisite
+## Release sequencing
 
-This v0.10.0 branch must not replace the source-READY v0.9.1 line on protected `main` until stable v0.9.1 has been published through the explicit Stable Release workflow or the release sequence is otherwise intentionally superseded by an accountable operator.
+The v0.9.1 source candidate reached READY on protected `main` but was not published as a stable GitHub Release. Its governance and FTQC verification-readiness changes are fully contained in v0.10.0.
+
+To avoid publishing an immediately superseded intermediate artifact, v0.10.0 intentionally supersedes the unreleased v0.9.1 source candidate. The stable-release history therefore remains v0.9.0 until v0.10.0 completes its own protected-main source gate and explicit Stable Release workflow.
 
 ## Release gate
 
