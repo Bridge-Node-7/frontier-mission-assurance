@@ -33,6 +33,8 @@ def test_ftqc_profile_release_surface_is_present():
         ROOT / "profiles" / "ftqc-assurance" / "schemas" / "expert-adjudication-record.schema.json",
         ROOT / "scripts" / "validate_ftqc_assurance.py",
         ROOT / "scripts" / "evaluate_ftqc_reference.py",
+        ROOT / "scripts" / "validate_ftqc_case.py",
+        ROOT / "profiles" / "ftqc-assurance" / "docs" / "PRIVATE_CASE_QUICKSTART.md",
     ]
     assert all(path.is_file() for path in required)
 
@@ -98,7 +100,7 @@ def test_external_reported_resource_estimate_boundary_is_explicit():
             / "resource-estimate-receipt.schema.json"
         ).read_text(encoding="utf-8")
     )
-    assert schema["properties"]["result"]["properties"]["synthetic_only"]["const"] is True
+    assert schema["properties"]["result"]["properties"]["synthetic_only"]["type"] == "boolean"
 
     scope = (
         ROOT / "profiles" / "ftqc-assurance" / "ASSURANCE_SCOPE.md"
