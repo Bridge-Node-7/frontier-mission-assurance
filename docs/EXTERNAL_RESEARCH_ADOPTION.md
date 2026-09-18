@@ -64,7 +64,7 @@ Use Scientific Discovery Assurance when proof state, specification equivalence, 
 
 ### External reported resource estimates
 
-When an external paper reports a resource estimate, preserve the estimate as external evidence unless a separate authorized process establishes a stronger assurance state. Under FTQC Assurance profile contract `0.1`, Resource Estimate Receipts remain synthetic/reference-only.
+When an external paper reports a resource estimate, preserve the estimate as external evidence unless a separate authorized process establishes a stronger assurance state. FTQC Assurance profile contract `0.2` supports governed private Resource Estimate Receipts for authorized case records, but copying a third-party published number into a private receipt does not turn that number into fresh reproduction, independent validation, or system applicability.
 
 Do not convert a published number into a fresh-reproduction, independent-validation, or system-applicability claim merely by copying it into an FMA record. Keep these states distinct:
 
