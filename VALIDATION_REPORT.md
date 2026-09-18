@@ -1,4 +1,4 @@
-# Source Validation Report — v0.10.0
+# Source Validation Report — v0.11.0
 
 **Date:** 2026-09-17  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -74,7 +74,22 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.10.0 source candidate advances FTQC Assurance to profile contract `0.2`. Release eligibility requires:
+The v0.11.0 source candidate retains FTQC Assurance profile contract `0.2` and adds bounded external technical-evidence adoption. Release eligibility requires:
+
+- reviewed ExperimentResult and ProcessorEvidenceReceipt artifacts fail closed on wrong trusted artifact SHA-256;
+- externally supplied producer schemas must match the exact reviewed schema SHA-256 values before JSON Schema validation;
+- ExperimentResult internal integrity and ProcessorEvidenceReceipt payload integrity must verify independently;
+- the processor receipt must bind exactly one input artifact and that linkage must match the supplied ExperimentResult identity and SHA-256;
+- unreviewed future producer releases fail closed even when contract identity is unchanged;
+- current generated decoder-backlog model evidence maps to `SIMULATED / NOT_ASSESSED / DECLARED`;
+- reproduced evidence may map to `REPRODUCED` without promoting authority;
+- cross-architecture technical evidence maps to applicability `REVIEW_REQUIRED`;
+- positive processor technical status maps only to `RE-EVALUATION_OPPORTUNITY`, never automatic approval;
+- unfavorable processor technical status remains a bounded technical result and must not be promoted into a mission/company-level conclusion;
+- the adapter emits an existing profile-0.2 evidence-validity envelope rather than a new ontology;
+- assurance-context remains `0.1.0` unless a future wire-semantic requirement is proven;
+
+The existing FTQC case controls remain required:
 
 - FTQC profile schemas, manifests, public reference records, evaluator, and private-case validator agree on profile contract `0.2`;
 - public synthetic FTQC reference records remain source-neutral and require `resource-estimate-receipt.result.synthetic_only = true`;
