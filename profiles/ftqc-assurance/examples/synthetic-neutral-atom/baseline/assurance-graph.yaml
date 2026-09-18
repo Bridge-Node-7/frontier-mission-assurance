@@ -2,7 +2,7 @@ graph_version: "1.0"
 metadata:
   record_class: synthetic
   profile: ftqc-assurance
-  profile_version: "0.1"
+  profile_version: "0.2"
 nodes:
   - {id: MISSION-001, kind: mission, title: "Advance synthetic FTQC architecture only when its decision basis is reviewable", status: active, criticality: 5}
   - {id: CLAIM-001, kind: claim, title: "Logical resource requirement is adequately characterized for the current decision", status: active, criticality: 5}
