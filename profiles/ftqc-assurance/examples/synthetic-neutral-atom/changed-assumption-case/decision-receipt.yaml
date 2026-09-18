@@ -1,0 +1,21 @@
+decision_version: "1.0"
+decision:
+  id: DECISION-001
+  disposition: HOLD
+  rationale: >
+    The synthetic architecture is structurally traceable, but one decision-gating
+    evidence envelope is declared rather than established. Advancement therefore
+    remains on HOLD pending a stronger applicability basis.
+  reopen_when:
+    - "Decision-gating evidence applicability becomes established."
+    - "The QEC code family changes."
+    - "The physical loss regime changes."
+    - "The resource estimate is regenerated."
+    - "The photonic interface regime changes."
+basis:
+  node_refs:
+    - CLAIM-001
+    - CLAIM-002
+    - CLAIM-003
+    - CLAIM-004
+    - RISK-QEC-001
