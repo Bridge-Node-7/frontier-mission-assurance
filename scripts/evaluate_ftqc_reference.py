@@ -23,7 +23,7 @@ except ImportError:
     jsonschema = None
     SchemaError = ValidationError = ValueError
 
-PROFILE_VERSION = "0.1"
+PROFILE_VERSION = "0.2"
 PROFILE_NAME = "ftqc-assurance"
 ALLOWED_RECORD_CLASSES = {"synthetic", "private"}
 URL_RE = re.compile(r"https?://", re.IGNORECASE)
