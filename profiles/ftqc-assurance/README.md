@@ -54,6 +54,17 @@ A passing software check means the declared synthetic contracts behaved as speci
 
 The reference case contains a baseline and a changed-assumption scenario. The changed case modifies one physical-model assumption and demonstrates which resource estimate, evidence envelope, expert review, claims, and decision must be reconsidered.
 
+## Use one governed private case
+
+The bundled reference teaches profile behavior. For an access-controlled real evaluation, use the private-case validator rather than modifying the synthetic fixture in place:
+
+```bash
+python scripts/validate_ftqc_case.py ../my-ftqc-case \
+  --report ../my-ftqc-case/decision-basis.md
+```
+
+Start with one decision and the six-file case shape documented in [`docs/PRIVATE_CASE_QUICKSTART.md`](docs/PRIVATE_CASE_QUICKSTART.md). Real evidence stays in its authoritative system; the private case carries only the bounded references and decision context required for review.
+
 ## Decision-basis continuity
 
 The product question is not only:
@@ -91,7 +102,7 @@ The synthetic neutral-atom reference is an **Algorithm-to-Atom view** of this mo
 
 ## Profile contracts
 
-The initial profile adds four bounded contracts:
+Profile contract `0.2` uses four bounded contracts:
 
 - **FTQC System Concept** — freezes the architecture revision, mission question, workload, and declared assumptions under review.
 - **Resource Estimate Receipt** — records the meaning, assumptions, result, and applicability of a resource-estimation output without replacing computational provenance.
