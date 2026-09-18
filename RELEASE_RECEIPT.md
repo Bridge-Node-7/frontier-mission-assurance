@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-17  
-**Canonical release gate:** PENDING HOSTED VALIDATION
+**Canonical release gate:** READY
 
 ## Purpose
 
@@ -16,6 +16,7 @@ Make the FTQC Assurance profile usable for a governed private one-decision case 
 - Added a generic six-file FTQC case validator for external private case directories.
 - Added a human-readable FTQC Decision Basis report.
 - Added a private-case operator quickstart.
+- Added governed previous/current FTQC case comparison for changed assumptions/context, stale reused estimates, out-of-envelope evidence, expert-review reopen triggers, downstream graph impact, and decision reconsideration.
 - Added fail-closed tests for mixed record classes, unresolved decision-gate promotion, missing applicability references, and synthetic-boundary violations.
 - Added the generic FTQC case workflow to local/hosted/release V&V.
 - Preserved the universal FMA graph ontology, authoritative external evidence custody, expert-review boundaries, and accountable human consequential authority.
@@ -42,6 +43,15 @@ The v0.9.1 source candidate reached READY on protected `main` but was not publis
 
 To avoid publishing an immediately superseded intermediate artifact, v0.10.0 intentionally supersedes the unreleased v0.9.1 source candidate. The stable-release history therefore remains v0.9.0 until v0.10.0 completes its own protected-main source gate and explicit Stable Release workflow.
 
+## Observed hosted evidence
+
+- Pull-request exact-head V&V run `35296572792` on `586dfa19e0c8a50c2815e169392e21d54ac1792c`: **PASS**, all seven required jobs.
+- Protected-main implementation commit `2f8504cde826c7250765eb55a9b332468d05a50f`.
+- Protected-main V&V run `35297166566`: **PASS**, all seven required jobs, including CodeQL on `main`.
+- Generic FTQC private-case validation and governed previous/current case comparison both executed inside the protected validation surface.
+
 ## Release gate
 
-The v0.10.0 source gate remains **PENDING HOSTED VALIDATION** until the complete protected pull-request and protected-main V&V contract passes for the exact candidate state. Stable publication is a separate explicit release action.
+The v0.10.0 source gate is **READY**. This READY state attests only to the declared source, packaging, boundary, profile, FTQC case, change-impact, and hosted validation controls exercised by the repository.
+
+Stable publication remains a separate explicit action performed only by the repository's `Stable Release` workflow. A source READY state does not itself create a tag or GitHub Release.
