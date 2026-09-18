@@ -82,6 +82,8 @@ jobs:
         run: python scripts/evaluate_ftqc_reference.py .
       - name: Validate generic FTQC case path
         run: python scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
+      - name: Compare governed FTQC case states
+        run: python scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
       - name: Run public reference evaluation
         run: python scripts/evaluate_public_reference.py
       - name: Analyze with CodeQL
