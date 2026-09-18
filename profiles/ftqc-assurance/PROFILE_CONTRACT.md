@@ -43,6 +43,7 @@ The surrounding program retains ownership of:
 - a declared FTQC system concept and architecture revision;
 - resource-estimate records and their assumptions;
 - evidence references with bounded applicability;
+- reviewed serialized technical-evidence artifacts may be adopted through an explicit fail-closed adapter without importing the producer implementation;
 - declared interface, component, and dependency relationships;
 - qualified expert adjudication where required;
 - an FMA assurance graph and Decision Receipt.
@@ -51,7 +52,19 @@ The surrounding program retains ownership of:
 
 Contract 0.2 supports governed private case directories using the same six-file shape as the public reference. `scripts/validate_ftqc_case.py` validates the declared profile records, cross-record references, assurance graph, decision receipt, applicability gates, and expert-review gates without relocating raw evidence or granting new technical authority.
 
+## External technical-evidence adoption
+
+FMA 0.11.0 adds a bounded adapter for reviewed FTQC ExperimentResult and
+ProcessorEvidenceReceipt artifacts. The producer-owned schemas remain external;
+FMA verifies exact reviewed schema digests plus trusted artifact SHA-256 values
+before mapping only the minimum semantics required by profile contract 0.2.
+
+This is an adoption boundary, not a new profile contract. Processor technical
+status remains distinct from FMA applicability, authority, reproduction state,
+expert review, and decision disposition.
+
 ## Outputs
+
 
 - profile validation findings;
 - a human-readable synthetic Decision Basis report;

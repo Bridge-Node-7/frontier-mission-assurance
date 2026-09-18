@@ -1,56 +1,51 @@
-# Source Release Receipt — v0.10.0
+# Source Release Receipt — v0.11.0
 
 **Release type:** stable public reference candidate  
-**Date:** 2026-09-17  
-**Canonical release gate:** READY
+**Date:** 2026-09-18  
+**Canonical release gate:** WORKING
 
 ## Purpose
 
-Make the FTQC Assurance profile usable for a governed private one-decision case without weakening the synthetic public reference, moving raw evidence into the repository, or increasing FMA's scientific or decision authority.
+Add a bounded FTQC technical-evidence consumer while preserving the separation
+between evidence production, processor technical evaluation, institutional
+assurance, downstream decision preparation, and accountable human authority.
 
-## Material changes in v0.10.0
+## Material changes in v0.11.0
 
-- Advanced FTQC Assurance profile contract from `0.1` to `0.2`.
-- Allowed private Resource Estimate Receipts to truthfully declare `synthetic_only: false`.
-- Preserved the requirement that public synthetic FTQC reference records declare `synthetic_only: true`.
-- Added a generic six-file FTQC case validator for external private case directories.
-- Added a human-readable FTQC Decision Basis report.
-- Added a private-case operator quickstart.
-- Added governed previous/current FTQC case comparison for changed assumptions/context, stale reused estimates, out-of-envelope evidence, expert-review reopen triggers, downstream graph impact, and decision reconsideration.
-- Added fail-closed tests for mixed record classes, unresolved decision-gate promotion, missing applicability references, and synthetic-boundary violations.
-- Added the generic FTQC case workflow to local/hosted/release V&V.
-- Preserved the universal FMA graph ontology, authoritative external evidence custody, expert-review boundaries, and accountable human consequential authority.
+- Added exact-artifact and exact-schema verification for reviewed
+  `ExperimentResult 2.0.0` plus linked `ProcessorEvidenceReceipt 2.0.0`.
+- Added explicit reviewed producer-release gates.
+- Added internal-integrity, one-input linkage, and architecture-consistency checks.
+- Mapped current generated decoder-backlog model evidence to
+  `SIMULATED / NOT_ASSESSED / DECLARED`.
+- Preserved cross-architecture evidence as `REVIEW_REQUIRED`.
+- Preserved positive technical evidence as `RE-EVALUATION_OPPORTUNITY`, never
+  automatic approval.
+- Reused FTQC profile contract `0.2` and assurance-context `0.1.0`.
+- Kept producer-owned schema bytes outside the public FMA source tree; exact
+  reviewed schema digests are verified against operator-supplied schema files.
 
 ## Source-level evidence
 
-Release eligibility requires the complete deterministic FMA validation surface to remain green, including package identity, public-boundary scanning, profile manifests, all assurance-profile validators, FTQC public reference evaluation, the generic FTQC case validator, cross-platform smoke paths, protected-main CodeQL, and clean wheel installation.
+Release eligibility requires the full deterministic FMA validation surface plus
+the FTQC processor-evidence adapter regressions to remain green.
 
-The generic FTQC case validator establishes only declared contract coherence and bounded cross-record linkage. It does not establish QEC/decoder correctness, resource-estimator correctness, quantum-hardware performance, independent V&V, government readiness, or permission for consequential action.
+The adapter establishes only structural integrity, reviewed interface identity,
+bounded evidence classification, and declared applicability semantics. It does
+not establish quantum truth, real hardware performance, independent V&V,
+certification, government readiness, or consequential decision authority.
 
 ## Public/private boundary
 
-No real customer, partner, supplier, architecture, laboratory, program, or controlled evidence is added to the public repository.
-
-Operational private cases remain outside this public repository and reference authoritative evidence rather than relocating it.
+No customer, partner, supplier, private architecture, raw protected evidence, or
+private producer artifact is added to this public repository.
 
 ## Hosted evidence rule
 
 Commit-specific hosted evidence belongs in GitHub Actions and tagged release metadata, not in this source-controlled receipt.
 
-## Release sequencing
-
-v0.9.1 was published successfully as the preceding stable GitHub Release after its READY protected-main source gate. Stable Release Operator run `35294640709` completed successfully and published the v0.9.1 source archive, wheel, SHA-256 manifests, CycloneDX SBOM, and provenance attestations.
-
-v0.10.0 therefore proceeds as the next stable release. It retains the v0.9.1 governance and FTQC verification-readiness work and adds the governed private-case and change-impact capabilities documented above.
-
-## Observed hosted evidence
-
-- Pull-request exact-head V&V run `35296572792`: **PASS**, all seven required jobs.
-- Protected-main V&V run `35297166566`: **PASS**, all seven required jobs, including CodeQL on `main`.
-- Generic FTQC private-case validation and governed previous/current case comparison both executed inside the protected validation surface.
-
 ## Release gate
 
-The v0.10.0 source gate is **READY**. This READY state attests only to the declared source, packaging, boundary, profile, FTQC case, change-impact, and hosted validation controls exercised by the repository.
-
-Stable publication remains a separate explicit action performed only by the repository's `Stable Release` workflow. A source READY state does not itself create a tag or GitHub Release.
+The source candidate remains **WORKING** until protected-main hosted V&V is green
+for the exact merged commit. Stable publication remains a separate explicit action
+performed only by the repository's `Stable Release` workflow.

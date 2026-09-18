@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.11.0 — bounded FTQC technical-evidence adoption
+
+- Added a fail-closed source-profile adapter for reviewed `ExperimentResult 2.0.0` plus linked `ProcessorEvidenceReceipt 2.0.0` artifacts.
+- Verify trusted artifact SHA-256, exact reviewed schema SHA-256, JSON Schema validity, producer release, internal integrity, one-input linkage, and architecture-comparison consistency before FMA mapping.
+- Map current decoder-backlog model evidence to `SIMULATED`, preserve `GENERATED != REPRODUCED`, and keep cross-architecture applicability `REVIEW_REQUIRED`.
+- Preserve processor technical status separately from FMA applicability and authority; a positive technical result creates only a `RE-EVALUATION_OPPORTUNITY`.
+- Reuse FTQC Assurance profile contract `0.2` and assurance-context `0.1.0`; no new core ontology, Decision Context Packet, or decision authority is introduced.
+- Keep producer-owned portable schema bytes outside FMA; operators supply the exact schema files and FMA verifies their reviewed digests before validation.
+- Added adversarial regression coverage for artifact tampering, linkage substitution, contradictory architecture state, unreviewed future producers, and unmapped evidence kinds.
+
+
 ## 0.10.0 — governed private FTQC case workflow
 
 - Advanced FTQC Assurance to profile contract `0.2` without changing the universal FMA graph ontology.
