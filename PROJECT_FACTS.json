@@ -37,7 +37,8 @@
     "preserve third-party FTQC resource estimates as external evidence under profile 0.1 without converting them into fresh-reproduction, independent-validation, or system-applicability claims",
     "validate an FMA-owned assurance-context export that preserves changed-assumption impact, review state, decision disposition, and authoritative references without copying raw evidence or increasing epistemic authority",
     "validate governed private FTQC case directories against profile contract 0.2 while allowing truthful non-synthetic resource-estimate records without weakening the public synthetic boundary",
-    "render a human-readable FTQC private-case decision-basis report covering disposition, assumptions, resource-estimate state, applicability envelopes, expert gates, and reopen conditions"
+    "render a human-readable FTQC private-case decision-basis report covering disposition, assumptions, resource-estimate state, applicability envelopes, expert gates, and reopen conditions",
+    "compare previous/current governed FTQC case states to surface stale reused estimates, evidence applicability loss, expert-review reopen triggers, downstream impact, and decision reconsideration without inferring the replacement technical answer"
   ],
   "governed_externally": [
     "scientific validity and interpretation",
