@@ -260,6 +260,8 @@ def validate_profile(root: Path) -> list[str]:
             problems.append(f"record_class invalid: {name}")
     if any(record["record_class"] != "synthetic" for record in records.values()) or changed_system["record_class"] != "synthetic":
         problems.append("public FTQC reference records must be synthetic")
+    if records["resource"].get("result", {}).get("synthetic_only") is not True:
+        problems.append("public FTQC resource-estimate reference must declare synthetic_only=true")
 
     graph_ids = {node["id"] for node in graph["nodes"]}
     node_kind = {node["id"]: node["kind"] for node in graph["nodes"]}
