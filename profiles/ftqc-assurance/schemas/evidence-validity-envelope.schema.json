@@ -1,11 +1,11 @@
 {
-  "$id": "urn:bn7:ftqc-assurance:evidence-validity-envelope:0.1",
-  "title": "FTQC Evidence Validity Envelope Set (v0.1)",
+  "$id": "urn:bn7:ftqc-assurance:evidence-validity-envelope:0.2",
+  "title": "FTQC Evidence Validity Envelope Set (v0.2)",
   "type": "object",
   "additionalProperties": false,
   "required": ["profile_version", "record_class", "envelopes"],
   "properties": {
-    "profile_version": {"const": "0.1"},
+    "profile_version": {"const": "0.2"},
     "record_class": {"enum": ["synthetic", "private"]},
     "envelopes": {
       "type": "array",
