@@ -70,8 +70,8 @@ jobs:
           python scripts/validate_orbital_recovery_assurance.py .
           python scripts/validate_ftqc_assurance.py .
           python scripts/evaluate_ftqc_reference.py .
-          python scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
-          python scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
+          PYTHONPATH=src python scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
+          PYTHONPATH=src python scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
 
       - name: Build release artifacts, SBOM, and manifests
         if: env.RELEASE_ELIGIBLE == '1'

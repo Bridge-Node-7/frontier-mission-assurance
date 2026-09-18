@@ -91,6 +91,8 @@ def test_stable_release_reverifies_ftqc_profile_and_reference():
     assert workflow.count("scripts/evaluate_ftqc_reference.py .") >= 2
     assert workflow.count("scripts/validate_ftqc_case.py") >= 2
     assert workflow.count("scripts/compare_ftqc_cases.py") >= 2
+    assert "PYTHONPATH=src python scripts/validate_ftqc_case.py" in workflow
+    assert "PYTHONPATH=src python scripts/compare_ftqc_cases.py" in workflow
 
 
 def test_external_reported_resource_estimate_boundary_is_explicit():
