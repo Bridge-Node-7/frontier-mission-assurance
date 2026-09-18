@@ -65,6 +65,8 @@ python scripts/validate_ftqc_case.py ../my-ftqc-case \
 
 Start with one decision and the six-file case shape documented in [`docs/PRIVATE_CASE_QUICKSTART.md`](docs/PRIVATE_CASE_QUICKSTART.md). Real evidence stays in its authoritative system; the private case carries only the bounded references and decision context required for review.
 
+When you have a previous and current governed case state, `scripts/compare_ftqc_cases.py` surfaces stale estimates, evidence outside its envelope, expert-review reopen triggers, downstream impact, and decision reconsideration without manufacturing the replacement technical answer.
+
 ## Decision-basis continuity
 
 The product question is not only:
