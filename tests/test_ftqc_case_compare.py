@@ -115,6 +115,11 @@ def test_compare_rejects_different_systems(tmp_path):
     data["system_id"] = "DIFFERENT-SYSTEM"
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
+    resource_path = current / "resource-estimate-receipt.json"
+    resource = json.loads(resource_path.read_text(encoding="utf-8"))
+    resource["system_ref"] = "DIFFERENT-SYSTEM"
+    resource_path.write_text(json.dumps(resource, indent=2) + "\n", encoding="utf-8")
+
     errors, _, _ = tool.compare_cases(ROOT, PREVIOUS, current)
     assert "previous/current FTQC cases must refer to the same system_id" in errors
 
