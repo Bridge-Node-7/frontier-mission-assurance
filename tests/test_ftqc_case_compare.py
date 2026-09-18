@@ -27,6 +27,9 @@ CURRENT = (
 
 
 def _load_tool():
+    scripts_dir = str(SCRIPT.parent)
+    if scripts_dir not in sys.path:
+        sys.path.insert(0, scripts_dir)
     spec = importlib.util.spec_from_file_location("ftqc_compare_test", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
