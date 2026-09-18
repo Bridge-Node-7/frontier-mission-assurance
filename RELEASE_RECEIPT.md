@@ -39,9 +39,9 @@ Commit-specific hosted evidence belongs in GitHub Actions and tagged release met
 
 ## Release sequencing
 
-The v0.9.1 source candidate reached READY on protected `main` but was not published as a stable GitHub Release. Its governance and FTQC verification-readiness changes are fully contained in v0.10.0.
+v0.9.1 was published successfully as the preceding stable GitHub Release after its READY protected-main source gate. Stable Release Operator run `35294640709` completed successfully and published the v0.9.1 source archive, wheel, SHA-256 manifests, CycloneDX SBOM, and provenance attestations.
 
-To avoid publishing an immediately superseded intermediate artifact, v0.10.0 intentionally supersedes the unreleased v0.9.1 source candidate. The stable-release history therefore remains v0.9.0 until v0.10.0 completes its own protected-main source gate and explicit Stable Release workflow.
+v0.10.0 therefore proceeds as the next stable release. It retains the v0.9.1 governance and FTQC verification-readiness work and adds the governed private-case and change-impact capabilities documented above.
 
 ## Observed hosted evidence
 
