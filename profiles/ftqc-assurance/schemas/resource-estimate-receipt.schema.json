@@ -1,11 +1,11 @@
 {
-  "$id": "urn:bn7:ftqc-assurance:resource-estimate-receipt:0.1",
-  "title": "FTQC Resource Estimate Receipt (v0.1)",
+  "$id": "urn:bn7:ftqc-assurance:resource-estimate-receipt:0.2",
+  "title": "FTQC Resource Estimate Receipt (v0.2)",
   "type": "object",
   "additionalProperties": false,
   "required": ["profile_version", "record_class", "record_id", "system_ref", "estimator", "problem", "assumption_refs", "result", "provenance", "applicability_envelope_ref", "review_state"],
   "properties": {
-    "profile_version": {"const": "0.1"},
+    "profile_version": {"const": "0.2"},
     "record_class": {"enum": ["synthetic", "private"]},
     "record_id": {"type": "string", "minLength": 1},
     "system_ref": {"type": "string", "minLength": 1},
@@ -36,7 +36,7 @@
       "properties": {
         "physical_qubits": {"type": "integer", "minimum": 1},
         "runtime_seconds": {"type": "number", "exclusiveMinimum": 0},
-        "synthetic_only": {"const": true}
+        "synthetic_only": {"type": "boolean"}
       }
     },
     "provenance": {
