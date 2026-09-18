@@ -1,0 +1,155 @@
+{
+  "profile_version": "0.2",
+  "record_class": "synthetic",
+  "envelopes": [
+    {
+      "envelope_id": "ENV-RESOURCE-001",
+      "evidence_ref": "MODEL-RESOURCE-001",
+      "evidence_class": "CALCULATED",
+      "basis": {
+        "type": "model",
+        "refs": [
+          "MODEL-RESOURCE-001"
+        ]
+      },
+      "applicability": {
+        "conditions": [
+          {
+            "subject": "modality",
+            "operator": "eq",
+            "value": "neutral_atom"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-QEC-001",
+            "operator": "eq",
+            "value": "synthetic_code_a"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-DECODER-001",
+            "operator": "eq",
+            "value": "synthetic_decoder_a"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-LOSS-001",
+            "operator": "eq",
+            "value": "baseline"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-SCALE-001",
+            "operator": "between",
+            "value": [
+              100,
+              1000
+            ]
+          }
+        ]
+      },
+      "review": {
+        "status": "IN_SCOPE",
+        "authority_state": "DECLARED",
+        "decision_gate": true
+      }
+    },
+    {
+      "envelope_id": "ENV-QEC-001",
+      "evidence_ref": "EXPERT-REVIEW-001",
+      "evidence_class": "EXPERT_ADJUDICATED",
+      "basis": {
+        "type": "expert_review",
+        "refs": [
+          "EXPERT-REVIEW-001"
+        ]
+      },
+      "applicability": {
+        "conditions": [
+          {
+            "subject": "modality",
+            "operator": "eq",
+            "value": "neutral_atom"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-QEC-001",
+            "operator": "eq",
+            "value": "synthetic_code_a"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-LOSS-001",
+            "operator": "eq",
+            "value": "baseline"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-SCALE-001",
+            "operator": "between",
+            "value": [
+              100,
+              1000
+            ]
+          }
+        ]
+      },
+      "review": {
+        "status": "IN_SCOPE",
+        "authority_state": "ESTABLISHED",
+        "decision_gate": true
+      }
+    },
+    {
+      "envelope_id": "ENV-LOSS-001",
+      "evidence_ref": "EVIDENCE-LOSS-001",
+      "evidence_class": "EXPERIMENTAL",
+      "basis": {
+        "type": "declared_assumption",
+        "refs": [
+          "ASSUMPTION-LOSS-001"
+        ]
+      },
+      "applicability": {
+        "conditions": [
+          {
+            "subject": "assumption:ASSUMPTION-LOSS-001",
+            "operator": "eq",
+            "value": "baseline"
+          },
+          {
+            "subject": "assumption:ASSUMPTION-SCALE-001",
+            "operator": "between",
+            "value": [
+              100,
+              1000
+            ]
+          }
+        ]
+      },
+      "review": {
+        "status": "IN_SCOPE",
+        "authority_state": "DECLARED",
+        "decision_gate": true
+      }
+    },
+    {
+      "envelope_id": "ENV-PHOTONIC-001",
+      "evidence_ref": "EVIDENCE-PHOTONIC-001",
+      "evidence_class": "EXPERIMENTAL",
+      "basis": {
+        "type": "experiment",
+        "refs": [
+          "EVIDENCE-PHOTONIC-001"
+        ]
+      },
+      "applicability": {
+        "conditions": [
+          {
+            "subject": "assumption:ASSUMPTION-PHOTONIC-001",
+            "operator": "eq",
+            "value": "baseline"
+          }
+        ]
+      },
+      "review": {
+        "status": "IN_SCOPE",
+        "authority_state": "ESTABLISHED",
+        "decision_gate": true
+      }
+    }
+  ]
+}
