@@ -1,4 +1,4 @@
-# Source Validation Report — v0.9.1
+# Source Validation Report — v0.10.0
 
 **Date:** 2026-09-17  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -74,31 +74,30 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.9.1 source candidate retains FTQC Assurance profile contract `0.1` and the external reported-resource-estimate boundary. Release eligibility requires:
+The v0.10.0 source candidate advances FTQC Assurance to profile contract `0.2`. Release eligibility requires:
 
-- FTQC profile schemas and public reference records agree on profile contract `0.1`;
-- profile contract `0.1` Resource Estimate Receipts remain synthetic/reference-only;
-- public guidance keeps third-party reported resource estimates distinct from fresh reproduction, independent replication, expert adjudication, and system applicability;
-- public FTQC examples remain synthetic and source-neutral;
-- the universal FMA graph ontology remains unchanged by the domain profile;
+- FTQC profile schemas, manifests, public reference records, evaluator, and private-case validator agree on profile contract `0.2`;
+- public synthetic FTQC reference records remain source-neutral and require `resource-estimate-receipt.result.synthetic_only = true`;
+- governed private FTQC cases may truthfully use `record_class = private` and `synthetic_only = false`;
+- the generic FTQC case validator accepts a user-supplied six-file case directory outside the public repository;
+- all four FTQC profile records in one case use a consistent record class;
+- private-case validation preserves the universal FMA graph ontology and core Decision Receipt semantics;
 - system-concept assumption references resolve to FMA assumption nodes;
-- resource-estimate assumption references resolve and remain distinct from estimator correctness;
-- evidence envelopes name an evidence class, explicit applicability conditions, applicability basis, authority state, and decision-gate state;
+- resource-estimate system/workload/assumption/applicability references resolve explicitly;
+- evidence envelopes name evidence class, applicability conditions, applicability basis, authority state, and decision-gate state;
 - `ESTABLISHED` applicability cannot rest only on a declared-assumption basis;
 - internal, external, and independent-review classes remain explicit and non-equivalent;
-- mandatory expert gates cannot coexist with an `APPROVE` synthetic Decision Receipt unless supported within scope;
+- mandatory expert gates or unresolved decision-gating applicability cannot coexist with an `APPROVE` Decision Receipt;
+- the generic FTQC case report surfaces disposition, assumptions, resource-estimate state/provenance, applicability envelopes, expert gates, and reopen conditions;
+- previous/current FTQC case comparison deterministically surfaces changed assumptions/context, stale reused resource estimates, out-of-envelope evidence, declared expert-review reopen triggers, downstream graph impact, and decision-node reconsideration;
 - the public baseline remains `HOLD` while a decision-gating applicability envelope is only declared;
-- the changed-assumption scenario modifies exactly one declared physical-model assumption;
-- that change makes the dependent synthetic resource estimate stale;
-- evidence outside its declared applicability envelope is surfaced without inferring architecture failure;
-- the QEC expert review reopens when its declared physical-model dependency changes;
-- affected claims and the dependent decision are surfaced through declared dependency/support relationships;
-- the human-readable Decision Basis report clearly separates software/contract PASS from technical-decision HOLD;
-- the evaluator is deterministic across repeated runs;
-- the QBI crosswalk remains documentation-only and makes no readiness, affiliation, or evaluator-internal claim;
-- profile validation and evaluation pass on the supported Python matrix and Ubuntu/macOS/Windows smoke paths.
+- the public changed-assumption scenario modifies exactly one declared physical-model assumption and preserves stale-estimate, outside-envelope, expert-review reopen, impacted-claim, and decision-reconsideration behavior;
+- the public evaluator remains deterministic;
+- private-case regression coverage rejects mixed record classes, synthetic cases claiming non-synthetic results, unresolved-gate approval, and missing applicability references;
+- the private-case validation and case-comparison workflows are exercised in local `make check`, supported Python CI, cross-platform smoke paths, and the explicit Stable Release workflow;
+- the QBI crosswalk remains documentation-only and makes no readiness, affiliation, or evaluator-internal claim.
 
-These controls establish declared profile behavior only. They do not establish quantum-physics validity, QEC correctness, resource-estimator correctness, hardware performance, supplier qualification, independent V&V, government-program readiness, or consequential decision authority.
+These controls establish declared profile and private-case contract behavior only. They do not establish quantum-physics validity, QEC correctness, decoder correctness, resource-estimator correctness, hardware performance, supplier qualification, independent V&V, government-program readiness, or consequential decision authority.
 
 ## Public release V&V
 

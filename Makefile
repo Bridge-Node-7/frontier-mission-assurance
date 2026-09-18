@@ -1,4 +1,4 @@
-.PHONY: install test lint validate assumptions coverage impact receipt reproduce report schema boundary evaluate fingerprint profile-manifests external-adoption scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate demo check clean
+.PHONY: install test lint validate assumptions coverage impact receipt reproduce report schema boundary evaluate fingerprint profile-manifests external-adoption scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate ftqc-case ftqc-compare demo check clean
 
 install:
 	python -m pip install -e '.[dev]'
@@ -66,9 +66,17 @@ ftqc:
 ftqc-evaluate:
 	python scripts/evaluate_ftqc_reference.py .
 
+ftqc-case:
+	mkdir -p build
+	python scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
+
+ftqc-compare:
+	mkdir -p build
+	python scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
+
 demo: evaluate
 
-check: lint test validate assumptions coverage receipt reproduce report evaluate fingerprint profile-manifests external-adoption scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate boundary
+check: lint test validate assumptions coverage receipt reproduce report evaluate fingerprint profile-manifests external-adoption scientific-discovery orbital-recovery orbital-recovery-benchmark ftqc ftqc-evaluate ftqc-case ftqc-compare boundary
 
 clean:
 	rm -rf build dist .pytest_cache .ruff_cache .coverage *.egg-info src/*.egg-info

@@ -1,8 +1,24 @@
 {
-  "changed_assumptions": ["ASSUMPTION-LOSS-001"],
-  "resource_estimates_stale": ["MODEL-RESOURCE-001"],
-  "evidence_outside_envelope": ["EVIDENCE-LOSS-001", "EXPERT-REVIEW-001"],
-  "expert_reviews_reopen": ["EXPERT-REVIEW-001"],
-  "impacted_nodes": ["CLAIM-001", "CLAIM-002", "CLAIM-003", "DECISION-001", "MODEL-RESOURCE-001"],
+  "changed_assumptions": [
+    "ASSUMPTION-LOSS-001"
+  ],
+  "resource_estimates_stale": [
+    "MODEL-RESOURCE-001"
+  ],
+  "evidence_outside_envelope": [
+    "EVIDENCE-LOSS-001",
+    "EXPERT-REVIEW-001",
+    "MODEL-RESOURCE-001"
+  ],
+  "expert_reviews_reopen": [
+    "EXPERT-REVIEW-001"
+  ],
+  "impacted_nodes": [
+    "CLAIM-001",
+    "CLAIM-002",
+    "CLAIM-003",
+    "DECISION-001",
+    "MODEL-RESOURCE-001"
+  ],
   "decision_reopen_required": true
 }

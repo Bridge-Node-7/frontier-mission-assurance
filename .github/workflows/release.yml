@@ -70,6 +70,8 @@ jobs:
           python scripts/validate_orbital_recovery_assurance.py .
           python scripts/validate_ftqc_assurance.py .
           python scripts/evaluate_ftqc_reference.py .
+          python scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
+          python scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
 
       - name: Build release artifacts, SBOM, and manifests
         if: env.RELEASE_ELIGIBLE == '1'
@@ -176,6 +178,8 @@ jobs:
           "$VERIFY/.venv/bin/python" scripts/validate_orbital_recovery_assurance.py .
           "$VERIFY/.venv/bin/python" scripts/validate_ftqc_assurance.py .
           "$VERIFY/.venv/bin/python" scripts/evaluate_ftqc_reference.py .
+          "$VERIFY/.venv/bin/python" scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
+          "$VERIFY/.venv/bin/python" scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
           "$VERIFY/.venv/bin/fma" reproduce examples/research_receipt/receipt.yaml --timeout 30
           "$VERIFY/.venv/bin/fma" receipt examples/research_receipt_v3_external/receipt.yaml
           grep -Fq "CLAIM-CYCLE-TARGET" build/assurance-report.md

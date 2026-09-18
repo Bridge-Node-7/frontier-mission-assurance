@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.0 — governed private FTQC case workflow
+
+- Advanced FTQC Assurance to profile contract `0.2` without changing the universal FMA graph ontology.
+- Removed the profile-contract defect that forced every resource-estimate result to claim `synthetic_only: true`; private governed cases can now truthfully declare non-synthetic results while public synthetic references remain required to declare `synthetic_only: true`.
+- Added `scripts/validate_ftqc_case.py` for validating a user-supplied six-file FTQC case directory against the profile schemas, assurance graph, Decision Receipt, applicability envelopes, expert gates, and cross-record references.
+- Added a compact Markdown FTQC Decision Basis report for technical leadership and review handoff.
+- Added governed previous/current FTQC case comparison that surfaces changed assumptions, stale reused estimates, applicability loss, expert-review reopen triggers, downstream impact, and decision reconsideration without inferring the replacement technical answer.
+- Added a private-case operator quickstart that keeps authoritative evidence in existing governed systems and uses FMA only for the minimum decision-relevant projection.
+- Added regression coverage for private non-synthetic resource estimates, mixed-record rejection, unresolved-gate approval denial, missing applicability references, and public synthetic-boundary preservation.
+- Added the generic FTQC case path to local, hosted, cross-platform, and stable-release validation.
+- Preserved qualified domain judgment, independent-review semantics, public/private evidence separation, and accountable human consequential authority.
+
 ## 0.9.1 — FTQC verification-readiness and independence governance
 
 - Added an institution-level Independence and Conflict Policy with pre-engagement screening for role class, proprietary access, design participation, future self-review risk, financial dependence, government conflict considerations, mitigations, and disposition.
