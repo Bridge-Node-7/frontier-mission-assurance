@@ -16,11 +16,13 @@ The profile provides machine-checkable structure for:
 - decision-gating conditions and explicit decision reopening;
 - source-neutral synthetic reference evaluation.
 
-## External reported resource estimates
+## Governed private and external reported resource estimates
 
-FTQC Assurance profile contract `0.1` keeps Resource Estimate Receipts synthetic/reference-only. A third-party published resource estimate must remain authoritative external evidence and must not be represented as freshly reproduced, independently validated, or system-applicable merely because its numerical result has been recorded.
+FTQC Assurance profile contract `0.2` permits a governed private Resource Estimate Receipt to declare `synthetic_only: false` when the record truthfully represents an authorized non-synthetic estimate in a private case. The receipt still does not establish estimator correctness, scientific validity, independent validation, or applicability merely because the number is recorded.
 
-Use a governed external-research sidecar to preserve the exact source identity, reported estimate, declared assumptions, provenance, applicability limits, reproduction state, and required expert review. Reported, freshly reproduced, independently replicated, expert-adjudicated, and technically applicable are distinct assurance states.
+A third-party published resource estimate remains authoritative external evidence unless a separate authorized process establishes a stronger state. Use a governed external-research sidecar to preserve the exact source identity, reported estimate, declared assumptions, provenance, applicability limits, reproduction state, and required expert review.
+
+Reported, freshly reproduced, independently replicated, expert-adjudicated, and technically applicable remain distinct assurance states.
 
 ## Governed responsibilities
 
