@@ -89,11 +89,12 @@ The v0.10.0 source candidate advances FTQC Assurance to profile contract `0.2`. 
 - internal, external, and independent-review classes remain explicit and non-equivalent;
 - mandatory expert gates or unresolved decision-gating applicability cannot coexist with an `APPROVE` Decision Receipt;
 - the generic FTQC case report surfaces disposition, assumptions, resource-estimate state/provenance, applicability envelopes, expert gates, and reopen conditions;
+- previous/current FTQC case comparison deterministically surfaces changed assumptions/context, stale reused resource estimates, out-of-envelope evidence, declared expert-review reopen triggers, downstream graph impact, and decision-node reconsideration;
 - the public baseline remains `HOLD` while a decision-gating applicability envelope is only declared;
 - the public changed-assumption scenario modifies exactly one declared physical-model assumption and preserves stale-estimate, outside-envelope, expert-review reopen, impacted-claim, and decision-reconsideration behavior;
 - the public evaluator remains deterministic;
 - private-case regression coverage rejects mixed record classes, synthetic cases claiming non-synthetic results, unresolved-gate approval, and missing applicability references;
-- the private-case workflow is exercised in local `make check`, supported Python CI, cross-platform smoke paths, and the explicit Stable Release workflow;
+- the private-case validation and case-comparison workflows are exercised in local `make check`, supported Python CI, cross-platform smoke paths, and the explicit Stable Release workflow;
 - the QBI crosswalk remains documentation-only and makes no readiness, affiliation, or evaluator-internal claim.
 
 These controls establish declared profile and private-case contract behavior only. They do not establish quantum-physics validity, QEC correctness, decoder correctness, resource-estimator correctness, hardware performance, supplier qualification, independent V&V, government-program readiness, or consequential decision authority.
