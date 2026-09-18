@@ -1,11 +1,11 @@
 {
-  "$id": "urn:bn7:ftqc-assurance:system-concept:0.1",
-  "title": "FTQC System Concept (v0.1)",
+  "$id": "urn:bn7:ftqc-assurance:system-concept:0.2",
+  "title": "FTQC System Concept (v0.2)",
   "type": "object",
   "additionalProperties": false,
   "required": ["profile_version", "record_class", "system_id", "modality", "architecture_revision", "mission_objective", "decision_ref", "workload", "assumptions"],
   "properties": {
-    "profile_version": {"const": "0.1"},
+    "profile_version": {"const": "0.2"},
     "record_class": {"enum": ["synthetic", "private"]},
     "system_id": {"type": "string", "minLength": 1},
     "modality": {"enum": ["neutral_atom", "ion_trap", "photonic", "superconducting", "other"]},
