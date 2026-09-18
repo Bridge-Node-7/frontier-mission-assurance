@@ -1,11 +1,11 @@
 {
-  "$id": "urn:bn7:ftqc-assurance:expert-adjudication-record:0.1",
-  "title": "FTQC Expert Adjudication Record Set (v0.1)",
+  "$id": "urn:bn7:ftqc-assurance:expert-adjudication-record:0.2",
+  "title": "FTQC Expert Adjudication Record Set (v0.2)",
   "type": "object",
   "additionalProperties": false,
   "required": ["profile_version", "record_class", "reviews"],
   "properties": {
-    "profile_version": {"const": "0.1"},
+    "profile_version": {"const": "0.2"},
     "record_class": {"enum": ["synthetic", "private"]},
     "reviews": {
       "type": "array",
