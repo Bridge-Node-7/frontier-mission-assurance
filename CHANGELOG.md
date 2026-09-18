@@ -6,6 +6,7 @@
 - Removed the profile-contract defect that forced every resource-estimate result to claim `synthetic_only: true`; private governed cases can now truthfully declare non-synthetic results while public synthetic references remain required to declare `synthetic_only: true`.
 - Added `scripts/validate_ftqc_case.py` for validating a user-supplied six-file FTQC case directory against the profile schemas, assurance graph, Decision Receipt, applicability envelopes, expert gates, and cross-record references.
 - Added a compact Markdown FTQC Decision Basis report for technical leadership and review handoff.
+- Added governed previous/current FTQC case comparison that surfaces changed assumptions, stale reused estimates, applicability loss, expert-review reopen triggers, downstream impact, and decision reconsideration without inferring the replacement technical answer.
 - Added a private-case operator quickstart that keeps authoritative evidence in existing governed systems and uses FMA only for the minimum decision-relevant projection.
 - Added regression coverage for private non-synthetic resource estimates, mixed-record rejection, unresolved-gate approval denial, missing applicability references, and public synthetic-boundary preservation.
 - Added the generic FTQC case path to local, hosted, cross-platform, and stable-release validation.
