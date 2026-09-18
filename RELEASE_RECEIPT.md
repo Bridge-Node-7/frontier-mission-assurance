@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-18  
-**Canonical release gate:** WORKING
+**Canonical release gate:** READY
 
 ## Purpose
 
@@ -46,6 +46,4 @@ Commit-specific hosted evidence belongs in GitHub Actions and tagged release met
 
 ## Release gate
 
-The source candidate remains **WORKING** until protected-main hosted V&V is green
-for the exact merged commit. Stable publication remains a separate explicit action
-performed only by the repository's `Stable Release` workflow.
+The v0.11.0 source gate is **READY** after exact-head pull-request V&V and protected-main hosted V&V completed successfully. This state attests only to the declared source, packaging, public-boundary, profile, adapter, and hosted validation controls. Stable publication remains a separate explicit action performed only by the repository's `Stable Release` workflow.
