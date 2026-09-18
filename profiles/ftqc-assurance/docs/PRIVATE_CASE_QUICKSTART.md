@@ -101,23 +101,37 @@ The report surfaces:
 
 The report is a review surface, not a substitute for the authoritative evidence systems it references.
 
-## 5. Test one consequential change
+## 5. Compare two governed states
 
-After the initial case is coherent, change one governed assumption or evidence condition that materially controls the decision.
-
-Use the normal FMA graph tools to inspect dependency impact:
+When the decision basis changes, keep the previous governed case state and produce a current case state. Then compare them:
 
 ```bash
-fma validate ../my-ftqc-case/assurance-graph.yaml
-fma impact ../my-ftqc-case/assurance-graph.yaml <CHANGED-NODE-ID>
-fma decision ../my-ftqc-case/assurance-graph.yaml ../my-ftqc-case/decision-receipt.yaml
+python scripts/compare_ftqc_cases.py \
+  ../my-ftqc-case-previous \
+  ../my-ftqc-case-current \
+  --report ../my-ftqc-case-current/change-impact.md
 ```
 
-The goal is to verify that the team can answer:
+The comparison surfaces declared:
+
+- changed assumptions and context;
+- reused resource estimates that are now stale;
+- evidence that falls outside its current applicability envelope;
+- expert reviews whose declared reopen triggers were crossed;
+- downstream graph impact;
+- whether the declared decision node is impacted.
+
+The comparison does not modify either case and does not infer the replacement quantum-engineering answer.
+
+You can still use the core graph tool for a direct dependency query:
+
+```bash
+fma impact ../my-ftqc-case-current/assurance-graph.yaml <CHANGED-NODE-ID>
+```
+
+The operational question is:
 
 > **What became stale, what fell outside its evidence envelope, what expert judgment must reopen, and which decision basis now deserves reconsideration?**
-
-FMA should not manufacture the replacement scientific or engineering answer.
 
 ## Suggested first case
 
