@@ -2,10 +2,11 @@
 
 ## Contract version
 
-**FTQC Assurance profile contract:** `0.1`  
-**Containing FMA release:** `0.8.0`
+**FTQC Assurance profile contract:** `0.2`  
+**Profile introduced in FMA:** `0.8.0`  
+**Contract 0.2 first supported by FMA:** `0.10.0`
 
-The profile contract version is independent from the containing FMA release version. Consumers should pin both the FMA release and the `profile_version` carried by profile records. Breaking profile-contract changes require a profile-version change.
+The profile contract version is independent from the FMA release version. Consumers should pin both the FMA release and the `profile_version` carried by profile records. Contract 0.2 preserves the original record types and adds truthful private-case support by allowing a private resource-estimate result to declare `synthetic_only: false`; public synthetic references must still declare `synthetic_only: true`. Breaking profile-contract changes require a profile-version change.
 
 ## Purpose
 
@@ -45,6 +46,10 @@ The surrounding program retains ownership of:
 - declared interface, component, and dependency relationships;
 - qualified expert adjudication where required;
 - an FMA assurance graph and Decision Receipt.
+
+## Private-case operation
+
+Contract 0.2 supports governed private case directories using the same six-file shape as the public reference. `scripts/validate_ftqc_case.py` validates the declared profile records, cross-record references, assurance graph, decision receipt, applicability gates, and expert-review gates without relocating raw evidence or granting new technical authority.
 
 ## Outputs
 
