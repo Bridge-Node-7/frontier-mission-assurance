@@ -81,11 +81,14 @@ A maintained profile has a bounded validator and source-neutral validation fixtu
 
 A profile PASS means its declared machine-checkable controls passed. It does not establish the truth, readiness, safety, qualification, or authorization of a real domain system.
 
-## Public/private boundary
+## Publication surface
 
-Public profile material may include schemas, generic documentation, synthetic or sanitized fixtures, validation logic, and release evidence.
+Published profiles contain the schemas, documentation, source-neutral fixtures,
+validation logic, and release evidence required to understand and verify the
+profile.
 
-Customer, partner, supplier, program, proprietary architecture, controlled technical data, credentials, private links, protected logs, and other nonpublic evidence remain in governed environments.
+Case evidence remains referenced at its authoritative source rather than copied
+into the profile repository.
 
 > **Reference authoritative evidence where possible; do not create a second system of record.**
 
