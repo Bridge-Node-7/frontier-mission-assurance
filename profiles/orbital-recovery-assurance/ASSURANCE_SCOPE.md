@@ -17,7 +17,7 @@ The profile provides machine-checkable structure for:
 - synthetic benchmark and stress-matrix acceptance contracts;
 - source-neutral Mission Recovery Chain projections.
 
-## Governed mission responsibilities
+## Authority boundary
 
 The systems and authorities responsible for the mission retain ownership of:
 
@@ -33,6 +33,7 @@ The systems and authorities responsible for the mission retain ownership of:
 
 FMA consumes declared inputs from those governed processes and returns inspectable assurance artifacts for decision preparation and requalification review.
 
-## Public release policy
+## Public evaluation scope
 
-The public profile contains source-neutral contracts, documentation, validation logic, and synthetic or sanitized examples. Mission-specific evidence, protected identities, operational records, and sensitive program context remain in appropriately controlled systems.
+The public profile contains source-neutral contracts, documentation, validation
+logic, and synthetic examples sufficient to evaluate its declared behavior.

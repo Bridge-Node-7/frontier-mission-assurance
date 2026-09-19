@@ -124,7 +124,7 @@ def main() -> int:
             print(f"FAIL: {item}")
         return 2
     print("RELEASE HYGIENE PASS: tracked files satisfy automated release checks")
-    print("NOTE: tracked release files are authoritative; manual review is still required for proper nouns, sensitive technical values, binaries, and context.")
+    print("NOTE: tracked release files are authoritative; human review remains required for contextual publication suitability.")
     return 0
 
 

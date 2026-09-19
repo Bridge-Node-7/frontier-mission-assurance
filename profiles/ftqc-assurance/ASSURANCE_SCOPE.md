@@ -18,36 +18,26 @@ The profile provides machine-checkable structure for:
 
 ## Resource-estimate evidence states
 
-FTQC Assurance profile contract `0.2` supports non-synthetic Resource Estimate
-Receipts when an authorized case record truthfully represents the estimate.
-Recording a number does not establish estimator correctness, scientific
-validity, independent validation, or applicability.
+FTQC Assurance profile contract `0.2` permits a Resource Estimate Receipt to
+declare `synthetic_only: false` when the record truthfully represents an
+authorized non-synthetic estimate. Recording that state does not establish
+estimator correctness, scientific validity, independent validation, or
+applicability.
 
-A third-party published resource estimate remains external evidence unless a
-separate authorized process establishes a stronger state. The associated record
-preserves source identity, reported estimate, declared assumptions, provenance,
-applicability limits, reproduction state, and required expert review.
+A published third-party estimate remains external evidence unless additional
+evidence establishes a stronger state. Reported, freshly reproduced,
+independently replicated, expert-adjudicated, and technically applicable remain
+distinct assurance states.
 
-Reported, freshly reproduced, independently replicated, expert-adjudicated, and technically applicable remain distinct assurance states.
+## Authority boundary
 
-## Governed responsibilities
+FTQC Assurance can establish whether declared artifacts remain structurally
+connected to a decision basis. Scientific validity, estimator correctness,
+hardware-performance judgment, qualification, and consequential decision
+authority remain with the responsible technical and institutional processes.
 
-The systems, experts, laboratories, programs, and authorities responsible for the actual system retain ownership of:
+## Public evaluation scope
 
-- quantum-physics validity and interpretation;
-- QEC theory, decoder validity, thresholds, and mathematical closure;
-- resource-estimator correctness and configuration;
-- hardware fidelity, error and loss characterization, calibration, and metrology;
-- experimental truth and reproducibility;
-- supplier and manufacturing qualification;
-- safety, security, contracting, legal, regulatory, and government-program applicability;
-- final mission, program, investment, acquisition, or deployment decisions.
-
-FTQC Assurance can establish whether declared artifacts remain structurally connected to a decision basis. It cannot convert declared inputs into scientific truth.
-
-## Public release policy
-
-Public examples are synthetic and source-neutral. The published profile contains
-only the contracts, examples, validation logic, and provenance needed to
-evaluate the public capability. Case-specific evidence stays with the system
-responsible for that evidence.
+The public profile exposes source-neutral contracts, synthetic examples,
+validation behavior, evidence semantics, and limitations needed to evaluate the
+profile.

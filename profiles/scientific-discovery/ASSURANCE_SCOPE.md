@@ -16,7 +16,7 @@ The profile can verify declared structure and selected cross-record invariants f
 - attribution chronology;
 - explicit decision ownership.
 
-## Governed scientific responsibilities
+## Authority boundary
 
 Qualified scientific, legal, security, engineering, and institutional processes retain responsibility for:
 
@@ -31,8 +31,7 @@ Qualified scientific, legal, security, engineering, and institutional processes 
 
 The profile preserves these distinctions so machine-verifiable evidence can strengthen review without replacing the authorities responsible for the underlying judgment.
 
-## Public release policy
+## Public evaluation scope
 
-Public examples are synthetic or sanitized. The published profile contains only
-the contracts, examples, validation logic, and provenance needed to evaluate
-the public capability.
+Public examples are source-neutral and demonstrate only the profile's declared
+machine-checkable behavior and limitations.

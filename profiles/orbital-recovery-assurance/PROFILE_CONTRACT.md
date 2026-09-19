@@ -62,9 +62,8 @@ The option-assessment policy is a reference implementation for the profile contr
 
 Machine outputs provide evidence, filtering, ranking, and eligibility for downstream review. The accountable human and governing mission process retain consequential decision authority.
 
-## Public release policy
+## Public evaluation scope
 
-Examples are synthetic or sanitized. The published profile contains the
-contracts, reference policy, fixtures, and verification material needed to
-evaluate the profile; case evidence remains referenced by the environment that
-owns it.
+The public contract is exercised with source-neutral synthetic examples and
+portable references. Applied use keeps authoritative records authoritative at
+source.

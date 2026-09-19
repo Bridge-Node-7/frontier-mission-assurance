@@ -20,7 +20,7 @@ FMA core owns cross-domain contracts and release machinery, including:
 - research and decision receipt semantics;
 - dependency impact, evidence coverage, assumption visibility, and reporting;
 - CLI behavior and common verification semantics;
-- release scope and distribution controls;
+- public/private release boundaries;
 - common CI, packaging, and stable-release controls.
 
 The core must not depend on profile-specific science, mission logic, or specialist terminology.
@@ -81,16 +81,14 @@ A maintained profile has a bounded validator and source-neutral validation fixtu
 
 A profile PASS means its declared machine-checkable controls passed. It does not establish the truth, readiness, safety, qualification, or authorization of a real domain system.
 
-## Publication surface
+## Public evaluation surface
 
-Published profiles contain the schemas, documentation, source-neutral fixtures,
-validation logic, and release evidence required to understand and verify the
-profile.
+A public profile exposes the contracts, documentation, source-neutral fixtures,
+validation behavior, and release evidence needed to evaluate its declared
+capability.
 
-Case evidence remains referenced at its authoritative source rather than copied
-into the profile repository.
-
-> **Reference authoritative evidence where possible; do not create a second system of record.**
+Applied use should reference authoritative evidence at its source rather than
+turning the profile into a second system of record.
 
 ## When a profile stays in this repository
 

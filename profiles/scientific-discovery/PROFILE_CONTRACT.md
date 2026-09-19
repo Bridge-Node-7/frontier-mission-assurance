@@ -57,6 +57,7 @@ The surrounding research environment retains ownership of:
 
 Machine outputs validate declared structure and preserve evidence distinctions. They do not establish scientific truth, specification equivalence, authorship entitlement, publication priority, or authorization for consequential action. Qualified reviewers and accountable institutions retain those judgments.
 
-## Public release policy
+## Public evaluation scope
 
-Public examples are synthetic or sanitized. Protected identities, unpublished research, proprietary code or data, sensitive program context, credentials, private links, and governed evidence remain outside this public repository.
+The public contract uses source-neutral examples to demonstrate record semantics,
+validation behavior, unresolved states, and decision-authority boundaries.

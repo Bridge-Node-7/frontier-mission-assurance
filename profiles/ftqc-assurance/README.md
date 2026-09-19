@@ -54,7 +54,7 @@ A passing software check means the declared synthetic contracts behaved as speci
 
 The reference case contains a baseline and a changed-assumption scenario. The changed case modifies one physical-model assumption and demonstrates which resource estimate, evidence envelope, expert review, claims, and decision must be reconsidered.
 
-## Evaluate one governed case
+## Evaluate one case
 
 The bundled reference teaches profile behavior. For a real evaluation, use the case validator rather than modifying the synthetic fixture in place:
 
@@ -65,7 +65,7 @@ python scripts/validate_ftqc_case.py ../my-ftqc-case \
 
 Start with one decision and the six-file case shape documented in [`docs/GOVERNED_CASE_QUICKSTART.md`](docs/GOVERNED_CASE_QUICKSTART.md). The case carries bounded references and decision context while authoritative evidence remains at its source.
 
-When you have a previous and current governed case state, `scripts/compare_ftqc_cases.py` surfaces stale estimates, evidence outside its envelope, expert-review reopen triggers, downstream impact, and decision reconsideration without manufacturing the replacement technical answer.
+When you have a previous and current case state, `scripts/compare_ftqc_cases.py` surfaces stale estimates, evidence outside its envelope, expert-review reopen triggers, downstream impact, and decision reconsideration without manufacturing the replacement technical answer.
 
 ## Decision-basis continuity
 
@@ -123,7 +123,7 @@ The intended outcome is **verification readiness**, not certification or a favor
 
 The profile ships source-neutral contracts, documentation, validation logic, and synthetic reference data so its behavior can be evaluated without requiring a particular program architecture.
 
-For governed evaluations, keep authoritative evidence at its source and carry the bounded references needed for review. See [`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
+For applied evaluations, keep authoritative evidence at its source and carry only the bounded references needed for review. See [`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
 
 ## QBI crosswalk
 
@@ -133,4 +133,4 @@ For governed evaluations, keep authoritative evidence at its source and carry th
 
 Start with one consequential decision, not an enterprise rollout. See [`docs/ADOPTION_PATH.md`](docs/ADOPTION_PATH.md).
 
-When a review may be described as independent, apply the repository-level [`../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md) before making that representation.
+Before accepting work that could later intersect with an independent-review role, apply the repository-level [`../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md).
