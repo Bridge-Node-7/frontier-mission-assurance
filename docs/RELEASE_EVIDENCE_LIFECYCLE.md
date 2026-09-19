@@ -6,7 +6,7 @@ FMA separates durable source evidence from live GitHub execution evidence so rel
 
 ### 1. Source contract
 
-Versioned files define the public boundary, schemas, CLI behavior, tests, and release acceptance criteria. These files must be reproducible from the source tree alone.
+Versioned files define the release surface, schemas, CLI behavior, tests, and release acceptance criteria. These files must be reproducible from the source tree alone.
 
 ### 2. Source validation
 

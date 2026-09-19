@@ -17,9 +17,11 @@ Legal authority and evidence-sufficiency rules come from the governing mission p
 
 ## 2. Preserve source-of-record ownership
 
-Use local identifiers and references to mission evidence. Telemetry, identities, command records, source mappings, economics, credentials, and protected program information remain in the systems authorized to hold them.
+Use local identifiers and governed references. Keep authoritative records in
+the systems responsible for them.
 
-The public profile provides the assurance method. The governed mission environment remains the evidence source of record.
+The public profile provides the assurance method. The governed case environment
+remains the evidence source of record.
 
 ## 3. Map the Mission Recovery Chain
 
@@ -135,7 +137,7 @@ The method is creating value when a mission team can demonstrate one or more of 
 - HOLD prevented unsupported escalation;
 - requalification prevented premature restoration claims;
 - Time-to-Trust exposed a recovery bottleneck not visible in ordinary repair metrics;
-- the assessment was completed without moving mission-sensitive evidence into the public repository.
+- the assessment preserved authoritative source-of-record governance.
 
 ## Local case validation
 
@@ -151,4 +153,6 @@ Use `--require-stage mapped|assessed|post-intervention|requalification-review` w
 
 ## Logging policy
 
-The local validator may echo file names and unresolved local identifiers when reporting failures. Keep validation output inside the same governed boundary as the case evidence, and run mission cases outside public CI and public repository workspaces.
+Run the validator in the environment authorized for the case and handle its
+logs under the same rules as the case records. Do not use public CI as the
+execution environment for governed cases.

@@ -65,7 +65,7 @@ Identify the binding constraint before selecting an intervention path.
 
 ## 4. Create a governed assessment workspace
 
-Keep mission-specific evidence in an access-controlled workspace or the partner's existing governed systems.
+Keep case evidence in the environment and systems authorized to own it.
 
 Recommended local layout:
 
@@ -79,7 +79,8 @@ assessment-governed/
 └── review/
 ```
 
-Asset identifiers, telemetry, source identities, authority records, economics, and mission-sensitive evidence remain inside that governed boundary.
+Use local references in the assessment and resolve them through the systems that
+own the authoritative records.
 
 ## 5. Map the minimum required evidence
 
@@ -96,7 +97,8 @@ Map only the fields required by the profile:
 
 Where another system owns a record, preserve that ownership and reference it through a local mapping or adapter instead of creating a second source of truth.
 
-Posterior estimates, intervention-success calibration, safety predicates, and local admissibility rules remain governed mission inputs.
+Case-specific models, predicates, and admissibility rules remain governed inputs
+to the assessment.
 
 ## 6. Validate the local case
 

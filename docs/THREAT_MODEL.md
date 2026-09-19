@@ -11,10 +11,12 @@
 
 ## Trust boundaries
 
-1. **Public repository boundary** — everything committed, discussed, logged, or released may become durable disclosure.
+1. **Repository publication boundary** — treat repository content, issue/PR text,
+   workflow logs, and release artifacts as publishable.
 2. **Local validation boundary** — graph and receipt files may be malformed or adversarial.
 3. **Reproduction boundary** — `fma reproduce` executes trusted repository code and is not a sandbox or hermetic execution environment.
-4. **Operational data boundary** — real program evidence belongs in an appropriately access-controlled environment.
+4. **Operational record boundary** — authoritative case records remain governed by
+   the systems and environments responsible for them.
 5. **Supply-chain boundary** — package dependencies and CI Actions can change independently of FMA source unless pinned/recorded.
 
 ## Primary threats and controls
