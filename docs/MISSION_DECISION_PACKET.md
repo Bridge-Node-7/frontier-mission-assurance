@@ -178,8 +178,11 @@ Useful acceptance questions are:
 
 If the packet does not improve those outcomes, reduce it.
 
-## Public boundary
+## Repository use
 
-This repository contains only public software, documentation, and synthetic fixtures. Real mission evidence, sensitive architecture details, customer identifiers, credentials, partner-confidential information, and nonpublic technical data do not belong here.
+This repository provides the reference software, documentation, and synthetic
+fixtures needed to evaluate the Mission Decision Packet pattern.
 
-Operational use belongs in an appropriately access-controlled environment.
+Keep authoritative records in the systems that own them. Exchange only the
+minimum governed references and fields required by the packet contract, and use
+an environment appropriate to the information being reviewed.
