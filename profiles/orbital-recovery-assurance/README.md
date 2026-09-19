@@ -77,7 +77,7 @@ See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) and [`docs/INTEROPERABILITY.md`
 
 The public profile is intentionally source-neutral. Examples use synthetic or sanitized identifiers and contain no real customer, partner, supplier, operator, investor, asset, or personal identity.
 
-Mission-specific evidence and external identity mappings remain in their governed environments. See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and [`docs/PRIVATE_WORKSPACE_PATTERN.md`](docs/PRIVATE_WORKSPACE_PATTERN.md).
+Mission-specific evidence and external identity mappings remain in their governed environments. See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and [`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
 
 ## Adoption path
 

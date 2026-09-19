@@ -1,6 +1,6 @@
-# Private FTQC Case Quickstart
+# Governed FTQC Case Quickstart
 
-Use this path when you want to evaluate one real FTQC decision in a governed private workspace.
+Use this path when you want to evaluate one real FTQC decision in a governed workspace.
 
 The public repository remains source-neutral. Do **not** place customer, partner, supplier, laboratory, architecture, schedule, credential, controlled, or otherwise protected evidence in the public repository or a public fork.
 
@@ -24,7 +24,7 @@ The validator checks the declared contracts and their cross-record references. I
 
 ## 1. Start from the source-neutral shape
 
-Create a private working directory **outside this public repository**. The bundled synthetic baseline shows the required file shape:
+Create a governed working directory **outside this public repository**. The bundled synthetic baseline shows the required file shape:
 
 ```text
 system-concept.json
@@ -49,7 +49,7 @@ Copy-Item -Recurse .\profiles\ftqc-assurance\examples\synthetic-neutral-atom\bas
 
 The copied files are still synthetic reference data. They are only a structural starting point.
 
-## 2. Convert the case to governed private records
+## 2. Convert the case to governed records
 
 Before treating the workspace as a real case:
 
@@ -70,7 +70,7 @@ From the FMA source root:
 python scripts/validate_ftqc_case.py ../my-ftqc-case
 ```
 
-A passing private case ends with:
+A passing governed case ends with:
 
 ```text
 FTQC CASE PASS

@@ -1,7 +1,7 @@
-# Private Workspace Pattern
+# Governed Workspace
 
 Orbital Recovery Assurance separates **public assurance infrastructure** from
-**private mission evidence**.
+**governed mission evidence**.
 
 ## Public repository
 
@@ -18,10 +18,10 @@ It should not contain real program or relationship identifiers, telemetry,
 customer evidence, mission-sensitive configuration, private economics, or operational
 authority records.
 
-## Private assessment environment
+## Governed assessment environment
 
 Real assessments should remain in the partner's existing governed environment or a
-purpose-built private workspace.
+purpose-built governed workspace.
 
 A local assessment may reference:
 
@@ -68,6 +68,6 @@ data storage. A partner can evaluate and use the architecture locally.
 That separation is intentional: the public method can be inspectable while the real
 evidence remains under the partner's governance.
 
-## Private record class
+## Governed record class
 
 Real partner-controlled case records use `record_class: private`. That class is supported by the portable schemas but must never be committed as a worked case to the public repository. The public profile validator separately requires every checked-in worked example to remain `synthetic`.

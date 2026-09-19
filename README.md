@@ -68,7 +68,7 @@ FMA has one assurance core. Profiles are bounded domain projections; they do not
 
 - [`profiles/scientific-discovery/README.md`](profiles/scientific-discovery/README.md) — Scientific Discovery Assurance
 - [`profiles/ftqc-assurance/README.md`](profiles/ftqc-assurance/README.md) — FTQC Assurance
-  - governed case: [`profiles/ftqc-assurance/docs/PRIVATE_CASE_QUICKSTART.md`](profiles/ftqc-assurance/docs/PRIVATE_CASE_QUICKSTART.md)
+  - governed case: [`profiles/ftqc-assurance/docs/GOVERNED_CASE_QUICKSTART.md`](profiles/ftqc-assurance/docs/GOVERNED_CASE_QUICKSTART.md)
 - [`profiles/orbital-recovery-assurance/README.md`](profiles/orbital-recovery-assurance/README.md) — Orbital Recovery Assurance
 
 Each profile exposes a `PROFILE_CONTRACT.md` and a small machine-readable `profile.yaml` manifest. See [`docs/PROFILE_ARCHITECTURE.md`](docs/PROFILE_ARCHITECTURE.md).

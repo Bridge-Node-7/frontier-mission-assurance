@@ -1,4 +1,4 @@
-# Private Workspace Pattern
+# Governed Workspace
 
 The public FTQC profile is not a customer data store.
 
@@ -10,7 +10,7 @@ lab / source control / models / documents / supplier systems
                  │
                  │ governed references
                  ↓
-     private FTQC Assurance workspace
+    governed FTQC Assurance workspace
                  │
                  │ bounded profile contracts
                  ↓
