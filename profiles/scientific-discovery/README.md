@@ -58,7 +58,9 @@ See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md), [`SPECIFICATION_EQUIVALENCE.md`]
 
 ## Public release policy
 
-Public worked examples are synthetic or sanitized. Research evidence, protected identities, unpublished results, and sensitive program context remain in their governed environments.
+Public worked examples are synthetic or sanitized. The release surface is
+limited to the material needed to understand, run, and verify the published
+profile.
 
 ## Verify
 

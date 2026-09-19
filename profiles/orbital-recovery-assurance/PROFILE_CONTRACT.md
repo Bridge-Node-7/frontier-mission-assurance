@@ -64,4 +64,7 @@ Machine outputs provide evidence, filtering, ranking, and eligibility for downst
 
 ## Public release policy
 
-Examples are synthetic or sanitized and contain no real personal, customer, partner, supplier, investor, operator, or asset identity. Mission-specific evidence and external identity mappings remain in governed environments.
+Examples are synthetic or sanitized. The published profile contains the
+contracts, reference policy, fixtures, and verification material needed to
+evaluate the profile; case evidence remains referenced by the environment that
+owns it.

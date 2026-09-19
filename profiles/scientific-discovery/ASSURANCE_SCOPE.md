@@ -33,4 +33,6 @@ The profile preserves these distinctions so machine-verifiable evidence can stre
 
 ## Public release policy
 
-Public examples are synthetic or sanitized. Research evidence, protected identities, unpublished results, and sensitive program context remain in appropriately governed environments.
+Public examples are synthetic or sanitized. The published profile contains only
+the contracts, examples, validation logic, and provenance needed to evaluate
+the public capability.

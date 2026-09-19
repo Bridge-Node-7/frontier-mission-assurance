@@ -75,9 +75,12 @@ See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) and [`docs/INTEROPERABILITY.md`
 
 ## Public release policy
 
-The public profile is intentionally source-neutral. Examples use synthetic or sanitized identifiers and contain no real customer, partner, supplier, operator, investor, asset, or personal identity.
+The public profile is intentionally source-neutral. Examples use synthetic or
+sanitized identifiers, and the release contains only the material required to
+understand and verify the published profile.
 
-Mission-specific evidence and external identity mappings remain in their governed environments. See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and [`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
+See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and
+[`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
 
 ## Adoption path
 
