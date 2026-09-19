@@ -36,7 +36,7 @@ request human review for judgment-bearing semantics
 6. Never equate scientific truth with applicability to a different system or decision.
 7. Never use the trusted-code reproduction path for unknown or unauthorized code. The FMA fresh workspace is not a security sandbox.
 8. Preserve unresolved assumptions and contradictory evidence. Do not hide them to obtain a green machine state.
-9. Preserve the public/private boundary. Customer, partner, supplier, program, proprietary, credential, controlled, or otherwise protected evidence belongs in governed systems.
+9. Use only material authorized for the current workflow. Keep authoritative evidence in its system of record and pass only bounded references or approved projections into FMA.
 10. Preserve accountable human authority for consequential judgments and actions.
 
 ## Profile discovery
