@@ -8,7 +8,7 @@ A technical user should understand within five minutes:
 
 - what FMA validates;
 - the verification scope of a PASS;
-- how public reference data is separated from mission-specific evidence;
+- how the public reference uses source-neutral evidence;
 - how to run the reference validation path.
 
 ## AC-02 — Graph validation
@@ -41,7 +41,7 @@ A decision receipt shall fail if its declared basis references nodes absent from
 
 ## AC-09 — Public release policy
 
-Automated and human review shall reject credentials, personal paths, private URLs, mission-specific identities, and nonpublic evidence from the public source and release surface.
+Automated and human review shall reject material that is not suitable for unrestricted public release and shall fail closed on credentials and clearly nonpublic evidence.
 
 ## AC-10 — Clean package consumer
 
