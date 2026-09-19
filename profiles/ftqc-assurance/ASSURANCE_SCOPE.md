@@ -16,11 +16,17 @@ The profile provides machine-checkable structure for:
 - decision-gating conditions and explicit decision reopening;
 - source-neutral synthetic reference evaluation.
 
-## Governed private and external reported resource estimates
+## Resource-estimate evidence states
 
-FTQC Assurance profile contract `0.2` permits a governed private Resource Estimate Receipt to declare `synthetic_only: false` when the record truthfully represents an authorized non-synthetic estimate in a private case. The receipt still does not establish estimator correctness, scientific validity, independent validation, or applicability merely because the number is recorded.
+FTQC Assurance profile contract `0.2` supports non-synthetic Resource Estimate
+Receipts when an authorized case record truthfully represents the estimate.
+Recording a number does not establish estimator correctness, scientific
+validity, independent validation, or applicability.
 
-A third-party published resource estimate remains authoritative external evidence unless a separate authorized process establishes a stronger state. Use a governed external-research sidecar to preserve the exact source identity, reported estimate, declared assumptions, provenance, applicability limits, reproduction state, and required expert review.
+A third-party published resource estimate remains external evidence unless a
+separate authorized process establishes a stronger state. The associated record
+preserves source identity, reported estimate, declared assumptions, provenance,
+applicability limits, reproduction state, and required expert review.
 
 Reported, freshly reproduced, independently replicated, expert-adjudicated, and technically applicable remain distinct assurance states.
 
@@ -41,4 +47,7 @@ FTQC Assurance can establish whether declared artifacts remain structurally conn
 
 ## Public release policy
 
-Public examples are synthetic and source-neutral. Mission-specific or protected evidence remains in governed systems. The public profile must not contain real customer, partner, supplier, investor, operator, program, or proprietary architecture identity.
+Public examples are synthetic and source-neutral. The published profile contains
+only the contracts, examples, validation logic, and provenance needed to
+evaluate the public capability. Case-specific evidence stays with the system
+responsible for that evidence.
