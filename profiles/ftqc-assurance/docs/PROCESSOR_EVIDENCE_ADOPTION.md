@@ -52,8 +52,8 @@ scientific truth, hardware readiness, system applicability, certification,
 independent V&V, or consequential authority. Qualified review and accountable
 human decision ownership remain required.
 
-## Public/private boundary
+## Evidence handling
 
-The adapter accepts artifact paths. Real protected evidence stays in the system
-authorized to hold it. The public FMA repository contains no customer-specific
-architecture, raw evidence, or private producer artifact.
+The adapter accepts artifact paths and does not require source artifacts to be
+copied into this repository. Keep authoritative evidence at its approved source
+and provide only the artifacts or references required for the review.
