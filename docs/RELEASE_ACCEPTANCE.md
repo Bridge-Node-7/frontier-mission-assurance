@@ -56,7 +56,9 @@ The release surface makes the following immediately clear:
 - how to report a security issue privately;
 - what licensing and distribution rights apply.
 
-Public examples remain source-neutral. Mission-specific and protected evidence remains in governed environments.
+Public examples remain source-neutral. Stable release artifacts contain only
+the material required to evaluate the published contracts, reference fixtures,
+and verification results.
 
 ## Release evidence
 
