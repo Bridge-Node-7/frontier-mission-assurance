@@ -44,7 +44,7 @@ Release eligibility requires:
 
 - the source-neutral external-research sidecar graph validates under the core assurance-graph contract;
 - its Decision Receipt resolves against the sidecar graph;
-- the example remains explicitly synthetic/source-neutral and does not identify a real customer, partner, scientist, laboratory, or program;
+- the example remains explicitly synthetic/source-neutral and suitable for unrestricted public evaluation;
 - the public documentation keeps artifact identity, reproduction, scientific validity, applicability, and consequential authority distinct;
 - trusted-code reproduction guidance does not describe the FMA fresh workspace as a security sandbox;
 - stable-install guidance preserves the source-vs-wheel distribution boundary and does not expand license rights;
@@ -93,10 +93,10 @@ The existing FTQC case controls remain required:
 
 - FTQC profile schemas, manifests, public reference records, evaluator, and private-case validator agree on profile contract `0.2`;
 - public synthetic FTQC reference records remain source-neutral and require `resource-estimate-receipt.result.synthetic_only = true`;
-- governed private FTQC cases may truthfully use `record_class = private` and `synthetic_only = false`;
+- non-synthetic FTQC cases may truthfully use `record_class = private` and `synthetic_only = false`;
 - the generic FTQC case validator accepts a user-supplied six-file case directory outside the public repository;
 - all four FTQC profile records in one case use a consistent record class;
-- private-case validation preserves the universal FMA graph ontology and core Decision Receipt semantics;
+- case validation preserves the universal FMA graph ontology and core Decision Receipt semantics;
 - system-concept assumption references resolve to FMA assumption nodes;
 - resource-estimate system/workload/assumption/applicability references resolve explicitly;
 - evidence envelopes name evidence class, applicability conditions, applicability basis, authority state, and decision-gate state;
@@ -108,8 +108,8 @@ The existing FTQC case controls remain required:
 - the public baseline remains `HOLD` while a decision-gating applicability envelope is only declared;
 - the public changed-assumption scenario modifies exactly one declared physical-model assumption and preserves stale-estimate, outside-envelope, expert-review reopen, impacted-claim, and decision-reconsideration behavior;
 - the public evaluator remains deterministic;
-- private-case regression coverage rejects mixed record classes, synthetic cases claiming non-synthetic results, unresolved-gate approval, and missing applicability references;
-- the private-case validation and case-comparison workflows are exercised in local `make check`, supported Python CI, cross-platform smoke paths, and the explicit Stable Release workflow;
+- case regression coverage rejects mixed record classes, synthetic cases claiming non-synthetic results, unresolved-gate approval, and missing applicability references;
+- the case validation and case-comparison workflows are exercised in local `make check`, supported Python CI, cross-platform smoke paths, and the explicit Stable Release workflow;
 - the QBI crosswalk remains documentation-only and makes no readiness, affiliation, or evaluator-internal claim.
 
 These controls establish declared profile and private-case contract behavior only. They do not establish quantum-physics validity, QEC correctness, decoder correctness, resource-estimator correctness, hardware performance, supplier qualification, independent V&V, government-program readiness, or consequential decision authority.
@@ -123,7 +123,7 @@ The authoritative release surface is the Git-tracked file set. Required behavior
 - unapproved external URLs fail closed;
 - high-risk binary/archive/document extensions fail closed unless the public contract intentionally changes;
 - public examples remain source-neutral;
-- proper nouns, sensitive technical values, relationship context, and customer-identifying context receive human public-surface review.
+- candidate content receives human public-surface review for contextual publication suitability.
 
 A current-tree release-policy PASS attests to the tracked source state under review; historical Git objects remain separate durable history.
 
@@ -151,4 +151,4 @@ The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windo
 
 ## Disposition rule
 
-**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, quantum-performance, independent-evaluator, customer-adoption, and consequential-authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
+**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, quantum-performance, independent-evaluator, external-adoption, and consequential-authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
