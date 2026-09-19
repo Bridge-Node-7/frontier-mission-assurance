@@ -3,20 +3,13 @@
 Orbital Recovery Assurance separates **public assurance infrastructure** from
 **governed mission evidence**.
 
-## Public repository
+## Reference repository
 
-The public repository may contain:
+The repository publishes the schemas, validators, methods, synthetic examples,
+benchmark material, and documentation needed to inspect the profile.
 
-- schemas;
-- validators;
-- methods;
-- synthetic examples;
-- synthetic benchmark protocols and results;
-- source-neutral documentation.
-
-It should not contain real program or relationship identifiers, telemetry,
-customer evidence, mission-sensitive configuration, private economics, or operational
-authority records.
+Public examples should be authored from the public contract and public sources
+rather than derived by copying an operational case.
 
 ## Governed assessment environment
 
@@ -47,27 +40,27 @@ If another system already owns evidence, configuration, authority, or a strategi
 the assessment should reference it rather than silently cloning it into a second canonical
 store.
 
-## Sanitization rule
+## Public example rule
 
-If an assessment artifact is ever proposed for public contribution:
+When proposing a public example:
 
-1. remove real identities and relationship context;
-2. replace program-specific identifiers with synthetic identifiers;
-3. remove mission-sensitive values;
-4. ensure every remaining example is safe to publish;
-5. run the repository public-boundary gate;
-6. perform human public-surface review.
+1. start from the published profile contract;
+2. use synthetic identifiers and values;
+3. cite only sources suitable for public reference;
+4. run the repository release checks;
+5. complete human review of the resulting public surface.
 
-Sanitization does not make a real assessment automatically suitable for release.
+Treat publication as a separate review decision; passing the profile validator
+does not authorize release.
 
 ## No default data path back to BN7
 
-The public profile has no requirement for telemetry upload, remote API access, or customer
-data storage. A partner can evaluate and use the architecture locally.
+The profile can be evaluated locally and does not require a remote service.
 
-That separation is intentional: the public method can be inspectable while the real
-evidence remains under the partner's governance.
+That separation keeps the reference method inspectable while authoritative
+records remain governed by the systems that own them.
 
 ## Governed record class
 
-Real partner-controlled case records use `record_class: private`. That class is supported by the portable schemas but must never be committed as a worked case to the public repository. The public profile validator separately requires every checked-in worked example to remain `synthetic`.
+Portable schemas support governed case records as well as synthetic reference
+examples. Checked-in worked examples are required to remain `synthetic`.
