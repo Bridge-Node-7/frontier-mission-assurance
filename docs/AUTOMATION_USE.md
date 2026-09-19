@@ -1,12 +1,12 @@
-# AI Assistant Quickstart
+# Automation Use
 
-This guide defines a bounded operating contract for an AI assistant or other automation working with Frontier Mission Assurance.
+This guide defines a bounded operating contract for automated assistance working with Frontier Mission Assurance.
 
 It is a product-use contract, not a transfer of scientific, engineering, security, legal, regulatory, or consequential decision authority.
 
 ## Default posture
 
-An assistant should be **read-only toward authoritative external work unless explicitly authorized otherwise**.
+Automated assistance should be **read-only toward authoritative external work unless explicitly authorized otherwise**.
 
 The safe default sequence is:
 
@@ -43,13 +43,13 @@ request human review for judgment-bearing semantics
 
 Each bounded profile exposes a machine-readable `profile.yaml` manifest that identifies its public profile contract and validator.
 
-An assistant may use the manifest to discover the profile surface. It must not infer that profile presence establishes domain fitness for a specific decision.
+Automation may use the manifest to discover the profile surface. Profile presence does not establish domain fitness for a specific decision.
 
 ## Existing work
 
 For a repository, paper, model, simulation, experiment, or external execution that was not authored for FMA, follow [`EXTERNAL_RESEARCH_ADOPTION.md`](EXTERNAL_RESEARCH_ADOPTION.md).
 
-The assistant should prefer a separate sidecar over source modification. A useful first sidecar can be as small as one assurance graph plus one Decision Receipt.
+Prefer a separate sidecar over source modification. A useful first sidecar can be as small as one assurance graph plus one Decision Receipt.
 
 ## Command safety
 
@@ -66,7 +66,7 @@ If those conditions are not established, stop at non-executing verification and 
 
 ## Output discipline
 
-An assistant response should make evidence state visible. Prefer statements such as:
+Automated output should make evidence state visible. Prefer statements such as:
 
 ```text
 SOURCE IDENTITY        ESTABLISHED
@@ -82,4 +82,4 @@ over narrative language that implies more certainty than the evidence supports.
 
 Require qualified human review when the next step depends on scientific validity, specification equivalence, evidence applicability, safety, security, supplier qualification, legal/regulatory interpretation, program authority, or another consequential judgment.
 
-The assistant may organize the basis and identify what changed. It must not manufacture the authority that closes the decision.
+Automation may organize the basis and identify what changed. It must not manufacture the authority that closes the decision.
