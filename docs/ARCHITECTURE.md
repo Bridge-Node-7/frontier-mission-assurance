@@ -82,7 +82,7 @@ That workspace prevents a stale result in the caller's working tree from satisfy
 
 Graph validity is not scientific truth. A structurally valid edge can still be based on weak or incorrect source material. Source credibility, independence, applicability, calibration validity, and domain-specific sufficiency remain review responsibilities unless separately encoded and validated.
 
-See [`../PUBLIC_BOUNDARY.md`](../PUBLIC_BOUNDARY.md) for the public-data and claim boundary.
+See [`../SCOPE.md`](../SCOPE.md) for repository and verification scope.
 
 ## Runtime boundary
 
