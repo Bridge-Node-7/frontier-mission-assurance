@@ -133,8 +133,6 @@ See [`docs/PRIVATE_WORKSPACE_PATTERN.md`](docs/PRIVATE_WORKSPACE_PATTERN.md).
 
 [`docs/QBI_PUBLIC_CROSSWALK.md`](docs/QBI_PUBLIC_CROSSWALK.md) is a bounded public-source crosswalk for learning and interoperability. It is not a QBI implementation, readiness determination, or representation of any internal evaluation process.
 
-[`docs/QBI_IVV_FIT_REVIEW.md`](docs/QBI_IVV_FIT_REVIEW.md) records the current public-source fit assessment: BN7 can credibly contribute verification-readiness and evidence-to-decision infrastructure, while deep quantum adjudication, test infrastructure, evaluator eligibility, and independence determinations remain governed by qualified experts and the applicable process.
-
 ## Adoption
 
 Start with one consequential decision, not an enterprise rollout. See [`docs/ADOPTION_PATH.md`](docs/ADOPTION_PATH.md).
