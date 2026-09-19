@@ -201,7 +201,7 @@ frontier-mission-assurance/
 - [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md) — trust and execution boundaries
 - [`docs/STANDARDS_POSITIONING.md`](docs/STANDARDS_POSITIONING.md) — standards and non-claim positioning
 - [`docs/MAINTENANCE.md`](docs/MAINTENANCE.md) — repository and dependency-maintenance discipline
-- [`docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](docs/INDEPENDENCE_AND_CONFLICT_POLICY.md) — pre-engagement independence, self-review, and conflict-screen discipline
+- [`docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](docs/INDEPENDENCE_AND_CONFLICT_POLICY.md) — conditions for representing a review as independent
 
 ## Development
 
