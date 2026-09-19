@@ -35,7 +35,7 @@ def test_ftqc_profile_release_surface_is_present():
         ROOT / "scripts" / "evaluate_ftqc_reference.py",
         ROOT / "scripts" / "validate_ftqc_case.py",
         ROOT / "scripts" / "compare_ftqc_cases.py",
-        ROOT / "profiles" / "ftqc-assurance" / "docs" / "PRIVATE_CASE_QUICKSTART.md",
+        ROOT / "profiles" / "ftqc-assurance" / "docs" / "GOVERNED_CASE_QUICKSTART.md",
     ]
     assert all(path.is_file() for path in required)
 
