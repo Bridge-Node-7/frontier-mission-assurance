@@ -1,8 +1,6 @@
 # Governed Workspace
 
-The public FTQC profile is not a customer data store.
-
-Use this pattern for governed work:
+Use this pattern when applying the FTQC profile around real work:
 
 ```text
 Authoritative systems of record
@@ -28,6 +26,10 @@ FTQC Assurance should retain only the minimum information needed to preserve ide
 
 The authoritative source remains the system that owns the evidence.
 
-## Public boundary
+## Operational use
 
-Do not place customer identities, proprietary architecture records, raw experiment data, supplier-sensitive records, controlled technical data, credentials, or nonpublic program information in this public repository.
+Keep authoritative evidence in the environment that owns it. Carry only the
+bounded references and review context needed for the assurance case.
+
+Contribute material to this repository only when it is appropriate for the
+repository's published evaluation scope.
