@@ -155,5 +155,5 @@ A strong assurance basis stays synchronized with the system it describes.
 - [`RECOVERY_CHAIN.md`](RECOVERY_CHAIN.md) — recovery-path model.
 - [`REAL_CASE_PROTOCOL.md`](REAL_CASE_PROTOCOL.md) — governed mission-case protocol.
 - [`ADOPTION_PATH.md`](ADOPTION_PATH.md) — adoption lifecycle.
-- [`PRIVATE_WORKSPACE_PATTERN.md`](PRIVATE_WORKSPACE_PATTERN.md) — data-handling pattern.
+- [`GOVERNED_WORKSPACE.md`](GOVERNED_WORKSPACE.md) — governed data-handling pattern.
 - [`../ASSURANCE_SCOPE.md`](../ASSURANCE_SCOPE.md) — profile verification and authority scope.
