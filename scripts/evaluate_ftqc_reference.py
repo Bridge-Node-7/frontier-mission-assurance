@@ -192,7 +192,7 @@ def validate_profile(root: Path) -> list[str]:
         profile / "docs" / "EVIDENCE_VALIDITY_ENVELOPES.md",
         profile / "docs" / "EXPERT_REVIEW_GATES.md",
         profile / "docs" / "QBI_PUBLIC_CROSSWALK.md",
-        profile / "docs" / "PRIVATE_WORKSPACE_PATTERN.md",
+        profile / "docs" / "GOVERNED_WORKSPACE.md",
         profile / "docs" / "ADOPTION_PATH.md",
         root / "scripts" / "evaluate_ftqc_reference.py",
         root / "scripts" / "validate_ftqc_assurance.py",
