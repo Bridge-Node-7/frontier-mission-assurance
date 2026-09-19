@@ -35,10 +35,12 @@ bounded evidence classification, and declared applicability semantics. It does
 not establish quantum truth, real hardware performance, independent V&V,
 certification, government readiness, or consequential decision authority.
 
-## Public/private boundary
+## Release surface
 
-No customer, partner, supplier, private architecture, raw protected evidence, or
-private producer artifact is added to this public repository.
+The public reference includes the adapter, contracts, source-neutral examples,
+and validation evidence required to evaluate the released behavior. Operational
+case evidence remains referenced at its authoritative source rather than copied
+into the repository.
 
 ## Hosted evidence rule
 
