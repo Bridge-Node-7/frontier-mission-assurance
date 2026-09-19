@@ -20,7 +20,7 @@ FMA core owns cross-domain contracts and release machinery, including:
 - research and decision receipt semantics;
 - dependency impact, evidence coverage, assumption visibility, and reporting;
 - CLI behavior and common verification semantics;
-- public/private release boundaries;
+- release scope and distribution controls;
 - common CI, packaging, and stable-release controls.
 
 The core must not depend on profile-specific science, mission logic, or specialist terminology.
