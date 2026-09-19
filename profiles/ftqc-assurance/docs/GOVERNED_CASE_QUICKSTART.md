@@ -2,7 +2,9 @@
 
 Use this path when you want to evaluate one real FTQC decision in a governed workspace.
 
-The public repository remains source-neutral. Do **not** place customer, partner, supplier, laboratory, architecture, schedule, credential, controlled, or otherwise protected evidence in the public repository or a public fork.
+The public repository remains source-neutral. Build governed cases in the
+environment authorized for the case and keep authoritative evidence in its
+system of record.
 
 The operating rule is:
 
