@@ -6,7 +6,7 @@
 **Profile introduced in FMA:** `0.8.0`  
 **Contract 0.2 first supported by FMA:** `0.10.0`
 
-The profile contract version is independent from the FMA release version. Consumers should pin both the FMA release and the `profile_version` carried by profile records. Contract 0.2 preserves the original record types and adds truthful private-case support by allowing a private resource-estimate result to declare `synthetic_only: false`; public synthetic references must still declare `synthetic_only: true`. Breaking profile-contract changes require a profile-version change.
+The profile contract version is independent from the FMA release version. Consumers should pin both the FMA release and the `profile_version` carried by profile records. Contract 0.2 preserves the original record types and permits a non-synthetic resource-estimate result to declare `synthetic_only: false`; public synthetic references must still declare `synthetic_only: true`. Breaking profile-contract changes require a profile-version change.
 
 ## Purpose
 
@@ -27,16 +27,11 @@ The profile owns:
 - FTQC-specific reference validation and change-impact demonstration;
 - the Workload-to-System Assurance Chain as a non-canonical view.
 
-## Retained system ownership
+## Authority boundary
 
-The surrounding program retains ownership of:
-
-- canonical laboratory, modeling, code, test, document, and supplier records;
-- quantum theory and hardware-performance judgments;
-- generic FMA graph and Decision Receipt semantics;
-- operational and program authority;
-- the final consequential decision;
-- institutional learning outside the declared profile contracts.
+The profile does not replace authoritative technical records, domain judgment,
+the FMA core contracts, or consequential decision authority. Those remain with
+the processes responsible for the underlying system and decision.
 
 ## Inputs
 
@@ -48,9 +43,9 @@ The surrounding program retains ownership of:
 - qualified expert adjudication where required;
 - an FMA assurance graph and Decision Receipt.
 
-## Private-case operation
+## Case validation
 
-Contract 0.2 supports governed private case directories using the same six-file shape as the public reference. `scripts/validate_ftqc_case.py` validates the declared profile records, cross-record references, assurance graph, decision receipt, applicability gates, and expert-review gates without relocating raw evidence or granting new technical authority.
+Contract 0.2 supports case directories using the same six-file shape as the public reference. `scripts/validate_ftqc_case.py` validates the declared profile records, cross-record references, assurance graph, decision receipt, applicability gates, and expert-review gates without relocating authoritative evidence or granting new technical authority.
 
 ## External technical-evidence adoption
 
@@ -78,6 +73,7 @@ expert review, and decision disposition.
 
 Machine outputs surface declared structure, change impact, and review conditions. Qualified experts and accountable human owners retain scientific judgment and consequential decision authority.
 
-## Public release policy
+## Public evaluation scope
 
-Examples are synthetic and contain no real customer, partner, supplier, program, architecture, or operator identity. Nonpublic evidence stays in governed systems and is referenced rather than copied into this profile.
+The public contract is evaluated with source-neutral synthetic examples. Applied
+cases reference authoritative evidence rather than copying it into the profile.
