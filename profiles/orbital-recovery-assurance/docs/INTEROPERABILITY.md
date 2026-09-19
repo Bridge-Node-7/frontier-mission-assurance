@@ -26,4 +26,6 @@ Human-governed decision workflow
 6. Adapters must preserve provenance and fail visibly on ambiguity.
 7. Integration should remain additive, reversible, and low-coupling.
 
-The public contract exposes only the information needed for interoperable assurance. Internal system topology and implementation ownership are outside this repository's public boundary.
+The contract is intentionally limited to the fields needed for interoperable
+assurance. Implementations may vary behind that contract without changing its
+meaning.
