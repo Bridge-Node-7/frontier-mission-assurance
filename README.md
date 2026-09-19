@@ -60,7 +60,7 @@ That distinction is the product: **expose what became invalid without manufactur
 5. **Install a published stable release** — [`docs/INSTALL_STABLE_RELEASE.md`](docs/INSTALL_STABLE_RELEASE.md)
 6. **Understand evaluation and governed-use boundaries** — [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md)
 
-For bounded automation or AI-assistant use, see [`docs/AI_ASSISTANT_QUICKSTART.md`](docs/AI_ASSISTANT_QUICKSTART.md).
+For bounded automation use, see [`docs/AUTOMATION_USE.md`](docs/AUTOMATION_USE.md).
 
 ## Choose a profile only when it helps
 
