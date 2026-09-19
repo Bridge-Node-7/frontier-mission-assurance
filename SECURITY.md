@@ -1,10 +1,8 @@
 # Security and Data Handling
 
-This public repository contains only public-safe software, documentation, and synthetic fixtures.
+This repository is a public reference implementation. Security guidance here covers the published software, examples, workflows, and release artifacts.
 
-It must not contain credentials, secrets, private keys, personally identifying information, real external program identities in worked examples, proprietary data, private system details, restricted technical data, nonpublic performance values, internal URLs, private repository links, screenshots, or raw logs that reveal private context.
-
-See [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md).
+See [`SCOPE.md`](SCOPE.md) for the repository's evaluation and verification scope.
 
 ## Supported versions
 
@@ -14,9 +12,9 @@ Only the latest tagged stable release is supported for security fixes. Earlier t
 
 Do **not** disclose suspected vulnerabilities, exploit details, credentials, or sensitive reproduction data in a public issue, pull request, Discussion, commit, branch name, or Actions artifact.
 
-Use this repository's GitHub Security page and private vulnerability-reporting flow when that control is available. Include the affected release or commit, a concise impact description, the smallest public-safe reproduction sufficient for triage, and any proposed mitigation. Do not include real mission/program data or unrelated secrets.
+Use this repository's GitHub Security page and private vulnerability-reporting flow when that control is available. Include the affected release or commit, a concise impact description, the smallest reproduction sufficient for triage, and any proposed mitigation. Do not include unrelated sensitive material.
 
-If private reporting is not available in the viewer's GitHub session, do not publish exploit details as a workaround; use an already authorized private Bridge Node 7 contact channel.
+If private reporting is not available in the viewer's GitHub session, do not publish exploit details as a workaround; use an established non-public reporting channel.
 
 ## Automated security controls
 
@@ -28,13 +26,13 @@ The repository uses bounded, fail-visible controls as defense in depth:
 - GitHub Actions are pinned to immutable commit SHAs.
 - Runtime regression tests prohibit common network-client imports in the installed FMA package.
 - Version-2 receipt tests verify code/input binding and fresh-output reproduction behavior.
-- The public release boundary check rejects several high-risk disclosure patterns and artifact types.
+- The release-hygiene check rejects unsupported artifact types and obvious secret-like material.
 
 These controls reduce risk; they do not prove the absence of vulnerabilities, malicious dependencies, sensitive proper nouns, or unsafe operational use.
 
-## Public GitHub is a disclosure surface
+## Reporting surface
 
-Treat public issues, pull requests, Actions logs, uploaded artifacts, Discussions, release notes, commit history, branch names, and filenames as publicly observable. Deleting a file later does not guarantee removal from forks, caches, clones, logs, or history.
+Issues, pull requests, Actions logs, uploaded artifacts, Discussions, release notes, commit history, branch names, and filenames are part of the repository's observable surface. Use the private vulnerability-reporting path for sensitive security reports.
 
 ## Executing research receipts
 
