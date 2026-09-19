@@ -54,16 +54,16 @@ A passing software check means the declared synthetic contracts behaved as speci
 
 The reference case contains a baseline and a changed-assumption scenario. The changed case modifies one physical-model assumption and demonstrates which resource estimate, evidence envelope, expert review, claims, and decision must be reconsidered.
 
-## Use one governed private case
+## Evaluate one governed case
 
-The bundled reference teaches profile behavior. For an access-controlled real evaluation, use the private-case validator rather than modifying the synthetic fixture in place:
+The bundled reference teaches profile behavior. For a real evaluation, use the case validator rather than modifying the synthetic fixture in place:
 
 ```bash
 python scripts/validate_ftqc_case.py ../my-ftqc-case \
   --report ../my-ftqc-case/decision-basis.md
 ```
 
-Start with one decision and the six-file case shape documented in [`docs/PRIVATE_CASE_QUICKSTART.md`](docs/PRIVATE_CASE_QUICKSTART.md). Real evidence stays in its authoritative system; the private case carries only the bounded references and decision context required for review.
+Start with one decision and the six-file case shape documented in [`docs/PRIVATE_CASE_QUICKSTART.md`](docs/PRIVATE_CASE_QUICKSTART.md). The case carries bounded references and decision context while authoritative evidence remains at its source.
 
 When you have a previous and current governed case state, `scripts/compare_ftqc_cases.py` surfaces stale estimates, evidence outside its envelope, expert-review reopen triggers, downstream impact, and decision reconsideration without manufacturing the replacement technical answer.
 
@@ -119,15 +119,11 @@ See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) and [`ASSURANCE_SCOPE.md`](ASSU
 
 The intended outcome is **verification readiness**, not certification or a favorable technical verdict.
 
-## Public reference boundary
+## Reference case scope
 
-The public profile contains only source-neutral contracts, documentation, validation logic, and synthetic reference data. Real customer, partner, supplier, architecture, experiment, program, or controlled evidence belongs in governed systems outside this public repository.
+The profile ships source-neutral contracts, documentation, validation logic, and synthetic reference data so its behavior can be evaluated without requiring a particular program architecture.
 
-The operating doctrine is:
-
-> **Reference the evidence. Do not relocate the evidence.**
-
-See [`docs/PRIVATE_WORKSPACE_PATTERN.md`](docs/PRIVATE_WORKSPACE_PATTERN.md).
+For governed evaluations, keep authoritative evidence at its source and carry the bounded references needed for review. See [`docs/PRIVATE_WORKSPACE_PATTERN.md`](docs/PRIVATE_WORKSPACE_PATTERN.md).
 
 ## QBI crosswalk
 
