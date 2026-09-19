@@ -68,7 +68,7 @@ FMA has one assurance core. Profiles are bounded domain projections; they do not
 
 - [`profiles/scientific-discovery/README.md`](profiles/scientific-discovery/README.md) — Scientific Discovery Assurance
 - [`profiles/ftqc-assurance/README.md`](profiles/ftqc-assurance/README.md) — FTQC Assurance
-  - governed private case: [`profiles/ftqc-assurance/docs/PRIVATE_CASE_QUICKSTART.md`](profiles/ftqc-assurance/docs/PRIVATE_CASE_QUICKSTART.md)
+  - governed case: [`profiles/ftqc-assurance/docs/PRIVATE_CASE_QUICKSTART.md`](profiles/ftqc-assurance/docs/PRIVATE_CASE_QUICKSTART.md)
 - [`profiles/orbital-recovery-assurance/README.md`](profiles/orbital-recovery-assurance/README.md) — Orbital Recovery Assurance
 
 Each profile exposes a `PROFILE_CONTRACT.md` and a small machine-readable `profile.yaml` manifest. See [`docs/PROFILE_ARCHITECTURE.md`](docs/PROFILE_ARCHITECTURE.md).
@@ -138,7 +138,7 @@ Start with [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md) 
 - **Assurance-context exports** — project bounded change impact and review state for downstream decision preparation without copying raw evidence or increasing authority.
 - **Mission Decision Packets** — preserve evidence, assumptions, dependencies, human disposition, and reopen conditions together.
 - **Profile manifests** — expose bounded profile identity, contract version, containing release, and validator without creating a plugin framework.
-- **Public release controls** — scan tracked files, pin Actions, exercise tamper paths, build deterministic release evidence, and verify clean installation.
+- **Release integrity** — scan tracked files, pin Actions, exercise tamper paths, build deterministic release evidence, and verify clean installation.
 - **CI-native V&V** — exercise the public assurance surface across supported Python versions and Ubuntu/macOS/Windows smoke paths.
 
 ## Research and reproduction semantics
@@ -166,13 +166,11 @@ Scientific validity, regulatory approval, safety acceptance, mission qualificati
 
 The exact source validation contract is [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md). Commit-specific hosted proof belongs in GitHub Actions. Stable release proof belongs to the matching tag, release artifacts, checksums, SBOM, and provenance attestations.
 
-## Runtime privacy and evidence boundary
+## Runtime behavior and repository scope
 
 The installed FMA runtime makes no remote API calls, emits no telemetry, and performs no default uploads. Runtime assurance checks operate on local files.
 
-The public repository contains software, schemas, source-neutral fixtures, documentation, and release evidence. Real customer, supplier, partner, program, laboratory, architecture, schedule, credential, controlled, or otherwise protected evidence belongs in governed environments.
-
-See [`PUBLIC_BOUNDARY.md`](PUBLIC_BOUNDARY.md) and [`SECURITY.md`](SECURITY.md).
+This repository provides the public reference implementation, source-neutral examples, portable contracts, validation tooling, and release evidence used to evaluate FMA behavior. See [`SCOPE.md`](SCOPE.md) and [`SECURITY.md`](SECURITY.md).
 
 ## Repository map
 
@@ -187,7 +185,7 @@ frontier-mission-assurance/
 ├── docs/                            # adoption, architecture, contracts, and doctrine
 ├── .github/                         # CI, dependency maintenance, and release workflows
 ├── ASSURANCE_SCOPE.md               # verification and authority scope
-├── PUBLIC_BOUNDARY.md               # public release policy
+├── SCOPE.md                         # repository purpose and verification scope
 ├── SECURITY.md                      # security guidance
 ├── VALIDATION_REPORT.md             # deterministic source validation contract
 └── PROJECT_FACTS.json               # machine-readable public scope
@@ -213,7 +211,7 @@ python -m pip install --no-deps -e .
 make check
 ```
 
-The canonical local gate validates the core reference, existing-work sidecar, profile manifests, all bounded profiles, deterministic reports, public-boundary controls, and regression suite. Hosted CI adds the supported Python matrix, cross-platform smoke paths, dependency review, CodeQL on protected `main`, and clean wheel installation.
+The canonical local gate validates the core reference, existing-work sidecar, profile manifests, all bounded profiles, deterministic reports, release-integrity controls, and regression suite. Hosted CI adds the supported Python matrix, cross-platform smoke paths, dependency review, CodeQL on protected `main`, and clean wheel installation.
 
 ## Release status and rights
 
