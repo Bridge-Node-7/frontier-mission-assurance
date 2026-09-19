@@ -73,26 +73,24 @@ Canonical mission evidence, dependency ownership, operational authority, command
 
 See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) and [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md).
 
-## Public release policy
+## Public evaluation scope
 
-The public profile is intentionally source-neutral. Examples use synthetic or
-sanitized identifiers, and the release contains only the material required to
-understand and verify the published profile.
-
-See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and
+The public profile is source-neutral and uses synthetic examples so its
+contracts, validation behavior, and limitations can be evaluated independently
+of any particular mission. See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and
 [`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
 
 ## Adoption path
 
 Start with [`docs/PARTNER_QUICKSTART.md`](docs/PARTNER_QUICKSTART.md).
 
-For a governed mission case, retain mission evidence in the owning environment and validate the local assessment workspace with:
+For an applied mission case, retain authoritative evidence at its source and validate the assessment workspace with:
 
 ```bash
-python scripts/validate_orbital_recovery_case.py /path/to/private-case --require-stage mapped
+python scripts/validate_orbital_recovery_case.py /path/to/case --require-stage mapped
 ```
 
-The local validator checks schema and cross-record integrity without moving mission data into the public repository.
+The validator checks schema and cross-record integrity while authoritative evidence remains at its source.
 
 Use [`docs/RECOVERY_ASSURANCE_PACKAGE.md`](docs/RECOVERY_ASSURANCE_PACKAGE.md) for the decision-review handoff, [`docs/REAL_CASE_PROTOCOL.md`](docs/REAL_CASE_PROTOCOL.md) for mission-case application, and [`docs/ADOPTION_PATH.md`](docs/ADOPTION_PATH.md) for the evaluate → map → count/exercise → assess → decide → requalify → learn lifecycle.
 
