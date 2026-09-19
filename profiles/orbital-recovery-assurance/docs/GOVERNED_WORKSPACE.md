@@ -1,27 +1,13 @@
 # Governed Workspace
 
-Orbital Recovery Assurance separates **public assurance infrastructure** from
-**governed mission evidence**.
+Orbital Recovery Assurance is designed to work with authoritative evidence
+systems without becoming a second source of truth.
 
-## Public repository
+## Operating pattern
 
-The public repository may contain:
-
-- schemas;
-- validators;
-- methods;
-- synthetic examples;
-- synthetic benchmark protocols and results;
-- source-neutral documentation.
-
-It should not contain real program or relationship identifiers, telemetry,
-customer evidence, mission-sensitive configuration, private economics, or operational
-authority records.
-
-## Governed assessment environment
-
-Real assessments should remain in the partner's existing governed environment or a
-purpose-built governed workspace.
+Use the public profile for its schemas, validators, methods, reference cases,
+and review semantics. Perform real assessments in the environment approved for
+that work, and connect the profile through bounded identifiers and references.
 
 A local assessment may reference:
 
@@ -33,41 +19,33 @@ LOCAL-RECOVERY-CHAIN-001
 LOCAL-OPTION-001
 ```
 
-The Mission Recovery Chain view should remain a projection over these governed records,
-not a second canonical store.
-
-The local environment resolves those identifiers to real records. The public repository
-does not need to know what they represent.
+The local environment resolves those identifiers to authoritative records. The
+Mission Recovery Chain remains a projection over those records rather than a
+second canonical store.
 
 ## Ownership rule
 
 Use one authoritative owner per real record.
 
-If another system already owns evidence, configuration, authority, or a strategic option,
-the assessment should reference it rather than silently cloning it into a second canonical
-store.
+If another system already owns evidence, configuration, authority, or a
+strategic option, reference it rather than silently cloning it into a second
+canonical store.
 
-## Sanitization rule
+## Contribution rule
 
-If an assessment artifact is ever proposed for public contribution:
+Worked examples in this repository are synthetic and reviewable on their own.
+Contribute additional examples only when they are appropriate for the
+repository's published evaluation scope and pass the repository validation
+gates.
 
-1. remove real identities and relationship context;
-2. replace program-specific identifiers with synthetic identifiers;
-3. remove mission-sensitive values;
-4. ensure every remaining example is safe to publish;
-5. run the repository public-boundary gate;
-6. perform human public-surface review.
+## Local operation
 
-Sanitization does not make a real assessment automatically suitable for release.
-
-## No default data path back to BN7
-
-The public profile has no requirement for telemetry upload, remote API access, or customer
-data storage. A partner can evaluate and use the architecture locally.
-
-That separation is intentional: the public method can be inspectable while the real
-evidence remains under the partner's governance.
+The public profile does not require telemetry upload or remote API access. It
+can be evaluated and used locally with the operator's own governed evidence
+references.
 
 ## Governed record class
 
-Real partner-controlled case records use `record_class: private`. That class is supported by the portable schemas but must never be committed as a worked case to the public repository. The public profile validator separately requires every checked-in worked example to remain `synthetic`.
+Partner-controlled case records may use `record_class: private` in governed
+workspaces. Checked-in worked examples remain `synthetic` and are validated as
+such.
