@@ -43,13 +43,15 @@ A bounded evaluation can produce:
 - dependency/change-impact visibility;
 - explicit conditions that reopen the decision.
 
-## Data and evidence boundary
+## Evidence handling
 
-Real customer, supplier, partner, program, laboratory, architecture, schedule, credential, controlled, or otherwise protected evidence should remain in the governed systems authorized to hold it.
+Use the public reference with synthetic, public-source, or otherwise
+approved-for-release material.
 
-The public repository is not a customer evidence store.
-
-A private FMA workspace should carry only the minimum assurance projection required to support the decision and should reference authoritative evidence rather than duplicating it unnecessarily.
+For operational evaluations, keep authoritative evidence in the systems
+designated to hold it and carry only the bounded references or projections
+needed for review. FMA is not a replacement system of record for the underlying
+evidence.
 
 ## Decision authority
 
