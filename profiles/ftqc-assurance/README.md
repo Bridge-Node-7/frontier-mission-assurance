@@ -63,7 +63,7 @@ python scripts/validate_ftqc_case.py ../my-ftqc-case \
   --report ../my-ftqc-case/decision-basis.md
 ```
 
-Start with one decision and the six-file case shape documented in [`docs/PRIVATE_CASE_QUICKSTART.md`](docs/PRIVATE_CASE_QUICKSTART.md). The case carries bounded references and decision context while authoritative evidence remains at its source.
+Start with one decision and the six-file case shape documented in [`docs/GOVERNED_CASE_QUICKSTART.md`](docs/GOVERNED_CASE_QUICKSTART.md). The case carries bounded references and decision context while authoritative evidence remains at its source.
 
 When you have a previous and current governed case state, `scripts/compare_ftqc_cases.py` surfaces stale estimates, evidence outside its envelope, expert-review reopen triggers, downstream impact, and decision reconsideration without manufacturing the replacement technical answer.
 
@@ -123,7 +123,7 @@ The intended outcome is **verification readiness**, not certification or a favor
 
 The profile ships source-neutral contracts, documentation, validation logic, and synthetic reference data so its behavior can be evaluated without requiring a particular program architecture.
 
-For governed evaluations, keep authoritative evidence at its source and carry the bounded references needed for review. See [`docs/PRIVATE_WORKSPACE_PATTERN.md`](docs/PRIVATE_WORKSPACE_PATTERN.md).
+For governed evaluations, keep authoritative evidence at its source and carry the bounded references needed for review. See [`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
 
 ## QBI crosswalk
 
