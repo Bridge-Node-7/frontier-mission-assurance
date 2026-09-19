@@ -36,7 +36,7 @@ schema:
 	pytest -q tests/test_schemas.py
 
 boundary:
-	python scripts/public_boundary_scan.py .
+	python scripts/release_hygiene.py .
 
 evaluate:
 	python scripts/evaluate_public_reference.py

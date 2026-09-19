@@ -41,7 +41,7 @@ URL_RE = re.compile(r"https?://[^\s)\]>\"']+")
 def _git_tracked_files(root: Path) -> list[Path] | None:
     """Return every Git-tracked file, or None when root is not a Git worktree.
 
-    Release eligibility is based on tracked content, not directory reputation. A file
+    Release checks are based on tracked content, not directory reputation. A file
     remains in scope even when it is force-added under build/, dist/, or a cache path.
     """
     try:
@@ -115,15 +115,15 @@ def main() -> int:
                 findings.append(f"unapproved external URL: {rel}:{line} ({host})")
 
     if warnings:
-        print("PUBLIC BOUNDARY WARNINGS")
+        print("RELEASE HYGIENE WARNINGS")
         for item in sorted(set(warnings)):
             print(f"WARN: {item}")
     if findings:
-        print("PUBLIC BOUNDARY FAIL")
+        print("RELEASE HYGIENE FAIL")
         for item in sorted(set(findings)):
             print(f"FAIL: {item}")
         return 2
-    print("PUBLIC BOUNDARY PASS: no automated high-risk disclosure patterns detected")
+    print("RELEASE HYGIENE PASS: tracked files satisfy automated release checks")
     print("NOTE: tracked release files are authoritative; manual review is still required for proper nouns, sensitive technical values, binaries, and context.")
     return 0
 

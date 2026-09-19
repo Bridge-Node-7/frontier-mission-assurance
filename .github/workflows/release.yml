@@ -58,10 +58,10 @@ jobs:
           "setuptools==84.0.0" "wheel==0.48.0" "build==1.6.1"
           "PyYAML==6.0.3" "jsonschema==4.26.0"
 
-      - name: Reverify public release policy
+      - name: Reverify release integrity
         if: env.RELEASE_ELIGIBLE == '1'
         run: |
-          python scripts/public_boundary_scan.py .
+          python scripts/release_hygiene.py .
           PYTHONPATH=src python scripts/evaluate_public_reference.py
           python scripts/validate_profile_manifests.py .
           PYTHONPATH=src python -m frontier_assurance.cli validate examples/external_research_adoption/graph.yaml
