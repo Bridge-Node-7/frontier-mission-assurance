@@ -138,7 +138,7 @@ INTERFACE REVIEW
 DEPENDENT DECISION
 ```
 
-Only information appropriate for the receiving boundary belongs in the shared packet. Sensitive program context remains outside the public FMA repository.
+Include only information authorized for the receiving environment and required for the review.
 
 ## AI-assisted work
 
@@ -178,8 +178,9 @@ Useful acceptance questions are:
 
 If the packet does not improve those outcomes, reduce it.
 
-## Public boundary
+## Repository use
 
-This repository contains only public software, documentation, and synthetic fixtures. Real mission evidence, sensitive architecture details, customer identifiers, credentials, partner-confidential information, and nonpublic technical data do not belong here.
+This repository provides reusable methods, contracts, validators, documentation,
+and synthetic reference material. Operational packets should be created and
+handled in the environment approved for the work.
 
-Operational use belongs in an appropriately access-controlled environment.
