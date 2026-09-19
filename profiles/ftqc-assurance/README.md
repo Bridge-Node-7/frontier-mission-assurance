@@ -133,4 +133,4 @@ For governed evaluations, keep authoritative evidence at its source and carry th
 
 Start with one consequential decision, not an enterprise rollout. See [`docs/ADOPTION_PATH.md`](docs/ADOPTION_PATH.md).
 
-Before accepting work that could later intersect with an independent-review role, apply the repository-level [`../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md).
+When a review may be described as independent, apply the repository-level [`../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md`](../../docs/INDEPENDENCE_AND_CONFLICT_POLICY.md) before making that representation.
