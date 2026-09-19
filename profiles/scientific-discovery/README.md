@@ -56,11 +56,11 @@ This separation is a strength of the profile: machine-verifiable evidence can ac
 
 See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md), [`SPECIFICATION_EQUIVALENCE.md`](SPECIFICATION_EQUIVALENCE.md), and [`ATTRIBUTION.md`](ATTRIBUTION.md).
 
-## Public release policy
+## Public evaluation scope
 
-Public worked examples are synthetic or sanitized. The release surface is
-limited to the material needed to understand, run, and verify the published
-profile.
+Public worked examples are source-neutral and suitable for unrestricted
+evaluation. They demonstrate the profile contracts without implying a stronger
+scientific conclusion.
 
 ## Verify
 
