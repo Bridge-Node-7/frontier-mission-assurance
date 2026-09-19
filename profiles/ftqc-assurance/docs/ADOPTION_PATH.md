@@ -6,7 +6,7 @@ Do not begin with an enterprise-wide assurance rollout.
 
 ## Operator path
 
-For a governed private evaluation, first create the six-file case described in [`PRIVATE_CASE_QUICKSTART.md`](PRIVATE_CASE_QUICKSTART.md), then validate it with:
+For a governed evaluation, first create the six-file case described in [`GOVERNED_CASE_QUICKSTART.md`](GOVERNED_CASE_QUICKSTART.md), then validate it with:
 
 ```bash
 python scripts/validate_ftqc_case.py ../my-ftqc-case \
