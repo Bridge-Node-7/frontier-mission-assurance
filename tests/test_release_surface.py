@@ -103,7 +103,7 @@ def test_release_identity_is_consistent():
 
 
 def test_proprietary_candidate_does_not_claim_open_source():
-    assurance_scope = (ROOT / "ASSURANCE_SCOPE.md").read_text(encoding="utf-8").lower()
+    assurance_scope = (ROOT / "SCOPE.md").read_text(encoding="utf-8").lower()
     assert "open-source" not in assurance_scope
     assert "open source" not in assurance_scope
 
