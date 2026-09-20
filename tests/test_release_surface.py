@@ -108,7 +108,7 @@ def test_proprietary_candidate_does_not_claim_open_source():
     assert "open source" not in assurance_scope
 
 
-def test_release_evidence_lifecycle_is_non_recursive():
+def test_release_evidence_layers_are_explicit():
     receipt = (ROOT / "RELEASE_RECEIPT.md").read_text(encoding="utf-8")
     validation = (ROOT / "VALIDATION_REPORT.md").read_text(encoding="utf-8")
     acceptance = (ROOT / "docs" / "RELEASE_ACCEPTANCE.md").read_text(encoding="utf-8")
@@ -116,9 +116,11 @@ def test_release_evidence_lifecycle_is_non_recursive():
         encoding="utf-8"
     )
 
-    assert "Commit-specific hosted evidence belongs in GitHub Actions" in receipt
-    assert "Commit-specific hosted evidence belongs in GitHub Actions" in acceptance
-    assert "recursive" in lifecycle.lower()
+    assert "Hosted validation evidence is recorded in GitHub Actions and release metadata." in receipt
+    assert "Hosted validation evidence is recorded in GitHub Actions and release metadata." in acceptance
+    assert "## Source validation" in lifecycle
+    assert "## Hosted validation" in lifecycle
+    assert "## Published release evidence" in lifecycle
     assert not re.search(r"\b[0-9a-f]{40}\b", receipt)
     assert not re.search(r"\b[0-9a-f]{40}\b", validation)
 
