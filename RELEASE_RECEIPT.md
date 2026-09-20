@@ -44,7 +44,7 @@ into the repository.
 
 ## Hosted evidence rule
 
-Commit-specific hosted evidence belongs in GitHub Actions and tagged release metadata, not in this source-controlled receipt.
+Hosted validation evidence is recorded in GitHub Actions and release metadata.
 
 ## Validation status
 
