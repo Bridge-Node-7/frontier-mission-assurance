@@ -202,4 +202,4 @@
 
 ## Pre-0.2.0 development history
 
-Earlier tagged release candidates remain available in Git history for exact reproducibility. The stable changelog focuses on supported public product evolution rather than intermediate staging iterations.
+Earlier tagged versions remain available in Git history for exact reproducibility. The stable changelog focuses on supported public product evolution.
