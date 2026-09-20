@@ -3,7 +3,7 @@
 **Date:** 2026-09-17  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
 
-This report defines the deterministic validation contract for the source candidate. Commit-specific hosted CI evidence belongs in GitHub Actions and tagged release metadata rather than being copied into source. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
+This report defines deterministic validation requirements for the source. Release-specific hosted evidence is recorded in GitHub Actions and release metadata. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
 
 ## Core functional V&V
 
@@ -34,7 +34,7 @@ This report defines the deterministic validation contract for the source candida
 - Local Markdown-link integrity: **PASS required**
 - GitHub Actions immutable-SHA pins: **PASS required**
 - Pull-request dependency vulnerability review: **PASS required on pull requests**
-- Protected-main CodeQL analysis: **PASS required on main pushes**
+- CodeQL analysis: **PASS required where configured**
 
 ## Existing-work adoption V&V
 
@@ -74,7 +74,7 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.11.0 source candidate retains FTQC Assurance profile contract `0.2` and adds bounded external technical-evidence adoption. Release eligibility requires:
+The v0.11.0 source retains FTQC Assurance profile contract `0.2` and adds bounded external technical-evidence adoption. Release eligibility requires:
 
 - reviewed ExperimentResult and ProcessorEvidenceReceipt artifacts fail closed on wrong trusted artifact SHA-256;
 - externally supplied producer schemas must match the exact reviewed schema SHA-256 values before JSON Schema validation;
@@ -118,12 +118,12 @@ These controls establish declared profile and case-contract behavior only. They 
 
 The authoritative release surface is the Git-tracked file set. Required behavior:
 
-- every Git-tracked candidate file is scanned regardless of directory name;
+- every Git-tracked release file is scanned regardless of directory name;
 - prohibited credential/private-key/local-path/private-IP patterns fail closed;
 - unapproved external URLs fail closed;
 - high-risk binary/archive/document extensions fail closed unless the public contract intentionally changes;
 - public examples remain source-neutral;
-- candidate content receives human publication review for contextual suitability.
+- release content receives human publication review for contextual suitability.
 
 A current-tree release-policy PASS attests only to the tracked source state under review.
 
@@ -147,8 +147,8 @@ Assurance profiles are distributed through the repository/source archive. The co
 
 ## Hosted acceptance
 
-The exact pushed commit must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-release validation, adversarial regressions, profile-manifest validation, external-research sidecar validation, all assurance profile validators, dependency review where applicable, protected-main CodeQL on main, and clean wheel installation. The Actions run attached to that exact commit is the authoritative hosted evidence.
+The released source revision must pass the declared Python matrix, Ubuntu/macOS/Windows smoke tests, Ruff, tracked-file public-release validation, adversarial regressions, profile-manifest validation, external-research sidecar validation, all assurance profile validators, dependency review where applicable, CodeQL where configured, and clean wheel installation. GitHub Actions provides the hosted validation record.
 
 ## Disposition rule
 
-**SOURCE PASS** means the candidate satisfies this deterministic source contract. Scientific, regulatory, safety, mission-qualification, quantum-performance, independent-evaluator, external-adoption, and consequential-authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
+**SOURCE PASS** means the source satisfies this deterministic validation contract. Scientific, regulatory, safety, mission-qualification, quantum-performance, independent-evaluator, external-adoption, and consequential-authority determinations remain with the governing processes responsible for them. Stable release additionally requires the source, hosted verification, published artifact set, and clean-user verification to agree under [`docs/RELEASE_ACCEPTANCE.md`](docs/RELEASE_ACCEPTANCE.md).
