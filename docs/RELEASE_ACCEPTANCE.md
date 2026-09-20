@@ -2,19 +2,6 @@
 
 A stable Frontier Mission Assurance release binds one exact source state to one verified public artifact set. Promotion occurs only after the source, hosted verification, release metadata, and clean-user checks agree on the same identity.
 
-## Release cadence
-
-Stable releases are milestone-driven. Documentation-only, metadata-only, or routine maintenance changes do not by themselves require a new stable version. Publish a stable release when a supported capability, contract, security posture, packaging/distribution surface, or other material user-facing behavior warrants a new distribution milestone. Security-critical corrections may be promoted sooner, but they still require the applicable release gates.
-
-## Repository state
-
-A stable release requires:
-
-- protected `main` as the default branch;
-- the intended release commit as the exact accepted source state;
-- only intentional long-lived branches and collaboration state;
-- a source-neutral public surface containing approved documentation, schemas, software, and reference fixtures.
-
 ## Hosted verification
 
 The required hosted verification surface includes:
@@ -28,12 +15,12 @@ The required hosted verification surface includes:
 - controlled malformed-input CLI behavior with exit code `2` and no traceback;
 - deterministic report regression under `SOURCE_DATE_EPOCH`;
 - dependency review where applicable;
-- protected-main static analysis before stable release eligibility;
+- static analysis where configured;
 - Scientific Discovery Assurance validation when present;
 - Orbital Recovery Assurance validation when present;
 - tracked-file public release verification.
 
-Any required check that is red, unexpectedly skipped, or materially different from the reviewed candidate blocks stable promotion.
+Any required check that is red, unexpectedly skipped, or materially different from the source revision blocks stable promotion.
 
 ## Reproduction-integrity release gate
 
@@ -76,7 +63,7 @@ The stable release record binds:
 - available provenance attestations;
 - successful clean-user verification of the published artifacts.
 
-Commit-specific hosted evidence belongs in GitHub Actions and release metadata rather than being recursively embedded back into the source tree.
+Hosted validation evidence is recorded in GitHub Actions and release metadata.
 
 ## Acceptance rule
 
