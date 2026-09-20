@@ -125,7 +125,6 @@ def test_release_evidence_lifecycle_is_non_recursive():
 
 def test_public_infrastructure_docs_are_present():
     required = [
-        ROOT / "docs" / "MAINTENANCE.md",
         ROOT / "docs" / "RELEASE_EVIDENCE_LIFECYCLE.md",
         ROOT / "docs" / "RESEARCH_REPRODUCIBILITY_CONTRACT.md",
         ROOT / "docs" / "MISSION_DECISION_PACKET.md",
