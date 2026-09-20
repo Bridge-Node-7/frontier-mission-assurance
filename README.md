@@ -184,7 +184,6 @@ frontier-mission-assurance/
 ├── scripts/                         # deterministic validators and evaluators
 ├── docs/                            # adoption, architecture, contracts, and doctrine
 ├── .github/                         # CI, dependency maintenance, and release workflows
-├── ASSURANCE_SCOPE.md               # verification and authority scope
 ├── SCOPE.md                         # repository purpose and verification scope
 ├── SECURITY.md                      # security guidance
 ├── VALIDATION_REPORT.md             # deterministic source validation contract
