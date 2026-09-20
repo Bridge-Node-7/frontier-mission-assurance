@@ -11,24 +11,23 @@
 - Added adversarial regression coverage for artifact tampering, linkage substitution, contradictory architecture state, unreviewed future producers, and unmapped evidence kinds.
 
 
-## 0.10.0 — governed private FTQC case workflow
+## 0.10.0 — FTQC case validation and comparison
 
 - Advanced FTQC Assurance to profile contract `0.2` without changing the universal FMA graph ontology.
-- Removed the profile-contract defect that forced every resource-estimate result to claim `synthetic_only: true`; private governed cases can now truthfully declare non-synthetic results while public synthetic references remain required to declare `synthetic_only: true`.
+- Corrected resource-estimate handling so case records can represent their actual synthetic status while public synthetic references remain required to declare `synthetic_only: true`.
 - Added `scripts/validate_ftqc_case.py` for validating a user-supplied six-file FTQC case directory against the profile schemas, assurance graph, Decision Receipt, applicability envelopes, expert gates, and cross-record references.
 - Added a compact Markdown FTQC Decision Basis report for technical leadership and review handoff.
 - Added governed previous/current FTQC case comparison that surfaces changed assumptions, stale reused estimates, applicability loss, expert-review reopen triggers, downstream impact, and decision reconsideration without inferring the replacement technical answer.
-- Added a private-case operator quickstart that keeps authoritative evidence in existing governed systems and uses FMA only for the minimum decision-relevant projection.
-- Added regression coverage for private non-synthetic resource estimates, mixed-record rejection, unresolved-gate approval denial, missing applicability references, and public synthetic-boundary preservation.
+- Added regression coverage for non-synthetic resource estimates, mixed-record rejection, unresolved-gate approval denial, missing applicability references, and synthetic-reference preservation.
 - Added the generic FTQC case path to local, hosted, cross-platform, and stable-release validation.
-- Preserved qualified domain judgment, independent-review semantics, public/private evidence separation, and accountable human consequential authority.
+- Preserved qualified domain judgment, independent-review semantics, governed evidence separation, and accountable human consequential authority.
 
 ## 0.9.1 — FTQC verification-readiness and independence governance
 
-- Added an institution-level Independence and Conflict Policy with pre-engagement screening for role class, proprietary access, design participation, future self-review risk, financial dependence, government conflict considerations, mitigations, and disposition.
+- Added evaluator-facing independence criteria and conflict-governance guidance.
 - Added the FTQC Evidence & Mission-Risk Baseline as the smallest bounded verification-readiness engagement pattern for claims, assumptions, evidence, dependencies, expert gates, risk retirement, and decision reopening.
 - Added a dated public-source QBI IV&V fit review that states BN7's credible contribution today and explicitly preserves deep quantum adjudication, test infrastructure, evaluator eligibility, and independence determinations for qualified experts and applicable processes.
-- Preserved FTQC Assurance profile contract `0.1`, the universal FMA graph ontology, the synthetic neutral-atom reference, governed private evidence custody, and accountable human consequential authority.
+- Preserved FTQC Assurance profile contract `0.1`, the universal FMA graph ontology, the synthetic neutral-atom reference, governed evidence custody, and accountable human consequential authority.
 - Made no claim of QBI affiliation, government readiness, quantum certification, or full-stack independent V&V capability.
 
 
@@ -37,7 +36,7 @@
 - Added the FMA-owned assurance-context export contract `0.1.0` for bounded downstream interoperability.
 - Added a source-neutral changed-assumption fixture covering stale artifacts, applicability loss, reopened review, decision reconsideration, and reevaluation opportunity without automatic approval.
 - Added fail-closed schema and regression coverage for contract identity, release provenance, raw-evidence exclusion, and preserved epistemic states.
-- Preserved FTQC Assurance profile contract `0.1`, the universal FMA graph ontology, private evidence custody, and accountable human consequential authority.
+- Preserved FTQC Assurance profile contract `0.1`, the universal FMA graph ontology, governed evidence custody, and accountable human consequential authority.
 
 ## 0.8.1 — external FTQC evidence-boundary hardening
 
@@ -56,7 +55,7 @@
 - Added a source-neutral changed-assumption reference case that makes resource estimates stale, moves evidence outside its declared envelope, reopens expert review, traces affected claims, and reopens the dependent decision.
 - Added a human-readable Decision Basis report that separates software/contract PASS from technical-decision HOLD.
 - Added one-command local evaluation, deterministic profile validation, regression coverage, Makefile integration, and CI coverage on the supported Python and operating-system matrix.
-- Preserved the FMA core graph ontology, Mission Decision Packet semantics, local-first runtime, public/private evidence boundary, and accountable human consequential authority.
+- Preserved the FMA core graph ontology, Mission Decision Packet semantics, local-first runtime, governed evidence boundaries, and accountable human consequential authority.
 - Kept QBI material as a bounded public-source crosswalk with no readiness score, affiliation claim, or representation of evaluator internals.
 - Aligned Research Receipt documentation with the current 3.1 contract while retaining 3.0, 2.0, and 1.0 compatibility semantics.
 - Aligned local and hosted profile validation, formalized the bounded profile architecture, and added an explicit Scientific Discovery profile contract.
@@ -72,16 +71,16 @@
 - Reorganized public documentation around capabilities, verification evidence, accountable authority, and direct adoption paths rather than repeated defensive caveats.
 - Replaced profile `LIMITATIONS.md` surfaces with `ASSURANCE_SCOPE.md` for Orbital Recovery Assurance and Scientific Discovery Assurance.
 - Replaced the Orbital `REAL_WORLD_ADOPTION.md` surface with the source-neutral `ADOPTION_PATH.md` and refined partner, mission-case, validation, benchmark, and decision-review guidance.
-- Generalized Orbital interoperability language so public contracts expose stable interfaces without publishing internal portfolio topology.
+- Generalized Orbital interoperability language around stable, source-neutral interfaces.
 - Refined standards positioning, acceptance criteria, release notes, project facts, and public release policy for a consistent institutional voice.
 - Preserved runtime, schema, benchmark, receipt, decision, fail-closed assurance, source-neutral evidence handling, and accountable human authority semantics.
 
-## 0.7.1 — public-surface hardening
+## 0.7.1 — release alignment
 
-- Aligned the current source, package, citation, project-facts, validation, and Orbital profile release identity after the accepted v0.7.0 hardening work.
+- Aligned source, package, citation, project facts, validation, and Orbital profile release identity for v0.7.1.
 - Generalized Orbital Recovery Assurance interoperability and resilience terminology so the public profile stays source-neutral and reusable.
 - Kept the public Orbital Recovery Assurance profile source-neutral and focused on reusable interoperability, resilience, evidence, and authority boundaries.
-- Preserved runtime, schema, benchmark, fail-closed assurance, human-authority, and public/private evidence-boundary semantics.
+- Preserved runtime, schema, benchmark, fail-closed assurance, human-authority, and governed evidence-boundary semantics.
 
 ## 0.7.0 — Orbital Recovery Assurance
 
@@ -91,15 +90,15 @@
 - Added explicit HOLD/no-consequential-action utility, per-option unsafe hypotheses, gate failures, eligibility, and utility advantage versus HOLD so blocked options remain explainable.
 - Added post-intervention requalification and event-derived TTC/TTE/TTMC/TTT/TTV recovery metrics.
 - Added a source-neutral synthetic known-truth benchmark with preregistered safe baselines, deterministic checked-in results, protocol-history preservation, and stress-matrix validation.
-- Added a local-only validator for governed private cases with lifecycle gates for mapped, assessed, post-intervention, and requalification-review stages; public CI never receives real mission evidence.
-- Added evaluation/adoption, private-workspace, Recovery Assurance Package, Epistemic Firewall, evidence-quorum, evidence-degradation exercise, recovery-pathway, real-case, and bounded intervention-experiment guidance.
+- Added case validation with lifecycle gates for mapped, assessed, post-intervention, and requalification-review stages.
+- Added evaluation/adoption, governed-workspace, Recovery Assurance Package, Epistemic Firewall, evidence-quorum, evidence-degradation exercise, recovery-pathway, real-case, and bounded intervention-experiment guidance.
 - Added Orbital profile validation to the existing Python matrix, cross-platform smoke, Makefile gate, and deliberate stable-release source verification without creating a parallel workflow.
 - Preserved governed evidence/dependency ownership, downstream human decision preparation, and accountable human consequential authority.
-- Preserved the public/synthetic repository boundary and made the source-vs-wheel distribution boundary explicit.
+- Preserved the synthetic-reference boundary and made the source-vs-wheel distribution boundary explicit.
 
 ## 0.6.0 — resilience and trust semantics
 
-- Made the authoritative public release-boundary scan operate on every Git-tracked file regardless of directory name, closing force-tracked build/cache disclosure bypasses while allowing untracked ephemeral caches to remain outside release scope.
+- Strengthened release validation across every Git-tracked file regardless of directory name.
 - Added Research Receipt 3.1 with explicit per-output `EXACT`, `SEMANTICALLY_CHECKED`, and `RECORD_ONLY` assurance semantics while preserving an observed SHA-256 for every output.
 - Required semantic outputs to name the exact same-output checks that define their bounded equivalence claim; record-only outputs make no equivalence claim.
 - Added external execution chronology checks for `submitted_at <= started_at <= completed_at <= collected_at` and bound required calibration validity to the declared execution interval.
@@ -114,18 +113,18 @@
 - Added Research Receipt v3 with explicit `EXACT_SHA256`, `NUMERIC_CHECKS`, and `HYBRID` output-acceptance modes while keeping declared code and inputs SHA-256 exact.
 - Preserved every observed v3 output SHA-256 as provenance even when stochastic/numerical acceptance does not require byte identity.
 - Added calibration/instrument-state provenance with explicit policy, identity, configuration hash, lineage, observation time, and validity-window checks.
-- Added a bounded external/cluster contract that separates submission/environment evidence from result collection and verifies scheduler/job continuity, code/input manifests, environment identity, timeout/cancellation semantics, terminal state, and collected-output hashes without running a real cluster in public CI.
+- Added a bounded external/cluster contract that separates submission/environment evidence from result collection and verifies scheduler/job continuity, code/input manifests, environment identity, timeout/cancellation semantics, terminal state, and collected-output hashes using synthetic fixtures.
 - Kept version-2 exact local reproduction semantics backward compatible.
 - Improved reproduction diagnostics for undeclared Python helpers while retaining raw child stderr, and made invalid graph-status errors list the sorted allowed set.
 - Added synthetic-only regression coverage for stochastic acceptance, calibration freshness, external collection provenance, exact-hash tampering, external execution refusal, and bounded diagnostics.
-- Preserved the public/synthetic boundary, local-only runtime behavior for FMA itself, All Rights Reserved licensing, protected release gates, and human consequential decision authority.
+- Preserved the synthetic-reference boundary, local-only runtime behavior for FMA itself, All Rights Reserved licensing, release validation, and human consequential decision authority.
 
 ## 0.4.2 — reproduction entrypoint binding
 
 - Tightened version-2 reproduction so a Python command must execute the declared entrypoint as its first script argument; merely mentioning the entrypoint later in `argv` no longer satisfies the binding control.
 - Reject interpreter execution modes such as `python -c`, `python -m`, stdin execution, and other decoy-token shapes from satisfying declared-entrypoint binding.
 - Added adversarial regression coverage for interpreter-mode and decoy-entrypoint command shapes while preserving successful `python <entrypoint> ...` reproduction.
-- Made the clean-adopter evaluation path install the exact pinned build backend inside its isolated environment and use that reviewed backend without build-isolation drift.
+- Made the evaluation path install the exact pinned build backend inside its isolated environment and use that reviewed backend without build-isolation drift.
 - Preserved fresh-output verification, SHA-256 code/input/output binding, cross-platform V&V, Scientific Discovery Assurance, Mission Decision Packets, local-only runtime, synthetic-only fixtures, All Rights Reserved licensing, and human consequential decision authority.
 
 ## 0.4.1 — portable contract identity
@@ -148,21 +147,21 @@
 - Added positional CLI help, command examples, and a first-run pointer to the five-minute evaluation.
 - Added warning-level detection for `depends_on` self-loops and cycles while preserving finite dependency traversal.
 - Added deterministic report generation through `SOURCE_DATE_EPOCH` and expanded adversarial rejection-path regression coverage.
-- Preserved the public/synthetic boundary, one-runtime-dependency design, cross-platform V&V, immutable Action pins, protected-main release gate, Scientific Discovery Assurance, Mission Decision Packets, and human consequential decision authority.
+- Preserved the synthetic-reference boundary, one-runtime-dependency design, cross-platform V&V, immutable Action pins, release validation, Scientific Discovery Assurance, Mission Decision Packets, and human consequential decision authority.
 
 ## 0.3.5 — durable public-release polish
 
-- Refined release evidence and regression naming so the current source reads as a finished product rather than a maintenance narrative.
+- Refined release evidence and regression naming for consistency.
 - Preserved the Mission Decision Packet, explicit reopen conditions, Scientific Discovery Assurance, and bounded public-data model introduced in the v0.3 line.
 - Preserved cross-platform V&V, dependency review, CodeQL, immutable Action pins, local-only runtime, synthetic-only fixtures, All Rights Reserved licensing, and human consequential decision authority.
 - No assurance-graph, schema, CLI, runtime, or workflow semantics changed from v0.3.4.
 
-## 0.3.4 — mission decision UX and public-surface finalization
+## 0.3.4 — mission decision UX
 
 - Added the Mission Decision Packet as a bounded evidence-to-decision pattern with explicit reopen conditions.
 - Upgraded the synthetic frontier-program example into a worked technical decision walkthrough.
 - Simplified the README around mission, evidence, reproducibility, decision basis, and bounded evaluation.
-- Standardized public-boundary terminology across source, tests, CI, release automation, and contribution surfaces.
+- Standardized validation terminology across source, tests, CI, release automation, and contribution surfaces.
 - Consolidated acceptance and release documentation into user-facing contracts.
 - Preserved runtime semantics, Scientific Discovery Assurance, cross-platform V&V, dependency review, CodeQL, immutable Action pins, local-only runtime, synthetic-only fixtures, All Rights Reserved licensing, and human consequential decision authority.
 
@@ -170,20 +169,20 @@
 
 - Updated the pinned development test runner to pytest 9.1.1.
 - Raised the optional development dependency floor to `pytest>=9.1.1,<10`.
-- Added a release-surface regression that keeps the supported pytest baseline aligned between `requirements-dev.txt` and package metadata.
+- Added a regression that keeps the supported pytest baseline aligned between `requirements-dev.txt` and package metadata.
 - Preserved the v0.3.2 security, scientific-discovery, release, and runtime behavior.
 
 ## 0.3.2 — build-tool dependency security closure
 
 - Updated pinned setuptools to 84.0.0.
 - Updated pinned wheel to 0.48.0, incorporating upstream security fixes including path-traversal protections.
-- Kept package metadata, hosted package smoke, release construction, release-surface tests, and validation documentation aligned on the same build-tool versions.
+- Kept package metadata, hosted package smoke, release construction, release tests, and validation documentation aligned on the same build-tool versions.
 
 ## 0.3.1 — security and release hardening
 
 - Moved first-party GitHub Actions to current Node 24 runtimes while retaining immutable commit-SHA pins.
 - Added high-severity dependency vulnerability review to the required pull-request V&V path.
-- Added CodeQL Python analysis to protected-main V&V before stable release eligibility.
+- Added CodeQL Python analysis to required V&V.
 - Pinned build-backend/tooling requirements and made hosted package construction non-isolated to reduce release-time dependency drift.
 - Added supported-version and private vulnerability-reporting guidance.
 
