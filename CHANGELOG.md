@@ -26,7 +26,6 @@
 
 - Added evaluator-facing independence criteria and conflict-governance guidance.
 - Added the FTQC Evidence & Mission-Risk Baseline as the smallest bounded verification-readiness engagement pattern for claims, assumptions, evidence, dependencies, expert gates, risk retirement, and decision reopening.
-- Added a dated public-source QBI IV&V fit review that states BN7's credible contribution today and explicitly preserves deep quantum adjudication, test infrastructure, evaluator eligibility, and independence determinations for qualified experts and applicable processes.
 - Preserved FTQC Assurance profile contract `0.1`, the universal FMA graph ontology, the synthetic neutral-atom reference, governed evidence custody, and accountable human consequential authority.
 - Made no claim of QBI affiliation, government readiness, quantum certification, or full-stack independent V&V capability.
 
