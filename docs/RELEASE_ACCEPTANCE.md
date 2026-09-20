@@ -24,7 +24,7 @@ Any required check that is red, unexpectedly skipped, or materially different fr
 
 ## Reproduction-integrity release gate
 
-The stable candidate demonstrates that:
+The stable release demonstrates that:
 
 - declared code and input hashes are verified before trusted execution;
 - the receipt command is bound to the declared entrypoint;

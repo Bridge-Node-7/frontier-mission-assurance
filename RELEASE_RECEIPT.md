@@ -1,6 +1,6 @@
 # Source Release Receipt — v0.11.0
 
-**Release type:** stable public reference candidate  
+**Release type:** stable public reference release  
 **Date:** 2026-09-18  
 **Validation status:** READY
 
@@ -15,7 +15,7 @@ assurance, downstream decision preparation, and accountable human authority.
 - Added exact-artifact and exact-schema verification for reviewed
   `ExperimentResult 2.0.0` plus linked `ProcessorEvidenceReceipt 2.0.0`.
 - Added explicit reviewed producer-release gates.
-- Added internal-integrity, one-input linkage, and architecture-consistency checks.
+- Added structural-integrity, one-input linkage, and architecture-consistency checks.
 - Mapped current generated decoder-backlog model evidence to
   `SIMULATED / NOT_ASSESSED / DECLARED`.
 - Preserved cross-architecture evidence as `REVIEW_REQUIRED`.
@@ -23,7 +23,7 @@ assurance, downstream decision preparation, and accountable human authority.
   automatic approval.
 - Reused FTQC profile contract `0.2` and assurance-context `0.1.0`.
 - Kept producer-owned schema bytes outside the public FMA source tree; exact
-  reviewed schema digests are verified against operator-supplied schema files.
+  reviewed schema digests are verified against supplied schema files.
 
 ## Source-level evidence
 
