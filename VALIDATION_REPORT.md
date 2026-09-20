@@ -91,7 +91,7 @@ The v0.11.0 source candidate retains FTQC Assurance profile contract `0.2` and a
 
 The existing FTQC case controls remain required:
 
-- FTQC profile schemas, manifests, public reference records, evaluator, and private-case validator agree on profile contract `0.2`;
+- FTQC profile schemas, manifests, reference records, evaluator, and case validator agree on profile contract `0.2`;
 - public synthetic FTQC reference records remain source-neutral and require `resource-estimate-receipt.result.synthetic_only = true`;
 - non-synthetic FTQC cases may truthfully use `record_class = private` and `synthetic_only = false`;
 - the generic FTQC case validator accepts a user-supplied six-file case directory outside the public repository;
@@ -112,7 +112,7 @@ The existing FTQC case controls remain required:
 - the case validation and case-comparison workflows are exercised in local `make check`, supported Python CI, cross-platform smoke paths, and the explicit Stable Release workflow;
 - the QBI crosswalk remains documentation-only and makes no readiness, affiliation, or evaluator-internal claim.
 
-These controls establish declared profile and private-case contract behavior only. They do not establish quantum-physics validity, QEC correctness, decoder correctness, resource-estimator correctness, hardware performance, supplier qualification, independent V&V, government-program readiness, or consequential decision authority.
+These controls establish declared profile and case-contract behavior only. They do not establish quantum-physics validity, QEC correctness, decoder correctness, resource-estimator correctness, hardware performance, supplier qualification, independent V&V, government-program readiness, or consequential decision authority.
 
 ## Public release V&V
 
@@ -123,9 +123,9 @@ The authoritative release surface is the Git-tracked file set. Required behavior
 - unapproved external URLs fail closed;
 - high-risk binary/archive/document extensions fail closed unless the public contract intentionally changes;
 - public examples remain source-neutral;
-- candidate content receives human public-surface review for contextual publication suitability.
+- candidate content receives human publication review for contextual suitability.
 
-A current-tree release-policy PASS attests to the tracked source state under review; historical Git objects remain separate durable history.
+A current-tree release-policy PASS attests only to the tracked source state under review.
 
 ## Reproduction integrity contract
 
