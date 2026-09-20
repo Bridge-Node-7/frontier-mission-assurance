@@ -2,7 +2,7 @@
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-18  
-**Canonical release gate:** READY
+**Validation status:** READY
 
 ## Purpose
 
@@ -46,6 +46,6 @@ into the repository.
 
 Commit-specific hosted evidence belongs in GitHub Actions and tagged release metadata, not in this source-controlled receipt.
 
-## Release gate
+## Validation status
 
-The v0.11.0 source gate is **READY** after exact-head pull-request V&V and protected-main hosted V&V completed successfully. This state attests only to the declared source, packaging, public-boundary, profile, adapter, and hosted validation controls. Stable publication remains a separate explicit action performed only by the repository's `Stable Release` workflow.
+The v0.11.0 source is **READY** after required hosted validation completed successfully. This status attests only to the declared source, packaging, profile, adapter, and validation controls; it does not expand the authority or claims described above.
