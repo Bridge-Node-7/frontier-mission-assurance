@@ -20,12 +20,13 @@ already own.
 
 A machine PASS means only that the declared machine-checkable controls
 succeeded. It does not establish scientific validity, operational readiness,
-certification, regulatory approval, safety acceptance, or a consequential
-decision.
+certification, regulatory approval, safety acceptance, flight qualification,
+acquisition authority, security authorization, or a consequential decision.
 
-Authoritative evidence remains authoritative at its source. FMA carries the
-bounded references, assumptions, applicability, review state, and decision basis
-needed to make change visible and reviewable.
+Authoritative evidence remains authoritative at its source. FMA strengthens
+governed review with inspectable evidence, explicit assumptions, reproducible
+checks, bounded applicability, and durable decision basis without collapsing
+distinct approval responsibilities into one automated state.
 
 For evaluation rights and operational-use terms, see
 [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md). For security
