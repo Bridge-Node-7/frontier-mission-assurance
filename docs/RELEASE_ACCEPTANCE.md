@@ -2,6 +2,10 @@
 
 A stable Frontier Mission Assurance release binds one exact source state to one verified public artifact set. Promotion occurs only after the source, hosted verification, release metadata, and clean-user checks agree on the same identity.
 
+## Release cadence
+
+Stable releases are milestone-driven. Documentation-only, metadata-only, or routine maintenance changes do not by themselves require a new stable version. Publish a stable release when a supported capability, contract, security posture, packaging/distribution surface, or other material user-facing behavior warrants a new distribution milestone. Security-critical corrections may be promoted sooner, but they still require the applicable release gates.
+
 ## Repository state
 
 A stable release requires:
