@@ -1,0 +1,26 @@
+{
+  "format": "bn7.fma.ftqc-reviewed-producers/0.1",
+  "authority": "HUMAN_REVIEW_REQUIRED_FOR_CHANGES",
+  "reviewed": [
+    {
+      "artifact": "ExperimentResult",
+      "application": "naftk",
+      "releases": [
+        "0.5.0"
+      ],
+      "contract_id": "na-ftqc.experiment-result",
+      "contract_version": "2.0.0",
+      "schema_sha256": "923f28bd45729008f54eea09281caacf359311f9a7e0486344d41a336a4c3c33"
+    },
+    {
+      "artifact": "ProcessorEvidenceReceipt",
+      "application": "neutral-atom-ftqc-processor-contract",
+      "releases": [
+        "0.4.0"
+      ],
+      "contract_id": "na-ftqc.processor-evidence-receipt",
+      "contract_version": "2.0.0",
+      "schema_sha256": "1e8c164ddabbf1f6a1f0274e3b3225ec2ba81a1a566a33d69d00b91e1788ccdb"
+    }
+  ]
+}
