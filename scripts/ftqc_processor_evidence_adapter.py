@@ -40,14 +40,14 @@ def _load_reviewed_producers(path: Path = REVIEWED_PRODUCERS_PATH) -> tuple[dict
     except (OSError, json.JSONDecodeError) as exc:
         raise RuntimeError(f"reviewed FTQC producer registry is unavailable or invalid: {exc}") from exc
     if not isinstance(registry, dict):
-        raise RuntimeError("reviewed FTQC producer registry must be a JSON object")
+        raise TypeError("reviewed FTQC producer registry must be a JSON object")
     if registry.get("format") != "bn7.fma.ftqc-reviewed-producers/0.1":
         raise RuntimeError("unsupported reviewed FTQC producer registry format")
     if registry.get("authority") != "HUMAN_REVIEW_REQUIRED_FOR_CHANGES":
         raise RuntimeError("reviewed FTQC producer registry authority boundary is invalid")
     reviewed = registry.get("reviewed")
     if not isinstance(reviewed, list):
-        raise RuntimeError("reviewed FTQC producer registry entries must be an array")
+        raise TypeError("reviewed FTQC producer registry entries must be an array")
 
     expected = {
         "ExperimentResult": (
@@ -64,7 +64,7 @@ def _load_reviewed_producers(path: Path = REVIEWED_PRODUCERS_PATH) -> tuple[dict
     by_artifact: dict[str, dict[str, set[str]]] = {}
     for entry in reviewed:
         if not isinstance(entry, dict):
-            raise RuntimeError("reviewed FTQC producer entry must be an object")
+            raise TypeError("reviewed FTQC producer entry must be an object")
         artifact = entry.get("artifact")
         if artifact not in expected or artifact in by_artifact:
             raise RuntimeError("reviewed FTQC producer registry has an unsupported or duplicate artifact entry")
