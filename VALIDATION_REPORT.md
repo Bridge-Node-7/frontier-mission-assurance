@@ -1,6 +1,6 @@
-# Source Validation Report — v0.11.0
+# Source Validation Report — v0.11.1
 
-**Date:** 2026-09-17  
+**Date:** 2026-09-21  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
 
 This report defines deterministic validation requirements for the source. Release-specific hosted evidence is recorded in GitHub Actions and release metadata. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
@@ -74,13 +74,15 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.11.0 source retains FTQC Assurance profile contract `0.2` and adds bounded external technical-evidence adoption. Release eligibility requires:
+The v0.11.1 source retains FTQC Assurance profile contract `0.2` and the bounded external technical-evidence adapter, while separating portable contract identity from application version and externalizing explicitly reviewed producer releases into a governed registry. Release eligibility requires:
 
 - reviewed ExperimentResult and ProcessorEvidenceReceipt artifacts fail closed on wrong trusted artifact SHA-256;
 - externally supplied producer schemas must match the exact reviewed schema SHA-256 values before JSON Schema validation;
 - ExperimentResult internal integrity and ProcessorEvidenceReceipt payload integrity must verify independently;
 - the processor receipt must bind exactly one input artifact and that linkage must match the supplied ExperimentResult identity and SHA-256;
 - unreviewed future producer releases fail closed even when contract identity is unchanged;
+- root `INTERFACES.json` exact schema SHA-256 values must match the producer-owned portable contract bytes;
+- the FTQC reviewed-producer registry must retain `HUMAN_REVIEW_REQUIRED_FOR_CHANGES` and exact contract/schema identities;
 - current generated decoder-backlog model evidence maps to `SIMULATED / NOT_ASSESSED / DECLARED`;
 - reproduced evidence may map to `REPRODUCED` without promoting authority;
 - cross-architecture technical evidence maps to applicability `REVIEW_REQUIRED`;
