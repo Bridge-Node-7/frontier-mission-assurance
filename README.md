@@ -56,9 +56,10 @@ That distinction is the product: **expose what became invalid without manufactur
 1. **Evaluate the public reference** — [`docs/FIVE_MINUTE_EVALUATION.md`](docs/FIVE_MINUTE_EVALUATION.md)
 2. **Apply FMA around one consequential decision** — [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md)
 3. **Wrap work you already own** — [`docs/EXTERNAL_RESEARCH_ADOPTION.md`](docs/EXTERNAL_RESEARCH_ADOPTION.md)
-4. **Build the smallest reviewable decision basis** — [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md)
-5. **Install a published stable release** — [`docs/INSTALL_STABLE_RELEASE.md`](docs/INSTALL_STABLE_RELEASE.md)
-6. **Understand evaluation and governed-use boundaries** — [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md)
+4. **Follow the FTQC decision-to-reassessment golden path** — [`docs/FTQC_GOLDEN_PATH.md`](docs/FTQC_GOLDEN_PATH.md)
+5. **Build the smallest reviewable decision basis** — [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md)
+6. **Install a published stable release** — [`docs/INSTALL_STABLE_RELEASE.md`](docs/INSTALL_STABLE_RELEASE.md)
+7. **Understand evaluation and governed-use boundaries** — [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md)
 
 For bounded automation use, see [`docs/AUTOMATION_USE.md`](docs/AUTOMATION_USE.md).
 
