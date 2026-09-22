@@ -74,6 +74,16 @@ def test_stable_release_requires_explicit_main_dispatch():
     assert "      contents: write" in workflow
 
 
+def test_stable_release_fails_before_publication_without_immutability():
+    workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(
+        encoding="utf-8"
+    )
+    assert "Require immutable-release protection before publication" in workflow
+    assert 'immutable-releases' in workflow
+    assert "--jq '.enabled'" in workflow
+    assert workflow.index("Require immutable-release protection before publication") < workflow.index("Publish GitHub Release")
+
+
 def test_release_identity_is_consistent():
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     assert re.fullmatch(r"\d+\.\d+\.\d+", version)

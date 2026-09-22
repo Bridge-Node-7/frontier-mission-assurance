@@ -1,51 +1,36 @@
-# Source Release Receipt — v0.11.0
+# Source Release Receipt — v0.11.1
 
-**Release type:** stable public reference release  
-**Date:** 2026-09-18  
-**Validation status:** READY
+**Release type:** stable public reference candidate  
+**Date:** 2026-09-21  
+**Validation status:** READY FOR HOSTED VALIDATION; PUBLICATION REQUIRES IMMUTABLE-RELEASE PROTECTION
 
 ## Purpose
 
-Add a bounded FTQC technical-evidence consumer while preserving the separation
-between evidence production, processor technical evaluation, institutional
-assurance, downstream decision preparation, and accountable human authority.
+Reduce cross-repository maintenance while preserving the fail-closed FTQC technical-evidence boundary, exact contract identity, explicit producer review, and accountable human authority.
 
-## Material changes in v0.11.0
+## Material changes in v0.11.1
 
-- Added exact-artifact and exact-schema verification for reviewed
-  `ExperimentResult 2.0.0` plus linked `ProcessorEvidenceReceipt 2.0.0`.
-- Added explicit reviewed producer-release gates.
-- Added structural-integrity, one-input linkage, and architecture-consistency checks.
-- Mapped current generated decoder-backlog model evidence to
-  `SIMULATED / NOT_ASSESSED / DECLARED`.
-- Preserved cross-architecture evidence as `REVIEW_REQUIRED`.
-- Preserved positive technical evidence as `RE-EVALUATION_OPPORTUNITY`, never
-  automatic approval.
-- Reused FTQC profile contract `0.2` and assurance-context `0.1.0`.
-- Kept producer-owned schema bytes outside the public FMA source tree; exact
-  reviewed schema digests are verified against supplied schema files.
+- Added low-churn `INTERFACES.json` declarations for the FMA Assurance Graph, Decision Receipt, assurance-context, and bounded FTQC input contracts.
+- Separated portable contract versions and exact schema SHA-256 values from the FMA application version.
+- Moved reviewed FTQC producer releases into a governed, human-review-required compatibility registry.
+- Preserved exact schema/artifact integrity checks, one-input linkage, architecture consistency, evidence-class mapping, applicability semantics, and future-release fail-closed behavior.
+- Added a release preflight that prevents a future stable publication unless repository immutable-release protection is enabled.
+- Preserved FTQC profile contract `0.2`, assurance-context `0.1.0`, browser/user-facing behavior, and human consequential authority.
 
 ## Source-level evidence
 
-Release eligibility requires the full deterministic FMA validation surface plus
-the FTQC processor-evidence adapter regressions to remain green.
+Release eligibility requires the full deterministic FMA validation surface plus the interface-manifest, reviewed-producer-registry, and FTQC processor-evidence adapter regressions to remain green.
 
-The adapter establishes only structural integrity, reviewed interface identity,
-bounded evidence classification, and declared applicability semantics. It does
-not establish quantum truth, real hardware performance, independent V&V,
-certification, government readiness, or consequential decision authority.
-
-## Release surface
-
-The public reference includes the adapter, contracts, source-neutral examples,
-and validation evidence required to evaluate the released behavior. Operational
-case evidence remains referenced at its authoritative source rather than copied
-into the repository.
+These controls establish only declared interoperability, integrity, reviewed implementation compatibility, and bounded assurance semantics. They do not establish quantum truth, hardware performance, independent V&V, certification, government readiness, or consequential decision authority.
 
 ## Hosted evidence rule
 
 Hosted validation evidence is recorded in GitHub Actions and release metadata.
 
+## Publication gate
+
+The v0.11.1 source may be merged after native V&V passes. The Stable Release workflow must fail before publication unless GitHub immutable-release protection is enabled for future releases. Historical v0.11.0 is preserved as published.
+
 ## Validation status
 
-The v0.11.0 source is **READY** after required hosted validation completed successfully. This status attests only to the declared source, packaging, profile, adapter, and validation controls; it does not expand the authority or claims described above.
+The source candidate is **READY** when required native CI passes. Publication remains a separate governed action and must not occur until the immutable-release setting is verified.

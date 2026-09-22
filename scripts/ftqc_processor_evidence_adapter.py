@@ -28,10 +28,69 @@ PROCESSOR_CONTRACT_ID = "na-ftqc.processor-evidence-receipt"
 PROCESSOR_CONTRACT_VERSION = "2.0.0"
 PROCESSOR_SCHEMA_SHA256 = "1e8c164ddabbf1f6a1f0274e3b3225ec2ba81a1a566a33d69d00b91e1788ccdb"
 
-REVIEWED_EXPERIMENT_PRODUCERS = {"naftk": {"0.5.0"}}
-REVIEWED_PROCESSOR_PRODUCERS = {
-    "neutral-atom-ftqc-processor-contract": {"0.4.0"}
-}
+ROOT = Path(__file__).resolve().parents[1]
+REVIEWED_PRODUCERS_PATH = (
+    ROOT / "profiles" / "ftqc-assurance" / "compatibility" / "reviewed-producers.json"
+)
+
+
+def _load_reviewed_producers(path: Path = REVIEWED_PRODUCERS_PATH) -> tuple[dict[str, set[str]], dict[str, set[str]]]:
+    try:
+        registry = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"reviewed FTQC producer registry is unavailable or invalid: {exc}") from exc
+    if not isinstance(registry, dict):
+        raise TypeError("reviewed FTQC producer registry must be a JSON object")
+    if registry.get("format") != "bn7.fma.ftqc-reviewed-producers/0.1":
+        raise RuntimeError("unsupported reviewed FTQC producer registry format")
+    if registry.get("authority") != "HUMAN_REVIEW_REQUIRED_FOR_CHANGES":
+        raise RuntimeError("reviewed FTQC producer registry authority boundary is invalid")
+    reviewed = registry.get("reviewed")
+    if not isinstance(reviewed, list):
+        raise TypeError("reviewed FTQC producer registry entries must be an array")
+
+    expected = {
+        "ExperimentResult": (
+            EXPERIMENT_CONTRACT_ID,
+            EXPERIMENT_CONTRACT_VERSION,
+            EXPERIMENT_SCHEMA_SHA256,
+        ),
+        "ProcessorEvidenceReceipt": (
+            PROCESSOR_CONTRACT_ID,
+            PROCESSOR_CONTRACT_VERSION,
+            PROCESSOR_SCHEMA_SHA256,
+        ),
+    }
+    by_artifact: dict[str, dict[str, set[str]]] = {}
+    for entry in reviewed:
+        if not isinstance(entry, dict):
+            raise TypeError("reviewed FTQC producer entry must be an object")
+        artifact = entry.get("artifact")
+        if artifact not in expected or artifact in by_artifact:
+            raise RuntimeError("reviewed FTQC producer registry has an unsupported or duplicate artifact entry")
+        contract_id, contract_version, schema_sha256 = expected[artifact]
+        if (
+            entry.get("contract_id") != contract_id
+            or entry.get("contract_version") != contract_version
+            or entry.get("schema_sha256") != schema_sha256
+        ):
+            raise RuntimeError(f"{artifact} registry contract identity does not match the reviewed adapter contract")
+        application = entry.get("application")
+        releases = entry.get("releases")
+        if not isinstance(application, str) or not application or not isinstance(releases, list) or not releases:
+            raise RuntimeError(f"{artifact} registry producer identity is incomplete")
+        if any(not isinstance(item, str) or not item for item in releases):
+            raise RuntimeError(f"{artifact} registry releases must be non-empty strings")
+        if len(set(releases)) != len(releases):
+            raise RuntimeError(f"{artifact} registry releases must be unique")
+        by_artifact[artifact] = {application: set(releases)}
+
+    if set(by_artifact) != set(expected):
+        raise RuntimeError("reviewed FTQC producer registry must cover both bounded input artifacts")
+    return by_artifact["ExperimentResult"], by_artifact["ProcessorEvidenceReceipt"]
+
+
+REVIEWED_EXPERIMENT_PRODUCERS, REVIEWED_PROCESSOR_PRODUCERS = _load_reviewed_producers()
 EVIDENCE_CLASS_BY_KIND = {"decoder_backlog": "SIMULATED"}
 
 _HEX = set("0123456789abcdef")

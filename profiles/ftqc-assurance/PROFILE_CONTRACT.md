@@ -49,6 +49,8 @@ Contract 0.2 supports case directories using the same six-file shape as the publ
 
 ## External technical-evidence adoption
 
+FMA 0.11.1 keeps the 0.11.0 adapter semantics unchanged but moves reviewed producer-release compatibility into `compatibility/reviewed-producers.json`. Contract identity and exact schema SHA-256 remain code-enforced; the registry only records which producer releases have completed explicit review. A future producer release remains rejected until the registry is deliberately reviewed and updated.
+
 FMA 0.11.0 adds a bounded adapter for reviewed FTQC ExperimentResult and
 ProcessorEvidenceReceipt artifacts. The producer-owned schemas remain external;
 FMA verifies exact reviewed schema digests plus trusted artifact SHA-256 values
