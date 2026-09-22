@@ -11,11 +11,6 @@ from scripts import ftqc_processor_evidence_adapter as adapter
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MODULE_PATH = ROOT / "scripts" / "ftqc_processor_evidence_adapter.py"
-SPEC = importlib.util.spec_from_file_location("ftqc_processor_evidence_adapter_contract_test", MODULE_PATH)
-assert SPEC and SPEC.loader
-adapter = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(adapter)
 
 
 def test_interface_manifest_is_low_churn_and_exact() -> None:
