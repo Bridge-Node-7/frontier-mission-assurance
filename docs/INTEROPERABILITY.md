@@ -31,8 +31,7 @@ review-required artifact references, evidence-applicability state, reopened
 expert review, reconsideration conditions, reevaluation opportunities, and
 authoritative record references. The contract explicitly excludes raw evidence.
 
-Consumers must pin the exact FMA release, commit, contract version, and schema
-blob they support. They must preserve `HOLD`, `REVIEW_REQUIRED`, `DECLARED`,
+Consumers must pin the contract version and exact schema identity they support and record the tested FMA release/commit as implementation provenance. An FMA application-version change alone is not a portable-contract change when the declared interface bytes and behavioral conformance remain unchanged. Assurance-producing implementation releases may still require explicit review where the governing integration policy says so. Consumers must preserve `HOLD`, `REVIEW_REQUIRED`, `DECLARED`,
 `EXTERNAL_REPORTED`, and `RE-EVALUATION_OPPORTUNITY` states without promoting
 them to approval, support, establishment, reproduction, or consequential action.
 
@@ -57,6 +56,8 @@ Likewise, a domain decision object may retain objectives, alternatives, scores, 
 Interoperability therefore means **preserve local meaning, map explicit fields, and fail visibly on loss or ambiguity**. It does not mean flattening every Bridge Node 7 repository into one schema.
 
 ## Compatibility rules
+
+Root `INTERFACES.json` is the low-churn machine declaration for BN7 cross-repository boundaries. It deliberately omits the FMA application version. FTQC producer-release review state is separately governed in `profiles/ftqc-assurance/compatibility/reviewed-producers.json`; matching a contract does not auto-trust an unreviewed producer release.
 
 - Producers must preserve declared version fields.
 - Consumers must fail visibly on unsupported contract versions.
