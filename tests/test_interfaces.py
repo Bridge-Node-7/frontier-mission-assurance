@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import copy
 import hashlib
-import importlib.util
 import json
 from pathlib import Path
 
 import pytest
+
+from scripts import ftqc_processor_evidence_adapter as adapter
 
 
 ROOT = Path(__file__).resolve().parents[1]
