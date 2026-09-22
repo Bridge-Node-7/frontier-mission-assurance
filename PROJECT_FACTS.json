@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "maturity": "stable public reference implementation",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -63,5 +63,5 @@
   ],
   "distribution": "GitHub source and stable release workflow; public package-index upload is intentionally blocked by package metadata. Assurance profiles are distributed in the repository/source archive while the core wheel carries the frontier_assurance package and CLI.",
   "evidence_lifecycle": "Deterministic source validation is complemented by release-specific hosted evidence.",
-  "interoperability": "Versioned core schemas use stable identifiers. Richer domain records map into FMA contracts through explicit adapters while preserving local evidence, calibration, acceptance, and decision semantics. FTQC Assurance references authoritative laboratory, modeling, estimator, expert-review, and supplier systems rather than replacing them. FTQC profile contract 0.2 adds a governed case-validation path while retaining external evidence custody and human technical authority. FTQC technical-evidence adoption can verify externally supplied exact producer schemas/artifacts by SHA-256 and map only reviewed semantics into existing profile contract 0.2 while preserving producer authority and human review."
+  "interoperability": "Versioned core schemas use stable identifiers and root INTERFACES.json separates portable contract identity from FMA application version. Richer domain records map into FMA contracts through explicit adapters while preserving local evidence, calibration, acceptance, and decision semantics. FTQC technical-evidence adoption verifies exact producer schemas/artifacts by SHA-256 and requires explicit reviewed-producer registry entries without importing producer implementations or promoting technical status into consequential authority."
 }
