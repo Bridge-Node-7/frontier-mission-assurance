@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.1 — contract-first interoperability and reviewed-producer registry
+
+- Added a low-churn `INTERFACES.json` that separates FMA application version from portable contract identity and exact schema SHA-256.
+- Moved reviewed FTQC producer-release compatibility out of adapter source constants into a governed, human-review-required registry while preserving exact schema, artifact, linkage, integrity, applicability, and authority checks.
+- Kept future producer releases fail-closed until explicitly reviewed.
+- Added release preflight semantics so the next stable FMA publication is blocked unless repository immutable-release protection is enabled.
+- Preserved FTQC profile contract `0.2`, assurance-context `0.1.0`, core graph/decision contracts, UX, and accountable human consequential authority.
+
 ## 0.11.0 — bounded FTQC technical-evidence adoption
 
 - Added a fail-closed source-profile adapter for reviewed `ExperimentResult 2.0.0` plus linked `ProcessorEvidenceReceipt 2.0.0` artifacts.
