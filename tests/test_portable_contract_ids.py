@@ -15,6 +15,9 @@ EXPECTED = {
     "schemas/decision-receipt.schema.json": (
         "https://bridge-node-7.github.io/frontier-mission-assurance/decision-receipt.schema.json"
     ),
+    "schemas/assurance-context.schema.json": (
+        "https://bridge-node-7.github.io/frontier-mission-assurance/assurance-context.schema.json"
+    ),
 }
 
 
