@@ -51,6 +51,17 @@ jobs:
           echo "TAG=$TAG" >> "$GITHUB_ENV"
           echo "RELEASE_SHA=$SHA" >> "$GITHUB_ENV"
 
+      - name: Require immutable-release protection before publication
+        if: env.RELEASE_ELIGIBLE == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENABLED="$(gh api "repos/$GITHUB_REPOSITORY/immutable-releases" --jq '.enabled')"
+          if [[ "$ENABLED" != "true" ]]; then
+            echo "::error::Immutable-release protection must be enabled before publishing $TAG"
+            exit 1
+          fi
+
       - name: Install release toolchain
         if: env.RELEASE_ELIGIBLE == '1'
         run: >-
