@@ -1,0 +1,46 @@
+{
+  "format": "bn7.interfaces/0.1",
+  "system": "frontier-mission-assurance",
+  "provides": [
+    {
+      "contract_id": "https://bridge-node-7.github.io/frontier-mission-assurance/assurance-graph.schema.json",
+      "contract_version": "1.0",
+      "schema_path": "schemas/assurance-graph.schema.json",
+      "sha256": "28be24c589f7b3e26586af58c4a6f413e9398ca784cac95191a928d85a619f85",
+      "authority": "PRODUCER_OWNED_PORTABLE_CONTRACT"
+    },
+    {
+      "contract_id": "https://bridge-node-7.github.io/frontier-mission-assurance/decision-receipt.schema.json",
+      "contract_version": "1.0",
+      "schema_path": "schemas/decision-receipt.schema.json",
+      "sha256": "dd19aad0fb1dd2f877e15d04e5d8812e4e2fe0cccb634c513e62f91148056fcf",
+      "authority": "PRODUCER_OWNED_PORTABLE_CONTRACT"
+    },
+    {
+      "contract_id": "bn7.frontier-mission-assurance.assurance-context",
+      "contract_version": "0.1.0",
+      "schema_id": "https://bridge-node-7.github.io/frontier-mission-assurance/assurance-context.schema.json",
+      "schema_path": "schemas/assurance-context.schema.json",
+      "sha256": "d4345ddfc986cc1a50487f013a91c49dd0cef07fbfa2fad146808d04f249d250",
+      "authority": "PRODUCER_OWNED_PORTABLE_CONTRACT"
+    }
+  ],
+  "accepts": [
+    {
+      "contract_id": "na-ftqc.experiment-result",
+      "contract_version": "2.0.0",
+      "schema_id": "urn:na-ftqc:experiment-result:2.0.0",
+      "sha256": "923f28bd45729008f54eea09281caacf359311f9a7e0486344d41a336a4c3c33",
+      "compatibility_registry": "profiles/ftqc-assurance/compatibility/reviewed-producers.json",
+      "authority": "EXACT_CONTRACT_PLUS_EXPLICIT_PRODUCER_REVIEW"
+    },
+    {
+      "contract_id": "na-ftqc.processor-evidence-receipt",
+      "contract_version": "2.0.0",
+      "schema_id": "urn:na-ftqc:processor-evidence-receipt:2.0.0",
+      "sha256": "1e8c164ddabbf1f6a1f0274e3b3225ec2ba81a1a566a33d69d00b91e1788ccdb",
+      "compatibility_registry": "profiles/ftqc-assurance/compatibility/reviewed-producers.json",
+      "authority": "EXACT_CONTRACT_PLUS_EXPLICIT_PRODUCER_REVIEW"
+    }
+  ]
+}
