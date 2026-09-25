@@ -24,7 +24,7 @@ Start with:
 
 ```text
 one consequential decision
-one frozen system or research revision
+one exact system or research revision
 1–3 controlling claims or requirements
 only the critical assumptions
 only the decision-relevant evidence references
