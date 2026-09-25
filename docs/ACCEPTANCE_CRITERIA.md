@@ -69,7 +69,7 @@ An independent user starting from a clean supported environment shall be able to
 
 ## AC-16 — Release provenance
 
-The public release record shall bind the accepted tag to the exact passing commit, successful hosted V&V run, source archive, wheel, and external SHA-256 manifest. The frozen source archive shall reconstruct to the exact accepted Git tree.
+The public release record shall bind the accepted tag to the exact passing commit, successful hosted V&V run, source archive, wheel, and external SHA-256 manifest. The source archive shall reconstruct to the exact accepted Git tree.
 
 ## AC-17 — Scientific Discovery Assurance
 
