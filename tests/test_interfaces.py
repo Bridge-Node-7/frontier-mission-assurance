@@ -26,12 +26,15 @@ def test_interface_manifest_is_low_churn_and_exact() -> None:
     for entry in manifest["provides"]:
         path = ROOT / entry["schema_path"]
         assert hashlib.sha256(path.read_bytes()).hexdigest() == entry["sha256"]
+        assert entry["authority"] == "PRODUCER_OWNED_PORTABLE_CONTRACT"
 
     accepted = {item["contract_id"]: item for item in manifest["accepts"]}
     assert accepted["na-ftqc.experiment-result"]["contract_version"] == "2.0.0"
     assert accepted["na-ftqc.experiment-result"]["sha256"] == adapter.EXPERIMENT_SCHEMA_SHA256
+    assert accepted["na-ftqc.experiment-result"]["authority"] == "EXACT_CONTRACT_PLUS_EXPLICIT_PRODUCER_REVIEW"
     assert accepted["na-ftqc.processor-evidence-receipt"]["contract_version"] == "2.0.0"
     assert accepted["na-ftqc.processor-evidence-receipt"]["sha256"] == adapter.PROCESSOR_SCHEMA_SHA256
+    assert accepted["na-ftqc.processor-evidence-receipt"]["authority"] == "EXACT_CONTRACT_PLUS_EXPLICIT_PRODUCER_REVIEW"
 
 
 def test_reviewed_producer_registry_preserves_explicit_human_review_boundary(tmp_path: Path) -> None:
