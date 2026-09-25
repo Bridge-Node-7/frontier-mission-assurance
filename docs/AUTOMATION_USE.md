@@ -29,7 +29,7 @@ request human review for judgment-bearing semantics
 ## Required rules
 
 1. Preserve authoritative sources. Do not rewrite an external repository, paper, experiment, or governed record merely to fit FMA.
-2. Freeze source identity before drawing conclusions from an artifact that can change.
+2. Record exact source identity before drawing conclusions from an artifact that can change.
 3. Distinguish **reported**, **verified**, **reproduced**, **replicated**, and **applicable** states. Do not collapse them into one confidence label.
 4. Use the narrowest relevant profile. Core FMA remains valid without a profile.
 5. Never equate successful reproduction with scientific truth.
