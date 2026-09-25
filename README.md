@@ -95,7 +95,7 @@ For an existing repository, paper, model, simulation, experiment, or external ex
 ```text
 existing work
     ↓
-freeze exact source state
+capture exact source state
     ↓
 identify the claim or result that matters
     ↓
