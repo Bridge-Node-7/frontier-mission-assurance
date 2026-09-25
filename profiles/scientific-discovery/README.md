@@ -65,6 +65,7 @@ scientific conclusion.
 ## Verify
 
 ```bash
+python -m pip install "jsonschema==4.26.0"
 python scripts/validate_scientific_discovery.py .
 ```
 
