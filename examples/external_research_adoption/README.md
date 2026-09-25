@@ -22,7 +22,7 @@ ACCOUNTABLE REVIEW
 The synthetic sidecar records:
 
 - a reported paper/result identity;
-- a frozen synthetic source revision;
+- an exact synthetic source revision;
 - the relationship that still needs review between the reported result and implementation;
 - an unresolved reproduction-environment assumption;
 - an unresolved applicability assumption;

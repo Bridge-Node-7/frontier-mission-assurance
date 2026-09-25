@@ -15,7 +15,7 @@ Use this path when the important artifact already lives in source control.
 ```text
 existing repository
         ↓
-freeze exact revision
+pin exact revision
         ↓
 identify the result or claim that matters
         ↓
@@ -101,7 +101,7 @@ Do not infer that a repository reproduces every claim in a paper simply because 
 
 ## Model or simulation
 
-Freeze the model identity and configuration that produced the result under review. Keep model correctness separate from execution integrity.
+Record the model identity and configuration that produced the result under review. Keep model correctness separate from execution integrity.
 
 A useful sidecar records:
 

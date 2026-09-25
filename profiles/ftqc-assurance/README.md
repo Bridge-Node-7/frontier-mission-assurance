@@ -106,7 +106,7 @@ The synthetic neutral-atom reference is an **Algorithm-to-Atom view** of this mo
 
 Profile contract `0.2` uses four bounded contracts:
 
-- **FTQC System Concept** — freezes the architecture revision, mission question, workload, and declared assumptions under review.
+- **FTQC System Concept** — records the architecture revision, mission question, workload, and declared assumptions under review.
 - **Resource Estimate Receipt** — records the meaning, assumptions, result, and applicability of a resource-estimation output without replacing computational provenance.
 - **Evidence Validity Envelope** — records where evidence applies, what establishes that applicability, and whether it is decision-gating.
 - **Expert Adjudication Record** — records the scope, class, evidence, uncertainties, exclusions, and reopen triggers of qualified domain judgment.
