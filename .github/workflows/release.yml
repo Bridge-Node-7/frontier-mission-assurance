@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   prepare:
-    name: Prepare stable release
+    name: Validate and build release candidate
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -40,7 +40,7 @@ jobs:
         run: |
           set -euo pipefail
           VERSION="$(tr -d '\r\n' < VERSION)"
-          SHA="${{ github.sha }}"
+          SHA="$(git rev-parse HEAD)"
           if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "release_eligible=0" >> "$GITHUB_OUTPUT"
             exit 0
@@ -54,20 +54,6 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "release_sha=$SHA" >> "$GITHUB_OUTPUT"
-          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-          echo "TAG=$TAG" >> "$GITHUB_ENV"
-          echo "RELEASE_SHA=$SHA" >> "$GITHUB_ENV"
-
-      - name: Require immutable-release protection before publication
-        if: steps.identity.outputs.release_eligible == '1'
-        shell: bash
-        run: |
-          set -euo pipefail
-          ENABLED="$(gh api "repos/$GITHUB_REPOSITORY/immutable-releases" --jq '.enabled')"
-          if [[ "$ENABLED" != "true" ]]; then
-            echo "::error::Immutable-release protection must be enabled before publishing $TAG"
-            exit 1
-          fi
 
       - name: Install release toolchain
         if: steps.identity.outputs.release_eligible == '1'
@@ -93,6 +79,9 @@ jobs:
 
       - name: Build release artifacts, SBOM, and manifests
         if: steps.identity.outputs.release_eligible == '1'
+        env:
+          VERSION: ${{ steps.identity.outputs.version }}
+          RELEASE_SHA: ${{ steps.identity.outputs.release_sha }}
         shell: bash
         run: |
           set -euo pipefail
@@ -112,20 +101,24 @@ jobs:
               "FMA-v${VERSION}-SOURCE-SHA256SUMS" \
               "FMA-v${VERSION}-SBOM.cdx.json" \
               > "FMA-v${VERSION}-SHA256SUMS"
-            sha256sum -c "FMA-v${VERSION}-SHA256SUMS"
           )
 
-      - name: Upload prepared release artifacts
+      - name: Upload validated release candidate
         if: steps.identity.outputs.release_eligible == '1'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: fma-stable-release-candidate
-          path: dist/
+          name: stable-release-candidate
+          path: |
+            dist/frontier-mission-assurance-v${{ steps.identity.outputs.version }}.zip
+            dist/frontier_mission_assurance-${{ steps.identity.outputs.version }}-py3-none-any.whl
+            dist/FMA-v${{ steps.identity.outputs.version }}-SOURCE-SHA256SUMS
+            dist/FMA-v${{ steps.identity.outputs.version }}-SBOM.cdx.json
+            dist/FMA-v${{ steps.identity.outputs.version }}-SHA256SUMS
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 7
 
   publish:
-    name: Publish stable release
+    name: Publish validated release
     needs: prepare
     if: needs.prepare.outputs.release_eligible == '1'
     runs-on: ubuntu-latest
@@ -140,13 +133,23 @@ jobs:
       TAG: ${{ needs.prepare.outputs.tag }}
       RELEASE_SHA: ${{ needs.prepare.outputs.release_sha }}
     steps:
-      - name: Download prepared release artifacts
+      - name: Require immutable-release protection before publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENABLED="$(gh api "repos/$GITHUB_REPOSITORY/immutable-releases" --jq '.enabled')"
+          if [[ "$ENABLED" != "true" ]]; then
+            echo "::error::Immutable-release protection must be enabled before publishing $TAG"
+            exit 1
+          fi
+
+      - name: Download validated release candidate
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: fma-stable-release-candidate
+          name: stable-release-candidate
           path: dist
 
-      - name: Verify prepared artifact checksums
+      - name: Verify candidate checksums
         shell: bash
         run: |
           set -euo pipefail
@@ -164,20 +167,23 @@ jobs:
           subject-path: dist/frontier_mission_assurance-${{ env.VERSION }}-py3-none-any.whl
           sbom-path: dist/FMA-v${{ env.VERSION }}-SBOM.cdx.json
 
+      - name: Verify local artifact attestations
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh attestation verify "dist/frontier_mission_assurance-${VERSION}-py3-none-any.whl" --repo "$GITHUB_REPOSITORY"
+          gh attestation verify "dist/frontier-mission-assurance-v${VERSION}.zip" --repo "$GITHUB_REPOSITORY"
+
       - name: Publish GitHub Release
         shell: bash
         run: |
           set -euo pipefail
-          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >/dev/null 2>&1; then
-            echo "::error::Release tag $TAG appeared after preparation; refusing to overwrite."
-            exit 1
-          fi
           cat > release-notes.md <<EOF
           Frontier Mission Assurance v${VERSION} is a stable public reference release for evidence-native verification, validation, reproducibility, traceability, and mission assurance.
 
           This release is bound to an exact protected-main commit and includes verified source and wheel artifacts, SHA-256 manifests, a CycloneDX SBOM, and GitHub build-provenance attestations. See CHANGELOG.md for material changes.
 
-          Release ceremony run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${{ github.run_id }}
+          Release ceremony run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
           Commit: ${RELEASE_SHA}
 
           Verification scope: a PASS attests that the declared controls satisfied their acceptance criteria. Scientific validity, regulatory approval, safety acceptance, mission qualification, and consequential decision authority remain with the governing processes responsible for those determinations.
@@ -194,9 +200,10 @@ jobs:
           TAG_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
           [[ "$TAG_SHA" == "$RELEASE_SHA" ]]
 
-  verify-published:
-    name: Verify published stable release
+  verify:
+    name: Verify published release
     needs: [prepare, publish]
+    if: needs.prepare.outputs.release_eligible == '1'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -205,12 +212,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       VERSION: ${{ needs.prepare.outputs.version }}
       TAG: ${{ needs.prepare.outputs.tag }}
-      RELEASE_SHA: ${{ needs.prepare.outputs.release_sha }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ needs.prepare.outputs.release_sha }}
-          persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
@@ -248,8 +250,8 @@ jobs:
           "$VERIFY/.venv/bin/python" scripts/validate_orbital_recovery_assurance.py .
           "$VERIFY/.venv/bin/python" scripts/validate_ftqc_assurance.py .
           "$VERIFY/.venv/bin/python" scripts/evaluate_ftqc_reference.py .
-          PYTHONPATH=src "$VERIFY/.venv/bin/python" scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
-          PYTHONPATH=src "$VERIFY/.venv/bin/python" scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
+          "$VERIFY/.venv/bin/python" scripts/validate_ftqc_case.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline --report build/ftqc-case-decision-basis.md
+          "$VERIFY/.venv/bin/python" scripts/compare_ftqc_cases.py profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline profiles/ftqc-assurance/examples/synthetic-neutral-atom/changed-assumption-case --report build/ftqc-change-impact.md
           "$VERIFY/.venv/bin/fma" reproduce examples/research_receipt/receipt.yaml --timeout 30
           "$VERIFY/.venv/bin/fma" receipt examples/research_receipt_v3_external/receipt.yaml
           grep -Fq "CLAIM-CYCLE-TARGET" build/assurance-report.md
