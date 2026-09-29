@@ -63,13 +63,21 @@ def test_github_actions_are_immutably_pinned():
     assert not floating, "\n".join(floating)
 
 
-def test_stable_release_requires_explicit_main_dispatch():
+def test_stable_release_starts_after_validated_main_and_keeps_manual_recovery():
     workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(
         encoding="utf-8"
     )
     assert "  workflow_dispatch:" in workflow
-    assert "workflow_run:" not in workflow
-    assert "if: github.ref == 'refs/heads/main'" in workflow
+    assert "  workflow_run:" in workflow
+    assert '    workflows: ["V&V CI"]' in workflow
+    assert "    types: [completed]" in workflow
+    assert "    branches: [main]" in workflow
+    assert "github.event.workflow_run.conclusion == 'success'" in workflow
+    assert "github.event.workflow_run.event == 'push'" in workflow
+    assert "github.event.workflow_run.head_branch == 'main'" in workflow
+    assert "RELEASE_CANDIDATE_SHA:" in workflow
+    assert "github.event.workflow_run.head_sha || github.sha" in workflow
+    assert 'SHA="$RELEASE_CANDIDATE_SHA"' in workflow
     assert "permissions:\n  contents: read" in workflow
     assert "      contents: write" in workflow
 
