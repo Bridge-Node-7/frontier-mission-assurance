@@ -84,7 +84,7 @@ A technical leader should be able to answer five questions without reconstructin
 2. **Which claims are supported by direct evidence, and which still depend on assumptions?**
 3. **Which important results have been freshly reproduced or independently challenged?**
 4. **What decisions or interfaces are affected when a dependency changes?**
-5. **What decision can an accountable human justify now—and what would make that decision reopen?**
+5. **What decision does the evidence justify now—and what would make that decision reopen?**
 
 The useful output is not a bigger graph. It is less hidden uncertainty around a consequential decision.
 
