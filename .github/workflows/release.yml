@@ -45,6 +45,18 @@ jobs:
             echo "release_eligible=0" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+
+          REMOTE_MAIN="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if [[ "$REMOTE_MAIN" != "$SHA" ]]; then
+            echo "::error::Stable release must target the current remote main commit."
+            exit 1
+          fi
+          VERIFIED="$(gh api "repos/$GITHUB_REPOSITORY/commits/$SHA" --jq '.commit.verification.verified and (.commit.verification.reason == "valid")')"
+          if [[ "$VERIFIED" != "true" ]]; then
+            echo "::error::Stable release commit must be GitHub-verified."
+            exit 1
+          fi
+
           TAG="v$VERSION"
           if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >/dev/null 2>&1; then
             echo "release_eligible=0" >> "$GITHUB_OUTPUT"
@@ -178,6 +190,32 @@ jobs:
             echo "::error::Release tag $TAG appeared after preparation; refusing to overwrite."
             exit 1
           fi
+
+          REMOTE_MAIN="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          [[ "$REMOTE_MAIN" == "$RELEASE_SHA" ]]
+          VERIFIED="$(gh api "repos/$GITHUB_REPOSITORY/commits/$RELEASE_SHA" --jq '.commit.verification.verified and (.commit.verification.reason == "valid")')"
+          [[ "$VERIFIED" == "true" ]]
+
+          TAG_OBJECT_SHA="$(
+            gh api --method POST "repos/$GITHUB_REPOSITORY/git/tags" \
+              -f tag="$TAG" \
+              -f message="Frontier Mission Assurance $TAG" \
+              -f object="$RELEASE_SHA" \
+              -f type="commit" \
+              --jq '.sha'
+          )"
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" \
+            -f ref="refs/tags/$TAG" \
+            -f sha="$TAG_OBJECT_SHA" \
+            >/dev/null
+
+          REF_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
+          REF_TYPE="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.type')"
+          TARGET_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$TAG_OBJECT_SHA" --jq '.object.sha')"
+          [[ "$REF_TYPE" == "tag" ]]
+          [[ "$REF_SHA" == "$TAG_OBJECT_SHA" ]]
+          [[ "$TARGET_SHA" == "$RELEASE_SHA" ]]
+
           cat > release-notes.md <<EOF
           Frontier Mission Assurance v${VERSION} is a stable public reference release for evidence-native verification, validation, reproducibility, traceability, and mission assurance.
 
@@ -190,15 +228,19 @@ jobs:
 
           License posture: All Rights Reserved. No reuse license is granted by this release.
           EOF
-          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$RELEASE_SHA" \
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --verify-tag \
             --title "Frontier Mission Assurance v${VERSION}" --notes-file release-notes.md \
             "dist/frontier-mission-assurance-v${VERSION}.zip" \
             "dist/frontier_mission_assurance-${VERSION}-py3-none-any.whl" \
             "dist/FMA-v${VERSION}-SOURCE-SHA256SUMS" \
             "dist/FMA-v${VERSION}-SBOM.cdx.json" \
             "dist/FMA-v${VERSION}-SHA256SUMS"
-          TAG_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
-          [[ "$TAG_SHA" == "$RELEASE_SHA" ]]
+
+          TAG_REF_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
+          TAG_REF_TYPE="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.type')"
+          TAG_TARGET_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$TAG_REF_SHA" --jq '.object.sha')"
+          [[ "$TAG_REF_TYPE" == "tag" ]]
+          [[ "$TAG_TARGET_SHA" == "$RELEASE_SHA" ]]
 
   verify-published:
     name: Verify published stable release
@@ -225,6 +267,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          VERIFIED="$(gh api "repos/$GITHUB_REPOSITORY/commits/$RELEASE_SHA" --jq '.commit.verification.verified and (.commit.verification.reason == "valid")')"
+          [[ "$VERIFIED" == "true" ]]
+          TAG_REF_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
+          TAG_REF_TYPE="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.type')"
+          TAG_TARGET_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$TAG_REF_SHA" --jq '.object.sha')"
+          [[ "$TAG_REF_TYPE" == "tag" ]]
+          [[ "$TAG_TARGET_SHA" == "$RELEASE_SHA" ]]
+
           VERIFY="$RUNNER_TEMP/fma-release-verify"
           mkdir -p "$VERIFY"
           cd "$VERIFY"
