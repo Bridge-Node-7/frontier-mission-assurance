@@ -196,3 +196,64 @@ def test_report_does_not_turn_undeclared_assumptions_into_no_assumptions_claim()
     report = render_markdown_report(graph)
     assert "No unresolved assumptions are **declared** in this graph" in report
     assert "does not establish that no real-world assumptions exist" in report
+
+
+def test_numeric_graph_version_is_rejected(tmp_path):
+    """FMA-GRAPH-01 / AC-13: the schema declares {"const": "1.0"} (string).
+
+    str() coercion previously accepted YAML numeric 1.0, diverging runtime
+    validation from the published contract.
+    """
+    from frontier_assurance.validate import validate_graph
+
+    graph = {
+        "graph_version": 1.0,
+        "nodes": [{"id": "M1", "kind": "mission", "title": "t", "status": "open"}],
+        "edges": [],
+    }
+    result = validate_graph(graph)
+    assert not result.ok
+    assert any("graph_version" in e for e in result.errors)
+
+    graph["graph_version"] = "1.0"
+    assert validate_graph(graph).ok
+
+
+def test_missing_graph_version_is_rejected_with_a_distinct_message():
+    """Absent and invalid graph_version must be distinguishable diagnostics."""
+    from frontier_assurance.validate import validate_graph
+
+    result = validate_graph(
+        {"nodes": [{"id": "M1", "kind": "mission", "title": "t", "status": "open"}], "edges": []}
+    )
+    assert not result.ok
+    assert any("graph_version is required" in e for e in result.errors)
+
+
+def test_boolean_criticality_is_rejected():
+    """FMA-CONTRACT-03: JSON Schema does not treat booleans as numbers.
+
+    isinstance(True, int) is True in Python, so `criticality: true` was
+    silently accepted as 1.
+    """
+    from frontier_assurance.validate import validate_graph
+
+    graph = {
+        "graph_version": "1.0",
+        "nodes": [
+            {
+                "id": "M1",
+                "kind": "mission",
+                "title": "t",
+                "status": "open",
+                "criticality": True,
+            }
+        ],
+        "edges": [],
+    }
+    result = validate_graph(graph)
+    assert not result.ok
+    assert any("criticality" in e for e in result.errors)
+
+    graph["nodes"][0]["criticality"] = 3
+    assert validate_graph(graph).ok

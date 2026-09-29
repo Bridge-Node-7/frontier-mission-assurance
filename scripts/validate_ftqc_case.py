@@ -127,7 +127,10 @@ def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dic
         metadata = {}
     if metadata.get("profile") != "ftqc-assurance":
         errors.append("assurance-graph.yaml: metadata.profile must be ftqc-assurance")
-    if str(metadata.get("profile_version")) != PROFILE_VERSION:
+    # FMA-CONTRACT: the profile contract declares profile_version as the
+    # string "0.2". str() coercion accepted YAML numeric 0.2, the same
+    # runtime/contract divergence closed for graph/decision/receipt versions.
+    if metadata.get("profile_version") != PROFILE_VERSION:
         errors.append(
             f"assurance-graph.yaml: metadata.profile_version must be {PROFILE_VERSION}"
         )

@@ -72,8 +72,17 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
     if extra_root:
         result.errors.append(f"unsupported graph fields: {', '.join(extra_root)}")
 
-    if str(graph.get("graph_version")) != "1.0":
-        result.errors.append("graph_version must be '1.0'")
+    graph_version = graph.get("graph_version")
+    # FMA-GRAPH-01: the published schema declares {"const": "1.0"} (string).
+    # str() coercion accepted numeric 1.0, diverging runtime from contract
+    # in violation of AC-13.
+    if graph_version != "1.0":
+        if graph_version is None:
+            result.errors.append("graph_version is required and must be the string '1.0'")
+        else:
+            result.errors.append(
+                f"graph_version must be the string '1.0', got {graph_version!r}"
+            )
 
     metadata = graph.get("metadata")
     if metadata is not None and not isinstance(metadata, dict):
@@ -115,8 +124,13 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
             )
 
         criticality = node.get("criticality")
+        # FMA-CONTRACT-03: JSON Schema does not treat booleans as numbers, but
+        # isinstance(True, int) is True in Python, so `criticality: true` was
+        # accepted as 1.
         if criticality is not None and (
-            not isinstance(criticality, (int, float)) or not 0 <= float(criticality) <= 5
+            isinstance(criticality, bool)
+            or not isinstance(criticality, (int, float))
+            or not 0 <= float(criticality) <= 5
         ):
             result.errors.append(f"{node_id}: criticality must be between 0 and 5")
 

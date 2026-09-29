@@ -192,7 +192,7 @@ def _validate_external_execution(doc: dict[str, Any], result: Any) -> None:
             )
         return
 
-    version = str(doc.get("receipt_version"))
+    version = doc.get("receipt_version")
     submission = execution.get("submission_receipt")
     collection = execution.get("collection_receipt")
     if not isinstance(submission, dict):
@@ -342,7 +342,7 @@ def _check_map(doc: dict[str, Any], result: Any) -> dict[str, dict[str, Any]]:
 
 
 def validate_v3_shape(doc: dict[str, Any], result: Any) -> None:
-    version = str(doc.get("receipt_version"))
+    version = doc.get("receipt_version")
     acceptance = doc.get("output_acceptance")
     if not isinstance(acceptance, dict):
         result.errors.append(
@@ -488,7 +488,7 @@ def verify_v3_provenance(
     safe_target: Callable[[Path, Any, str, Any], Path | None],
     sha256_file: Callable[[Path], str],
 ) -> None:
-    version = str(doc.get("receipt_version"))
+    version = doc.get("receipt_version")
     acceptance = doc.get("output_acceptance", {})
     mode = acceptance.get("mode")
     outputs = doc.get("outputs", [])

@@ -136,3 +136,35 @@ def test_case_requires_resource_applicability_envelope(tmp_path):
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     errors, _, _ = tool.validate_case(ROOT, case)
     assert "resource-estimate applicability_envelope_ref does not resolve" in errors
+
+
+def test_numeric_profile_version_in_case_metadata_is_rejected(tmp_path):
+    """FMA-CONTRACT: the FTQC profile contract declares profile_version "0.2".
+
+    str() coercion accepted YAML numeric 0.2 and the case validator passed.
+    Found by sweeping for the coercion pattern after the graph, decision and
+    receipt version sites were closed.
+    """
+    import shutil
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    source = root / "profiles/ftqc-assurance/examples/synthetic-neutral-atom/baseline"
+    case = tmp_path / "case"
+    shutil.copytree(source, case)
+
+    graph = case / "assurance-graph.yaml"
+    graph.write_text(
+        graph.read_text(encoding="utf-8").replace('profile_version: "0.2"', "profile_version: 0.2"),
+        encoding="utf-8",
+    )
+
+    completed = subprocess.run(
+        [sys.executable, str(root / "scripts/validate_ftqc_case.py"), str(case),
+         "--report", str(tmp_path / "report.md")],
+        capture_output=True, text=True, cwd=root, timeout=120, check=False,
+    )
+    output = completed.stdout + completed.stderr
+    assert "metadata.profile_version must be" in output, output

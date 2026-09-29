@@ -6,6 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 import yaml
 from jsonschema import Draft202012Validator
 
@@ -338,3 +339,138 @@ def test_invalid_graph_status_lists_sorted_allowed_values():
         "unsupported status 'mystery'" in error and expected in error
         for error in result.errors
     )
+
+
+# --- FMA-NUM-01 / FMA-NUM-02 regressions ------------------------------------
+
+
+def _retune_check(receipt_path: Path, **overrides: object) -> None:
+    document = yaml.safe_load(receipt_path.read_text(encoding="utf-8"))
+    document["checks"][0].update(overrides)
+    receipt_path.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+
+
+def test_v3_non_finite_tolerance_is_rejected(tmp_path: Path):
+    """Infinite or NaN tolerance must never produce a numerical PASS.
+
+    math.isclose(x, y, abs_tol=inf) is unconditionally true, and a NaN
+    tolerance silently degrades to exact equality. YAML resolves .inf/.nan,
+    so both reach the comparison as ordinary floats.
+    """
+    for field in ("atol", "rtol"):
+        for bad in (float("inf"), float("-inf"), float("nan")):
+            path = _write_local_v3(tmp_path, value=99999.0)
+            _retune_check(path, **{field: bad})
+            result = reproduce_receipt(path, timeout=30)
+            assert not result.ok, f"{field}={bad} must not pass"
+            assert any("must be finite" in e or "non-negative" in e for e in result.errors)
+
+
+@pytest.mark.parametrize("literal", ["Infinity", "-Infinity", "NaN"])
+def test_v3_non_finite_observed_value_is_rejected(tmp_path: Path, literal: str):
+    """FMA-NUM-TEST-02: each pathological observed literal locked individually.
+
+    json.loads accepts bare Infinity/-Infinity/NaN even though JSON does not
+    define them, so a producer can emit them without any parse error.
+    """
+    path = _write_local_v3(tmp_path)
+    outputs = tmp_path / "outputs"
+    outputs.mkdir(exist_ok=True)
+    (outputs / "result.json").write_text(f'{{"value": {literal}}}\n', encoding="utf-8")
+    result = verify_receipt(path)
+    assert not result.ok
+    assert any("observed must be finite" in e for e in result.errors)
+
+
+@pytest.mark.parametrize("bad", [float("inf"), float("-inf"), float("nan")])
+def test_v3_non_finite_expected_value_is_rejected(tmp_path: Path, bad: float):
+    """FMA-NUM-TEST-02: a non-finite expectation is never a valid criterion."""
+    path = _write_local_v3(tmp_path)
+    _retune_check(path, expected=bad)
+    outputs = tmp_path / "outputs"
+    outputs.mkdir(exist_ok=True)
+    (outputs / "result.json").write_text('{"value": 1.0}\n', encoding="utf-8")
+    result = verify_receipt(path)
+    assert not result.ok
+    assert any("expected must be finite" in e for e in result.errors)
+
+
+def test_v3_non_finite_observed_or_expected_is_rejected(tmp_path: Path):
+    """The JSON decoder accepts bare Infinity/NaN; acceptance must not."""
+    path = _write_local_v3(tmp_path)
+    _retune_check(path, expected=float("inf"), atol=1e-12)
+    outputs = tmp_path / "outputs"
+    outputs.mkdir(exist_ok=True)
+    # json.loads accepts bare Infinity even though JSON does not define it.
+    (outputs / "result.json").write_text('{"value": Infinity}\n', encoding="utf-8")
+    result = verify_receipt(path)
+    assert not result.ok
+    assert any("must be finite" in e for e in result.errors)
+
+
+def test_v3_successful_numeric_check_reports_declared_tolerance(tmp_path: Path):
+    """A wide tolerance is a valid declaration, but it must be visible.
+
+    Without this, an atol of 1e-12 and an atol of 1e9 render identically.
+    """
+    path = _write_local_v3(tmp_path, value=99999.0)
+    _retune_check(path, atol=1e9)
+    result = reproduce_receipt(path, timeout=30)
+    assert result.ok
+    line = next(c for c in result.checks if c.startswith("numeric OK"))
+    assert "atol=1000000000.0" in line
+    assert "observed=99999.0" in line and "expected=1.0" in line
+
+
+@pytest.mark.parametrize(
+    "literal,fragment",
+    [('"1.0"', "must be a number"), ("true", "must be a number")],
+)
+def test_v3_non_numeric_observed_value_is_rejected(tmp_path: Path, literal: str, fragment: str):
+    """FMA-CONTRACT: float() promoted schema-invalid types into valid numbers.
+
+    The schema declares these fields as JSON numbers; "1.0" and true are not.
+    """
+    path = _write_local_v3(tmp_path)
+    outputs = tmp_path / "outputs"
+    outputs.mkdir(exist_ok=True)
+    (outputs / "result.json").write_text(f'{{"value": {literal}}}\n', encoding="utf-8")
+    result = verify_receipt(path)
+    assert not result.ok
+    assert any(fragment in e for e in result.errors)
+
+
+@pytest.mark.parametrize("bad", ["1.0", True, None])
+def test_v3_non_numeric_expected_or_tolerance_is_rejected(tmp_path: Path, bad: object):
+    for index, field in enumerate(("expected", "atol")):
+        work = tmp_path / f"case{index}"
+        work.mkdir()
+        path = _write_local_v3(work)
+        _retune_check(path, **{field: bad})
+        (work / "outputs").mkdir(exist_ok=True)
+        (work / "outputs" / "result.json").write_text('{"value": 1.0}\n', encoding="utf-8")
+        result = verify_receipt(path)
+        assert not result.ok
+        assert any("must be a number" in e for e in result.errors)
+
+
+def test_v3_over_range_integer_is_a_controlled_failure(tmp_path: Path):
+    """An int too large for float raised OverflowError outside the handler."""
+    path = _write_local_v3(tmp_path)
+    _retune_check(path, expected=10**400)
+    (tmp_path / "outputs").mkdir(exist_ok=True)
+    (tmp_path / "outputs" / "result.json").write_text('{"value": 1.0}\n', encoding="utf-8")
+    result = verify_receipt(path)
+    assert not result.ok
+    assert any("not representable as a float" in e for e in result.errors)
+
+
+def test_numeric_receipt_version_is_rejected(tmp_path: Path):
+    """FMA-CONTRACT-02: the v3 schema enumerates strings '3.0' and '3.1'."""
+    path = _write_local_v3(tmp_path)
+    document = yaml.safe_load(path.read_text(encoding="utf-8"))
+    document["receipt_version"] = 3.1
+    path.write_text(yaml.safe_dump(document, sort_keys=False), encoding="utf-8")
+    result = verify_receipt(path)
+    assert not result.ok
+    assert any("receipt_version" in e for e in result.errors)
