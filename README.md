@@ -1,14 +1,22 @@
 # Frontier Mission Assurance
 
-**Evidence-native verification and validation for high-consequence frontier systems.**
+**Know whether a consequential technical decision is still supported when the evidence changes.**
+
+*Evidence-native verification and validation for high-consequence frontier systems.*
 
 [Explore Frontier Mission Assurance →](https://bridgenode7.com/frontier-mission-assurance/)
 
-Frontier Mission Assurance (FMA) preserves the evidence behind consequential technical decisions as assumptions, experiments, estimates, interfaces, and dependencies change.
+Frontier Mission Assurance (FMA) connects claims, assumptions, experiments, estimates, interfaces, dependencies, and evidence to the technical decisions that rely on them—so teams can see what is supported, what remains uncertain, and what must be reconsidered when reality changes.
+
+**Start with one consequential decision. Keep the existing work where it is.**
+
+FMA is a local-first assurance layer for technical, scientific, and engineering decision bases. It does not replace laboratories, source control, test infrastructure, research notebooks, supplier systems, domain experts, or accountable decision authorities. Those systems remain authoritative; FMA carries the minimum reviewable decision basis across them.
+
+**Local-first:** the installed FMA runtime makes no remote API calls, emits no telemetry, and performs no default uploads.
+
+FMA does **not** manufacture the scientific or engineering answer that replaces a decision basis that has become stale.
 
 **Mission → Claim → Assumption → Experiment → Evidence → Decision**
-
-FMA is a local-first assurance layer for teams working at the edge of science and engineering. It does not replace laboratories, source control, test infrastructure, research notebooks, supplier systems, or operational tools. Those systems remain authoritative; FMA carries the minimum reviewable decision basis across them.
 
 > **Design principle:** automate what machines can prove; preserve accountable human authority where judgment matters.
 
@@ -53,17 +61,19 @@ That the new architecture is good or bad.
 
 That distinction is the product: **expose what became invalid without manufacturing the domain judgment that replaces it.**
 
-## Start
+## Choose your path
 
-1. **Evaluate the public reference** — [`docs/FIVE_MINUTE_EVALUATION.md`](docs/FIVE_MINUTE_EVALUATION.md)
-2. **Apply FMA around one consequential decision** — [`docs/MISSION_ORIENTED_ADOPTION.md`](docs/MISSION_ORIENTED_ADOPTION.md)
-3. **Wrap work you already own** — [`docs/EXTERNAL_RESEARCH_ADOPTION.md`](docs/EXTERNAL_RESEARCH_ADOPTION.md)
-4. **Follow the FTQC decision-to-reassessment golden path** — [`docs/FTQC_GOLDEN_PATH.md`](docs/FTQC_GOLDEN_PATH.md)
-5. **Build the smallest reviewable decision basis** — [`docs/MISSION_DECISION_PACKET.md`](docs/MISSION_DECISION_PACKET.md)
-6. **Install a published stable release** — [`docs/INSTALL_STABLE_RELEASE.md`](docs/INSTALL_STABLE_RELEASE.md)
-7. **Understand evaluation and governed-use boundaries** — [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md)
+- **Technical evaluator** — run the [Five-Minute Evaluation](docs/FIVE_MINUTE_EVALUATION.md).
+- **Technical leader or prospective adopter** — start with [one consequential decision](docs/MISSION_ORIENTED_ADOPTION.md).
+- **Existing research or engineering work** — [wrap the work without reorganizing it around FMA](docs/EXTERNAL_RESEARCH_ADOPTION.md).
+- **FTQC program** — follow the [FTQC decision-to-reassessment golden path](docs/FTQC_GOLDEN_PATH.md).
+- **Need the smallest reviewable decision basis** — use the [Mission Decision Packet](docs/MISSION_DECISION_PACKET.md).
+- **Need stable artifacts** — use the [latest published GitHub Release](docs/INSTALL_STABLE_RELEASE.md); `main` may be newer than the latest stable release.
+- **Governed or operational evaluation** — review [use and evaluation boundaries](docs/USE_AND_EVALUATION.md).
 
 For bounded automation use, see [`docs/AUTOMATION_USE.md`](docs/AUTOMATION_USE.md).
+
+The public repository is provided for evaluation and review. Operational use, integration, modification, or deployment beyond the public rights requires separate written permission. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md).
 
 ## Choose a profile only when it helps
 
