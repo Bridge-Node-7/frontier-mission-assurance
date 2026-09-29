@@ -1,10 +1,12 @@
 # Scientific Discovery Assurance
 
-**Evidence architecture for machine-assisted and computational discovery.**
+**Know what a promising machine-assisted result actually establishes before it influences an important decision.**
 
-Scientific Discovery Assurance keeps provenance, specification, priority, proof state, replication, attribution, and accountable decision ownership explicit from candidate discovery through institutional review.
+Your AI or computational workflow may produce a promising result. A proof checker may even pass. But important questions remain: was the intended claim actually proved, has the result been independently reproduced, what evidence supports priority and provenance, what remains unresolved, and who has authority to act?
 
-The profile is designed for work where computational speed can exceed the natural pace of evidence organization. Its role is to preserve a reviewable chain from the originating problem and source material to proof, replication, attribution, and the final governed decision.
+Scientific Discovery Assurance keeps those questions separate and reviewable from candidate discovery through institutional review. It preserves provenance, specification, priority, proof state, replication, attribution, and accountable decision ownership without turning machine-verifiable progress into a stronger scientific claim than the evidence supports.
+
+**Use this profile when** computational or machine-assisted research is moving faster than the surrounding evidence, replication, and review process.
 
 See [`PROFILE_CONTRACT.md`](PROFILE_CONTRACT.md) for the profile boundary, ownership model, and decision-authority contract.
 
