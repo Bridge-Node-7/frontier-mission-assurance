@@ -35,7 +35,7 @@ The baseline should allow a reviewer to answer:
 - Which dependencies can invalidate the current basis?
 - Where is qualified expert adjudication mandatory?
 - What next test, analysis, prototype, or review retires the most decision-relevant uncertainty?
-- What decision can an accountable human justify now?
+- What decision does the evidence justify now?
 - What change forces reconsideration?
 
 ## Domain-expert gate
