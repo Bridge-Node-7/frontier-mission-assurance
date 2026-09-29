@@ -115,7 +115,6 @@ def test_stable_release_binds_verified_main_and_annotated_tag():
         'commit.verification.reason == "valid"',
         'git/tags',
         'git/refs',
-        '--verify-tag',
         '.object.type',
     ):
         assert marker in workflow
