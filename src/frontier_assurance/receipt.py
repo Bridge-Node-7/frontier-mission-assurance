@@ -86,7 +86,7 @@ def _artifact_paths(doc: dict[str, Any], section: str) -> list[str]:
 
 
 def _validate_document_shape(doc: dict[str, Any], result: ReceiptResult) -> None:
-    version = str(doc.get("receipt_version"))
+    version = doc.get("receipt_version")
     result.receipt_version = version
     if version not in SUPPORTED_RECEIPT_VERSIONS:
         result.errors.append("receipt_version must be '1.0', '2.0', '3.0', or '3.1'")
@@ -239,11 +239,11 @@ def verify_receipt(receipt_path: str | Path) -> ReceiptResult:
                 result.errors.append(f"check {name}: missing result file {rel}")
                 continue
             try:
-                value = _json_path(json.loads(target.read_text(encoding="utf-8")), json_path)
-                value = float(value)
-                expected = float(check["expected"])
-                atol = float(check.get("atol", 0.0))
-                rtol = float(check.get("rtol", 0.0))
+                raw_value = _json_path(json.loads(target.read_text(encoding="utf-8")), json_path)
+                value = _finite_number("observed", raw_value)
+                expected = _finite_number("expected", check["expected"])
+                atol = _finite_number("atol", check.get("atol", 0.0))
+                rtol = _finite_number("rtol", check.get("rtol", 0.0))
                 if atol < 0 or rtol < 0:
                     raise ValueError("atol/rtol must be non-negative")
             except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
@@ -255,10 +255,40 @@ def verify_receipt(receipt_path: str | Path) -> ReceiptResult:
                     f"within atol={atol}, rtol={rtol}"
                 )
             else:
-                result.checks.append(f"numeric OK: {name}={value}")
+                # FMA-NUM-02: report declared tolerance strength on success,
+                # matching what the failure path already prints. A wide
+                # tolerance is a legitimate declaration, but it must be visible.
+                result.checks.append(
+                    f"numeric OK: {name} observed={value} expected={expected} "
+                    f"atol={atol} rtol={rtol}"
+                )
                 result.numerical_checks += 1
 
     return result
+
+
+
+def _finite_number(label: str, raw: object) -> float:
+    """Normalise a declared numeric input, or raise a controlled TypeError/ValueError.
+
+    FMA-CONTRACT: the published schemas declare these fields as JSON numbers.
+    A bare float() call silently promotes values the schema rejects — the
+    string "1.0", the boolean true (isinstance(True, int) is True) — and lets
+    an over-range integer escape as an uncaught OverflowError. Non-finite
+    values additionally make math.isclose meaningless: abs_tol=inf accepts
+    everything, and a NaN tolerance degrades to exact equality.
+    """
+    if isinstance(raw, bool):
+        raise TypeError(f"{label} must be a number, got boolean {raw!r}")
+    if not isinstance(raw, (int, float)):
+        raise TypeError(f"{label} must be a number, got {type(raw).__name__} {raw!r}")
+    try:
+        number = float(raw)
+    except OverflowError as exc:
+        raise ValueError(f"{label} is not representable as a float: {exc}") from exc
+    if not math.isfinite(number):
+        raise ValueError(f"{label} must be finite, got {number}")
+    return number
 
 
 def _normalized_command_path(value: str) -> str:

@@ -18,6 +18,10 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
+      # FMA-REL-01: listing workflow runs requires the Actions read scope.
+      # Declaring permissions sets every unlisted scope to none, so this
+      # must be explicit rather than relying on the repository being public.
+      actions: read
     outputs:
       release_eligible: ${{ steps.identity.outputs.release_eligible }}
       version: ${{ steps.identity.outputs.version }}
@@ -69,6 +73,30 @@ jobs:
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
           echo "TAG=$TAG" >> "$GITHUB_ENV"
           echo "RELEASE_SHA=$SHA" >> "$GITHUB_ENV"
+
+      - name: Require successful V&V CI for the exact release commit
+        # The identity step exits before exporting RELEASE_SHA when the release
+        # is ineligible, so this must carry the same guard as the steps below
+        # or it fails on an unbound variable under `set -u`.
+        if: steps.identity.outputs.release_eligible == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # FMA-REL-01: bind publication authority to validation authority.
+          # Filtered to a main-branch push run: ci.yml also runs on
+          # pull_request, and a PR run at the same head SHA is not evidence
+          # that the commit passed validation as it sits on protected main.
+          RUNS="$(gh api \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$RELEASE_SHA&branch=main&event=push&status=success" \
+            --jq '[.workflow_runs[]
+                   | select(.conclusion == "success" and .head_branch == "main" and .event == "push")]
+                  | length')"
+          if [[ "$RUNS" -lt 1 ]]; then
+            echo "::error::No successful main-push V&V CI run for $RELEASE_SHA." >&2
+            exit 1
+          fi
+          echo "PASS: $RUNS successful main-push V&V run(s) bound to $RELEASE_SHA"
 
       - name: Install release toolchain
         if: steps.identity.outputs.release_eligible == '1'

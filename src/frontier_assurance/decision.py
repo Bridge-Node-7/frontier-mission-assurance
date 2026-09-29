@@ -26,7 +26,9 @@ def verify_decision(graph_path: str | Path, decision_path: str | Path) -> Decisi
         return result
 
     doc = load_structured(decision_path)
-    if str(doc.get("decision_version")) != "1.0":
+    # FMA-CONTRACT-01: the schema declares {"const": "1.0"}; str() coercion
+    # accepted numeric 1.0, diverging runtime from the published contract.
+    if doc.get("decision_version") != "1.0":
         result.errors.append("decision_version must be '1.0'")
 
     decision = doc.get("decision")
