@@ -82,14 +82,27 @@ def test_stable_release_starts_after_validated_main_and_keeps_manual_recovery():
     assert "      contents: write" in workflow
 
 
-def test_stable_release_fails_before_publication_without_immutability():
+def test_stable_release_accepts_only_immutable_published_state():
     workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(
         encoding="utf-8"
     )
-    assert "Require immutable-release protection before publication" in workflow
-    assert 'immutable-releases' in workflow
-    assert "--jq '.enabled'" in workflow
-    assert workflow.index("Require immutable-release protection before publication") < workflow.index("Publish GitHub Release")
+    assert "immutable-releases" not in workflow
+    assert "-F draft=true" in workflow
+    assert 'gh release upload "$TAG"' in workflow
+    assert "-F draft=false -f make_latest=false" in workflow
+    assert "--jq '.immutable'" in workflow
+    assert "cleanup_unaccepted_release" in workflow
+    assert '--method DELETE "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID"' in workflow
+    assert '--method DELETE "repos/$GITHUB_REPOSITORY/git/refs/tags/$TAG"' in workflow
+    assert '[[ "$IMMUTABLE" != "true" ]]' in workflow
+    assert "RELEASE_ACCEPTED=1" in workflow
+
+    draft = workflow.index("-F draft=true")
+    upload = workflow.index('gh release upload "$TAG"')
+    publish = workflow.index("-F draft=false -f make_latest=false")
+    immutable = workflow.index("--jq '.immutable'")
+    accept = workflow.index("RELEASE_ACCEPTED=1")
+    assert draft < upload < publish < immutable < accept
 
 
 def test_stable_release_binds_verified_main_and_annotated_tag():
@@ -102,7 +115,6 @@ def test_stable_release_binds_verified_main_and_annotated_tag():
         'commit.verification.reason == "valid"',
         'git/tags',
         'git/refs',
-        '--verify-tag',
         '.object.type',
     ):
         assert marker in workflow
@@ -111,7 +123,7 @@ def test_stable_release_binds_verified_main_and_annotated_tag():
         workflow.index("  publish:"):workflow.index("  verify-published:")
     ]
     assert '--target "$RELEASE_SHA"' not in publish
-    assert publish.index('git/tags') < publish.index('gh release create')
+    assert publish.index('git/tags') < publish.index('repos/$GITHUB_REPOSITORY/releases')
 
 
 def test_release_identity_is_consistent():
