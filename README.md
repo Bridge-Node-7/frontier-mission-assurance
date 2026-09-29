@@ -24,7 +24,7 @@ FMA does **not** manufacture the scientific or engineering answer that replaces 
 
 - **What is supported.** Which claims have declared evidence behind them.
 - **What is still assumed.** Which mission-critical dependencies remain unresolved.
-- **What changed.** Which estimates, evidence envelopes, claims, or interfaces are affected by a changed dependency.
+- **What changed.** Which estimates, supporting evidence, claims, or interfaces are affected by a changed dependency.
 - **What must be reconsidered.** Which human decision basis is stale or should reopen.
 
 FMA does **not** infer a new scientific or engineering answer merely because an old basis became invalid.
@@ -112,10 +112,10 @@ The public repository is provided for evaluation and review. Operational use, in
 
 FMA has one assurance core. Profiles are bounded domain projections; they do not redefine the core product.
 
-- [`profiles/scientific-discovery/README.md`](profiles/scientific-discovery/README.md) — Scientific Discovery Assurance
-- [`profiles/ftqc-assurance/README.md`](profiles/ftqc-assurance/README.md) — FTQC Assurance
+- [**Scientific Discovery Assurance**](profiles/scientific-discovery/README.md) — use this when a computational, AI-generated, or research result could influence an important decision and you need proof state, replication, provenance, and unresolved scientific obligations kept distinct.
+- [**FTQC Assurance**](profiles/ftqc-assurance/README.md) — use this when a fault-tolerant quantum architecture decision depends on changing resource estimates, physical assumptions, experimental evidence, interfaces, or expert review.
   - governed case: [`profiles/ftqc-assurance/docs/GOVERNED_CASE_QUICKSTART.md`](profiles/ftqc-assurance/docs/GOVERNED_CASE_QUICKSTART.md)
-- [`profiles/orbital-recovery-assurance/README.md`](profiles/orbital-recovery-assurance/README.md) — Orbital Recovery Assurance
+- [**Orbital Recovery Assurance**](profiles/orbital-recovery-assurance/README.md) — use this when a degraded or uncertain orbital capability may be recoverable, but physical state, trust, authority, recovery options, or requalification remain unresolved.
 
 Each profile exposes a `PROFILE_CONTRACT.md` and a small machine-readable `profile.yaml` manifest. See [`docs/PROFILE_ARCHITECTURE.md`](docs/PROFILE_ARCHITECTURE.md).
 

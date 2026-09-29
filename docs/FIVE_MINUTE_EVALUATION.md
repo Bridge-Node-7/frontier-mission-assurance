@@ -2,6 +2,12 @@
 
 This path validates the public FMA reference locally using source-neutral fixtures and the reviewed build toolchain.
 
+## What you'll learn
+
+In five minutes, you will see FMA validate a decision basis, keep unresolved assumptions visible, detect missing direct evidence, verify a research result separately from scientific truth, and preserve a human `HOLD` instead of manufacturing readiness.
+
+The goal is not merely to prove that the software runs. It is to see how FMA keeps incomplete evidence visible while preserving the accountable human decision.
+
 ## 1. Create an isolated environment
 
 FMA pins its build backend so the clean evaluation path is explicit and reproducible. Install the reviewed build tools inside the isolated environment, then use them for the editable install.
