@@ -1,16 +1,24 @@
 # Orbital Recovery Assurance
 
-**Profile contract version:** `0.5`
+**Know what can be recovered, what can be trusted, and what must be demonstrated before consequential action.**
 
-**Evidence-driven recovery assurance for degraded, legacy, or uncertain orbital capability.**
+A degraded or legacy orbital system may still contain useful capability. The immediate problem is human and operational: what still works, can the telemetry and command paths be trusted, does the required authority exist, which recovery paths remain safe, and what must be requalified afterward?
 
-Orbital Recovery Assurance organizes the path from uncertain system state to trusted mission capability. It brings physical condition, digital trust, authority, recovery-path diversity, evidence lineage, option robustness, requalification, and Time-to-Trust into one inspectable assurance flow.
+The operator-facing recovery lens is intentionally simple:
+
+`Power → Contact → Telemetry → Command → Capability`
+
+Orbital Recovery Assurance keeps trust and authority visible across that chain while organizing the evidence needed to move from uncertain system state toward a reviewable recovery decision.
+
+**Use this profile when** orbital capability is degraded, legacy, or uncertain and physical state, digital trust, authority, recovery options, or post-intervention qualification remain unresolved.
 
 Mission systems retain their established sources of record, command paths, and decision authority. Orbital Recovery Assurance provides the evidence and verification layer that makes the recovery basis clear, reviewable, and reproducible.
 
+**Profile contract version:** `0.5`
+
 ## Mission objective
 
-A degraded or legacy orbital system may retain valuable capability even when its current condition, command path, authority state, or mission fitness is incomplete or contested. The profile helps teams establish:
+The profile helps teams establish:
 
 - what capability remains;
 - which evidence is current, applicable, and trustworthy;
@@ -25,11 +33,7 @@ The assurance path is:
 
 ## Mission Recovery Chain
 
-The operator-facing recovery lens is:
-
-`Power → Contact → Telemetry → Command → Capability`
-
-Trust and authority are cross-cutting overlays across the chain. Recovery resilience is measured by **independent recovery paths**, not raw asset count.
+Trust and authority are cross-cutting overlays across `Power → Contact → Telemetry → Command → Capability`. Recovery resilience is measured by **independent recovery paths**, not raw asset count.
 
 The working sequence is:
 
