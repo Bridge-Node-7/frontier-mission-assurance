@@ -29,9 +29,40 @@ FMA does **not** manufacture the scientific or engineering answer that replaces 
 
 FMA does **not** infer a new scientific or engineering answer merely because an old basis became invalid.
 
-## See the behavior in 90 seconds
+## See FMA in 90 seconds
 
-A source-neutral example:
+Imagine your team is deciding whether to commit more time, money, or integration effort to a technical architecture.
+
+The decision looked supportable because a resource estimate, supporting evidence, and expert review all relied on one important assumption.
+
+Then new evidence changes that assumption.
+
+### Without a clear assurance trail
+
+Someone has to reconstruct the reasoning across models, test results, documents, tickets, experiment folders, and conversations to answer:
+
+- Does the old estimate still apply?
+- Which supporting evidence needs another look?
+- Does the prior expert review still hold?
+- Is the decision basis still supportable?
+- What should we verify before committing further?
+
+### With FMA
+
+Once the changed assumption is reflected in the decision basis, FMA surfaces the consequence:
+
+**The basis for the previous decision has changed.**
+
+The resource estimate that depended on the old assumption is now stale. Some supporting evidence may no longer apply under the new conditions. The prior expert review should be revisited.
+
+That does **not** mean the architecture is automatically good or bad. It means the reason for treating the previous decision as settled has changed.
+
+FMA helps the team see **what changed, why it matters, and what deserves review before committing further**. The accountable human still decides what happens next.
+
+<details>
+<summary><strong>See the precise references FMA keeps under the hood</strong></summary>
+
+The identifiers below are machine-readable references used to keep the decision basis precise and traceable. A decision-maker does not need to memorize them to understand the result.
 
 ```text
 DECISION
@@ -59,7 +90,9 @@ FMA DOES NOT CLAIM
 That the new architecture is good or bad.
 ```
 
-That distinction is the product: **expose what became invalid without manufacturing the domain judgment that replaces it.**
+</details>
+
+**The takeaway:** when important evidence changes, FMA helps the team see what changed, why it matters, and what deserves review before the previous decision is treated as settled.
 
 ## Choose your path
 
