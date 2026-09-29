@@ -179,16 +179,6 @@ jobs:
       TAG: ${{ needs.prepare.outputs.tag }}
       RELEASE_SHA: ${{ needs.prepare.outputs.release_sha }}
     steps:
-      - name: Require immutable-release protection before publication
-        shell: bash
-        run: |
-          set -euo pipefail
-          ENABLED="$(gh api "repos/$GITHUB_REPOSITORY/immutable-releases" --jq '.enabled')"
-          if [[ "$ENABLED" != "true" ]]; then
-            echo "::error::Immutable-release protection must be enabled before publishing $TAG"
-            exit 1
-          fi
-
       - name: Download prepared release artifacts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
@@ -266,13 +256,52 @@ jobs:
 
           License posture: All Rights Reserved. No reuse license is granted by this release.
           EOF
-          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --verify-tag \
-            --title "Frontier Mission Assurance v${VERSION}" --notes-file release-notes.md \
+          RELEASE_ID=""
+          RELEASE_ACCEPTED=0
+          cleanup_unaccepted_release() {
+            if [[ "$RELEASE_ACCEPTED" == "1" ]]; then
+              return
+            fi
+            if [[ -n "$RELEASE_ID" ]]; then
+              gh api --method DELETE "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" >/dev/null 2>&1 || true
+            fi
+            if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >/dev/null 2>&1; then
+              gh api --method DELETE "repos/$GITHUB_REPOSITORY/git/refs/tags/$TAG" >/dev/null 2>&1 || true
+            fi
+          }
+          trap cleanup_unaccepted_release EXIT
+
+          RELEASE_ID="$(
+            gh api --method POST "repos/$GITHUB_REPOSITORY/releases" \
+              -f tag_name="$TAG" \
+              -f name="Frontier Mission Assurance v${VERSION}" \
+              --raw-field body="$(cat release-notes.md)" \
+              -F draft=true \
+              -F prerelease=false \
+              -f make_latest=false \
+              --jq '.id'
+          )"
+
+          gh release upload "$TAG" --repo "$GITHUB_REPOSITORY" \
             "dist/frontier-mission-assurance-v${VERSION}.zip" \
             "dist/frontier_mission_assurance-${VERSION}-py3-none-any.whl" \
             "dist/FMA-v${VERSION}-SOURCE-SHA256SUMS" \
             "dist/FMA-v${VERSION}-SBOM.cdx.json" \
             "dist/FMA-v${VERSION}-SHA256SUMS"
+
+          gh api --method PATCH "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            -F draft=false -f make_latest=false >/dev/null
+
+          IMMUTABLE="$(gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" --jq '.immutable')"
+          if [[ "$IMMUTABLE" != "true" ]]; then
+            echo "::error::Published release $TAG is not immutable; removing unaccepted release state."
+            exit 1
+          fi
+
+          gh api --method PATCH "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" \
+            -f make_latest=true >/dev/null
+          RELEASE_ACCEPTED=1
+          trap - EXIT
 
           TAG_REF_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.sha')"
           TAG_REF_TYPE="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq '.object.type')"
