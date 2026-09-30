@@ -13,7 +13,7 @@ from collections import defaultdict, deque
 from pathlib import Path
 from typing import Any
 
-from validate_ftqc_case import case_summary, validate_case
+from validate_ftqc_case import case_summary, evaluate_envelopes, validate_case
 
 
 def _assumptions(system: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -35,58 +35,79 @@ def changed_assumptions(
     )
 
 
-def _subject_value(subject: str, system: dict[str, Any]) -> Any:
-    if subject == "modality":
-        return system.get("modality")
-    if subject == "architecture_revision":
-        return system.get("architecture_revision")
-    if subject.startswith("assumption:"):
-        item = _assumptions(system).get(subject.split(":", 1)[1])
-        return None if item is None else item.get("value")
-    raise ValueError(f"unsupported applicability subject: {subject}")
+def _node_map(graph: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {
+        item["id"]: item
+        for item in graph.get("nodes", [])
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
 
 
-def _condition_matches(condition: dict[str, Any], system: dict[str, Any]) -> bool:
-    actual = _subject_value(condition["subject"], system)
-    expected = condition["value"]
-    operator = condition["operator"]
-    if operator == "eq":
-        return actual == expected
-    if operator == "in":
-        return actual in expected
-    if operator == "lte":
-        return actual is not None and actual <= expected
-    if operator == "gte":
-        return actual is not None and actual >= expected
-    if operator == "between":
-        return (
-            actual is not None
-            and isinstance(expected, list)
-            and len(expected) == 2
-            and expected[0] <= actual <= expected[1]
-        )
-    raise ValueError(f"unsupported applicability operator: {operator}")
+def _edge_set(graph: dict[str, Any]) -> set[tuple[str, str, str]]:
+    return {
+        (str(item.get("from")), str(item.get("relation")), str(item.get("to")))
+        for item in graph.get("edges", [])
+        if isinstance(item, dict)
+    }
 
 
-def evaluate_envelopes(
-    envelope_doc: dict[str, Any], system: dict[str, Any]
-) -> list[dict[str, Any]]:
-    results: list[dict[str, Any]] = []
-    for envelope in envelope_doc.get("envelopes", []):
-        failed = [
-            condition
-            for condition in envelope["applicability"]["conditions"]
-            if not _condition_matches(condition, system)
+def _graph_changes(previous: dict[str, Any], current: dict[str, Any]) -> dict[str, Any]:
+    before_nodes, after_nodes = _node_map(previous), _node_map(current)
+    changed_nodes: list[dict[str, Any]] = []
+    for node_id in sorted(set(before_nodes) & set(after_nodes)):
+        fields = [
+            field
+            for field in ("kind", "status", "criticality", "title")
+            if before_nodes[node_id].get(field) != after_nodes[node_id].get(field)
         ]
-        results.append(
-            {
-                "envelope_id": envelope["envelope_id"],
-                "evidence_ref": envelope["evidence_ref"],
-                "in_scope": not failed,
-                "failed_subjects": [item["subject"] for item in failed],
-            }
-        )
-    return results
+        if fields:
+            changed_nodes.append({"node_id": node_id, "changed_fields": fields})
+    before_edges, after_edges = _edge_set(previous), _edge_set(current)
+
+    def edge_rows(items: set[tuple[str, str, str]]) -> list[dict[str, str]]:
+        return [
+            {"from": source, "relation": relation, "to": target}
+            for source, relation, target in sorted(items)
+        ]
+
+    return {
+        "added_nodes": sorted(set(after_nodes) - set(before_nodes)),
+        "removed_nodes": sorted(set(before_nodes) - set(after_nodes)),
+        "changed_nodes": changed_nodes,
+        "added_relations": edge_rows(after_edges - before_edges),
+        "removed_relations": edge_rows(before_edges - after_edges),
+    }
+
+
+def _envelope_map(doc: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {
+        item["envelope_id"]: item
+        for item in doc.get("envelopes", [])
+        if isinstance(item, dict) and isinstance(item.get("envelope_id"), str)
+    }
+
+
+def _envelope_changes(previous: dict[str, Any], current: dict[str, Any]) -> dict[str, Any]:
+    before, after = _envelope_map(previous), _envelope_map(current)
+    changed: list[dict[str, Any]] = []
+    fields = ("evidence_ref", "evidence_class", "basis", "applicability", "review")
+    for envelope_id in sorted(set(before) & set(after)):
+        changed_fields = [
+            field for field in fields if before[envelope_id].get(field) != after[envelope_id].get(field)
+        ]
+        if changed_fields:
+            changed.append({"envelope_id": envelope_id, "changed_fields": changed_fields})
+    return {
+        "added": sorted(set(after) - set(before)),
+        "removed": sorted(set(before) - set(after)),
+        "changed": changed,
+    }
+
+
+def _changed_fields(
+    previous: dict[str, Any], current: dict[str, Any], fields: tuple[str, ...]
+) -> list[str]:
+    return [field for field in fields if previous.get(field) != current.get(field)]
 
 
 def _impact(
@@ -160,9 +181,28 @@ def compare_cases(
         changed_ids.intersection(cur_resource.get("assumption_refs", []))
         or context_changes
     )
-    stale_resources = (
-        {cur_resource["record_id"]} if resource_reused and controlling_change else set()
+    stale_resources: set[str] = set()
+    if resource_reused and controlling_change:
+        stale_resources.add(cur_resource["record_id"])
+    if cur_resource.get("review_state") == "STALE":
+        stale_resources.add(cur_resource["record_id"])
+
+    resource_changes = _changed_fields(
+        prev_resource,
+        cur_resource,
+        (
+            "record_id",
+            "estimator",
+            "problem",
+            "assumption_refs",
+            "result",
+            "provenance",
+            "applicability_envelope_ref",
+            "review_state",
+        ),
     )
+    graph_changes = _graph_changes(previous["graph"], current["graph"])
+    envelope_changes = _envelope_changes(previous["envelopes"], current["envelopes"])
 
     envelope_results = evaluate_envelopes(current["envelopes"], cur_system)
     outside = {
@@ -175,11 +215,35 @@ def compare_cases(
         if changed_ids.intersection(item.get("reopen_when_refs", []))
     }
 
-    graph = current["graph"]
+    impact_graph = {
+        "edges": [
+            *previous["graph"].get("edges", []),
+            *current["graph"].get("edges", []),
+        ]
+    }
     seeds = changed_ids | stale_resources
-    impacted = _impact(graph, seeds, outside, reopened_reviews)
+    impacted = _impact(impact_graph, seeds, outside, reopened_reviews)
     decision_id = current["decision"]["decision"]["id"]
     decision_reopen = decision_id in impacted
+
+    prev_decision = previous["decision"]["decision"]
+    cur_decision = current["decision"]["decision"]
+    decision_changes = _changed_fields(
+        prev_decision, cur_decision, ("disposition", "rationale", "reopen_when")
+    )
+    if previous["decision"].get("basis") != current["decision"].get("basis"):
+        decision_changes.append("basis")
+    governance_review_required = bool(
+        graph_changes["added_nodes"]
+        or graph_changes["removed_nodes"]
+        or graph_changes["changed_nodes"]
+        or graph_changes["added_relations"]
+        or graph_changes["removed_relations"]
+        or envelope_changes["added"]
+        or envelope_changes["removed"]
+        or envelope_changes["changed"]
+        or decision_changes
+    )
 
     result = {
         "profile_version": "0.2",
@@ -191,12 +255,17 @@ def compare_cases(
         "context_changes": context_changes,
         "resource_estimates_stale": sorted(stale_resources),
         "resource_estimate_regenerated": not resource_reused,
+        "resource_estimate_changes": resource_changes,
         "evidence_outside_envelope": sorted(outside),
         "envelope_results": envelope_results,
+        "envelope_changes": envelope_changes,
         "expert_reviews_reopen": sorted(reopened_reviews),
+        "graph_changes": graph_changes,
         "impacted_nodes": sorted(impacted - changed_ids),
         "decision_id": decision_id,
+        "decision_changes": decision_changes,
         "decision_reopen_required": decision_reopen,
+        "governance_review_required": governance_review_required,
         "current_case": case_summary(current),
         "boundary_note": (
             "Change impact is derived from declared case contracts and graph relationships. "
@@ -216,6 +285,7 @@ def render_report(result: dict[str, Any], warnings: list[str]) -> str:
         f"- Current revision: {result['current_architecture_revision']}",
         f"- Decision: `{result['decision_id']}`",
         f"- Decision reopen required: **{str(result['decision_reopen_required']).upper()}**",
+        f"- Governance review required: **{str(result['governance_review_required']).upper()}**",
         "",
         "## What changed",
         "",
@@ -226,6 +296,57 @@ def render_report(result: dict[str, Any], warnings: list[str]) -> str:
         lines.extend(f"- Context: {item}" for item in result["context_changes"])
     if not result["changed_assumptions"] and not result["context_changes"]:
         lines.append("- No declared assumption or context change detected.")
+
+    graph_changes = result["graph_changes"]
+    envelope_changes = result["envelope_changes"]
+    lines += ["", "## Governance changes", ""]
+    if any(
+        (
+            graph_changes["added_nodes"],
+            graph_changes["removed_nodes"],
+            graph_changes["changed_nodes"],
+            graph_changes["added_relations"],
+            graph_changes["removed_relations"],
+            envelope_changes["added"],
+            envelope_changes["removed"],
+            envelope_changes["changed"],
+            result["decision_changes"],
+        )
+    ):
+        for item in graph_changes["added_nodes"]:
+            lines.append(f"- Graph node added: `{item}`")
+        for item in graph_changes["removed_nodes"]:
+            lines.append(f"- Graph node removed: `{item}`")
+        for item in graph_changes["changed_nodes"]:
+            fields = ", ".join(item["changed_fields"])
+            lines.append(f"- Graph node changed: `{item['node_id']}` ({fields})")
+        for item in graph_changes["added_relations"]:
+            lines.append(
+                f"- Relation added: `{item['from']} --{item['relation']}→ {item['to']}`"
+            )
+        for item in graph_changes["removed_relations"]:
+            lines.append(
+                f"- Relation removed: `{item['from']} --{item['relation']}→ {item['to']}`"
+            )
+        for item in envelope_changes["added"]:
+            lines.append(f"- Evidence envelope added: `{item}`")
+        for item in envelope_changes["removed"]:
+            lines.append(f"- Evidence envelope removed: `{item}`")
+        for item in envelope_changes["changed"]:
+            fields = ", ".join(item["changed_fields"])
+            lines.append(f"- Evidence envelope changed: `{item['envelope_id']}` ({fields})")
+        if result["decision_changes"]:
+            lines.append(
+                "- Decision governance changed: " + ", ".join(result["decision_changes"])
+            )
+    else:
+        lines.append("- No graph, envelope, or decision-governance change detected.")
+
+    lines += ["", "## Resource-estimate changes", ""]
+    if result["resource_estimate_changes"]:
+        lines.append("- Changed fields: " + ", ".join(result["resource_estimate_changes"]))
+    else:
+        lines.append("- No resource-estimate field changed.")
 
     lines += ["", "## What became stale", ""]
     if result["resource_estimates_stale"]:
@@ -349,6 +470,9 @@ def main() -> int:
         )
         print(
             f"DECISION REOPEN REQUIRED: {str(result['decision_reopen_required']).upper()}"
+        )
+        print(
+            f"GOVERNANCE REVIEW REQUIRED: {str(result['governance_review_required']).upper()}"
         )
         if args.report:
             print(f"WROTE: {Path(args.report)}")
