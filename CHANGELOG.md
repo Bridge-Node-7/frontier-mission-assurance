@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.11.2 — FTQC semantic integrity hardening
+
+- Recomputed FTQC evidence applicability against the current System Concept and rejected contradictory declared envelope states in governed case validation.
+- Blocked approval when a decision-relevant resource estimate is stale or otherwise not current.
+- Required exact resource-estimate provenance claims to resolve to a verifiable governed Research Receipt.
+- Rejected duplicate assumption and expert-review identities and required reviewer identity for supported external or independent review claims.
+- Expanded previous/current FTQC comparison to surface graph topology, evidence-envelope, resource-estimate, and Decision Receipt governance changes while preserving historical impact paths.
+- Clarified the public-example boundary, governed engagement handoff, independence/conflict discovery, and existing contract-change governance for evaluators.
+- Preserved FTQC profile contract `0.2`, assurance-context `0.1.0`, the universal FMA graph ontology, and accountable human consequential authority.
+
 ## 0.11.1 — contract-first interoperability and reviewed-producer registry
 
 - Added a low-churn `INTERFACES.json` that separates FMA application version from portable contract identity and exact schema SHA-256.
