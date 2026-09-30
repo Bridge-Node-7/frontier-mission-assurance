@@ -1,7 +1,7 @@
 {
   "project": "frontier-mission-assurance",
   "display_name": "Frontier Mission Assurance",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "maturity": "stable public reference implementation",
   "owner": "Bridge Node 7",
   "license": "All rights reserved; no reuse license granted by this release",
@@ -39,7 +39,9 @@
     "validate governed FTQC case directories against profile contract 0.2 while allowing truthful non-synthetic resource-estimate records without weakening the public synthetic boundary",
     "render a human-readable FTQC case decision-basis report covering disposition, assumptions, resource-estimate state, applicability envelopes, expert gates, and reopen conditions",
     "compare previous/current governed FTQC case states to surface stale reused estimates, evidence applicability loss, expert-review reopen triggers, downstream impact, and decision reconsideration without inferring the replacement technical answer",
-    "consume reviewed FTQC ExperimentResult 2.0.0 plus linked ProcessorEvidenceReceipt 2.0.0 through an exact-schema, exact-artifact, authority-non-escalating adapter without importing the producer implementations"
+    "consume reviewed FTQC ExperimentResult 2.0.0 plus linked ProcessorEvidenceReceipt 2.0.0 through an exact-schema, exact-artifact, authority-non-escalating adapter without importing the producer implementations",
+    "fail closed on FTQC evidence-applicability contradictions, stale decision-relevant resource estimates, duplicate semantic identities, and unsupported strong review claims",
+    "compare governed FTQC cases for graph, evidence-envelope, resource-estimate, and decision-governance mutations without deleting historical impact paths"
   ],
   "governed_externally": [
     "scientific validity and interpretation",
