@@ -1,6 +1,6 @@
 # Use and Evaluation
 
-Frontier Mission Assurance is publicly visible so technical reviewers can inspect its contracts, reference implementation, source-neutral examples, validation behavior, and release evidence.
+Frontier Mission Assurance is publicly visible so technical reviewers can inspect its contracts, reference implementation, synthetic or source-neutral examples, validation behavior, and release evidence. Checked-in examples are evaluation fixtures; they are not customer cases, real-system validation, mission-readiness evidence, or proof of operational use.
 
 The public repository does not by itself grant operational-use rights.
 
@@ -14,7 +14,11 @@ A public evaluator can inspect the repository and assess the reference behavior 
 
 Internal operational use, private deployment, integration into governed workflows, modification of adapters or other derivative work, redistribution, resale, and other rights not granted by the public license require separate written permission or agreement from Bridge Node 7.
 
-For current engagement information, visit [Bridge Node 7](https://bridgenode7.com/).
+For governed or operational engagement, start at [Partner](https://bridgenode7.com/partner/) or email [contact@bridgenode7.com](mailto:contact@bridgenode7.com). Start with a non-confidential overview; protected material belongs in the approved channel for the engagement.
+
+## Independence and conflict boundary
+
+Using FMA does not itself make a review independent. Before representing work as independent, evaluator-side, or third-party V&V, apply the repository's [Independence & Conflict Policy](INDEPENDENCE_AND_CONFLICT_POLICY.md) and preserve the engagement-specific authority and conflict disposition.
 
 ## Governed one-decision evaluation
 
