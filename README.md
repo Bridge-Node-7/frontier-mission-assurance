@@ -4,8 +4,6 @@
 
 *Evidence-native verification and validation for high-consequence frontier systems.*
 
-[Explore Frontier Mission Assurance →](https://bridgenode7.com/frontier-mission-assurance/)
-
 Frontier Mission Assurance (FMA) connects claims, assumptions, experiments, estimates, interfaces, dependencies, and evidence to the technical decisions that rely on them—so teams can see what is supported, what remains uncertain, and what must be reconsidered when reality changes.
 
 **Start with one consequential decision. Keep the existing work where it is.**
