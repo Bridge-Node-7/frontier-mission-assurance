@@ -109,7 +109,7 @@ That the new architecture is good or bad.
 
 For bounded automation use, see [`docs/AUTOMATION_USE.md`](docs/AUTOMATION_USE.md).
 
-The public repository is provided for evaluation and review. Operational use, integration, modification, or deployment beyond the public rights requires separate written permission. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md). For governed or operational engagement, use [Partner](https://bridgenode7.com/partner/) or email [contact@bridgenode7.com](mailto:contact@bridgenode7.com).
+The public repository is provided for evaluation and review. Operational use, integration, modification, or deployment beyond the public rights requires separate written permission. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md). For governed or operational engagement, use [Partner](https://bridgenode7.com/partner/).
 
 ## Choose a profile only when it helps
 
