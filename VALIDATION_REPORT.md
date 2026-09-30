@@ -1,6 +1,6 @@
-# Source Validation Report — v0.11.1
+# Source Validation Report — v0.11.2
 
-**Date:** 2026-09-21  
+**Date:** 2026-09-29  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
 
 This report defines deterministic validation requirements for the source. Release-specific hosted evidence is recorded in GitHub Actions and release metadata. See [`docs/RELEASE_EVIDENCE_LIFECYCLE.md`](docs/RELEASE_EVIDENCE_LIFECYCLE.md).
@@ -74,7 +74,7 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.11.1 source retains FTQC Assurance profile contract `0.2` and the bounded external technical-evidence adapter, while separating portable contract identity from application version and externalizing explicitly reviewed producer releases into a governed registry. Release eligibility requires:
+The v0.11.2 source retains FTQC Assurance profile contract `0.2` and the bounded external technical-evidence adapter, while separating portable contract identity from application version and externalizing explicitly reviewed producer releases into a governed registry. Release eligibility requires:
 
 - reviewed ExperimentResult and ProcessorEvidenceReceipt artifacts fail closed on wrong trusted artifact SHA-256;
 - externally supplied producer schemas must match the exact reviewed schema SHA-256 values before JSON Schema validation;
@@ -90,6 +90,11 @@ The v0.11.1 source retains FTQC Assurance profile contract `0.2` and the bounded
 - unfavorable processor technical status remains a bounded technical result and must not be promoted into a mission/company-level conclusion;
 - the adapter emits an existing profile-0.2 evidence-validity envelope rather than a new ontology;
 - assurance-context remains `0.1.0` unless a future wire-semantic requirement is proven;
+- declared envelope status must agree with applicability recomputed from the current System Concept in standalone governed-case validation;
+- a decision-relevant resource estimate that is not `CURRENT` must block `APPROVE`;
+- exact Research Receipt provenance claims must resolve and verify inside the governed case boundary;
+- duplicate assumption/review identities and supported strong review claims without reviewer identity must fail closed;
+- previous/current comparison must report graph, envelope, resource-estimate, and decision-governance mutations while preserving historical impact paths;
 
 The existing FTQC case controls remain required:
 
