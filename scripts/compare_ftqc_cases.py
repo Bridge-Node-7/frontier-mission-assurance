@@ -147,7 +147,9 @@ def compare_cases(
     warnings: list[str] = []
 
     prev_errors, prev_warnings, previous = validate_case(root, previous_dir)
-    cur_errors, cur_warnings, current = validate_case(root, current_dir)
+    cur_errors, cur_warnings, current = validate_case(
+        root, current_dir, allow_applicability_mismatch=True
+    )
     errors.extend(f"previous: {item}" for item in prev_errors)
     errors.extend(f"current: {item}" for item in cur_errors)
     warnings.extend(f"previous: {item}" for item in prev_warnings)
