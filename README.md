@@ -14,6 +14,8 @@ FMA is a local-first assurance layer for technical, scientific, and engineering 
 
 **Local-first:** the installed FMA runtime makes no remote API calls, emits no telemetry, and performs no default uploads.
 
+**Public-example boundary:** checked-in examples and profile fixtures are synthetic or source-neutral evaluation material. They are not customer cases, real-system validation, mission readiness evidence, or proof of operational use.
+
 FMA does **not** manufacture the scientific or engineering answer that replaces a decision basis that has become stale.
 
 **Mission → Claim → Assumption → Experiment → Evidence → Decision**
@@ -103,10 +105,11 @@ That the new architecture is good or bad.
 - **Need the smallest reviewable decision basis** — use the [Mission Decision Packet](docs/MISSION_DECISION_PACKET.md).
 - **Need stable artifacts** — use the [latest published GitHub Release](docs/INSTALL_STABLE_RELEASE.md); `main` may be newer than the latest stable release.
 - **Governed or operational evaluation** — review [use and evaluation boundaries](docs/USE_AND_EVALUATION.md).
+- **Independent or evaluator-side work** — review the [Independence & Conflict Policy](docs/INDEPENDENCE_AND_CONFLICT_POLICY.md) before representing a review as independent.
 
 For bounded automation use, see [`docs/AUTOMATION_USE.md`](docs/AUTOMATION_USE.md).
 
-The public repository is provided for evaluation and review. Operational use, integration, modification, or deployment beyond the public rights requires separate written permission. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md).
+The public repository is provided for evaluation and review. Operational use, integration, modification, or deployment beyond the public rights requires separate written permission. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md). For governed or operational engagement, use [Partner](https://bridgenode7.com/partner/).
 
 ## Choose a profile only when it helps
 

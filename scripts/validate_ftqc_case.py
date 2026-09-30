@@ -16,6 +16,7 @@ import yaml
 from jsonschema import Draft202012Validator
 
 from frontier_assurance.decision import verify_decision
+from frontier_assurance.receipt import verify_receipt
 from frontier_assurance.validate import validate_graph
 
 PROFILE_VERSION = "0.2"
@@ -54,23 +55,136 @@ def _schema(root: Path, name: str) -> dict[str, Any]:
     return _json(root / "profiles" / "ftqc-assurance" / "schemas" / name)
 
 
-def _hold_reasons(envelopes: dict[str, Any], experts: dict[str, Any]) -> list[str]:
+def _assumption_map(system: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    return {
+        item["id"]: item
+        for item in system.get("assumptions", [])
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+
+
+def _subject_value(subject: str, system: dict[str, Any]) -> Any:
+    if subject == "modality":
+        return system.get("modality")
+    if subject == "architecture_revision":
+        return system.get("architecture_revision")
+    if subject.startswith("assumption:"):
+        item = _assumption_map(system).get(subject.split(":", 1)[1])
+        return None if item is None else item.get("value")
+    raise ValueError(f"unsupported applicability subject: {subject}")
+
+
+def _condition_matches(condition: dict[str, Any], system: dict[str, Any]) -> bool:
+    actual = _subject_value(condition["subject"], system)
+    expected = condition["value"]
+    operator = condition["operator"]
+    if operator == "eq":
+        return actual == expected
+    if operator == "in":
+        return actual in expected
+    if operator == "lte":
+        return actual is not None and actual <= expected
+    if operator == "gte":
+        return actual is not None and actual >= expected
+    if operator == "between":
+        return (
+            actual is not None
+            and isinstance(expected, list)
+            and len(expected) == 2
+            and expected[0] <= actual <= expected[1]
+        )
+    raise ValueError(f"unsupported applicability operator: {operator}")
+
+
+def evaluate_envelopes(
+    envelope_doc: dict[str, Any], system: dict[str, Any]
+) -> list[dict[str, Any]]:
+    results: list[dict[str, Any]] = []
+    for envelope in envelope_doc.get("envelopes", []):
+        failed = [
+            condition
+            for condition in envelope["applicability"]["conditions"]
+            if not _condition_matches(condition, system)
+        ]
+        results.append(
+            {
+                "envelope_id": envelope["envelope_id"],
+                "evidence_ref": envelope["evidence_ref"],
+                "in_scope": not failed,
+                "failed_subjects": [item["subject"] for item in failed],
+            }
+        )
+    return results
+
+
+def _validate_resource_provenance(
+    case_dir: Path,
+    resource: dict[str, Any],
+    errors: list[str],
+) -> None:
+    provenance = resource.get("provenance", {})
+    if provenance.get("status") != "EXACT_RECEIPT_REF":
+        return
+    ref = provenance.get("research_receipt_ref")
+    if not isinstance(ref, str) or not ref.strip():
+        errors.append(
+            "resource-estimate EXACT_RECEIPT_REF requires a non-empty research_receipt_ref"
+        )
+        return
+    target = (case_dir / ref).resolve()
+    try:
+        target.relative_to(case_dir.resolve())
+    except ValueError:
+        errors.append("resource-estimate research_receipt_ref must remain inside the case directory")
+        return
+    if not target.is_file():
+        errors.append(f"resource-estimate research_receipt_ref does not resolve: {ref}")
+        return
+    try:
+        result = verify_receipt(target)
+    except (OSError, UnicodeError, json.JSONDecodeError, yaml.YAMLError, TypeError, ValueError) as exc:
+        errors.append(f"resource-estimate research receipt cannot be verified: {exc}")
+        return
+    if not result.ok:
+        for item in result.errors:
+            errors.append(f"resource-estimate research receipt: {item}")
+
+
+def _hold_reasons(
+    envelopes: dict[str, Any],
+    experts: dict[str, Any],
+    resource: dict[str, Any],
+    computed_envelopes: list[dict[str, Any]],
+) -> list[str]:
     reasons: list[str] = []
+    computed = {item["envelope_id"]: item for item in computed_envelopes}
     for envelope in envelopes.get("envelopes", []):
         review = envelope.get("review", {})
+        envelope_id = envelope.get("envelope_id")
         if review.get("decision_gate") and review.get("status") != "IN_SCOPE":
-            reasons.append(f"{envelope.get('envelope_id')} is not in scope")
+            reasons.append(f"{envelope_id} is not in scope")
         if review.get("decision_gate") and review.get("authority_state") != "ESTABLISHED":
-            reasons.append(
-                f"{envelope.get('envelope_id')} applicability is declared but not established"
-            )
+            reasons.append(f"{envelope_id} applicability is declared but not established")
+        result = computed.get(envelope_id)
+        if review.get("decision_gate") and result is not None and not result["in_scope"]:
+            reasons.append(f"{envelope_id} is outside computed applicability")
+    if resource.get("review_state") != "CURRENT":
+        reasons.append(
+            f"resource estimate {resource.get('record_id')} review_state is "
+            f"{resource.get('review_state')}"
+        )
     for review in experts.get("reviews", []):
         if review.get("mandatory") and review.get("conclusion") != "SUPPORTED_WITHIN_SCOPE":
             reasons.append(f"{review.get('review_id')} mandatory expert gate remains open")
     return reasons
 
 
-def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dict[str, Any]]:
+def validate_case(
+    root: Path,
+    case_dir: Path,
+    *,
+    allow_applicability_mismatch: bool = False,
+) -> tuple[list[str], list[str], dict[str, Any]]:
     errors: list[str] = []
     warnings: list[str] = []
     docs: dict[str, Any] = {}
@@ -154,11 +268,14 @@ def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dic
     experts = docs["experts"]
     decision = docs["decision"]
 
-    assumption_ids = {
-        item.get("id")
-        for item in system.get("assumptions", [])
-        if isinstance(item, dict) and isinstance(item.get("id"), str)
-    }
+    assumption_ids: set[str] = set()
+    for item in system.get("assumptions", []):
+        if not isinstance(item, dict) or not isinstance(item.get("id"), str):
+            continue
+        ref = item["id"]
+        if ref in assumption_ids:
+            errors.append(f"duplicate system assumption id: {ref}")
+        assumption_ids.add(ref)
     for ref in assumption_ids:
         if ref not in node_ids or node_kinds.get(ref) != "assumption":
             errors.append(f"system assumption does not resolve to graph assumption: {ref}")
@@ -208,9 +325,41 @@ def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dic
     if resource.get("applicability_envelope_ref") not in envelope_ids:
         errors.append("resource-estimate applicability_envelope_ref does not resolve")
 
+    _validate_resource_provenance(case_dir, resource, errors)
+
+    computed_envelopes: list[dict[str, Any]] = []
+    try:
+        computed_envelopes = evaluate_envelopes(envelopes, system)
+    except (KeyError, TypeError, ValueError) as exc:
+        errors.append(f"evidence applicability cannot be computed: {exc}")
+    computed_by_id = {item["envelope_id"]: item for item in computed_envelopes}
+    for envelope in envelopes.get("envelopes", []):
+        envelope_id = envelope.get("envelope_id")
+        computed = computed_by_id.get(envelope_id)
+        if computed is None:
+            continue
+        declared = envelope.get("review", {}).get("status")
+        if not allow_applicability_mismatch:
+            if computed["in_scope"] and declared == "OUTSIDE_ENVELOPE":
+                errors.append(
+                    f"evidence envelope {envelope_id} declares OUTSIDE_ENVELOPE "
+                    "but its applicability conditions compute in scope"
+                )
+            if not computed["in_scope"] and declared != "OUTSIDE_ENVELOPE":
+                failed = ", ".join(computed["failed_subjects"])
+                errors.append(
+                    f"evidence envelope {envelope_id} declares {declared} but computes "
+                    f"outside envelope (failed: {failed})"
+                )
+
+    review_ids: set[str] = set()
     for review in experts.get("reviews", []):
         review_id = review.get("review_id")
         claim_ref = review.get("claim_ref")
+        if isinstance(review_id, str):
+            if review_id in review_ids:
+                errors.append(f"duplicate expert review id: {review_id}")
+            review_ids.add(review_id)
         if review_id not in node_ids:
             errors.append(f"expert review does not resolve in assurance graph: {review_id}")
         if claim_ref not in node_ids or node_kinds.get(claim_ref) != "claim":
@@ -220,6 +369,17 @@ def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dic
         ):
             if ref not in node_ids:
                 errors.append(f"expert review ref does not resolve: {ref}")
+        if (
+            review.get("review_class") in {"EXTERNAL_DOMAIN_REVIEW", "INDEPENDENT_VV_REVIEW"}
+            and review.get("conclusion") == "SUPPORTED_WITHIN_SCOPE"
+            and (
+                not isinstance(review.get("reviewer_ref"), str)
+                or not review.get("reviewer_ref", "").strip()
+            )
+        ):
+            errors.append(
+                f"{review_id} supported {review.get('review_class')} requires reviewer_ref"
+            )
 
     decision_doc = decision.get("decision", {})
     if decision_doc.get("id") != system.get("decision_ref"):
@@ -234,10 +394,11 @@ def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dic
     )
     errors.extend(f"decision-receipt.yaml: {item}" for item in decision_result.errors)
 
-    hold_reasons = _hold_reasons(envelopes, experts)
+    hold_reasons = _hold_reasons(envelopes, experts, resource, computed_envelopes)
     if hold_reasons and decision_doc.get("disposition") == "APPROVE":
         errors.append(
-            "decision cannot APPROVE while mandatory FTQC applicability/expert gates remain open"
+            "decision cannot APPROVE while mandatory FTQC applicability, resource, "
+            "or expert gates remain open: " + "; ".join(hold_reasons)
         )
 
     return errors, warnings, docs
@@ -249,7 +410,8 @@ def case_summary(docs: dict[str, Any]) -> dict[str, Any]:
     envelopes = docs["envelopes"]
     experts = docs["experts"]
     decision = docs["decision"]["decision"]
-    hold_reasons = _hold_reasons(envelopes, experts)
+    computed_envelopes = evaluate_envelopes(envelopes, system)
+    hold_reasons = _hold_reasons(envelopes, experts, resource, computed_envelopes)
     return {
         "profile_version": PROFILE_VERSION,
         "record_class": system["record_class"],

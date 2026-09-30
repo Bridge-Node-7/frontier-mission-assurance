@@ -1,21 +1,22 @@
-# Source Release Receipt — v0.11.1
+# Source Release Receipt — v0.11.2
 
 **Release type:** stable public reference candidate  
-**Date:** 2026-09-21  
+**Date:** 2026-09-29  
 **Validation status:** READY FOR HOSTED VALIDATION; PUBLICATION REQUIRES IMMUTABLE-RELEASE PROTECTION
 
 ## Purpose
 
-Reduce cross-repository maintenance while preserving the fail-closed FTQC technical-evidence boundary, exact contract identity, explicit producer review, and accountable human authority.
+Close the bounded FTQC applied-case semantic gaps while preserving existing portable contract identity, source-neutral public evaluation, and accountable human authority.
 
-## Material changes in v0.11.1
+## Material changes in v0.11.2
 
-- Added low-churn `INTERFACES.json` declarations for the FMA Assurance Graph, Decision Receipt, assurance-context, and bounded FTQC input contracts.
-- Separated portable contract versions and exact schema SHA-256 values from the FMA application version.
-- Moved reviewed FTQC producer releases into a governed, human-review-required compatibility registry.
-- Preserved exact schema/artifact integrity checks, one-input linkage, architecture consistency, evidence-class mapping, applicability semantics, and future-release fail-closed behavior.
-- Added a release preflight that prevents a future stable publication unless repository immutable-release protection is enabled.
-- Preserved FTQC profile contract `0.2`, assurance-context `0.1.0`, browser/user-facing behavior, and human consequential authority.
+- Recompute evidence applicability against the current FTQC System Concept and fail closed on declaration/computation contradictions.
+- Treat non-current decision-relevant resource estimates as approval blockers.
+- Verify exact Research Receipt provenance claims within the governed case boundary.
+- Reject duplicate assumption/review identities and unsupported strong external/independent review claims.
+- Surface graph, evidence-envelope, resource-estimate, and decision-governance mutations in previous/current case comparison while retaining historical impact paths.
+- Clarify public-example, governed engagement, independence/conflict, and contract-change boundaries for evaluators.
+- Preserve FTQC profile contract `0.2`, assurance-context `0.1.0`, existing schemas, and human consequential authority.
 
 ## Source-level evidence
 
@@ -29,7 +30,7 @@ Hosted validation evidence is recorded in GitHub Actions and release metadata.
 
 ## Publication gate
 
-The v0.11.1 source may be merged after native V&V passes. The Stable Release workflow must fail before publication unless GitHub immutable-release protection is enabled for future releases. Historical v0.11.0 is preserved as published.
+The v0.11.2 source may be merged after native V&V passes. The Stable Release workflow must fail before publication unless GitHub immutable-release protection is enabled for future releases. Historical v0.11.0 is preserved as published.
 
 ## Validation status
 
