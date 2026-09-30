@@ -179,7 +179,12 @@ def _hold_reasons(
     return reasons
 
 
-def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dict[str, Any]]:
+def validate_case(
+    root: Path,
+    case_dir: Path,
+    *,
+    allow_applicability_mismatch: bool = False,
+) -> tuple[list[str], list[str], dict[str, Any]]:
     errors: list[str] = []
     warnings: list[str] = []
     docs: dict[str, Any] = {}
@@ -334,17 +339,18 @@ def validate_case(root: Path, case_dir: Path) -> tuple[list[str], list[str], dic
         if computed is None:
             continue
         declared = envelope.get("review", {}).get("status")
-        if computed["in_scope"] and declared == "OUTSIDE_ENVELOPE":
-            errors.append(
-                f"evidence envelope {envelope_id} declares OUTSIDE_ENVELOPE "
-                "but its applicability conditions compute in scope"
-            )
-        if not computed["in_scope"] and declared != "OUTSIDE_ENVELOPE":
-            failed = ", ".join(computed["failed_subjects"])
-            errors.append(
-                f"evidence envelope {envelope_id} declares {declared} but computes "
-                f"outside envelope (failed: {failed})"
-            )
+        if not allow_applicability_mismatch:
+            if computed["in_scope"] and declared == "OUTSIDE_ENVELOPE":
+                errors.append(
+                    f"evidence envelope {envelope_id} declares OUTSIDE_ENVELOPE "
+                    "but its applicability conditions compute in scope"
+                )
+            if not computed["in_scope"] and declared != "OUTSIDE_ENVELOPE":
+                failed = ", ".join(computed["failed_subjects"])
+                errors.append(
+                    f"evidence envelope {envelope_id} declares {declared} but computes "
+                    f"outside envelope (failed: {failed})"
+                )
 
     review_ids: set[str] = set()
     for review in experts.get("reviews", []):
@@ -404,7 +410,8 @@ def case_summary(docs: dict[str, Any]) -> dict[str, Any]:
     envelopes = docs["envelopes"]
     experts = docs["experts"]
     decision = docs["decision"]["decision"]
-    hold_reasons = _hold_reasons(envelopes, experts)
+    computed_envelopes = evaluate_envelopes(envelopes, system)
+    hold_reasons = _hold_reasons(envelopes, experts, resource, computed_envelopes)
     return {
         "profile_version": PROFILE_VERSION,
         "record_class": system["record_class"],
