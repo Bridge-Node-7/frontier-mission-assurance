@@ -14,7 +14,7 @@ A public evaluator can inspect the repository and assess the reference behavior 
 
 Internal operational use, private deployment, integration into governed workflows, modification of adapters or other derivative work, redistribution, resale, and other rights not granted by the public license require separate written permission or agreement from Bridge Node 7.
 
-For governed or operational engagement, start at [Partner](https://bridgenode7.com/partner/) or email [contact@bridgenode7.com](mailto:contact@bridgenode7.com). Start with a non-confidential overview; protected material belongs in the approved channel for the engagement.
+For governed or operational engagement, start at [Partner](https://bridgenode7.com/partner/). Start with a non-confidential overview; protected material belongs in the approved channel for the engagement.
 
 ## Independence and conflict boundary
 
