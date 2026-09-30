@@ -57,6 +57,8 @@ Breaking changes to a profile-level behavioral contract require a profile-contra
 
 Consumers must not infer stronger compatibility than the declared versions provide.
 
+Contract changes are governed through reviewed changes on protected `main`, repository V&V, explicit profile/record version changes and migration guidance when compatibility breaks, and stable publication from an exact validated commit. A newer application release does not by itself change a profile or portable-record contract.
+
 ## Profile discovery manifest
 
 Each maintained profile exposes a small `profile.yaml` discovery manifest. The manifest identifies:
