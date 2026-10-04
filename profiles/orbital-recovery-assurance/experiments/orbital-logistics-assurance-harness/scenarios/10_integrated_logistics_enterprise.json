@@ -1,0 +1,84 @@
+{
+  "record_class": "synthetic",
+  "case_id": "SYNTHETIC-LOGISTICS-010",
+  "phase": "pre_service",
+  "demonstrated_functions": [
+    "resource_management",
+    "transfer_vehicle_integration",
+    "network_coordination",
+    "orbital_warehousing",
+    "service_recovery",
+    "health_monitoring"
+  ],
+  "pre_service_assessment": {
+    "disposition": "ELIGIBLE_FOR_DECISION_PREPARATION",
+    "service_option": "integrated_resupply_refuel_repair",
+    "eligible_options": [
+      "integrated_resupply_refuel_repair"
+    ]
+  },
+  "pre_service_evidence_ids": [
+    "E-AUTH-INT-1",
+    "E-IF-DEPOT-OTV",
+    "E-IF-OTV-SERVICER",
+    "E-IF-SERVICER-CLIENT",
+    "E-RESOURCE-PROP",
+    "E-RESOURCE-SPARE",
+    "E-MODEL-NETWORK",
+    "E-MODEL-HEALTH"
+  ],
+  "authority_evidence_refs": [
+    "E-AUTH-INT-1"
+  ],
+  "interfaces": [
+    {
+      "interface_id": "IF-DEPOT-OTV",
+      "state": "COMPATIBLE",
+      "blockers": []
+    },
+    {
+      "interface_id": "IF-OTV-SERVICER",
+      "state": "COMPATIBLE",
+      "blockers": []
+    },
+    {
+      "interface_id": "IF-SERVICER-CLIENT",
+      "state": "COMPATIBLE",
+      "blockers": []
+    }
+  ],
+  "resources": [
+    {
+      "resource_id": "RESOURCE-PROP-BATCH-001",
+      "presence": "PRESENT",
+      "fitness": "VERIFIED",
+      "release_state": "AUTHORIZED"
+    },
+    {
+      "resource_id": "RESOURCE-SPARE-MODULE-001",
+      "presence": "PRESENT",
+      "fitness": "SUPPORTED",
+      "release_state": "AUTHORIZED"
+    }
+  ],
+  "models": [
+    {
+      "model_id": "MODEL-NETWORK-COORDINATION-1",
+      "applicability": "SUPPORTED",
+      "blockers": []
+    },
+    {
+      "model_id": "MODEL-CLIENT-HEALTH-1",
+      "applicability": "ESTABLISHED",
+      "blockers": []
+    }
+  ],
+  "service": {
+    "execution_state": "NOT_EXECUTED",
+    "verification_state": "NOT_ASSESSED"
+  },
+  "post_service_evidence_ids": [],
+  "requalification": {
+    "review_state": "HOLD_FAIL_CLOSED"
+  }
+}

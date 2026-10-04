@@ -34,7 +34,14 @@ Persistent orbital logistics introduces cross-system dependence among independen
 6. failed requalification;
 7. nominal requalification-review readiness;
 8. nominal post-service readiness for requalification review;
-9. unsupported lifecycle phase fails closed.
+9. unsupported lifecycle phase fails closed;
+10. integrated multi-node logistics-enterprise composition across resource management, transfer-vehicle integration, network coordination, orbital warehousing, service/recovery, and health monitoring.
+
+## Integrated mission composition
+
+Scenario `10_integrated_logistics_enterprise.json` demonstrates that the assurance layer can compose outputs from multiple independently governed logistics functions in one decision basis. It includes multiple interfaces, resources, and models representing a depot/warehouse node, transfer-vehicle integration, network coordination, servicing/recovery, resource management, and health monitoring.
+
+The scenario does **not** simulate propulsion, rendezvous and proximity operations, docking control, warehouse robotics, trajectory optimization, or physical servicing. Those capabilities remain authoritative in their own systems. The experiment verifies only whether their declared outputs can jointly support accountable service review and whether a failure in any material assurance dimension forces a fail-closed result.
 
 ## Public data boundary
 
