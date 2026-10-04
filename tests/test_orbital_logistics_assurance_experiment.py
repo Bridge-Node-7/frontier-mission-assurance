@@ -95,7 +95,6 @@ def test_non_object_input_fails_closed_without_exception():
     assert result["disposition"] == h.HOLD
     assert "CASE_INPUT_INVALID" in {x["code"] for x in result["findings"]}
 
-
 def test_private_record_class_is_rejected_by_public_experiment():
     case = load("01_nominal_pre_service.json")
     case["record_class"] = "private"
@@ -132,7 +131,6 @@ def test_dispositions_remain_bounded_review_states():
     for path in sorted((HERE / "scenarios").glob("*.json")):
         result = h.evaluate(json.loads(path.read_text(encoding="utf-8")))
         assert result["disposition"] in allowed
-
 
 def test_cli_invalid_path_does_not_echo_local_path():
     missing = HERE / "sensitive-local-name-that-must-not-echo.json"
