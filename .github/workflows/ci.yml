@@ -51,7 +51,7 @@ jobs:
       - name: Verify installed dependency consistency
         run: python -m pip check
       - name: Lint
-        run: ruff check src tests scripts
+        run: ruff check src tests scripts profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness
       - name: Unit, regression, schema, tamper, and boundary tests
         run: pytest
       - name: Release hygiene check
