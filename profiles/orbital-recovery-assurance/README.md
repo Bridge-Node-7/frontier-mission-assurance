@@ -84,6 +84,12 @@ contracts, validation behavior, and limitations can be evaluated independently
 of any particular mission. See [`ASSURANCE_SCOPE.md`](ASSURANCE_SCOPE.md) and
 [`docs/GOVERNED_WORKSPACE.md`](docs/GOVERNED_WORKSPACE.md).
 
+## Experimental cross-system service assurance
+
+For a bounded evaluation of cross-system servicing logic, use the [Orbital Logistics Assurance Harness](experiments/orbital-logistics-assurance-harness/README.md). The experiment exercises pre-service eligibility, pre-existing authority, configuration-specific interface compatibility, resource fitness and release, model applicability, service verification, post-service evidence, and requalification with source-neutral synthetic inputs.
+
+The harness is non-actuating and does not change profile contract `0.5`, create a new portable contract, authorize operations, certify mission readiness, or replace governed mission systems. Promotion of any experimental structure requires repeated governed use and a separately reviewed contract decision.
+
 ## Adoption path
 
 Start with [`docs/PARTNER_QUICKSTART.md`](docs/PARTNER_QUICKSTART.md).
