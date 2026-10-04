@@ -54,6 +54,40 @@ A future model-dependent path should remain optional, observable, replaceable, a
 
 This experiment exposes only the minimum reusable behavior needed to evaluate the declared assurance invariants. It is not a complete logistics architecture, customer/program roadmap, autonomy policy, optimization strategy, or commercialization design. Mission-specific policy, thresholds, calibration, integration adapters, and operating authority remain outside this public reference.
 
+## Governed case binding
+
+For an access-controlled Orbital Recovery case, bind the service experiment to the
+existing governed records instead of re-declaring physical, trust, authority, or
+requalification state inside the experiment.
+
+Keep the service-assurance JSON **outside** the Orbital Recovery case directory so
+the existing case validator continues to recognize only its canonical profile
+records.
+
+Example:
+
+```bash
+python profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness/bound_case.py \
+  /path/to/private-orbital-recovery-case \
+  /path/to/service-assurance-case.json
+```
+
+The binding helper first runs the existing private Orbital Recovery case validator
+at the lifecycle stage required by the service case. It then binds:
+
+- the exact governed pre-service option assessment;
+- the exact governed pre-service evidence record;
+- the governed post-service evidence record when required;
+- the governed requalification record when required.
+
+A mismatched assessment, evidence record, asset, post-service record, record class,
+or requalification reference fails closed. Private records are accepted only
+through this governed binding path; the direct public experiment continues to
+accept synthetic or sanitized inputs only.
+
+The helper remains local-only and non-actuating. Structural PASS does not establish
+evidence authenticity, mission fitness, safety, ownership, or authorization.
+
 ## Run
 
 From the experiment directory:

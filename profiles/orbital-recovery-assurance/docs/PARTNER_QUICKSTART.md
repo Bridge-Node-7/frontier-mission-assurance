@@ -129,6 +129,16 @@ mapped | assessed | post-intervention | requalification-review
 
 Each stage proves only the artifacts required for that point in the lifecycle.
 
+For a governed cross-system service case, keep the experimental service-assurance JSON outside the Orbital Recovery case directory and bind it to the validated case records with:
+
+```bash
+python profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness/bound_case.py \
+  /path/to/private-case \
+  /path/to/service-assurance-case.json
+```
+
+The binding helper reuses the existing private-case validator and exact governed evidence, option-assessment, post-service, and requalification records. It fails closed on reference or asset mismatches and does not copy those records into a new authority.
+
 ## 7. Run the assessment
 
 Use the profile to answer:
