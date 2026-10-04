@@ -117,6 +117,7 @@ FMA has one assurance core. Profiles are bounded domain projections; they do not
 - [**FTQC Assurance**](profiles/ftqc-assurance/README.md) — use this when a fault-tolerant quantum architecture decision depends on changing resource estimates, physical assumptions, experimental evidence, interfaces, or expert review.
   - governed case: [`profiles/ftqc-assurance/docs/GOVERNED_CASE_QUICKSTART.md`](profiles/ftqc-assurance/docs/GOVERNED_CASE_QUICKSTART.md)
 - [**Orbital Recovery Assurance**](profiles/orbital-recovery-assurance/README.md) — use this when a degraded or uncertain orbital capability may be recoverable, but physical state, trust, authority, recovery options, or requalification remain unresolved.
+  - bounded cross-system service evaluation: [Orbital Logistics Assurance Harness](profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness/README.md)
 
 Each profile exposes a `PROFILE_CONTRACT.md` and a small machine-readable `profile.yaml` manifest. See [`docs/PROFILE_ARCHITECTURE.md`](docs/PROFILE_ARCHITECTURE.md).
 

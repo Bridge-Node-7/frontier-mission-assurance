@@ -29,6 +29,17 @@ ORBITAL RECOVERY ASSURANCE PROFILE PASS
 
 A PASS confirms the declared profile contracts, invariants, reference cases, and benchmark acceptance checks exercised by the validation set.
 
+### Optional: evaluate cross-system service assurance
+
+When the evaluation involves servicing between independently governed systems, run the source-neutral experimental harness before mapping any governed mission data:
+
+```bash
+python profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness/assurance_harness.py profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness/scenarios/01_nominal_pre_service.json
+python -m pytest -q tests/test_orbital_logistics_assurance_experiment.py
+```
+
+The experiment demonstrates bounded fail-closed behavior across pre-service eligibility, authority, interface compatibility, resource fitness/release, model applicability, service verification, and requalification. It is an evaluation aid, not an operational command path, mission-qualification result, or new profile contract.
+
 ## 2. Review the reference case
 
 Start with:
