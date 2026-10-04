@@ -7,7 +7,7 @@ test:
 	pytest
 
 lint:
-	ruff check src tests scripts
+	ruff check src tests scripts profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness
 
 validate:
 	fma validate examples/frontier_program/graph.yaml

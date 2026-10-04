@@ -1,0 +1,53 @@
+{
+  "record_class": "synthetic",
+  "case_id": "SYNTHETIC-LOGISTICS-002",
+  "phase": "pre_service",
+  "pre_service_assessment": {
+    "disposition": "ELIGIBLE_FOR_DECISION_PREPARATION",
+    "service_option": "refuel_and_inspect",
+    "eligible_options": [
+      "refuel_and_inspect"
+    ]
+  },
+  "pre_service_evidence_ids": [
+    "E-AUTH-1",
+    "E-IF-1",
+    "E-RESOURCE-1",
+    "E-MODEL-1"
+  ],
+  "authority_evidence_refs": [
+    "E-AUTH-1"
+  ],
+  "interfaces": [
+    {
+      "interface_id": "IF-FLUID-A",
+      "state": "INCOMPATIBLE",
+      "blockers": [
+        "configuration revision mismatch"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "resource_id": "RESOURCE-PROP-001",
+      "presence": "PRESENT",
+      "fitness": "VERIFIED",
+      "release_state": "AUTHORIZED"
+    }
+  ],
+  "models": [
+    {
+      "model_id": "MODEL-RENDEZVOUS-1",
+      "applicability": "SUPPORTED",
+      "blockers": []
+    }
+  ],
+  "service": {
+    "execution_state": "NOT_EXECUTED",
+    "verification_state": "NOT_ASSESSED"
+  },
+  "post_service_evidence_ids": [],
+  "requalification": {
+    "review_state": "HOLD_FAIL_CLOSED"
+  }
+}
