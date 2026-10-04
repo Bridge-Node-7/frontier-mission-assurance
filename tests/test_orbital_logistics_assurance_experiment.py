@@ -348,3 +348,43 @@ def test_bound_case_cli_reuses_private_orbital_recovery_validation(tmp_path):
         assessment["assessment_id"]
     )
     assert result["bound_records"]["pre_service_evidence"] == evidence["record_id"]
+
+
+def test_integrated_logistics_enterprise_scenario_covers_all_function_families():
+    case = load("10_integrated_logistics_enterprise.json")
+    assert set(case["demonstrated_functions"]) == {
+        "resource_management",
+        "transfer_vehicle_integration",
+        "network_coordination",
+        "orbital_warehousing",
+        "service_recovery",
+        "health_monitoring",
+    }
+    result = h.evaluate(case)
+    assert result["disposition"] == h.ELIGIBLE
+    assert result["findings"] == []
+    assert len(case["interfaces"]) == 3
+    assert len(case["resources"]) == 2
+    assert len(case["models"]) == 2
+
+
+def test_integrated_logistics_enterprise_fails_closed_on_cross_system_breaks():
+    import copy
+
+    base = load("10_integrated_logistics_enterprise.json")
+
+    broken_interface = copy.deepcopy(base)
+    broken_interface["interfaces"][1]["state"] = "INCOMPATIBLE"
+    assert h.evaluate(broken_interface)["disposition"] == h.HOLD
+
+    held_resource = copy.deepcopy(base)
+    held_resource["resources"][0]["release_state"] = "HELD"
+    assert h.evaluate(held_resource)["disposition"] == h.HOLD
+
+    invalid_model = copy.deepcopy(base)
+    invalid_model["models"][0]["applicability"] = "OUTSIDE_ENVELOPE"
+    assert h.evaluate(invalid_model)["disposition"] == h.HOLD
+
+    missing_authority = copy.deepcopy(base)
+    missing_authority["authority_evidence_refs"] = []
+    assert h.evaluate(missing_authority)["disposition"] == h.HOLD
