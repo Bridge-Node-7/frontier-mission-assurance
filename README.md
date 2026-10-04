@@ -204,7 +204,7 @@ DECISION AUTHORITY     remains human-owned
 
 A successful reproduction is not automatically scientific truth. Scientific truth is not automatically applicability to another configuration, scale, system, or decision.
 
-See [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), and [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md).
+See [`docs/EPISTEMIC_ASSURANCE.md`](docs/EPISTEMIC_ASSURANCE.md), [`docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md`](docs/RESEARCH_REPRODUCIBILITY_CONTRACT.md), [`docs/INTEROPERABILITY.md`](docs/INTEROPERABILITY.md), and [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md).
 
 ## Verification semantics
 
