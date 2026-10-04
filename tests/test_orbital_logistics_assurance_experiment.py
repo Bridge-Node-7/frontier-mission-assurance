@@ -143,3 +143,208 @@ def test_cli_invalid_path_does_not_echo_local_path():
     assert completed.returncode == 2
     assert completed.stderr.strip() == "invalid case input"
     assert str(missing) not in completed.stderr
+
+
+def _bound_pre_service_records():
+    evidence_record = {
+        "record_class": "private",
+        "record_id": "EVIDENCE-RECORD-BOUND-PRE",
+        "asset_id": "ASSET-BOUND-001",
+        "evidence": [{"id": "EVIDENCE-AUTH-BOUND"}],
+    }
+    option_assessment = {
+        "record_class": "private",
+        "assessment_id": "ASSESSMENT-BOUND-001",
+        "evidence_record_ref": "EVIDENCE-RECORD-BOUND-PRE",
+        "asset_id": "ASSET-BOUND-001",
+        "disposition": "ELIGIBLE_FOR_DECISION_PREPARATION",
+        "eligible_options": ["refuel_and_inspect"],
+    }
+    service_case = {
+        "record_class": "private",
+        "case_id": "BOUND-SERVICE-001",
+        "phase": "pre_service",
+        "pre_service_assessment": {
+            "assessment_id": "ASSESSMENT-BOUND-001",
+            "evidence_record_ref": "EVIDENCE-RECORD-BOUND-PRE",
+            "service_option": "refuel_and_inspect",
+        },
+        "authority_evidence_refs": ["EVIDENCE-AUTH-BOUND"],
+        "interfaces": [
+            {
+                "interface_id": "IF-BOUND-A",
+                "state": "COMPATIBLE",
+                "blockers": [],
+            }
+        ],
+        "resources": [],
+        "models": [],
+        "service": {
+            "execution_state": "NOT_EXECUTED",
+            "verification_state": "NOT_ASSESSED",
+        },
+    }
+    return service_case, evidence_record, option_assessment
+
+
+def test_bound_private_case_reuses_governed_assessment_and_evidence():
+    service_case, evidence_record, option_assessment = _bound_pre_service_records()
+    result = h.evaluate_bound_case(
+        service_case,
+        evidence_record,
+        option_assessment,
+    )
+    assert result["disposition"] == h.ELIGIBLE
+    assert result["findings"] == []
+    assert result["bound_records"]["pre_service_assessment"] == "ASSESSMENT-BOUND-001"
+    assert result["bound_records"]["pre_service_evidence"] == "EVIDENCE-RECORD-BOUND-PRE"
+    assert "does not duplicate or supersede" in result["binding_note"]
+
+
+def test_bound_case_rejects_assessment_binding_mismatch():
+    service_case, evidence_record, option_assessment = _bound_pre_service_records()
+    service_case["pre_service_assessment"]["assessment_id"] = "ASSESSMENT-WRONG"
+    result = h.evaluate_bound_case(
+        service_case,
+        evidence_record,
+        option_assessment,
+    )
+    assert result["disposition"] == h.HOLD
+    assert "UPSTREAM_ASSESSMENT_BINDING_MISMATCH" in {
+        row["code"] for row in result["findings"]
+    }
+
+
+def test_bound_post_service_requires_governed_post_service_evidence():
+    service_case, evidence_record, option_assessment = _bound_pre_service_records()
+    service_case["phase"] = "post_service"
+    service_case["post_service_evidence_record_ref"] = "EVIDENCE-RECORD-BOUND-POST"
+    service_case["service"] = {
+        "execution_state": "EXECUTED",
+        "verification_state": "SUPPORTED",
+    }
+    result = h.evaluate_bound_case(
+        service_case,
+        evidence_record,
+        option_assessment,
+    )
+    assert result["disposition"] == h.HOLD
+    assert "POST_SERVICE_EVIDENCE_RECORD_MISSING" in {
+        row["code"] for row in result["findings"]
+    }
+
+
+def test_bound_requalification_uses_governed_post_service_records():
+    service_case, evidence_record, option_assessment = _bound_pre_service_records()
+    service_case["phase"] = "requalification_review"
+    service_case["post_service_evidence_record_ref"] = "EVIDENCE-RECORD-BOUND-POST"
+    service_case["service"] = {
+        "execution_state": "EXECUTED",
+        "verification_state": "SUPPORTED",
+    }
+    service_case["requalification"] = {
+        "requalification_id": "REQUAL-BOUND-001",
+    }
+    post_evidence_record = {
+        "record_class": "private",
+        "record_id": "EVIDENCE-RECORD-BOUND-POST",
+        "asset_id": "ASSET-BOUND-001",
+        "evidence": [{"id": "EVIDENCE-POST-BOUND"}],
+    }
+    requalification_record = {
+        "record_class": "private",
+        "requalification_id": "REQUAL-BOUND-001",
+        "evidence_record_ref": "EVIDENCE-RECORD-BOUND-POST",
+        "review_state": h.READY,
+    }
+    result = h.evaluate_bound_case(
+        service_case,
+        evidence_record,
+        option_assessment,
+        post_evidence_record=post_evidence_record,
+        requalification_record=requalification_record,
+    )
+    assert result["disposition"] == h.READY
+    assert result["findings"] == []
+    assert result["bound_records"]["post_service_evidence"] == (
+        "EVIDENCE-RECORD-BOUND-POST"
+    )
+    assert result["bound_records"]["requalification"] == "REQUAL-BOUND-001"
+
+
+def test_bound_case_cli_reuses_private_orbital_recovery_validation(tmp_path):
+    source = (
+        ROOT
+        / "profiles"
+        / "orbital-recovery-assurance"
+        / "examples"
+        / "synthetic-recovery-case"
+    )
+    case_dir = tmp_path / "governed-case"
+    case_dir.mkdir()
+    for name in (
+        "recovery-evidence-record.json",
+        "recovery-chain-view.json",
+        "recovery-option-assessment.json",
+    ):
+        record = json.loads((source / name).read_text(encoding="utf-8"))
+        record["record_class"] = "private"
+        (case_dir / name).write_text(
+            json.dumps(record, indent=2) + "\n",
+            encoding="utf-8",
+        )
+
+    assessment = json.loads(
+        (case_dir / "recovery-option-assessment.json").read_text(encoding="utf-8")
+    )
+    evidence = json.loads(
+        (case_dir / "recovery-evidence-record.json").read_text(encoding="utf-8")
+    )
+    service_case = {
+        "record_class": "private",
+        "case_id": "BOUND-CLI-001",
+        "phase": "pre_service",
+        "pre_service_assessment": {
+            "assessment_id": assessment["assessment_id"],
+            "evidence_record_ref": evidence["record_id"],
+            "service_option": "controlled_retirement",
+        },
+        "authority_evidence_refs": ["EVIDENCE-004"],
+        "interfaces": [
+            {
+                "interface_id": "IF-BOUND-CLI",
+                "state": "COMPATIBLE",
+                "blockers": [],
+            }
+        ],
+        "resources": [],
+        "models": [],
+        "service": {
+            "execution_state": "NOT_EXECUTED",
+            "verification_state": "NOT_ASSESSED",
+        },
+    }
+    service_path = tmp_path / "service-assurance-case.json"
+    service_path.write_text(
+        json.dumps(service_case, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(HERE / "bound_case.py"),
+            str(case_dir),
+            str(service_path),
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 3
+    result = json.loads(completed.stdout)
+    assert result["disposition"] == h.HOLD
+    assert result["bound_records"]["pre_service_assessment"] == (
+        assessment["assessment_id"]
+    )
+    assert result["bound_records"]["pre_service_evidence"] == evidence["record_id"]
