@@ -34,6 +34,18 @@ def test_coverage_exposes_evidence_gap():
     assert coverage["coverage_ratio"] < 1.0
 
 
+def test_criticality_missing_is_allowed_but_explicit_null_is_rejected():
+    omitted = deepcopy(_graph())
+    omitted["nodes"][0].pop("criticality", None)
+    assert validate_graph(omitted).ok
+
+    explicitly_null = deepcopy(omitted)
+    explicitly_null["nodes"][0]["criticality"] = None
+    result = validate_graph(explicitly_null)
+    assert not result.ok
+    assert any("criticality must be between 0 and 5" in error for error in result.errors)
+
+
 def test_graph_rejection_branches_are_fail_closed():
     base = _graph()
     mutations: list[tuple[str, dict]] = []
@@ -86,7 +98,7 @@ def test_graph_rejection_branches_are_fail_closed():
     doc["nodes"][0]["status"] = "mystery"
     mutations.append(("unsupported status", doc))
 
-    for bad in (9, -1, "high"):
+    for bad in (9, -1, "high", None):
         doc = deepcopy(base)
         doc["nodes"][0]["criticality"] = bad
         mutations.append(("criticality must be between 0 and 5", doc))
