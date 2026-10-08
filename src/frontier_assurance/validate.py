@@ -127,7 +127,7 @@ def validate_graph(graph: dict[str, Any]) -> ValidationResult:
         # FMA-CONTRACT-03: JSON Schema does not treat booleans as numbers, but
         # isinstance(True, int) is True in Python, so `criticality: true` was
         # accepted as 1.
-        if criticality is not None and (
+        if "criticality" in node and (
             isinstance(criticality, bool)
             or not isinstance(criticality, (int, float))
             or not 0 <= float(criticality) <= 5
