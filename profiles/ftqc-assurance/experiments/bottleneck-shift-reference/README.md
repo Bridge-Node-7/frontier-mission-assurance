@@ -12,8 +12,8 @@ It follows the June 2026 Materials-to-Mission capstone principle: **fund the ver
 
 **External inspiration, not experimental input or endorsement:**
 
-- ORNL, [*Breaking a quantum computing bottleneck*](https://www.ornl.gov/news/breaking-a-quantum-computing-bottleneck/), October 12, 2026.
-- Chao Lu et al., [*LuGo: An enhanced quantum phase estimation implementation*](https://doi.org/10.1016/j.future.2025.108270), *Future Generation Computer Systems*, vol. 178 (2026); [preprint](https://arxiv.org/html/2503.15439v2).
+- ORNL, *Breaking a quantum computing bottleneck*, October 12, 2026 (official ORNL news article; source locator maintained in authorized research records).
+- Chao Lu et al., *LuGo: An enhanced quantum phase estimation implementation*, *Future Generation Computer Systems*, vol. 178 (2026), DOI `10.1016/j.future.2025.108270`; preprint `arXiv:2503.15439v2`.
 - ORNL paper Table 1 reports a 64×64 Toeplitz case with **2,876,007** conventional gates versus **91,054** LuGo gates and circuit-generation times **1,908.18 s** versus **37.65 s**. Those are author-reported results and **not values or observations produced by this experiment**. No claim is made here about actual quantum advantage, reproduced LuGo implementation, real hardware performance, licensing, or a customer's platform.
 
 ## Minimal reproducible run
