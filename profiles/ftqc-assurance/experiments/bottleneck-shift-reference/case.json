@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "case_id": "SYN-FTQC-BOTTLENECK-SHIFT-001",
+  "evidence_class": "SYNTHETIC",
+  "unit": "synthetic_latency_units",
+  "baseline": "baseline",
+  "options": ["baseline", "circuit_restructure", "hybrid_restructure"],
+  "min_speedup": 1.5,
+  "unverified_gates": [
+    "Real workload equivalence and output accuracy",
+    "Hardware native-gate mapping, noise, QEC and shots",
+    "Classical-versus-quantum end-to-end comparator",
+    "Licensing, cost, reproducibility and independent expert review"
+  ],
+  "scenarios": [
+    {
+      "id": "nominal_synthetic",
+      "durations": {
+        "baseline": {"preparation": 200, "circuit_generation": 600, "quantum_execution": 500, "readout": 100},
+        "circuit_restructure": {"preparation": 250, "circuit_generation": 50, "quantum_execution": 140, "readout": 100},
+        "hybrid_restructure": {"preparation": 250, "circuit_generation": 50, "quantum_execution": 140, "readout": 70}
+      }
+    },
+    {
+      "id": "preparation_cost_stress_synthetic",
+      "durations": {
+        "baseline": {"preparation": 300, "circuit_generation": 600, "quantum_execution": 500, "readout": 100},
+        "circuit_restructure": {"preparation": 900, "circuit_generation": 50, "quantum_execution": 140, "readout": 100},
+        "hybrid_restructure": {"preparation": 450, "circuit_generation": 50, "quantum_execution": 140, "readout": 70}
+      }
+    }
+  ]
+}
