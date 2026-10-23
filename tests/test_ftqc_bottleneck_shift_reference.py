@@ -3,8 +3,8 @@
 import copy
 import importlib.util
 import json
-from pathlib import Path
 import unittest
+from pathlib import Path
 
 HERE = (Path(__file__).resolve().parents[1] / "profiles" / "ftqc-assurance" / "experiments" / "bottleneck-shift-reference")
 spec = importlib.util.spec_from_file_location("synthetic_bottleneck_shift", HERE / "analyze.py")
