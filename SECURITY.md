@@ -25,7 +25,7 @@ The repository uses bounded, fail-visible controls as defense in depth:
 - Protected-main V&V performs CodeQL analysis for Python before a stable release can be triggered.
 - GitHub Actions are pinned to immutable commit SHAs.
 - Runtime regression tests prohibit common network-client imports in the installed FMA package.
-- Version-2 receipt tests verify code/input binding and fresh-output reproduction behavior.
+- Receipt tests cover version-2 exact local reproduction and version-3 output-assurance and execution-mode semantics; they do not turn external evidence into a local execution result.
 - The release-hygiene check rejects unsupported artifact types and obvious secret-like material.
 
 These controls reduce risk; they do not prove the absence of vulnerabilities, malicious dependencies, sensitive proper nouns, or unsafe operational use.
@@ -38,7 +38,7 @@ Issues, pull requests, Actions logs, uploaded artifacts, Discussions, release no
 
 `fma receipt` is verification-only and does not execute the declared experiment command.
 
-`fma reproduce` **does execute trusted repository code** and accepts only the current version-2 executable receipt contract. It verifies declared code and input hashes before execution, requires the command to reference the declared entrypoint, creates a fresh temporary workspace that does not contain declared outputs, runs the command with `shell=False`, and then verifies the resulting output hashes and numerical checks.
+`fma reproduce` **does execute trusted repository code** for supported version-2 receipts and version-3 receipts with execution mode `LOCAL`. It does not launch version-3 `EXTERNAL` receipts: those record collected external execution evidence for non-executing verification with `fma receipt`. For supported local reproduction, the command checks declared code and input identities, uses a fresh workspace without pre-existing declared outputs, runs the trusted command with `shell=False`, and applies the receipt's applicable output identities and checks. Version-3 output assurance distinguishes `EXACT`, `SEMANTICALLY_CHECKED`, and `RECORD_ONLY` semantics (see [`docs/CLI_CONTRACT.md`](docs/CLI_CONTRACT.md)); an observed output hash alone does not prove equivalent results.
 
 The fresh workspace prevents a stale checked-in result from satisfying a current reproduction PASS, but it is **not a sandbox or hermetic execution environment**. Trusted code can still use permissions, interpreters, libraries, environment variables, devices, files, and other capabilities available from the host.
 
