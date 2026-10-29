@@ -135,7 +135,7 @@ def test_release_identity_is_consistent():
     assert 'license = "LicenseRef-Proprietary"' in pyproject
     assert 'license-files = ["LICENSE"]' in pyproject
     assert 'Private :: Do Not Upload' in pyproject
-    assert 'setuptools==84.0.0' in pyproject
+    assert 'setuptools==84.1.0' in pyproject
     assert 'wheel==0.48.0' in pyproject
     assert 'pytest>=9.1.1,<10' in pyproject
 
