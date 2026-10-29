@@ -16,7 +16,7 @@ FMA pins its build backend so the clean evaluation path is explicit and reproduc
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install "setuptools==84.0.0" "wheel==0.48.0"
+.venv/bin/python -m pip install "setuptools==84.1.0" "wheel==0.48.0"
 .venv/bin/python -m pip install --no-build-isolation -e .
 ```
 
@@ -24,7 +24,7 @@ python3 -m venv .venv
 
 ```powershell
 py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install "setuptools==84.0.0" "wheel==0.48.0"
+.\.venv\Scripts\python.exe -m pip install "setuptools==84.1.0" "wheel==0.48.0"
 .\.venv\Scripts\python.exe -m pip install --no-build-isolation -e .
 ```
 
