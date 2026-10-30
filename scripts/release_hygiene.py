@@ -23,6 +23,7 @@ ALLOWED_URL_PREFIXES = (
     "https://github.com/Bridge-Node-7/",
     "https://bridge-node-7.github.io/",
     "https://json-schema.org/",
+    "https://raw.githubusercontent.com/googleapis/release-please/",
 )
 PATTERNS = {
     "email": re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE),
