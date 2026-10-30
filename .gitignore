@@ -19,3 +19,5 @@ private/
 evidence_private/
 raw_private/
 .DS_Store
+.coverage
+build/coverage.xml

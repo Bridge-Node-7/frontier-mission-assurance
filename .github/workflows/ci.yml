@@ -53,7 +53,30 @@ jobs:
       - name: Lint
         run: ruff check src tests scripts profiles/orbital-recovery-assurance/experiments/orbital-logistics-assurance-harness
       - name: Unit, regression, schema, tamper, and boundary tests
+        if: runner.os != 'Linux' || matrix.python-version != '3.12'
         run: pytest
+      - name: Unit tests with coverage summary
+        if: runner.os == 'Linux' && matrix.python-version == '3.12'
+        run: |
+          set -euo pipefail
+          mkdir -p build
+          export COVERAGE_FILE="$PWD/build/.coverage"
+          pytest --cov=frontier_assurance --cov-report=term --cov-report=xml:build/coverage.xml
+          {
+            echo "### Unit coverage (frontier_assurance)"
+            echo ""
+            echo '```'
+            python -m coverage report | tail -n 24
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload coverage artifact
+        if: always() && runner.os == 'Linux' && matrix.python-version == '3.12'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: fma-coverage-py3.12
+          path: build/coverage.xml
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Release hygiene check
         run: python scripts/release_hygiene.py .
       - name: Validate public example graph

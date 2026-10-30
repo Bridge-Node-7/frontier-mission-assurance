@@ -4,6 +4,8 @@
 
 *Evidence-native verification and validation for high-consequence frontier systems.*
 
+Stable public evaluation release — see the latest [GitHub Release](https://github.com/Bridge-Node-7/frontier-mission-assurance/releases/latest). Quickstart: [Five-minute evaluation](docs/FIVE_MINUTE_EVALUATION.md). Collaboration: [GitHub Issues](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues).
+
 Frontier Mission Assurance (FMA) connects claims, assumptions, experiments, estimates, interfaces, dependencies, and evidence to the technical decisions that rely on them—so teams can see what is supported, what remains uncertain, and what must be reconsidered when reality changes.
 
 **Start with one consequential decision. Keep the existing work where it is.**
@@ -263,7 +265,7 @@ The canonical local gate validates the core reference, existing-work sidecar, pr
 
 [`VERSION`](VERSION) identifies the current source. A version is stable only when the matching tag and GitHub Release have been published by the explicit Stable Release workflow. Use the latest published GitHub Release when you need stable artifacts.
 
-Copyright © 2026 Bridge Node 7. All rights reserved. The public release is provided for evaluation and review only; it does not itself grant operational-use rights. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md).
+Copyright © 2026 Bridge Node 7. All rights reserved. The public release is provided for evaluation and review only; it does not itself grant operational-use rights. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md). Operational use, integration, or redistribution beyond evaluation requires separate written permission.
 
 For current Bridge Node 7 information, see <https://bridgenode7.com/>.
 
