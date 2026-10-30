@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.11.4](https://github.com/Bridge-Node-7/frontier-mission-assurance/compare/v0.11.3...v0.11.4) (2026-10-30)
+
+
+### Bug Fixes
+
+* **release:** set version-file to VERSION for release-please simple ([#116](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/116)) ([8ad0acb](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/8ad0acb6a61e0b81d1c5e84ab5a8b1f868bb3b56))
+* **release:** use generic extra-file type for VERSION ([#114](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/114)) ([3e1dedd](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/3e1dedd3cf733caced14e45d3431195284a96b78))
+
+
+### Documentation
+
+* partner-ready front door, ARR clarity, publish coverage ([#117](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/117)) ([b551a81](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/b551a81e6a325f49e34dc3ff0b1df1a90f256d5f))
+
 ## [0.11.3](https://github.com/Bridge-Node-7/frontier-mission-assurance/compare/v0.11.2...v0.11.3) (2026-10-30)
 
 
