@@ -60,6 +60,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p build
+          export COVERAGE_FILE="$PWD/build/.coverage"
           pytest --cov=frontier_assurance --cov-report=term --cov-report=xml:build/coverage.xml
           {
             echo "### Unit coverage (frontier_assurance)"
