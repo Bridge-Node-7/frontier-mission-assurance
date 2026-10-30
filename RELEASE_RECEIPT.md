@@ -1,4 +1,4 @@
-# Source Release Receipt — v0.11.2
+# Source Release Receipt — v0.11.3
 
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-29  
@@ -8,7 +8,7 @@
 
 Close the bounded FTQC applied-case semantic gaps while preserving existing portable contract identity, source-neutral public evaluation, and accountable human authority.
 
-## Material changes in v0.11.2
+## Material changes in v0.11.3
 
 - Recompute evidence applicability against the current FTQC System Concept and fail closed on declaration/computation contradictions.
 - Treat non-current decision-relevant resource estimates as approval blockers.
@@ -30,7 +30,7 @@ Hosted validation evidence is recorded in GitHub Actions and release metadata.
 
 ## Publication gate
 
-The v0.11.2 source may be merged after native V&V passes. The Stable Release workflow must fail before publication unless GitHub immutable-release protection is enabled for future releases. Historical v0.11.0 is preserved as published.
+The v0.11.3 source may be merged after native V&V passes. The Stable Release workflow must fail before publication unless GitHub immutable-release protection is enabled for future releases. Historical v0.11.0 is preserved as published.
 
 ## Validation status
 

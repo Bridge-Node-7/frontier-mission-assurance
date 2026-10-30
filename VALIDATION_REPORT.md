@@ -1,4 +1,4 @@
-# Source Validation Report — v0.11.2
+# Source Validation Report — v0.11.3
 
 **Date:** 2026-09-29  
 **Role:** public reference implementation for evidence-native verification, validation, reproducibility, traceability, and mission assurance
@@ -74,7 +74,7 @@ These controls establish behavior under the declared contracts and synthetic gen
 
 ## FTQC Assurance V&V
 
-The v0.11.2 source retains FTQC Assurance profile contract `0.2` and the bounded external technical-evidence adapter, while separating portable contract identity from application version and externalizing explicitly reviewed producer releases into a governed registry. Release eligibility requires:
+The v0.11.3 source retains FTQC Assurance profile contract `0.2` and the bounded external technical-evidence adapter, while separating portable contract identity from application version and externalizing explicitly reviewed producer releases into a governed registry. Release eligibility requires:
 
 - reviewed ExperimentResult and ProcessorEvidenceReceipt artifacts fail closed on wrong trusted artifact SHA-256;
 - externally supplied producer schemas must match the exact reviewed schema SHA-256 values before JSON Schema validation;
