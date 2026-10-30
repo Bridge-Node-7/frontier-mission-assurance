@@ -1,20 +1,10 @@
 # Frontier Mission Assurance
 
-[![Release](https://img.shields.io/github/v/release/Bridge-Node-7/frontier-mission-assurance?display_name=tag)](https://github.com/Bridge-Node-7/frontier-mission-assurance/releases/latest)
-[![License](https://img.shields.io/badge/license-All%20Rights%20Reserved-lightgrey)](LICENSE)
-[![CI](https://img.shields.io/github/actions/workflow/status/Bridge-Node-7/frontier-mission-assurance/ci.yml?branch=main&label=CI)](https://github.com/Bridge-Node-7/frontier-mission-assurance/actions/workflows/ci.yml)
-
 **Know whether a consequential technical decision is still supported when the evidence changes.**
 
 *Evidence-native verification and validation for high-consequence frontier systems.*
 
-| | |
-|---|---|
-| **What** | Local-first assurance layer linking claims, assumptions, experiments, and evidence to consequential technical decisions |
-| **Status** | Public evaluation release — use the latest [GitHub Release](https://github.com/Bridge-Node-7/frontier-mission-assurance/releases/latest) |
-| **Quickstart** | [Five-minute evaluation](docs/FIVE_MINUTE_EVALUATION.md) · `pip install -r requirements-dev.txt && pip install --no-deps -e . && make check` |
-| **Architecture** | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/PROFILE_ARCHITECTURE.md](docs/PROFILE_ARCHITECTURE.md) |
-| **Collaboration** | [Issues](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues) · [Innovation Partnerships](https://bridgenode7.com/partner/) |
+Stable public evaluation release — see the latest [GitHub Release](https://github.com/Bridge-Node-7/frontier-mission-assurance/releases/latest). Quickstart: [Five-minute evaluation](docs/FIVE_MINUTE_EVALUATION.md). Collaboration: [GitHub Issues](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues).
 
 Frontier Mission Assurance (FMA) connects claims, assumptions, experiments, estimates, interfaces, dependencies, and evidence to the technical decisions that rely on them—so teams can see what is supported, what remains uncertain, and what must be reconsidered when reality changes.
 
@@ -275,9 +265,7 @@ The canonical local gate validates the core reference, existing-work sidecar, pr
 
 [`VERSION`](VERSION) identifies the current source. A version is stable only when the matching tag and GitHub Release have been published by the explicit Stable Release workflow. Use the latest published GitHub Release when you need stable artifacts.
 
-Copyright © 2026 Bridge Node 7. All rights reserved. The public release is provided for evaluation and review only; it does not itself grant operational-use rights. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md).
-
-Evaluation and collaboration inquiries are welcome via [GitHub Issues](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues) or [Innovation Partnerships](https://bridgenode7.com/partner/). Operational use, integration, or redistribution beyond evaluation requires separate written permission.
+Copyright © 2026 Bridge Node 7. All rights reserved. The public release is provided for evaluation and review only; it does not itself grant operational-use rights. See [`LICENSE`](LICENSE) and [`docs/USE_AND_EVALUATION.md`](docs/USE_AND_EVALUATION.md). Operational use, integration, or redistribution beyond evaluation requires separate written permission.
 
 For current Bridge Node 7 information, see <https://bridgenode7.com/>.
 
