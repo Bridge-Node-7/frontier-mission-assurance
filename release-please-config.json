@@ -20,7 +20,8 @@
           "type": "generic",
           "path": "src/frontier_assurance/__init__.py"
         }
-      ]
+      ],
+      "version-file": "VERSION"
     }
   },
   "changelog-sections": [
