@@ -1,5 +1,39 @@
 # Changelog
 
+## [0.11.3](https://github.com/Bridge-Node-7/frontier-mission-assurance/compare/v0.11.2...v0.11.3) (2026-10-30)
+
+
+### Bug Fixes
+
+* reject explicit null criticality at FMA graph intake (F05) ([f0a4ebb](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/f0a4ebb00d6c0a4d713f724c2a461de975c03d98))
+
+
+### Security
+
+* pin reviewed public metadata privacy policy ([#109](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/109)) ([e91b37c](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/e91b37c1e219b43d46208b48ee38e9271a999a5d))
+* repin reviewed privacy policy ([8a6c56c](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/8a6c56c8a979db6f0111e1248f0af996cdef7599))
+
+
+### Documentation
+
+* clarify synthetic FTQC applicability gates ([d25d958](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/d25d9589c71e44fa79e63b896f9f57c81ad4a180))
+* **security:** align v2/v3 receipt reproduction guidance ([017c3ed](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/017c3edc90e74b78d7fc5901915d3bdbe54b8f65))
+
+
+### CI
+
+* add pinned public privacy preflight ([48b09c0](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/48b09c0d9ceb53dfa72df6866c3e623097c1da46))
+* add release-please and repository quality gates ([fff384f](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/fff384f23143ef94a8507493c773c5649e783924))
+* check privacy on public PR metadata edits ([f98388e](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/f98388ee7c5037829cac6c8bf2f87393c2f30032))
+
+
+### Miscellaneous
+
+* **deps-dev:** bump ruff from 0.16.7 to 0.16.9 ([#93](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/93)) ([1306838](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/1306838ef6d2769b276916bd4157e4fb94ddac0f))
+* **deps:** bump github/codeql-action/analyze from 4.38.0 to 4.38.2 ([#94](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/94)) ([1bade72](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/1bade72e53ba70ae51505c8b78c647cb89d740e4))
+* **deps:** bump github/codeql-action/init from 4.38.0 to 4.38.2 ([#95](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/95)) ([86b9b55](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/86b9b556947fd3214778ab8bb5bf26faa13b204c))
+* **deps:** update setuptools build backend to 84.1.0 ([#110](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/110)) ([6602ba8](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/6602ba8539c97fc9ce2632876143849b810b610a))
+
 ## 0.11.2 — FTQC semantic integrity hardening
 
 - Recomputed FTQC evidence applicability against the current System Concept and rejected contradictory declared envelope states in governed case validation.
