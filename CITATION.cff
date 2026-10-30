@@ -1,10 +1,12 @@
 cff-version: 1.2.0
-title: "Frontier Mission Assurance"
-message: "If this public reference implementation informs published work, cite the repository and the exact release used."
+title: Frontier Mission Assurance
+message: >-
+  If this public reference implementation informs published work, cite the
+  repository and the exact release used.
 type: software
 authors:
-  - name: "Bridge Node 7"
-version: "0.11.2"
-date-released: 2026-09-29
-repository-code: "https://github.com/Bridge-Node-7/frontier-mission-assurance"
-url: "https://bridgenode7.com/"
+  - name: Bridge Node 7
+version: 0.11.3
+date-released: 2026-09-29T00:00:00.000Z
+repository-code: https://github.com/Bridge-Node-7/frontier-mission-assurance
+url: https://bridgenode7.com/
