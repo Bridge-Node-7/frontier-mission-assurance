@@ -15,7 +15,7 @@ INIT_RE = re.compile(r'__version__\s*=\s*["\'][^"\']+["\']')
 
 
 def main() -> int:
-    root = Path(".").resolve()
+    root = Path.cwd()
     version = str(
         json.loads((root / ".release-please-manifest.json").read_text(encoding="utf-8")).get(".", "")
     ).strip()
