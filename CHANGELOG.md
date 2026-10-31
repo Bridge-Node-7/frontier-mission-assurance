@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.11.4](https://github.com/Bridge-Node-7/frontier-mission-assurance/compare/v0.11.3...v0.11.4) (2026-10-30)
+## [0.11.4] (2026-10-30)
 
 
 ### Bug Fixes
