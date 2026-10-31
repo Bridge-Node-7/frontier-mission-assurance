@@ -58,7 +58,7 @@ jobs:
           GIT_MAIL_DOMAIN='users.noreply.github.com'
           gh auth setup-git
           rm -rf .repo-sync
-          git clone --branch "${BRANCH}" --single-branch "https://github.com/${GITHUB_REPOSITORY}.git" .repo-sync
+          git clone --branch "${BRANCH}" --single-branch "https://github.com/Bridge-Node-7/frontier-mission-assurance.git" .repo-sync
           cd .repo-sync
           python3 -B scripts/sync_release_candidate_manifests.py
           if git diff --quiet; then
