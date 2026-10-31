@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.5] (2026-10-31)
+
+
+### CI
+
+* restore concurrency group expression ([#118](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/118)) ([97e8873](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/97e8873f11e33f9cc3f02c43e409e421e4ed6917))
+
 ## [0.11.4] (2026-10-30)
 
 
