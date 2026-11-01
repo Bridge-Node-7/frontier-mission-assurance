@@ -111,7 +111,7 @@ jobs:
         run: python scripts/evaluate_public_reference.py
       - name: Analyze with CodeQL
         if: github.event_name == 'push' && matrix.python-version == '3.12'
-        uses: github/codeql-action/analyze@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4
+        uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
       - name: Record public-safe environment fingerprint
         run: python scripts/environment_fingerprint.py --out build/environment-fingerprint.json
       - name: Upload validation artifacts
