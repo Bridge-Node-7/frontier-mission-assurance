@@ -1,32 +1,12 @@
-## What changed?
+## Summary
 
-<!-- Describe the smallest meaningful change in clear product language. -->
+Describe the change using public or synthetic information only.
 
-## Assurance impact
+## Validation
 
-- [ ] Claim changed
-- [ ] Assumption changed
-- [ ] Evidence changed
-- [ ] Acceptance threshold changed
-- [ ] Decision changed
-- [ ] No assurance-semantic change
+List checks run and their results.
 
-## Evidence
-
-<!-- Link the smallest reviewable evidence needed to verify the change. -->
-
-## Regression protection
-
-<!-- What automated test prevents this from silently breaking later? -->
-
-## Decision consequence
-
-<!-- What generic decision becomes safer/faster/more accurate because of this change? -->
-
-## Release hygiene
-
-- [ ] I ran `python scripts/release_hygiene.py .`.
-- [ ] New examples are source-neutral or intentionally attributable public references.
-- [ ] User-facing claims match the evidence and tests in this change.
-- [ ] No credentials or sensitive reproduction material are included.
-- [ ] The change does not expand authority beyond the repository's declared scope.
+- [ ] `python scripts/release_hygiene.py .` passes
+- [ ] Claims, assumptions, evidence, and authority remain within the declared scope
+- [ ] Changed behavior has regression coverage
+- [ ] No credentials, protected data, or nonpublic context
