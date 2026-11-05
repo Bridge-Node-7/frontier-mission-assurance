@@ -4,7 +4,7 @@ body:
   - type: markdown
     attributes:
       value: >-
-        **PUBLIC REPOSITORY:** Use synthetic/public-safe information only. Do not include personal names, external organization/program identities, private URLs, screenshots, raw logs, credentials, or nonpublic technical data. Suspected security vulnerabilities or exploit details belong in the private reporting path described in SECURITY.md, not this public form.
+        Use public or synthetic information only. Report vulnerabilities privately through SECURITY.md.
   - type: textarea
     id: behavior
     attributes:
@@ -22,7 +22,7 @@ body:
     id: version
     attributes:
       label: FMA version
-      placeholder: 0.3.5
+      placeholder: Version or commit SHA
     validations:
       required: true
   - type: dropdown
@@ -39,7 +39,7 @@ body:
   - type: checkboxes
     id: public_safe
     attributes:
-      label: Public-safety attestation
+      label: Public information
       options:
         - label: I confirm this submission contains only public-safe or synthetic information.
           required: true

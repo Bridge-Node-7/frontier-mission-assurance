@@ -3,9 +3,7 @@ description: Challenge an active assumption with new evidence or reasoning
 body:
 - type: markdown
   attributes:
-    value: '**PUBLIC REPOSITORY:** Use synthetic/public-safe identifiers only. Do
-      not include personal names, external organization names, private URLs, screenshots,
-      raw logs, credentials, or nonpublic program data.'
+    value: Use public or synthetic information only. Report vulnerabilities privately through SECURITY.md.
 - type: input
   id: assumption
   attributes:
@@ -25,11 +23,11 @@ body:
 - type: textarea
   id: impact
   attributes:
-    label: What decisions/claims could be stale if this challenge is correct?
+    label: Affected public claim or example
 - type: checkboxes
   id: public_safe
   attributes:
-    label: Public-safety attestation
+    label: Public information
     options:
     - label: I confirm this submission contains only public-safe or synthetic information.
       required: true
