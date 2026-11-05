@@ -6,7 +6,7 @@ message: >-
 type: software
 authors:
   - name: Bridge Node 7
-version: 0.11.4
+version: 0.11.5
 date-released: 2026-09-29T00:00:00.000Z
 repository-code: https://github.com/Bridge-Node-7/frontier-mission-assurance
 url: https://bridgenode7.com/
