@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.5] (2026-11-01)
+
+
+### Bug Fixes
+
+* **ci:** release-please must not preempt Stable Release publisher ([#120](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/120)) ([3e2eb8a](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/3e2eb8a7b1716a3550535fed5a4f578982f73095))
+
+
+### CI
+
+* restore concurrency group expression ([#118](https://github.com/Bridge-Node-7/frontier-mission-assurance/issues/118)) ([97e8873](https://github.com/Bridge-Node-7/frontier-mission-assurance/commit/97e8873f11e33f9cc3f02c43e409e421e4ed6917))
+
 ## [0.11.4] (2026-10-30)
 
 
