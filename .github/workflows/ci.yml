@@ -76,7 +76,7 @@ jobs:
           name: fma-coverage-py3.12
           path: build/coverage.xml
           if-no-files-found: ignore
-          retention-days: 14
+          retention-days: 7
       - name: Release hygiene check
         run: python scripts/release_hygiene.py .
       - name: Validate public example graph
