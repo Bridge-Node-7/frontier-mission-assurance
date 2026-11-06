@@ -3,7 +3,7 @@
 ## Contract version
 
 **Scientific Discovery Assurance profile contract:** `0.1`  
-**Containing FMA release:** `0.8.0`
+**Containing FMA source version:** [`VERSION`](../../VERSION)
 
 The profile contract version is independent from the containing FMA release. Breaking profile-level behavior requires a profile-contract version change. Record/schema versions remain authoritative for the individual portable contracts defined by this profile.
 
