@@ -1,5 +1,7 @@
 # Source Release Receipt — v0.11.3
 
+> Historical review record for v0.11.3. This is not current publication status; see [GitHub Releases](https://github.com/Bridge-Node-7/frontier-mission-assurance/releases/latest) for published distribution identity and hosted release evidence.
+
 **Release type:** stable public reference candidate  
 **Date:** 2026-09-29  
 **Validation status:** READY FOR HOSTED VALIDATION; PUBLICATION REQUIRES IMMUTABLE-RELEASE PROTECTION
