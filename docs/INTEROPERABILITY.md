@@ -14,13 +14,13 @@ Current public contract versions:
 - decision receipt: `decision_version: "1.0"`.
 - assurance-context export: `contract_version: "0.1.0"`.
 
-The versioned JSON Schemas publish stable identifiers:
+The versioned JSON Schemas define stable contract identifiers:
 
-- `https://bridge-node-7.github.io/frontier-mission-assurance/assurance-graph.schema.json`
-- `https://bridge-node-7.github.io/frontier-mission-assurance/research-receipt.schema.json`
-- `https://bridge-node-7.github.io/frontier-mission-assurance/research-receipt-v3.schema.json`
-- `https://bridge-node-7.github.io/frontier-mission-assurance/decision-receipt.schema.json`
-- `https://bridge-node-7.github.io/frontier-mission-assurance/assurance-context.schema.json`
+- [Assurance Graph](../schemas/assurance-graph.schema.json)
+- [Research Receipt](../schemas/research-receipt.schema.json)
+- [Research Receipt v3](../schemas/research-receipt-v3.schema.json)
+- [Decision Receipt](../schemas/decision-receipt.schema.json)
+- [Assurance Context](../schemas/assurance-context.schema.json)
 
 ## Assurance-context export
 
