@@ -4,7 +4,7 @@ This benchmark evaluates the Orbital Recovery Assurance reference policy against
 
 ## Current protocol
 
-`protocol.json` is protocol 1.3. It generates a posterior first and samples the latent truth from that posterior so probability semantics remain coherent inside the experiment. The policy receives the posterior and declared gate state; the sampled truth remains hidden until scoring.
+`protocol.json` defines the current protocol and acceptance contract. The generator produces a posterior first and samples the latent truth from that posterior so probability semantics remain coherent inside the experiment. The policy receives the posterior and declared gate state; the sampled truth remains hidden until scoring.
 
 The generator uses the stable `random()` stream with explicit deterministic transforms and cumulative truth sampling. Discrete case generation, choices, acceptance flags, and safety counts reproduce exactly across supported environments. Aggregate floating-point metrics are compared to checked-in snapshots with a `1e-12` absolute/relative tolerance to accommodate legitimate final-bit differences in floating reductions.
 
@@ -27,7 +27,7 @@ A gate-only fixed-base-rate ranker is retained as a contrast baseline. Because i
 
 ## Protocol history
 
-Earlier benchmark protocols are preserved as invalidated-method evidence with explicit reasons. The current PASS claim is tied only to protocol 1.3 and its checked-in acceptance contract. See [`PROTOCOL_HISTORY.md`](PROTOCOL_HISTORY.md).
+Earlier benchmark protocols are preserved as invalidated-method evidence with explicit reasons. The current PASS claim is tied only to `protocol.json` and its checked-in acceptance contract. See [`PROTOCOL_HISTORY.md`](PROTOCOL_HISTORY.md).
 
 ## Verification scope
 
